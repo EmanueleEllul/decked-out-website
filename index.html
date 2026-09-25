@@ -38,7 +38,6 @@
           <li><button class="nav-btn" data-tab="deckbuilder"><span class="icon">🛠️</span> Deck Builder</button></li>
           <li><button class="nav-btn" data-tab="combat"><span class="icon">⚔️</span> Combat Arena</button></li>
           <li><button class="nav-btn" data-tab="dungeon"><span class="icon">🗺️</span> Dungeon Map</button></li>
-          <li><button class="nav-btn" data-tab="wiki"><span class="icon">📖</span> Obsidian Wiki</button></li>
         </ul>
       </nav>
 
@@ -711,30 +710,6 @@
       <div id="mystery-events-carousel" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;"></div>
     </section>
 
-    <!-- ==========================================
-         TAB 7: OBSIDIAN WIKI
-         ========================================== -->
-    <section id="tab-wiki" class="tab-pane">
-      <div class="section-header">
-        <div class="section-title-wrap">
-          <h2><span>📖</span> Obsidian Documentation & Lore Hub</h2>
-          <p>All 38 notes from the official Decked Out Obsidian vault synchronized directly into the browser.</p>
-        </div>
-        <div class="search-input-wrap" style="max-width: 350px;">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="wiki-search-input" placeholder="Search Obsidian notes..." />
-        </div>
-      </div>
-
-      <div style="display: grid; grid-template-columns: 280px 1fr; gap: 2rem;">
-        <!-- Left: Category Sidebar -->
-        <aside id="wiki-sidebar-categories" style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.25rem; max-height: 750px; overflow-y: auto;"></aside>
-
-        <!-- Right: Article Viewer -->
-        <article id="wiki-article-display" style="min-height: 500px;"></article>
-      </div>
-    </section>
-
   </main>
 
   <!-- Card Detail Modal Dialog -->
@@ -772,7 +747,7 @@
       </div>
 
       <div class="footer-credits">
-        <p>Built with Godot 4.7 &amp; Obsidian Vault Systems.</p>
+        <p>Decked Out — Built with Godot 4.7 Forward+.</p>
         <p style="margin-top: 0.25rem;">Ready to deploy on GitHub Pages with zero external dependencies.</p>
       </div>
     </div>
@@ -780,7 +755,6 @@
 
   <!-- Scripts -->
   <script src="js/data.js"></script>
-  <script src="js/wiki-data.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/compendium.js"></script>
   <script src="js/pack-simulator.js"></script>
@@ -788,7 +762,6 @@
   <script src="js/combat-demo.js"></script>
   <script src="js/dungeon-map.js"></script>
   <script src="js/heroes-relics.js"></script>
-  <script src="js/wiki-viewer.js"></script>
   <script src="js/app.js"></script>
 
 </body>

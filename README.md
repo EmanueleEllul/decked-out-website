@@ -42,17 +42,10 @@ Live showcase ready to deploy directly to **GitHub Pages** with zero build steps
 - **Turn Flow**: Refill 15 Mana, draw cards, play spells, trigger Hero Strikes, and battle through Enemy AI turns.
 - **Genuine Game SFX**: Integrated audio triggers for card plays, enemy hits, gold gains, and turn shifts.
 
-### 6. 🗺️ 3-Act Dungeon Map & World Boss Raid
+### 6. 🗺️ 3-Act Dungeon Map
 - **Interactive Branching Acts**: Act 1 The Descent (12 floors), Act 2 The Core & Trials (10 floors), Act 3 The Primordial Summit (18 floors).
-- **Climax Boss Pool**: Bone Amalgam, Archmage Ignis, Wreckyard Colossus, and Ascended Sovereign.
 - **The Gambler's Den**: Play the 50/50 Coin Flip (wager Gold for 2.5x Gems) or spin the 6-slice Wheel of Fate!
 - **12 Mystery Events**: Explore interactive narrative dilemmas with choices and immediate rewards/penalties.
-- **The God Persistent World Boss**: Confront the secret 1,000,000 HP deity whose damage never resets on hero defeat!
-
-### 7. 📖 Obsidian Documentation Hub
-- **All 36 Notes Synchronized**: Complete knowledge base imported from the official Obsidian vault across 9 categories.
-- **Markdown Rendering**: Formatted tables, callout alerts (`[!NOTE]`, `[!CAUTION]`, etc.), code snippets, and clickable `[[wikilinks]]`.
-- **Live Search**: Instant documentation search across all notes and lore.
 
 ---
 
@@ -89,16 +82,14 @@ decked-out-website/
 │   ├── style.css           # Core dark fantasy responsive styling & layout
 │   └── card-foil.css       # 3D card tilt, holographic shaders & pack animations
 ├── js/
-│   ├── data.js             # 104 cards, 8 heroes, 9 relics, acts & drop rate data
-│   ├── wiki-data.js        # 38 Obsidian vault notes with full markdown
+│   ├── data.js             # 62 Series 1 cards, 7 heroes, 9 relics, acts & drop rate data
 │   ├── audio.js            # Godot game SFX player and Web Audio ambient synthesizer
 │   ├── compendium.js       # Card binder, multi-filter, search & 3D tilt inspector
 │   ├── pack-simulator.js   # Interactive gacha booster packs & collection binder
 │   ├── deck-builder.js     # Deck construction, mana curve & export/import
 │   ├── combat-demo.js      # Playable tactical combat sandbox arena
-│   ├── dungeon-map.js      # 3-act map timeline, gambler minigames & The God raid
+│   ├── dungeon-map.js      # 3-act map timeline, gambler minigames & floor encounters
 │   ├── heroes-relics.js    # Hero stats, traits & relic loadout builder
-│   ├── wiki-viewer.js      # Markdown wiki reader with wikilinks & search
 │   └── app.js              # Application controller, tab navigation & toast alerts
 └── assets/
     ├── cards/              # Series 1 card PNG sprites copied from the game
@@ -111,6 +102,5 @@ decked-out-website/
 
 ## 🎮 Game Credits & Tech Stack
 - **Game Engine**: Godot Engine 4.7 (Forward+ renderer)
-- **Documentation**: Obsidian Knowledge Base
 - **Frontend Stack**: Semantic HTML5, CSS Variables, 3D CSS Transforms, Web Audio API, Vanilla JavaScript
 - **Developer**: Emanuele Ellul

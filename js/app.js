@@ -105,10 +105,9 @@ class AppController {
 
   bindWishlistButtons() {
     document.querySelectorAll('.btn-wishlist, [data-action="wishlist"]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
+      btn.addEventListener('click', () => {
         if (window.audioMgr) window.audioMgr.playSFX('goldGain');
-        this.showToast('⭐ Decked Out added to your Steam Wishlist tracker! Coming soon on Godot 4.7 Forward+.');
+        this.showToast('⭐ Opening Decked Out on Steam...');
       });
     });
   }

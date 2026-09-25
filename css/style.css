@@ -151,9 +151,22 @@ p, span, a, li, td, th, input, select, button {
 }
 
 .brand-icon {
-  font-size: 1.75rem;
-  line-height: 1;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.6));
 }
 
 .brand-text h1 {
@@ -1581,6 +1594,17 @@ p, span, a, li, td, th, input, select, button {
 .foe-avatar-box.boss-avatar {
   border-color: var(--hp-red);
   box-shadow: 2px 2px 0 rgba(239,68,68,0.5);
+  background: radial-gradient(circle, #2a0808 0%, #000 100%);
+}
+
+.boss-icon-glyph {
+  font-size: 1.75rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.4));
+  image-rendering: auto;
 }
 
 .foe-avatar-box img {
@@ -1947,7 +1971,7 @@ p, span, a, li, td, th, input, select, button {
 /* Very small screens — tighten further */
 @media (max-width: 480px) {
   .header-container { gap: 0.5rem; }
-  .brand-icon       { font-size: 1.25rem; }
+  .brand-icon       { width: 34px; height: 34px; }
   .hero-section     { padding: 3rem 1rem 2.5rem; }
   .hero-cta-group   { flex-direction: column; align-items: center; }
   .act-tab-group    { flex-direction: column; }

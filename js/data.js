@@ -2548,7 +2548,7 @@ const GAME_ACTS = [
         armor: 12,
         ward: 0,
         desc: "Undead Behemoth fused from thousands of skeletal remains. Has high physical armor and counter bone spikes.",
-        sprite: "assets/enemies/EliteKnight.png"
+        icon: "💀"
       },
       {
         name: "Archmage Ignis",
@@ -2557,7 +2557,7 @@ const GAME_ACTS = [
         armor: 0,
         ward: 15,
         desc: "Corrupted pyromancer trapped in the dungeon vault. Inflicts heavy Burn stacks and reflects damage with Flame Shield.",
-        sprite: "assets/enemies/Cultist.png"
+        icon: "🔥"
       },
       {
         name: "Wreckyard Colossus",
@@ -2566,7 +2566,7 @@ const GAME_ACTS = [
         armor: 15,
         ward: 5,
         desc: "Rusted iron titan resurrected by Goblin junk-sorcery. Steam Vent deals recoil damage when cards are discarded.",
-        sprite: "assets/enemies/Goblin.png"
+        icon: "⚙️"
       }
     ]
   },
@@ -2583,7 +2583,7 @@ const GAME_ACTS = [
         armor: 20,
         ward: 18,
         desc: "Forged in the heart of the core, melts player defenses and summons flaming minions.",
-        sprite: "assets/enemies/Bandit.png"
+        icon: "🌋"
       }
     ]
   },
@@ -2600,7 +2600,7 @@ const GAME_ACTS = [
         armor: 30,
         ward: 25,
         desc: "Act 3 Final Boss. Supreme ruler of the celestial summit commanding astral magic and radiant defenses.",
-        sprite: "assets/cards/Ashmaw Colossus.png"
+        icon: "👑"
       }
     ]
   }

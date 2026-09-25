@@ -83,7 +83,7 @@ class DungeonMapManager {
             <div class="foe-card boss-card">
               <div class="foe-card-top">
                 <div class="foe-avatar-box boss-avatar">
-                  <img src="${b.sprite}" alt="${b.name}" class="pixel-art" />
+                  <span class="boss-icon-glyph">${b.icon || '👑'}</span>
                 </div>
                 <div class="foe-identity">
                   <span class="foe-rank-tag boss-rank">ACT ${b.act} — ${b.actName}</span>

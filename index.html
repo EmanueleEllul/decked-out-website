@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DECKED OUT - Official Roguelike Deck-Building RPG Website</title>
   <meta name="description" content="Official website for Decked Out, a single-player roguelike deckbuilding RPG built in Godot 4.7 Forward+. Explore the 62-card compendium, 7 heroes, 3-act dungeon descent, and tactical combat mechanics.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23f59e0b'/><text y='70' x='50' font-size='60' text-anchor='middle' fill='%230f172a'>🃏</text></svg>">
+  <link rel="icon" type="image/png" href="assets/icon.png">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,10 +22,12 @@
   <header class="site-header" id="top">
     <div class="header-container">
       <a href="#hero" class="brand-wrapper">
-        <div class="brand-icon">🃏</div>
+        <div class="brand-icon">
+          <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" />
+        </div>
         <div class="brand-text">
           <h1>DECKED OUT</h1>
-          <span>ROGUELIKE DECKBUILDER</span>
+          <span>ROGUELIKE TCG</span>
         </div>
       </a>
 
@@ -44,9 +46,9 @@
 
       <!-- Action Controls -->
       <div class="header-actions">
-        <button class="btn btn-wishlist" data-action="wishlist" title="Wishlist Decked Out on Steam">
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn-wishlist" title="Wishlist Decked Out on Steam">
           <span>⭐</span> Wishlist on Steam
-        </button>
+        </a>
         <button id="toggle-sfx-btn" class="audio-btn" title="Toggle Sound Effects">🔊</button>
         <button id="toggle-bgm-btn" class="audio-btn" title="Toggle Ambient Music">🎼</button>
         <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Toggle Navigation Menu">☰</button>
@@ -66,10 +68,10 @@
       </p>
 
       <div class="hero-cta-group">
-        <button class="btn btn-primary btn-wishlist" data-action="wishlist">
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-wishlist">
           <span>⭐ Wishlist on Steam</span>
           <span>➔</span>
-        </button>
+        </a>
         <a href="#compendium" class="btn btn-secondary">
           <span>🃏 Explore 62 Cards</span>
         </a>
@@ -454,9 +456,9 @@
           <div class="spec-icon">⭐</div>
           <h4>Join The Journey</h4>
           <p>Track development updates, test public builds, and support the game by adding it to your wishlist.</p>
-          <button class="btn btn-primary btn-wishlist" data-action="wishlist" style="margin-top: 1rem; width: 100%; justify-content: center;">
+          <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-wishlist" style="margin-top: 1rem; width: 100%; justify-content: center;">
             ⭐ Wishlist on Steam
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -475,10 +477,12 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="brand-wrapper">
-        <div class="brand-icon">🃏</div>
+        <div class="brand-icon">
+          <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" />
+        </div>
         <div class="brand-text">
           <h1>DECKED OUT</h1>
-          <span>Roguelike Deck-Building RPG</span>
+          <span>ROGUELIKE TCG</span>
         </div>
       </div>
 

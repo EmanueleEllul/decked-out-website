@@ -131,11 +131,11 @@ p, span, a, li, td, th, input, select, button {
 .header-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem clamp(0.75rem, 1.5vw, 1.5rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: clamp(0.5rem, 1.2vw, 1.5rem);
 }
 
 .brand-wrapper {
@@ -144,6 +144,7 @@ p, span, a, li, td, th, input, select, button {
   gap: 0.85rem;
   text-decoration: none;
   color: inherit;
+  flex-shrink: 0;
 }
 
 .brand-wrapper:hover .brand-text h1 {
@@ -201,11 +202,18 @@ p, span, a, li, td, th, input, select, button {
   list-style: none;
   gap: 0;
   border: 2px solid var(--border-strong);
+  flex-wrap: nowrap;
+}
+
+.nav-links li {
+  display: flex;
+  flex-shrink: 0;
 }
 
 .nav-link {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0.5rem 0.85rem;
   font-family: var(--font-pixel);
   font-size: 0.5rem;
@@ -214,9 +222,11 @@ p, span, a, li, td, th, input, select, button {
   border-right: 2px solid var(--border-strong);
   transition: background 0.1s, color 0.1s;
   letter-spacing: 0.05em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.nav-link:last-child {
+.nav-links li:last-child .nav-link {
   border-right: none;
 }
 
@@ -235,6 +245,7 @@ p, span, a, li, td, th, input, select, button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .btn-wishlist {
@@ -255,6 +266,7 @@ p, span, a, li, td, th, input, select, button {
   letter-spacing: 0.05em;
   transition: transform 0.08s, box-shadow 0.08s;
   line-height: 1.4;
+  white-space: nowrap;
 }
 
 .btn-wishlist:hover {
@@ -1850,9 +1862,7 @@ p, span, a, li, td, th, input, select, button {
   .hero-title { font-size: 1.3rem; }
   .heroes-workbench { grid-template-columns: 1fr; }
   .modal-card-dialog { grid-template-columns: 1fr; }
-}
 
-@media (max-width: 768px) {
   .nav-links {
     display: none;
     position: absolute;
@@ -1872,19 +1882,38 @@ p, span, a, li, td, th, input, select, button {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
   }
 
+  .nav-links li {
+    display: block;
+    width: 100%;
+  }
+
   .nav-link {
     border-right: none;
     border-bottom: 1px solid var(--border-subtle);
     padding: 0.85rem 1.25rem;
     font-size: 0.65rem;
     letter-spacing: 0.05em;
+    width: 100%;
+    white-space: nowrap;
   }
 
-  .nav-link:last-child { border-bottom: none; }
+  .nav-links li:last-child .nav-link { border-bottom: none; }
 
   .nav-links.mobile-open { display: flex; }
   .mobile-toggle-btn { display: block; }
+}
 
+@media (min-width: 1025px) and (max-width: 1250px) {
+  .brand-text span {
+    display: none;
+  }
+  .nav-link {
+    font-size: clamp(0.36rem, 0.65vw, 0.45rem);
+    padding: 0.45rem clamp(0.3rem, 0.55vw, 0.6rem);
+  }
+}
+
+@media (max-width: 768px) {
   .hero-title { font-size: 0.85rem; }
   .hero-pill { font-size: 0.38rem; }
 
@@ -1908,8 +1937,8 @@ p, span, a, li, td, th, input, select, button {
 .brand-text span              { font-size: clamp(0.42rem, 1vw, 0.6rem); }
 
 /* Nav */
-.nav-link                     { font-size: var(--px-nav); padding: 0.5rem clamp(0.5rem, 1.5vw, 0.85rem); }
-.btn-wishlist                 { font-size: var(--px-btn); padding: 0.55rem clamp(0.6rem, 1.5vw, 1rem); }
+.nav-link                     { font-size: var(--px-nav); padding: 0.5rem clamp(0.35rem, 0.7vw, 0.75rem); white-space: nowrap; }
+.btn-wishlist                 { font-size: var(--px-btn); padding: 0.55rem clamp(0.5rem, 1vw, 1rem); white-space: nowrap; }
 
 /* Hero */
 .hero-title                   { font-size: var(--px-hero); }

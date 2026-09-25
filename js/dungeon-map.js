@@ -68,7 +68,6 @@ class DungeonMapManager {
 
   init() {
     this.renderBestiary();
-    this.renderMysteryEvents();
   }
 
   renderBestiary() {
@@ -135,29 +134,6 @@ class DungeonMapManager {
     `;
 
     container.innerHTML = html;
-  }
-
-  renderMysteryEvents() {
-    const container = document.getElementById('mystery-events-carousel');
-    if (!container) return;
-
-    container.innerHTML = this.mysteryEvents.map(evt => `
-      <div class="mystery-event-card">
-        <div class="mystery-event-header">
-          <span class="mystery-event-icon">${evt.icon}</span>
-          <h4 class="mystery-event-title">${evt.name}</h4>
-        </div>
-        <p class="mystery-event-lore">"${evt.lore}"</p>
-        <div class="mystery-choices-list">
-          ${evt.choices.map(c => `
-            <div class="mystery-choice-preview">
-              <strong class="choice-label">${c.label}</strong>
-              <span class="choice-outcome">${c.outcome}</span>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    `).join('');
   }
 }
 

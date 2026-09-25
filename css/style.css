@@ -1597,14 +1597,19 @@ p, span, a, li, td, th, input, select, button {
   background: radial-gradient(circle, #2a0808 0%, #000 100%);
 }
 
-.boss-icon-glyph {
-  font-size: 1.75rem;
+.foe-icon-glyph {
+  font-size: 1.85rem;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.4));
   image-rendering: auto;
+  user-select: none;
+}
+
+.foe-icon-glyph.boss-glyph {
+  font-size: 2.1rem;
+  filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.6));
 }
 
 .foe-avatar-box img {

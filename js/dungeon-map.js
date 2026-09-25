@@ -13,7 +13,7 @@ class DungeonMapManager {
         atk: 7,
         armor: 2,
         ward: 0,
-        sprite: "assets/enemies/Goblin.png",
+        icon: "⚙️",
         desc: "Fast, scurrying scavengers that strip scrap from fallen adventurers. Attacks in sudden aggressive bursts."
       },
       {
@@ -23,7 +23,7 @@ class DungeonMapManager {
         atk: 10,
         armor: 4,
         ward: 2,
-        sprite: "assets/enemies/Bandit.png",
+        icon: "🗡️",
         desc: "Ruthless brigands lurking in dungeon choke points. Uses Bleed-inducing blades and swift evasion."
       },
       {
@@ -33,7 +33,7 @@ class DungeonMapManager {
         atk: 12,
         armor: 0,
         ward: 8,
-        sprite: "assets/enemies/Cultist.png",
+        icon: "🔮",
         desc: "Chants dark prayers in the catacombs. Casts high-damage magical spells that test your Ward mitigation."
       },
       {
@@ -43,7 +43,7 @@ class DungeonMapManager {
         atk: 9,
         armor: 3,
         ward: 5,
-        sprite: "assets/enemies/Gnome.png",
+        icon: "⚡",
         desc: "Tinkers with erratic arcane devices that apply Stun and volatile elemental damage."
       },
       {
@@ -53,7 +53,7 @@ class DungeonMapManager {
         atk: 16,
         armor: 14,
         ward: 4,
-        sprite: "assets/enemies/EliteKnight.png",
+        icon: "🛡️",
         desc: "Heavily armored guardian in runic plate. Requires armor-piercing attacks or strong magical spells to vanquish."
       }
     ];
@@ -83,7 +83,7 @@ class DungeonMapManager {
             <div class="foe-card boss-card">
               <div class="foe-card-top">
                 <div class="foe-avatar-box boss-avatar">
-                  <span class="boss-icon-glyph">${b.icon || '👑'}</span>
+                  <span class="foe-icon-glyph boss-glyph">${b.icon || '👑'}</span>
                 </div>
                 <div class="foe-identity">
                   <span class="foe-rank-tag boss-rank">ACT ${b.act} — ${b.actName}</span>
@@ -109,7 +109,7 @@ class DungeonMapManager {
             <div class="foe-card">
               <div class="foe-card-top">
                 <div class="foe-avatar-box">
-                  <img src="${f.sprite}" alt="${f.name}" class="pixel-art" />
+                  <span class="foe-icon-glyph">${f.icon}</span>
                 </div>
                 <div class="foe-identity">
                   <span class="foe-rank-tag">${f.title}</span>

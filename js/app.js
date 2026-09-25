@@ -8,12 +8,45 @@ class AppController {
   }
 
   init() {
+    this.ensureNavLinks();
     this.bindNavigation();
     this.bindScrollSpy();
     this.bindAudioControls();
     this.bindWishlistButtons();
     this.setupToasts();
     this.initPjax();
+  }
+
+  ensureNavLinks() {
+    // Ensure Lore tab is rendered even if the host page was served from an older browser cache
+    const navLinks = document.querySelector('.nav-links');
+    if (navLinks && !navLinks.querySelector('a[href="lore.html"]')) {
+      const dungeonLi = Array.from(navLinks.querySelectorAll('li')).find(li => li.querySelector('a[href="dungeon.html"]'));
+      const specsLi = Array.from(navLinks.querySelectorAll('li')).find(li => li.querySelector('a[href="specs.html"]'));
+      const loreLi = document.createElement('li');
+      const isLore = window.location.pathname.endsWith('lore.html');
+      loreLi.innerHTML = `<a href="lore.html" class="nav-link${isLore ? ' active' : ''}">Lore</a>`;
+      if (specsLi) {
+        navLinks.insertBefore(loreLi, specsLi);
+      } else if (dungeonLi && dungeonLi.nextSibling) {
+        navLinks.insertBefore(loreLi, dungeonLi.nextSibling);
+      } else {
+        navLinks.appendChild(loreLi);
+      }
+    }
+
+    const footerLinks = document.querySelector('.footer-links');
+    if (footerLinks && !footerLinks.querySelector('a[href="lore.html"]')) {
+      const specsA = footerLinks.querySelector('a[href="specs.html"]');
+      const loreA = document.createElement('a');
+      loreA.href = 'lore.html';
+      loreA.textContent = 'Lore';
+      if (specsA) {
+        footerLinks.insertBefore(loreA, specsA);
+      } else {
+        footerLinks.appendChild(loreA);
+      }
+    }
   }
 
   bindNavigation() {
@@ -239,6 +272,20 @@ class AppController {
       // Swap page content
       pageContainer.innerHTML = newContent.innerHTML;
       pageContainer.style.opacity = '1';
+
+      // Sync navbar & footer if changed
+      const newNav = doc.querySelector('.nav-links');
+      const curNav = document.querySelector('.nav-links');
+      if (newNav && curNav && newNav.innerHTML !== curNav.innerHTML) {
+        curNav.innerHTML = newNav.innerHTML;
+      }
+      const newFooter = doc.querySelector('.footer-links');
+      const curFooter = document.querySelector('.footer-links');
+      if (newFooter && curFooter && newFooter.innerHTML !== curFooter.innerHTML) {
+        curFooter.innerHTML = newFooter.innerHTML;
+      }
+
+      this.ensureNavLinks();
 
       // Update history
       if (pushState) {

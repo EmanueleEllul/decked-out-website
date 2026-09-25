@@ -51,6 +51,23 @@
   --shadow-px: 4px 4px 0 #000;
   --shadow-px-gold: 4px 4px 0 rgba(180, 83, 9, 0.7);
   --shadow-px-blue: 4px 4px 0 rgba(14, 165, 233, 0.4);
+
+  /* ── FLUID SCALE — pixel fonts & spacing auto-scale with viewport ── */
+  --px-hero:   clamp(0.65rem, 3.5vw, 1.8rem);
+  --px-brand:  clamp(0.52rem, 1.8vw, 0.85rem);
+  --px-h2:     clamp(0.55rem, 1.8vw, 1rem);
+  --px-h3:     clamp(0.45rem, 1.4vw, 0.75rem);
+  --px-label:  clamp(0.4rem,  1vw,   0.6rem);
+  --px-badge:  clamp(0.36rem, 0.9vw, 0.55rem);
+  --px-micro:  clamp(0.32rem, 0.8vw, 0.45rem);
+  --px-btn:    clamp(0.4rem,  1vw,   0.55rem);
+  --px-nav:    clamp(0.36rem, 0.9vw, 0.5rem);
+  --px-stat:   clamp(0.45rem, 1.2vw, 0.7rem);
+
+  /* Fluid spacing */
+  --space-section: clamp(2.5rem, 6vw, 5rem);
+  --space-gap:     clamp(1rem, 3vw, 2rem);
+  --space-panel:   clamp(1rem, 2.5vw, 2rem);
 }
 
 *, *::before, *::after {
@@ -1810,3 +1827,105 @@ p, span, a, li, td, th, input, select, button {
     gap: 1rem;
   }
 }
+
+/* ================================================================
+   FLUID AUTOSCALE OVERRIDES
+   All fixed pixel-font sizes replaced with clamp() variables.
+   This block takes precedence due to cascade order.
+   ================================================================ */
+
+/* Brand */
+.brand-text h1                { font-size: var(--px-brand); }
+.brand-text span              { font-size: clamp(0.42rem, 1vw, 0.6rem); }
+
+/* Nav */
+.nav-link                     { font-size: var(--px-nav); padding: 0.5rem clamp(0.5rem, 1.5vw, 0.85rem); }
+.btn-wishlist                 { font-size: var(--px-btn); padding: 0.55rem clamp(0.6rem, 1.5vw, 1rem); }
+
+/* Hero */
+.hero-title                   { font-size: var(--px-hero); }
+.hero-pill                    { font-size: var(--px-micro); }
+
+/* Section headers */
+.section-kicker               { font-size: var(--px-micro); }
+.section-title-wrap h2        { font-size: var(--px-h2); }
+
+/* Site sections — use fluid spacing */
+.site-section                 { padding: var(--space-section) 0; }
+.main-wrapper                 { padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 1.5rem); }
+
+/* Panels & cards */
+.lore-title                   { font-size: clamp(0.55rem, 1.6vw, 0.85rem); }
+.lore-spotlight-card          { padding: var(--space-panel); }
+.pillar-title                 { font-size: var(--px-label); }
+.pillar-card                  { padding: var(--space-panel); }
+
+/* Hero roster */
+.hero-roster-name             { font-size: var(--px-micro); }
+.hero-role-title              { font-size: var(--px-micro); }
+.hero-character-name          { font-size: var(--px-h3); }
+.hero-detail-card             { padding: var(--space-panel); }
+.stat-cell-label              { font-size: var(--px-micro); }
+.stat-cell-value              { font-size: var(--px-stat); }
+.box-label                    { font-size: var(--px-micro); }
+
+/* Foes */
+.bestiary-category-title      { font-size: var(--px-label); }
+.foe-name                     { font-size: var(--px-badge); }
+.foe-rank-tag                 { font-size: var(--px-micro); }
+.foe-stats-mini               { font-size: var(--px-micro); }
+
+/* Cards */
+.card-name-title              { font-size: var(--px-micro); }
+.card-cost-gem                { font-size: var(--px-micro); }
+.stat-pill                    { font-size: var(--px-micro); }
+.tag-badge                    { font-size: var(--px-micro); }
+.card-footer-bar              { font-size: clamp(0.58rem, 1vw, 0.68rem); }
+.rarity-text                  { font-size: var(--px-micro); }
+
+/* Compendium controls */
+.filter-pill                  { font-size: var(--px-micro); padding: 0.3rem clamp(0.4rem, 1vw, 0.75rem); }
+.card-counter-badge           { font-size: var(--px-micro); }
+.compendium-controls          { padding: var(--space-panel); }
+
+/* Mystery events */
+.mystery-event-title          { font-size: var(--px-badge); }
+.choice-label                 { font-size: var(--px-micro); }
+
+/* Relics */
+.relic-name                   { font-size: var(--px-badge); }
+.relic-cost-pill              { font-size: var(--px-micro); }
+
+/* Footer */
+.footer-links a               { font-size: var(--px-micro); }
+.footer-credits               { font-size: var(--px-micro); }
+
+/* Grids — fully fluid min sizes */
+.cards-grid           { grid-template-columns: repeat(auto-fill, minmax(clamp(150px, 20vw, 190px), 1fr)); }
+.pillars-grid         { grid-template-columns: repeat(auto-fill, minmax(clamp(220px, 28vw, 280px), 1fr)); }
+.bestiary-grid        { grid-template-columns: repeat(auto-fill, minmax(clamp(260px, 35vw, 320px), 1fr)); }
+.relics-showcase-grid { grid-template-columns: repeat(auto-fill, minmax(clamp(240px, 30vw, 300px), 1fr)); }
+.mystery-events-grid  { grid-template-columns: repeat(auto-fill, minmax(clamp(250px, 30vw, 300px), 1fr)); }
+.status-grid          { grid-template-columns: repeat(auto-fill, minmax(clamp(180px, 25vw, 220px), 1fr)); }
+.specs-grid           { grid-template-columns: repeat(auto-fill, minmax(clamp(220px, 28vw, 280px), 1fr)); }
+
+/* Heroes workbench — collapse to single column below 900px */
+@media (max-width: 900px) {
+  .heroes-workbench { grid-template-columns: 1fr; }
+  .hero-detail-top  { flex-direction: column; align-items: flex-start; }
+  .modal-card-dialog { grid-template-columns: 1fr; padding: 1.25rem; }
+}
+
+/* Very small screens — tighten further */
+@media (max-width: 480px) {
+  .header-container { gap: 0.5rem; }
+  .brand-icon       { font-size: 1.25rem; }
+  .hero-section     { padding: 3rem 1rem 2.5rem; }
+  .hero-cta-group   { flex-direction: column; align-items: center; }
+  .act-tab-group    { flex-direction: column; }
+  .act-tab-btn      { border-right: none; border-bottom: 2px solid var(--border-strong); }
+  .act-tab-btn:last-child { border-bottom: none; }
+  .filter-selects   { flex-direction: column; }
+  .formula-banner   { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+

@@ -104,10 +104,14 @@ class AppController {
   }
 
   bindWishlistButtons() {
+    const steamUrl = 'https://store.steampowered.com/app/4298040/Decked_Out/';
     document.querySelectorAll('.btn-wishlist, [data-action="wishlist"]').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         if (window.audioMgr) window.audioMgr.playSFX('goldGain');
         this.showToast('⭐ Opening Decked Out on Steam...');
+        window.open(steamUrl, '_blank', 'noopener,noreferrer');
       });
     });
   }

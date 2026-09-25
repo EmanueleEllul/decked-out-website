@@ -1,5 +1,5 @@
 // Decked Out - Gacha & Booster Pack Opening Simulator
-// Features authentic Godot drop rates, foil tear animations, 3D card flips, and persistent collection tracking
+// High-Performance 60FPS: Pre-rendered 3D hardware-accelerated card flips, zero layout thrashing
 
 class PackSimulator {
   constructor() {
@@ -49,7 +49,7 @@ class PackSimulator {
       claimGemsBtn.addEventListener('click', () => {
         this.gems += 500;
         this.saveState();
-        window.audioMgr.playSFX('goldGain');
+        if (window.audioMgr) window.audioMgr.playSFX('goldGain');
         if (window.showToast) window.showToast('💎 Claimed +500 Free Gems!');
       });
     }
@@ -133,55 +133,81 @@ class PackSimulator {
 
     if (this.gems < pack.cost) {
       if (window.showToast) window.showToast('⚠️ Not enough Gems! Click "Claim +500 Free Gems" above.', 'warning');
-      window.audioMgr.playSFX('buttonClick');
+      if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
       return;
     }
 
     this.gems -= pack.cost;
-    this.saveState();
-    window.audioMgr.playPackRip();
 
-    // Generate pulled cards based on pack rules
+    // Fast pre-cached pack tear audio
+    if (window.audioMgr) window.audioMgr.playPackRip();
+
+    // Generate pulled cards from clean Series 1 pool
     this.currentOpenedCards = this.rollCardsForPack(pack);
     this.revealedCount = 0;
 
-    // Show pack opening stage modal
+    // Track cards in collection (batch in memory)
+    this.currentOpenedCards.forEach(card => {
+      this.collection[card.id] = (this.collection[card.id] || 0) + 1;
+    });
+
+    // Save state once per pack opening (no disk thrashing)
+    this.saveState();
+
     const modal = document.getElementById('pack-opening-modal');
     const shelf = document.getElementById('pack-opened-shelf');
     const modalTitle = document.getElementById('opened-pack-title');
+    const revealAllBtn = document.getElementById('pack-reveal-all-btn');
+
     if (!modal || !shelf) return;
 
     if (modalTitle) modalTitle.textContent = `Cracking ${pack.name}...`;
+    if (revealAllBtn) revealAllBtn.style.display = 'inline-flex';
 
-    shelf.innerHTML = this.currentOpenedCards.map((c, idx) => `
-      <div class="unrevealed-card" data-index="${idx}">
-        <div class="card-back-pattern">
-          <div class="gem">🃏</div>
-          <span>DECKED OUT</span>
-          <span style="font-size: 0.7rem; color: #475569;">Click to Reveal</span>
+    // Pre-render both front and back faces into GPU 3D flip card structure
+    // This eliminates all DOM recreation and image decoding stutter when flipping!
+    shelf.innerHTML = this.currentOpenedCards.map((card, idx) => {
+      const isNew = this.collection[card.id] === 1; // It was new before this pack
+      const cardHTML = window.compendium ? window.compendium.generateCardHTML(card, false) : `<div>${card.name}</div>`;
+
+      return `
+        <div class="pack-flip-card" data-index="${idx}">
+          <div class="pack-flip-inner">
+            <!-- Back Face (Click to Flip) -->
+            <div class="pack-card-face pack-face-back">
+              <div class="card-back-pattern">
+                <div class="gem">🃏</div>
+                <span>DECKED OUT</span>
+                <span style="font-size: 0.7rem; color: #64748b;">Click to Reveal</span>
+              </div>
+            </div>
+
+            <!-- Front Face (Pre-decoded Card) -->
+            <div class="pack-card-face pack-face-front">
+              ${isNew ? '<span class="pack-new-badge">NEW!</span>' : ''}
+              ${cardHTML}
+            </div>
+          </div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     modal.classList.add('active');
 
-    // Attach card flip listeners
-    const unrevealedCards = shelf.querySelectorAll('.unrevealed-card');
-    unrevealedCards.forEach(el => {
-      el.addEventListener('click', () => {
-        const idx = parseInt(el.dataset.index, 10);
-        this.revealCard(el, idx);
+    // Attach instantaneous 3D flip listeners
+    shelf.querySelectorAll('.pack-flip-card').forEach(cardEl => {
+      cardEl.addEventListener('click', () => {
+        const idx = parseInt(cardEl.dataset.index, 10);
+        this.revealCard(cardEl, idx, false);
       });
     });
   }
 
   rollCardsForPack(pack) {
     const cards = [];
-    const poolS1 = this.allCards.filter(c => c.series === 1);
-    const poolS2 = this.allCards.filter(c => c.series === 2);
-    const fullPool = this.allCards;
+    const pool = this.allCards;
 
-    const getRandomByRarity = (pool, rarity) => {
+    const getRandomByRarity = (rarity) => {
       const match = pool.filter(c => c.rarity.toLowerCase() === rarity.toLowerCase());
       if (match.length > 0) {
         return match[Math.floor(Math.random() * match.length)];
@@ -201,85 +227,98 @@ class PackSimulator {
 
     if (pack.id === 'exotic') {
       // 1 Guaranteed Exotic
-      cards.push(getRandomByRarity(fullPool, 'Exotic'));
+      cards.push(getRandomByRarity('Exotic'));
       // 1 Guaranteed Legendary
-      cards.push(getRandomByRarity(fullPool, 'Legendary'));
+      cards.push(getRandomByRarity('Legendary'));
       // 6 High-Tier cards
       for (let i = 2; i < 8; i++) {
         const r = rollRarityFromTable(pack.rates);
-        cards.push(getRandomByRarity(fullPool, r));
-      }
-    } else if (pack.id === 'dragons') {
-      for (let i = 0; i < pack.cardCount; i++) {
-        const r = rollRarityFromTable(pack.rates);
-        cards.push(getRandomByRarity(poolS2, r));
+        cards.push(getRandomByRarity(r));
       }
     } else if (pack.id === 'bundle') {
       // Bundle box has 1 guaranteed Exotic & 1 guaranteed Legendary
-      cards.push(getRandomByRarity(fullPool, 'Exotic'));
-      cards.push(getRandomByRarity(fullPool, 'Legendary'));
+      cards.push(getRandomByRarity('Exotic'));
+      cards.push(getRandomByRarity('Legendary'));
       for (let i = 2; i < pack.cardCount; i++) {
         const r = rollRarityFromTable(pack.rates);
-        cards.push(getRandomByRarity(fullPool, r));
+        cards.push(getRandomByRarity(r));
       }
     } else {
       // Standard Common & Rare packs
       for (let i = 0; i < pack.cardCount; i++) {
         const r = rollRarityFromTable(pack.rates);
-        cards.push(getRandomByRarity(poolS1, r));
+        cards.push(getRandomByRarity(r));
       }
     }
 
     return cards;
   }
 
-  revealCard(el, index) {
-    if (el.classList.contains('revealed')) return;
-    el.classList.add('revealed', 'flipped');
+  revealCard(cardEl, index, isBatch = false) {
+    if (cardEl.classList.contains('is-flipped')) return;
+
+    // Pure GPU transform - 0ms latency, zero layout reflow
+    cardEl.classList.add('is-flipped');
+    this.revealedCount++;
 
     const card = this.currentOpenedCards[index];
-    const isNew = !this.collection[card.id];
 
-    // Track in collection
-    this.collection[card.id] = (this.collection[card.id] || 0) + 1;
-    this.saveState();
-
-    setTimeout(() => {
-      el.outerHTML = `
-        <div style="position: relative; width: 220px;">
-          ${isNew ? '<span class="tag-badge" style="position: absolute; top: -10px; right: -10px; z-index: 20; background: #ef4444; color: #fff; font-weight: 800; font-size: 0.75rem; box-shadow: 0 0 10px rgba(239,68,68,0.7);">NEW!</span>' : ''}
-          ${window.compendium ? window.compendium.generateCardHTML(card) : ''}
-        </div>
-      `;
-
-      // Play SFX
+    // Play SFX (throttled in batch mode)
+    if (!isBatch && window.audioMgr) {
       if (card.rarity === 'Exotic') {
         window.audioMgr.playFanfare('Exotic');
-        this.triggerSparkles();
+        this.triggerSparkles(cardEl);
       } else if (card.rarity === 'Legendary') {
         window.audioMgr.playFanfare('Legendary');
-        this.triggerSparkles();
+        this.triggerSparkles(cardEl);
       } else if (card.rarity === 'Epic' || card.rarity === 'Rare') {
         window.audioMgr.playSFX('goldGain');
       } else {
         window.audioMgr.playSFX('cardPlay');
       }
+    }
 
-      this.revealedCount++;
-      if (this.revealedCount >= this.currentOpenedCards.length) {
-        const revealAllBtn = document.getElementById('pack-reveal-all-btn');
-        if (revealAllBtn) revealAllBtn.style.display = 'none';
-      }
-    }, 300);
+    if (this.revealedCount >= this.currentOpenedCards.length) {
+      const revealAllBtn = document.getElementById('pack-reveal-all-btn');
+      if (revealAllBtn) revealAllBtn.style.display = 'none';
+    }
   }
 
   revealAllCards() {
-    const unrevealed = document.querySelectorAll('.unrevealed-card:not(.revealed)');
-    unrevealed.forEach((el, i) => {
+    const unrevealed = document.querySelectorAll('.pack-flip-card:not(.is-flipped)');
+    if (unrevealed.length === 0) return;
+
+    const revealAllBtn = document.getElementById('pack-reveal-all-btn');
+    if (revealAllBtn) revealAllBtn.style.display = 'none';
+
+    // Find highest rarity card to play single celebratory fanfare at end
+    let highestRarity = 'Common';
+    const rarityRank = { 'Common': 1, 'Uncommon': 2, 'Rare': 3, 'Epic': 4, 'Legendary': 5, 'Exotic': 6 };
+
+    this.currentOpenedCards.forEach(c => {
+      if ((rarityRank[c.rarity] || 1) > (rarityRank[highestRarity] || 1)) {
+        highestRarity = c.rarity;
+      }
+    });
+
+    if (window.audioMgr) window.audioMgr.playSFX('cardPlay');
+
+    // Stagger flips smoothly every 70ms (pure CSS transform)
+    unrevealed.forEach((cardEl, i) => {
       setTimeout(() => {
-        const idx = parseInt(el.dataset.index, 10);
-        this.revealCard(el, idx);
-      }, i * 150);
+        const idx = parseInt(cardEl.dataset.index, 10);
+        this.revealCard(cardEl, idx, true);
+
+        // On the final card, play appropriate celebratory sound
+        if (i === unrevealed.length - 1 && window.audioMgr) {
+          if (highestRarity === 'Exotic' || highestRarity === 'Legendary') {
+            window.audioMgr.playFanfare(highestRarity);
+            this.triggerSparkles();
+          } else if (highestRarity === 'Epic' || highestRarity === 'Rare') {
+            window.audioMgr.playSFX('goldGain');
+          }
+        }
+      }, i * 70);
     });
   }
 
@@ -291,27 +330,39 @@ class PackSimulator {
     this.currentOpenedCards = [];
   }
 
-  triggerSparkles() {
+  // Lightweight hardware-accelerated sparkles (max 12 particles)
+  triggerSparkles(targetEl) {
     const stage = document.getElementById('pack-opening-modal');
     if (!stage) return;
 
-    for (let i = 0; i < 30; i++) {
+    const colors = ['#f59e0b', '#00e5ff', '#ec4899', '#ffffff', '#a855f7'];
+    const particleCount = 12;
+
+    const fragment = document.createDocumentFragment();
+    const sparks = [];
+
+    for (let i = 0; i < particleCount; i++) {
       const spark = document.createElement('div');
       spark.className = 'sparkle-burst';
       spark.style.left = '50%';
       spark.style.top = '50%';
-      const colors = ['#f59e0b', '#00e5ff', '#ec4899', '#ffffff', '#a855f7'];
-      spark.style.background = colors[Math.floor(Math.random() * colors.length)];
-      spark.style.boxShadow = `0 0 10px ${spark.style.background}`;
+      spark.style.background = colors[i % colors.length];
 
-      const dx = (Math.random() - 0.5) * 600 + 'px';
-      const dy = (Math.random() - 0.5) * 600 + 'px';
+      const angle = (i / particleCount) * Math.PI * 2;
+      const dist = 140 + Math.random() * 120;
+      const dx = `${Math.cos(angle) * dist}px`;
+      const dy = `${Math.sin(angle) * dist}px`;
       spark.style.setProperty('--dx', dx);
       spark.style.setProperty('--dy', dy);
 
-      stage.appendChild(spark);
-      setTimeout(() => spark.remove(), 800);
+      fragment.appendChild(spark);
+      sparks.push(spark);
     }
+
+    stage.appendChild(fragment);
+    setTimeout(() => {
+      sparks.forEach(s => s.remove());
+    }, 650);
   }
 }
 

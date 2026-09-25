@@ -203,21 +203,24 @@
   font-weight: 600;
 }
 
-/* Pack Opening Stage Modal */
+/* Pack Opening Stage Modal - High Performance (No backdrop-filter lag) */
 .pack-open-modal {
   position: fixed;
   inset: 0;
-  background: rgba(5, 7, 10, 0.96);
-  backdrop-filter: blur(16px);
+  background: radial-gradient(ellipse at 50% 40%, rgba(18, 24, 38, 0.98) 0%, rgba(6, 8, 14, 0.99) 100%);
   z-index: 300;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  justify-content: flex-start;
+  padding: 2rem 1.5rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.2s ease;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+  transform: translateZ(0);
 }
 
 .pack-open-modal.active {
@@ -227,42 +230,111 @@
 
 .pack-opening-stage {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: auto 0;
+  padding: 1rem 0;
 }
 
 .opened-cards-shelf {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
   flex-wrap: wrap;
-  margin: 2rem 0;
+  margin: 1.75rem 0;
   width: 100%;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding: 1rem 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
 }
 
-.unrevealed-card {
-  width: 180px;
-  height: 250px;
-  background: linear-gradient(135deg, #1e293b, #0f172a);
-  border: 2px solid #334155;
+/* True 3D Hardware-Accelerated Pack Card Flip */
+.pack-flip-card {
+  position: relative;
+  width: 215px;
+  height: 330px;
+  perspective: 1000px;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  contain: layout style;
+  transform: translateZ(0);
+}
+
+.pack-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.pack-flip-card.is-flipped .pack-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.pack-card-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   border-radius: 12px;
+}
+
+/* Back Face */
+.pack-face-back {
+  background: linear-gradient(135deg, #182234 0%, #0d1320 100%);
+  border: 2px solid #2e3e56;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-  position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  user-select: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  z-index: 2;
 }
 
-.unrevealed-card:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 14px 30px rgba(56, 189, 248, 0.4);
+.pack-flip-card:not(.is-flipped):hover .pack-face-back {
   border-color: #38bdf8;
+  box-shadow: 0 12px 28px rgba(56, 189, 248, 0.35);
+  transform: translateY(-5px);
+}
+
+/* Front Face */
+.pack-face-front {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.pack-face-front .game-card {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.pack-new-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  z-index: 25;
+  background: #ef4444;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.72rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.8);
+  pointer-events: none;
+  animation: popScale 0.3s ease;
 }
 
 .card-back-pattern {
@@ -293,17 +365,18 @@
   color: #94a3b8;
 }
 
-/* Celebratory Sparks */
+/* Lightweight Celebratory Sparks */
 .sparkle-burst {
   position: absolute;
   pointer-events: none;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  animation: sparkleFly 0.7s ease-out forwards;
+  animation: sparkleFly 0.6s ease-out forwards;
+  will-change: transform, opacity;
 }
 
 @keyframes sparkleFly {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+  0% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+  100% { transform: translate3d(var(--dx), var(--dy), 0) scale(0); opacity: 0; }
 }

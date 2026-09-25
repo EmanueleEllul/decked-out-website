@@ -66,11 +66,14 @@ class AudioManager {
     this.initWebAudio();
     if (!this.ctx) return;
 
+    const now = this.ctx.currentTime;
+    if (this.lastFanfareTime && now - this.lastFanfareTime < 0.5) return;
+    this.lastFanfareTime = now;
+
     const freqs = rarity === 'Exotic' 
       ? [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98] // C Major arpeggio
       : [440.00, 554.37, 659.25, 880.00, 1108.73];          // A Major chime
 
-    const now = this.ctx.currentTime;
     freqs.forEach((freq, idx) => {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
@@ -89,22 +92,23 @@ class AudioManager {
     });
   }
 
-  // Pack rip tearing sound effect
+  // Pack rip tearing sound effect (with pre-cached noise buffer)
   playPackRip() {
     if (!this.sfxEnabled) return;
     this.initWebAudio();
     if (!this.ctx) return;
 
-    // White noise burst with lowpass filter sweep
-    const bufferSize = this.ctx.sampleRate * 0.35;
-    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for (let i = 0; i < bufferSize; i++) {
-      data[i] = Math.random() * 2 - 1;
+    if (!this.ripBuffer) {
+      const bufferSize = Math.floor(this.ctx.sampleRate * 0.35);
+      this.ripBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+      const data = this.ripBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
     }
 
     const noise = this.ctx.createBufferSource();
-    noise.buffer = buffer;
+    noise.buffer = this.ripBuffer;
 
     const filter = this.ctx.createBiquadFilter();
     filter.type = 'lowpass';

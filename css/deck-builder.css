@@ -664,3 +664,87 @@
   from { transform: translateX(100%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }
+
+/* Mobile & Touch Devices Optimization */
+@media (max-width: 768px) {
+  .deck-presets-bar {
+    padding: 0.75rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+  .presets-buttons-wrap {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.35rem;
+    scrollbar-width: thin;
+    gap: 0.4rem;
+  }
+  .preset-pill-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.65rem;
+  }
+  .clear-deck-btn {
+    width: 100%;
+    text-align: center;
+  }
+  .deck-vault-column {
+    padding: 0.85rem;
+  }
+  .deck-vault-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    max-height: 480px;
+  }
+  .vault-card-item {
+    font-size: 0.78rem;
+  }
+  .vault-card-art-box {
+    height: 85px;
+  }
+  .vault-card-desc-preview {
+    font-size: 0.66rem;
+    min-height: 38px;
+    padding: 0.3rem 0.4rem;
+  }
+  .deck-synergy-matrix {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.45rem;
+  }
+  .deck-cards-scroll-list {
+    max-height: 320px;
+  }
+  .deck-card-row {
+    padding: 0.45rem 0.5rem;
+  }
+  .deck-qty-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  .deck-card-preview-popover {
+    display: none !important; /* Mobile uses card clicks directly rather than hover popover */
+  }
+}
+
+@media (max-width: 480px) {
+  .deck-vault-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.45rem;
+  }
+  .vault-card-title {
+    max-width: 80px;
+    font-size: 0.72rem;
+  }
+  .deck-summary-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .deck-card-counter-wrap {
+    text-align: left;
+  }
+}

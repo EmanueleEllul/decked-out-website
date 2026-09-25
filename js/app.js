@@ -50,6 +50,15 @@ class AppController {
       mobileToggle.addEventListener('click', () => {
         navMenu.classList.toggle('mobile-open');
       });
+
+      // Close mobile menu on outside tap
+      document.addEventListener('click', (e) => {
+        if (navMenu.classList.contains('mobile-open')) {
+          if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+            navMenu.classList.remove('mobile-open');
+          }
+        }
+      });
     }
   }
 

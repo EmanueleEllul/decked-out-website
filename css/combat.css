@@ -72,10 +72,32 @@
 @media (max-width: 900px) {
   .combat-battlefield {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1rem;
+    padding: 1.25rem 0.85rem;
   }
   .combat-clash-column {
     order: -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0;
+  }
+  .combat-turn-pillar {
+    flex-direction: row;
+    gap: 0.4rem;
+    padding: 0.25rem 0.6rem;
+    min-width: unset;
+  }
+  .pillar-number {
+    font-size: 1.2rem;
+  }
+  .combat-vs-symbol {
+    font-size: 1.3rem;
+  }
+  .combat-phase-indicator {
+    width: 100%;
+    text-align: center;
   }
 }
 
@@ -777,5 +799,139 @@
   display: flex;
   gap: 1rem;
   justify-content: center;
+}
+
+/* Mobile & Touch Phones Optimization */
+@media (max-width: 680px) {
+  .combat-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+  .combat-toolbar-group {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+  .combat-toolbar-group select {
+    width: 100%;
+  }
+  .combat-toolbar-stats {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+    gap: 0.35rem;
+  }
+  .combat-stat-pill {
+    flex: 1;
+    text-align: center;
+    padding: 0.35rem 0.4rem;
+    font-size: 0.72rem;
+  }
+  .combat-arena-container {
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+  }
+  .combat-entity-card {
+    padding: 0.85rem;
+  }
+  .entity-body {
+    gap: 0.75rem;
+  }
+  .entity-avatar-frame {
+    width: 72px;
+    height: 72px;
+  }
+  .entity-avatar-frame img {
+    width: 64px;
+    height: 64px;
+  }
+  .entity-name {
+    font-size: 1.1rem;
+  }
+  .hero-strike-indicator, .enemy-intent-indicator {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.5rem;
+  }
+  .strike-auto-pill {
+    font-size: 0.55rem;
+  }
+  .combat-meter-group .meter-label-row {
+    font-size: 0.75rem;
+  }
+  .combat-status-tray {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  .status-badge {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.45rem;
+  }
+  .combat-hand-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.65rem 0.75rem;
+    gap: 0.6rem;
+  }
+  .combat-hand-meta {
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    justify-content: space-between;
+  }
+  .meta-tip {
+    width: 100%;
+    text-align: center;
+  }
+  .combat-actions-wrap {
+    width: 100%;
+  }
+  .combat-end-turn-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    font-size: 0.88rem;
+  }
+  .combat-hand-shelf {
+    min-height: 250px;
+    padding: 0.75rem 0.25rem;
+    gap: 0.65rem;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+  .combat-card-playable {
+    width: 150px;
+    min-width: 150px;
+    scroll-snap-align: start;
+  }
+  .combat-card-playable .card-image-box {
+    height: 95px;
+  }
+  .combat-card-playable .card-name-title {
+    font-size: 0.7rem;
+    max-width: 85px;
+  }
+  .combat-card-playable .card-desc-box {
+    min-height: 42px;
+    font-size: 0.66rem;
+    padding: 0.35rem;
+  }
+  .combat-result-modal {
+    padding: 1.5rem 1.25rem;
+    margin: 1rem;
+    width: 92%;
+  }
+  .combat-result-modal h2 {
+    font-size: 1.5rem;
+  }
+  .combat-result-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .combat-result-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 

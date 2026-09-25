@@ -911,20 +911,6 @@ p, span, a, li, td, th, input, select, button {
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
-  position: relative;
-}
-
-/* Pixel-scan overlay on detail avatar — matches card image box vibe */
-.hero-avatar-display::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    transparent, transparent 3px,
-    rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px
-  );
-  pointer-events: none;
-  z-index: 2;
 }
 
 .hero-avatar-display img {
@@ -934,12 +920,8 @@ p, span, a, li, td, th, input, select, button {
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
-  /* Scale up the tiny 24px sprite crisply */
-  transform: scale(1);
-  transition: transform 0.15s ease;
 }
 
-/* Roster thumbnail avatar */
 .hero-roster-avatar {
   width: 44px;
   height: 44px;
@@ -950,7 +932,6 @@ p, span, a, li, td, th, input, select, button {
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
-  position: relative;
 }
 
 .hero-roster-avatar img {
@@ -960,28 +941,10 @@ p, span, a, li, td, th, input, select, button {
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
-  transition: transform 0.12s ease;
 }
 
-/* Hover bounce on roster thumbnails */
-.hero-roster-card:hover .hero-roster-avatar img {
-  transform: scale(1.1) translateY(-1px);
-}
-
-/* Active hero — gold border on roster avatar */
 .hero-roster-card.active .hero-roster-avatar {
   border-color: var(--primary);
-  box-shadow: 1px 1px 0 var(--primary-dark);
-}
-
-/* Detail portrait always plays animation — subtle bob */
-@keyframes heroIdleBob {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-3px); }
-}
-
-.hero-portrait-detail {
-  animation: heroIdleBob 1.6s ease-in-out infinite;
 }
 
 

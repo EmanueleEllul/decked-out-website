@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DECKED OUT - Battle Test | Official Roguelike TCG</title>
+  <meta name="description" content="Playable tactical Godot deck combat arena: Test your custom decks, battle dungeon foes, manage Mana, Armor & Ward mitigation, and execute automatic Hero Strikes.">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/card-foil.css?v=3">
+  <link rel="stylesheet" href="css/combat.css?v=3">
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Header -->
+  <header class="site-header" id="top">
+    <div class="header-container">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-icon">
+          <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
+        </div>
+        <div class="brand-text">
+          <h1>DECKED OUT</h1>
+          <span>ROGUELIKE TCG</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Overview</a></li>
+          <li><a href="mechanics.html" class="nav-link">Mechanics</a></li>
+          <li><a href="heroes.html" class="nav-link">Heroes</a></li>
+          <li><a href="cards.html" class="nav-link">Cards</a></li>
+          <li><a href="deck-builder.html" class="nav-link">Deck Builder</a></li>
+          <li><a href="combat.html" class="nav-link active">Battle Test</a></li>
+          <li><a href="relics.html" class="nav-link">Relics</a></li>
+          <li><a href="dungeon.html" class="nav-link">Dungeon</a></li>
+          <li><a href="specs.html" class="nav-link">Game Info</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="header-actions">
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn-wishlist" title="Wishlist Decked Out on Steam">
+          <span>⭐</span> Wishlist on Steam
+        </a>
+        <button id="toggle-sfx-btn" class="audio-btn" title="Toggle Sound Effects">🔊</button>
+        <button id="toggle-bgm-btn" class="audio-btn" title="Toggle Ambient Music">🎼</button>
+        <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Website Content -->
+  <main class="main-wrapper">
+
+    <!-- ==========================================
+         PAGE: PLAYABLE COMBAT ARENA
+         ========================================== -->
+    <section class="site-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-kicker">TACTICAL COMBAT ARENA</span>
+          <h2><span>⚔️</span> Playable Tactical Combat Arena</h2>
+          <p>Authentic turn-based deck combat with Armor &amp; Ward mitigation, elemental status DoTs, Mana management, and automatic Hero Strikes.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="deck-builder.html" class="btn btn-secondary">🛠️ Edit Deck</a>
+          <button id="combat-restart-btn" class="btn btn-secondary">🔄 Reset Battle</button>
+          <button id="combat-next-foe-btn" class="btn btn-primary">⏭️ Next Foe</button>
+        </div>
+      </div>
+
+      <!-- Matchup Toolbar -->
+      <div class="combat-toolbar">
+        <div class="combat-toolbar-group">
+          <label for="combat-hero-select"><span>🛡️</span> Active Hero:</label>
+          <select id="combat-hero-select" class="custom-select"></select>
+        </div>
+        <div class="combat-toolbar-group">
+          <label for="combat-enemy-select"><span>👹</span> Dungeon Foe:</label>
+          <select id="combat-enemy-select" class="custom-select"></select>
+        </div>
+        <div class="combat-toolbar-group">
+          <label for="combat-deck-source-select"><span>🎴</span> Deck Source:</label>
+          <select id="combat-deck-source-select" class="custom-select">
+            <option value="standard">Standard Trial Deck (20 Cards)</option>
+            <option value="custom">Custom Deck (From Deck Builder)</option>
+          </select>
+        </div>
+        <div class="combat-toolbar-stats">
+          <span class="combat-stat-pill">Round <strong id="combat-turn-header-pill">1</strong></span>
+          <span class="combat-stat-pill">🎴 Deck: <strong id="combat-deck-header-pill">15</strong></span>
+          <span class="combat-stat-pill">🗑️ Discard: <strong id="combat-discard-header-pill">0</strong></span>
+        </div>
+      </div>
+
+      <!-- Battlefield Area -->
+      <div class="combat-arena-container">
+        <!-- Floating Result Modal / Banner -->
+        <div id="combat-result-overlay" class="combat-result-overlay" style="display: none;">
+          <div class="combat-result-modal">
+            <div id="combat-result-icon" class="combat-result-icon">🏆</div>
+            <h2 id="combat-result-title">VICTORY!</h2>
+            <p id="combat-result-subtitle">You vanquished Goblin Sentry in the dungeon depths!</p>
+            <div id="combat-result-rewards" class="combat-result-rewards">
+              <div class="reward-pill gold-reward">💰 +25 Gold</div>
+              <div class="reward-pill gem-reward">💎 +5 Gems</div>
+            </div>
+            <div class="combat-result-actions">
+              <button id="combat-overlay-next-btn" class="btn btn-primary">⚔️ Next Opponent</button>
+              <button id="combat-overlay-retry-btn" class="btn btn-secondary">🔄 Rematch</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="combat-battlefield">
+          <!-- Floating Damage Text Anchors -->
+          <div id="player-floating-anchor" class="combat-floating-anchor"></div>
+          <div id="enemy-floating-anchor" class="combat-floating-anchor"></div>
+
+          <!-- Player Hero Card -->
+          <div id="player-combat-card" class="combat-entity-card player-entity">
+            <div class="entity-card-header">
+              <div class="entity-identity">
+                <span id="player-hero-title" class="entity-role-tag">The Master of Balance</span>
+                <h3 id="player-hero-name" class="entity-name">Deck Monk</h3>
+              </div>
+              <span class="entity-side-badge hero-badge">HERO</span>
+            </div>
+
+            <div class="entity-body">
+              <div class="entity-avatar-frame hero-frame">
+                <img id="player-avatar-img" class="pixel-art" src="assets/heroes/anim/DeckMonk.gif" alt="Player Hero" />
+              </div>
+              <div class="entity-details">
+                <!-- Hero Strike Power Indicator -->
+                <div class="hero-strike-indicator">
+                  <span class="strike-icon">⚔️</span>
+                  <span>Auto Hero Strike: <strong id="player-hero-atk">10</strong> DMG</span>
+                  <span class="strike-auto-pill">ON END TURN</span>
+                </div>
+
+                <!-- Health Bar -->
+                <div class="combat-meter-group">
+                  <div class="meter-label-row">
+                    <span class="meter-title">Health</span>
+                    <strong id="player-hp-label" class="hp-text">100 / 100 HP</strong>
+                  </div>
+                  <div class="health-bar-wrapper">
+                    <div id="player-hp-ghost" class="health-bar-ghost" style="width: 100%;"></div>
+                    <div id="player-hp-fill" class="health-bar-fill player-hp" style="width: 100%;"></div>
+                  </div>
+                </div>
+
+                <!-- Mana Bar -->
+                <div class="combat-meter-group">
+                  <div class="meter-label-row">
+                    <span class="meter-title">Turn Mana</span>
+                    <strong id="player-mana-label" class="mana-text">15 / 15 Mana</strong>
+                  </div>
+                  <div class="mana-bar-wrapper">
+                    <div id="player-mana-fill" class="mana-bar-fill" style="width: 100%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Active Defenses & Status Badges -->
+            <div id="player-status-tray" class="combat-status-tray">
+              <span id="player-badge-armor" class="status-badge armor-badge">🛡️ Armor: <strong>0</strong></span>
+              <span id="player-badge-ward" class="status-badge ward-badge">🔮 Ward: <strong>0</strong></span>
+              <span id="player-badge-scrap" class="status-badge scrap-badge" style="display: none;">⚙️ Scrap: <strong>0</strong></span>
+              <span id="player-badge-burn" class="status-badge burn-badge" style="display: none;">🔥 Burn: <strong>0</strong></span>
+              <span id="player-badge-bleed" class="status-badge bleed-badge" style="display: none;">🩸 Bleed: <strong>0</strong></span>
+            </div>
+          </div>
+
+          <!-- Center Clash Column -->
+          <div class="combat-clash-column">
+            <div class="combat-turn-pillar">
+              <span class="pillar-label">ROUND</span>
+              <span id="combat-turn-num" class="pillar-number">1</span>
+            </div>
+            <div class="combat-vs-symbol">⚔️</div>
+            <div id="combat-phase-indicator" class="combat-phase-indicator phase-player">
+              Your Turn: Play Cards or End Turn
+            </div>
+          </div>
+
+          <!-- Enemy Entity Card -->
+          <div id="enemy-combat-card" class="combat-entity-card enemy-entity">
+            <div class="entity-card-header">
+              <div class="entity-identity">
+                <span id="enemy-rank-badge" class="entity-role-tag rank-normal">Dungeon Foe</span>
+                <h3 id="enemy-display-name" class="entity-name">Goblin Sentry</h3>
+              </div>
+              <span class="entity-side-badge foe-badge">FOE</span>
+            </div>
+
+            <div class="entity-body">
+              <div class="entity-avatar-frame enemy-frame">
+                <img id="enemy-avatar-img" class="pixel-art" src="assets/enemies/anim/Goblin.gif" alt="Dungeon Foe" />
+              </div>
+              <div class="entity-details">
+                <!-- Enemy Intent Preview -->
+                <div id="enemy-intent-preview" class="enemy-intent-indicator">
+                  <span class="intent-icon">⚠️</span>
+                  <span>Intent: <strong id="enemy-intent-val">Strikes for 7 Physical DMG</strong></span>
+                </div>
+
+                <!-- Health Bar -->
+                <div class="combat-meter-group">
+                  <div class="meter-label-row">
+                    <span class="meter-title">Health</span>
+                    <strong id="enemy-hp-label" class="hp-text">45 / 45 HP</strong>
+                  </div>
+                  <div class="health-bar-wrapper">
+                    <div id="enemy-hp-ghost" class="health-bar-ghost" style="width: 100%;"></div>
+                    <div id="enemy-hp-fill" class="health-bar-fill enemy-hp" style="width: 100%;"></div>
+                  </div>
+                </div>
+
+                <!-- Defense Summary -->
+                <div class="meter-label-row" style="margin-top: 0.5rem;">
+                  <span class="meter-title">Passive Mitigation</span>
+                  <span id="enemy-defense-summary" style="font-size: 0.8rem; color: #94a3b8;">Armor: 2 | Ward: 0</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Active Defenses & Status Badges -->
+            <div id="enemy-status-tray" class="combat-status-tray">
+              <span id="enemy-badge-armor" class="status-badge armor-badge">🛡️ Armor: <strong>2</strong></span>
+              <span id="enemy-badge-ward" class="status-badge ward-badge" style="display: none;">🔮 Ward: <strong>0</strong></span>
+              <span id="enemy-badge-burn" class="status-badge burn-badge" style="display: none;">🔥 Burn: <strong>0</strong></span>
+              <span id="enemy-badge-bleed" class="status-badge bleed-badge" style="display: none;">🩸 Bleed: <strong>0</strong></span>
+              <span id="enemy-badge-poison" class="status-badge poison-badge" style="display: none;">☠️ Poison: <strong>0</strong></span>
+              <span id="enemy-badge-stun" class="status-badge stun-badge" style="display: none;">⚡ Stunned</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hand Deck Header & End Turn Bar -->
+        <div class="combat-hand-bar">
+          <div class="combat-hand-meta">
+            <span class="meta-item">🎴 In Hand: <strong id="hand-count-label">5</strong>/5</span>
+            <span class="meta-item">📚 Draw Pile: <strong id="deck-count-label">15</strong></span>
+            <span class="meta-item">🗑️ Discard: <strong id="discard-count-label">0</strong></span>
+            <span class="meta-tip">💡 Click an affordable card to play it</span>
+          </div>
+
+          <div class="combat-actions-wrap">
+            <button id="combat-end-turn-btn" class="btn combat-end-turn-btn">
+              <span class="btn-sword">⚔️</span>
+              <span class="btn-text">End Turn &amp; Hero Strike</span>
+              <span class="btn-arrow">➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hand Shelf -->
+        <div id="combat-hand-cards" class="combat-hand-shelf"></div>
+
+        <!-- Chronicle Combat Log -->
+        <div class="combat-chronicle-wrap">
+          <div class="chronicle-header">
+            <span>📜 Tactical Event Chronicle</span>
+            <span style="font-size: 0.72rem; color: var(--text-faint);">Live combat log</span>
+          </div>
+          <div id="combat-log-box" class="chronicle-log-box"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="brand-wrapper">
+        <div class="brand-icon">
+          <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
+        </div>
+        <div class="brand-text">
+          <h1>DECKED OUT</h1>
+          <span>ROGUELIKE TCG</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">Overview</a>
+        <a href="mechanics.html">Mechanics</a>
+        <a href="heroes.html">Heroes</a>
+        <a href="cards.html">Cards</a>
+        <a href="deck-builder.html">Deck Builder</a>
+        <a href="combat.html">Battle Test</a>
+        <a href="relics.html">Relics</a>
+        <a href="dungeon.html">Dungeon</a>
+        <a href="specs.html">Game Info</a>
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Steam</a>
+      </div>
+
+      <div class="footer-credits">
+        <p>Decked Out — Built with Godot 4.7 Forward+.</p>
+        <p style="margin-top: 0.25rem;">Official Companion Website. All game assets &amp; characters &copy; Emanuele Ellul.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js?v=3"></script>
+  <script src="js/audio.js?v=3"></script>
+  <script src="js/compendium.js?v=3"></script>
+  <script src="js/combat-demo.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
+
+</body>
+</html>

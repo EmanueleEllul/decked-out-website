@@ -695,42 +695,18 @@ class DeckBuilder {
       return;
     }
 
-    // Convert deck dictionary to card instances array
-    const deckInstances = [];
-    Object.entries(this.deck).forEach(([cardId, count]) => {
-      const card = this.allCards.find(c => c.id === cardId);
-      if (card) {
-        for (let i = 0; i < count; i++) {
-          deckInstances.push({ ...card });
-        }
-      }
-    });
-
-    // Shuffle
-    for (let i = deckInstances.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [deckInstances[i], deckInstances[j]] = [deckInstances[j], deckInstances[i]];
-    }
-
-    // Load into Combat Demo
-    if (window.combatDemo) {
-      window.combatDemo.deck = [...deckInstances];
-      window.combatDemo.discard = [];
-      window.combatDemo.hand = [];
-      window.combatDemo.turn = 1;
-      window.combatDemo.drawHand(5);
-      window.combatDemo.renderCombatState();
-    }
-
-    // Switch to combat tab
-    if (window.app) {
-      window.app.switchTab('combat');
-      const combatPane = document.getElementById('tab-combat');
-      if (combatPane) combatPane.scrollIntoView({ behavior: 'smooth' });
+    try {
+      localStorage.setItem('decked_custom_deck', JSON.stringify(this.deck));
+    } catch (e) {
+      console.error('Failed to save custom deck', e);
     }
 
     if (window.audioMgr) window.audioMgr.playSFX('cardPlay');
-    if (window.showToast) window.showToast(`⚔️ Loaded your ${total}-card custom deck into Combat Arena!`);
+    if (window.showToast) window.showToast(`⚔️ Entering Combat Arena with your ${total}-card deck!`);
+
+    setTimeout(() => {
+      window.location.href = 'combat.html?customDeck=1';
+    }, 300);
   }
 
   exportDeck() {

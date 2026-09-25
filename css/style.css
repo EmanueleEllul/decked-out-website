@@ -1856,7 +1856,8 @@ p, span, a, li, td, th, input, select, button {
 }
 
 .footer-links a:last-child { border-right: none; }
-.footer-links a:hover { background: var(--bg-surface); color: var(--primary); }
+.footer-links a:hover,
+.footer-links a.active { background: var(--bg-surface); color: var(--primary); }
 
 .footer-credits {
   text-align: right;

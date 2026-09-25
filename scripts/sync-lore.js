@@ -8,11 +8,13 @@ const ASSETS_LORE_DIR = path.join(WEBSITE_DIR, 'assets', 'lore');
 const LORE_HTML_PATH = path.join(WEBSITE_DIR, 'lore.html');
 const BACKUP_SRC_DIR = path.join(WEBSITE_DIR, 'lore-source');
 
-// Helper to remove any instances of "bible" (rule constraint)
+// Helper to remove any instances of "bible" or "Age of Empires" (rule constraint)
 function sanitizeText(text) {
   return text
     .replace(/\bLore\s+Bible\b/gi, 'Lore Codex')
-    .replace(/\bbible\b/gi, 'codex');
+    .replace(/\bbible\b/gi, 'codex')
+    .replace(/\bThe\s+Age\s+of\s+Empires\b/gi, 'The Golden Age')
+    .replace(/\bAge\s+of\s+Empires\b/gi, 'The Golden Age');
 }
 
 // Convert markdown text to styled HTML
@@ -221,7 +223,7 @@ function generateLoreHtml(volumes) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DECKED OUT - Lore Codex | The Chronicles of Aethelgard &amp; Aethelos</title>
-  <meta name="description" content="The official Lore Codex of Decked Out: The Age of Empires, the Great World War, the Atlas of the Broken World, the Six Orders, Chronicles of the Champions, and Aethelos the Slumbering God.">
+  <meta name="description" content="The official Lore Codex of Decked Out: The Golden Age, the Great World War, the Atlas of the Broken World, the Six Orders, Chronicles of the Champions, and Aethelos the Slumbering God.">
   <link rel="icon" type="image/png" href="assets/icon.png">
   
   <!-- Google Fonts -->
@@ -301,7 +303,7 @@ function generateLoreHtml(volumes) {
     <nav class="lore-tabs-nav" aria-label="Lore Codex Volume Navigation">
       <div class="lore-tabs-container">
         <button class="lore-tab-btn active" data-tab="tab-overview"><span>📖</span> Overview</button>
-        <button class="lore-tab-btn" data-tab="tab-vol00"><span>🏛️</span> Vol 00: Age of Empires</button>
+        <button class="lore-tab-btn" data-tab="tab-vol00"><span>🏛️</span> Vol 00: The Golden Age</button>
         <button class="lore-tab-btn" data-tab="tab-vol01"><span>⚔️</span> Vol 01: The Shattered World</button>
         <button class="lore-tab-btn" data-tab="tab-vol02"><span>🗺️</span> Vol 02: World Atlas &amp; Maps</button>
         <button class="lore-tab-btn" data-tab="tab-vol03"><span>🏺</span> Vol 03: Arts of War &amp; Relics</button>
@@ -339,7 +341,7 @@ function generateLoreHtml(volumes) {
         <div class="lore-section-inner">
           <div class="panel-header-wrap">
             <span class="volume-kicker">VOLUME 00 &bull; PREQUEL</span>
-            <h2>The Age of Empires &amp; <span>The Eve of Ruin</span></h2>
+            <h2>The Golden Age &amp; <span>The Eve of Ruin</span></h2>
             <p>From the Golden Age of the Five Realms to the catastrophic rupture of the Firmament Siphon.</p>
           </div>
 
@@ -637,43 +639,37 @@ function generateLoreHtml(volumes) {
 
     </main>
 
-    <!-- Footer -->
+    <!-- Site Footer -->
     <footer class="site-footer">
-      <div class="footer-container">
-        <div class="footer-col brand-col">
-          <div class="footer-brand">
-            <img src="assets/icon.png" alt="Decked Out" class="footer-logo pixel-art" width="28" height="28" />
-            <span class="footer-title">DECKED OUT</span>
+      <div class="footer-inner">
+        <div class="brand-wrapper">
+          <div class="brand-icon">
+            <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
           </div>
-          <p class="footer-tagline">A tactical roguelike deckbuilding TCG forged in Godot 4.3.</p>
+          <div class="brand-text">
+            <h1>DECKED OUT</h1>
+            <span>ROGUELIKE TCG</span>
+          </div>
         </div>
 
-        <div class="footer-col links-col">
-          <div class="footer-heading">NAVIGATION</div>
-          <ul class="footer-links">
-            <li><a href="index.html">Overview</a></li>
-            <li><a href="mechanics.html">Mechanics</a></li>
-            <li><a href="heroes.html">Heroes</a></li>
-            <li><a href="cards.html">Cards</a></li>
-            <li><a href="deck-builder.html">Deck Builder</a></li>
-            <li><a href="combat.html">Combat Demo</a></li>
-            <li><a href="relics.html">Relics</a></li>
-            <li><a href="dungeon.html">Dungeon Map</a></li>
-            <li><a href="lore.html">Lore Codex</a></li>
-            <li><a href="specs.html">Tech Specs</a></li>
-          </ul>
+        <div class="footer-links">
+          <a href="index.html">Overview</a>
+          <a href="mechanics.html">Mechanics</a>
+          <a href="heroes.html">Heroes</a>
+          <a href="cards.html">Cards</a>
+          <a href="deck-builder.html">Deck Builder</a>
+          <a href="combat.html">Battle Test</a>
+          <a href="relics.html">Relics</a>
+          <a href="dungeon.html">Dungeon</a>
+          <a href="lore.html" class="active">Lore</a>
+          <a href="specs.html">Game Info</a>
+          <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Steam</a>
         </div>
 
-        <div class="footer-col steam-col">
-          <div class="footer-heading">WISHLIST TODAY</div>
-          <p>Support indie development by wishlisting Decked Out on Steam.</p>
-          <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn-steam-footer">
-            <span>⭐</span> Wishlist on Steam
-          </a>
+        <div class="footer-credits">
+          <p>Decked Out — Built with Godot 4.7 Forward+.</p>
+          <p style="margin-top: 0.25rem;">Official Companion Website. All game assets &amp; characters &copy; Emanuele Ellul.</p>
         </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 DECKED OUT. All lore and assets derived from the official Decked Out game project.</p>
       </div>
     </footer>
 

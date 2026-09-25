@@ -307,10 +307,22 @@ p, span, a, li, td, th, input, select, button {
   box-shadow: 1px 1px 0 #000;
 }
 
+@keyframes audioPlayingPulse {
+  0%, 100% {
+    box-shadow: 2px 2px 0 rgba(0, 212, 255, 0.4);
+    border-color: var(--mana-glow);
+  }
+  50% {
+    box-shadow: 2px 2px 8px rgba(0, 212, 255, 0.8);
+    border-color: #fff;
+  }
+}
+
 .audio-btn.playing {
   border-color: var(--mana-glow);
   color: var(--mana-glow);
   box-shadow: 2px 2px 0 rgba(0, 212, 255, 0.4);
+  animation: audioPlayingPulse 2.2s infinite ease-in-out;
 }
 
 .mobile-toggle-btn {

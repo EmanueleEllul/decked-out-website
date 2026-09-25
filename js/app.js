@@ -1,5 +1,5 @@
 // Decked Out - Main Web Application Controller
-// Orchestrates smooth page navigation, scroll spy, ambient audio & UI interactions
+// Orchestrates seamless PJAX page navigation, audio persistence, scroll spy & UI interactions
 
 class AppController {
   constructor() {
@@ -13,10 +13,11 @@ class AppController {
     this.bindAudioControls();
     this.bindWishlistButtons();
     this.setupToasts();
+    this.initPjax();
   }
 
   bindNavigation() {
-    // Smooth scrolling for navigation links
+    // Smooth scrolling for navigation links with hash
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', (e) => {
         const targetId = anchor.getAttribute('href').replace('#', '');
@@ -47,18 +48,21 @@ class AppController {
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const navMenu = document.querySelector('.nav-links');
     if (mobileToggle && navMenu) {
-      mobileToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('mobile-open');
-      });
+      if (!mobileToggle.dataset.bound) {
+        mobileToggle.dataset.bound = 'true';
+        mobileToggle.addEventListener('click', () => {
+          navMenu.classList.toggle('mobile-open');
+        });
 
-      // Close mobile menu on outside tap
-      document.addEventListener('click', (e) => {
-        if (navMenu.classList.contains('mobile-open')) {
-          if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
-            navMenu.classList.remove('mobile-open');
+        // Close mobile menu on outside tap
+        document.addEventListener('click', (e) => {
+          if (navMenu.classList.contains('mobile-open')) {
+            if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+              navMenu.classList.remove('mobile-open');
+            }
           }
-        }
-      });
+        });
+      }
     }
   }
 
@@ -74,7 +78,7 @@ class AppController {
             navLinks.forEach(link => {
               if (link.getAttribute('href') === `#${id}`) {
                 link.classList.add('active');
-              } else {
+              } else if (link.getAttribute('href').startsWith('#')) {
                 link.classList.remove('active');
               }
             });
@@ -91,30 +95,28 @@ class AppController {
   bindAudioControls() {
     const sfxBtn = document.getElementById('toggle-sfx-btn');
     if (sfxBtn && window.audioMgr) {
-      sfxBtn.addEventListener('click', () => {
+      sfxBtn.onclick = () => {
         const enabled = window.audioMgr.toggleSFX();
-        sfxBtn.innerHTML = enabled ? '🔊' : '🔇';
-        sfxBtn.title = enabled ? 'Sound Effects: ON' : 'Sound Effects: OFF';
-        this.showToast(enabled ? '🔊 SFX Enabled' : '🔇 SFX Muted');
-      });
+        this.showToast(enabled ? '🔊 Sound Effects Enabled' : '🔇 Sound Effects Muted');
+      };
     }
 
     const bgmBtn = document.getElementById('toggle-bgm-btn');
     if (bgmBtn && window.audioMgr) {
-      bgmBtn.addEventListener('click', () => {
-        window.audioMgr.toggleAmbient();
-        const isPlaying = window.audioMgr.bgmEnabled;
-        bgmBtn.classList.toggle('playing', isPlaying);
-        bgmBtn.innerHTML = isPlaying ? '🎵' : '🎼';
-        bgmBtn.title = isPlaying ? 'Ambient Music: ON' : 'Ambient Music: OFF';
-        this.showToast(isPlaying ? '🎵 Ambient Soundscape Started' : '🎼 Ambient Soundscape Stopped');
-      });
+      bgmBtn.onclick = () => {
+        const isPlaying = window.audioMgr.toggleBGM();
+        this.showToast(isPlaying ? '🎵 Playing Decked Out Main Menu Theme' : '🎼 Music Paused');
+      };
+      window.audioMgr.updateBgmUi();
+      window.audioMgr.updateSfxUi();
     }
   }
 
   bindWishlistButtons() {
     const steamUrl = 'https://store.steampowered.com/app/4298040/Decked_Out/';
     document.querySelectorAll('.btn-wishlist, [data-action="wishlist"]').forEach(btn => {
+      if (btn.dataset.boundWishlist) return;
+      btn.dataset.boundWishlist = 'true';
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -152,6 +154,210 @@ class AppController {
       toast.style.transition = 'all 0.3s ease';
       setTimeout(() => toast.remove(), 300);
     }, 3500);
+  }
+
+  /* ========================================================
+     SEAMLESS PJAX CLIENT-SIDE PAGE TRANSITIONS
+     Maintains active audio & background music without interruption
+     ======================================================== */
+  initPjax() {
+    if (window.location.protocol !== 'http:' && window.location.protocol !== 'https:') {
+      return;
+    }
+
+    window.addEventListener('popstate', () => {
+      this.loadPage(window.location.href, false);
+    });
+
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (href.startsWith('#')) return;
+
+      if (link.target === '_blank' || link.hostname !== window.location.hostname) return;
+
+      if (href.match(/\.(png|jpe?g|gif|svg|pdf|zip|mp3|wav|ogg)$/i)) return;
+
+      const targetUrl = new URL(link.href, window.location.href);
+
+      if (targetUrl.pathname === window.location.pathname) {
+        if (targetUrl.hash) {
+          const el = document.getElementById(targetUrl.hash.slice(1));
+          if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: 'smooth' });
+            return;
+          }
+        }
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      e.preventDefault();
+      if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
+      this.loadPage(link.href, true);
+    });
+  }
+
+  async loadPage(url, pushState = true) {
+    try {
+      const pageContainer = document.getElementById('page-content');
+      if (!pageContainer) {
+        window.location.href = url;
+        return;
+      }
+
+      pageContainer.style.opacity = '0.4';
+      pageContainer.style.transition = 'opacity 0.12s ease';
+
+      const res = await fetch(url);
+      if (!res.ok) {
+        window.location.href = url;
+        return;
+      }
+
+      const html = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+
+      const newContent = doc.getElementById('page-content');
+      if (!newContent) {
+        window.location.href = url;
+        return;
+      }
+
+      // Update page title
+      document.title = doc.title;
+
+      // Swap page content
+      pageContainer.innerHTML = newContent.innerHTML;
+      pageContainer.style.opacity = '1';
+
+      // Update history
+      if (pushState) {
+        window.history.pushState({}, '', url);
+      }
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'instant' });
+
+      // Update active nav link
+      this.updateNavbarActive(url);
+
+      // Close mobile menu if open
+      const navMenu = document.querySelector('.nav-links');
+      if (navMenu) navMenu.classList.remove('mobile-open');
+
+      // Re-bind base interactions
+      this.bindNavigation();
+      this.bindScrollSpy();
+      this.bindWishlistButtons();
+
+      // Extract current page filename
+      const targetUrl = new URL(url, window.location.href);
+      const pageName = targetUrl.pathname.split('/').pop() || 'index.html';
+
+      // Initialize page-specific controllers
+      await this.initPageControllers(pageName);
+
+      // Re-sync audio buttons
+      if (window.audioMgr) {
+        window.audioMgr.updateBgmUi();
+        window.audioMgr.updateSfxUi();
+      }
+    } catch (e) {
+      console.warn('PJAX fetch failed, navigating normally:', e);
+      window.location.href = url;
+    }
+  }
+
+  updateNavbarActive(url) {
+    const targetUrl = new URL(url, window.location.href);
+    let pageName = targetUrl.pathname.split('/').pop() || 'index.html';
+    if (!pageName || pageName === '/') pageName = 'index.html';
+
+    document.querySelectorAll('.nav-links .nav-link').forEach(link => {
+      const linkHref = link.getAttribute('href');
+      if (!linkHref) return;
+      const linkPage = linkHref.split('#')[0].split('/').pop() || 'index.html';
+      if (linkPage === pageName) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  async initPageControllers(pageName) {
+    if (!pageName || pageName === '/' || pageName === 'index.html') {
+      return;
+    }
+
+    if (pageName === 'cards.html') {
+      if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=4');
+      if (!window.CompendiumManager) await this.loadScript('js/compendium.js?v=4');
+      if (window.CompendiumManager) {
+        window.compendium = new CompendiumManager();
+      }
+    } else if (pageName === 'heroes.html' || pageName === 'relics.html') {
+      if (!window.GAME_HEROES) await this.loadScript('js/data.js?v=4');
+      if (!window.HeroesRelicsManager) await this.loadScript('js/heroes-relics.js?v=4');
+      if (window.HeroesRelicsManager) {
+        window.heroesRelics = new HeroesRelicsManager();
+      }
+    } else if (pageName === 'deck-builder.html') {
+      if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=4');
+      if (!window.CompendiumManager) await this.loadScript('js/compendium.js?v=4');
+      if (!window.DeckBuilder) await this.loadScript('js/deck-builder.js?v=4');
+      if (window.DeckBuilder) {
+        window.deckBuilder = new DeckBuilder();
+      }
+    } else if (pageName === 'combat.html') {
+      if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=4');
+      if (!window.CompendiumManager) await this.loadScript('js/compendium.js?v=4');
+      if (!window.CombatDemo) await this.loadScript('js/combat-demo.js?v=4');
+      if (window.CombatDemo) {
+        window.combatDemo = new CombatDemo();
+      }
+    } else if (pageName === 'dungeon.html') {
+      if (!window.DUNGEON_DATA) await this.loadScript('js/data.js?v=4');
+      if (!window.DungeonMapManager) await this.loadScript('js/dungeon-map.js?v=4');
+      if (window.DungeonMapManager) {
+        window.dungeonMap = new DungeonMapManager();
+      }
+    } else if (pageName === 'lore.html') {
+      const pills = document.querySelectorAll('.lore-nav-pill');
+      pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
+          pills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+        });
+      });
+    }
+  }
+
+  loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const cleanSrc = src.split('?')[0];
+      const existing = document.querySelector(`script[src*="${cleanSrc}"]`);
+      if (existing) {
+        resolve();
+        return;
+      }
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = () => resolve();
+      s.onerror = (err) => reject(err);
+      document.body.appendChild(s);
+    });
   }
 }
 

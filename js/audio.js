@@ -1,13 +1,15 @@
 // Decked Out - Audio Manager
-// Plays genuine Godot game SFX and rich procedural synthesized audio
+// Plays authentic Godot game SFX and the official Decked Out Main Menu soundtrack
+// Features millisecond-accurate cross-page persistence and audio restoration
 
 class AudioManager {
   constructor() {
     this.sfxEnabled = true;
     this.bgmEnabled = false;
     this.volume = 0.5;
+    this.bgmVolume = 0.35;
     
-    // Audio clips cache
+    // Audio clips cache (genuine Godot SFX)
     this.clips = {
       cardPlay: new Audio('assets/audio/Card_Play.mp3'),
       buttonClick: new Audio('assets/audio/Button_Click.mp3'),
@@ -25,14 +27,15 @@ class AudioManager {
     });
 
     this.ctx = null;
-    this.ambientOsc = null;
-    this.ambientGain = null;
 
-    // Load user settings
+    // Load SFX settings
     try {
       const savedSfx = localStorage.getItem('decked_sfx');
       if (savedSfx !== null) this.sfxEnabled = savedSfx === 'true';
     } catch (e) {}
+
+    // Initialize Decked Out Main Menu BGM
+    this.initBGM();
   }
 
   initWebAudio() {
@@ -127,64 +130,188 @@ class AudioManager {
     noise.start();
   }
 
-  // Ambient Dark Fantasy Synth Drone
-  toggleAmbient(forceState) {
-    this.initWebAudio();
-    if (!this.ctx) return;
+  /* ========================================================
+     BACKGROUND MUSIC (Decked Out Main Menu Theme) & PERSISTENCE
+     ======================================================== */
+  initBGM() {
+    this.bgm = new Audio('assets/audio/Decked_Out_Main_Menu.mp3');
+    this.bgm.loop = true;
+    this.bgm.volume = this.bgmVolume;
+    this.bgm.preload = 'auto';
 
+    let savedBgm = null;
+    let savedTime = 0;
+    let savedTimestamp = 0;
+
+    try {
+      savedBgm = localStorage.getItem('decked_bgm_enabled');
+      savedTime = parseFloat(localStorage.getItem('decked_bgm_time') || '0');
+      savedTimestamp = parseInt(localStorage.getItem('decked_bgm_timestamp') || '0', 10);
+    } catch (e) {}
+
+    // Default to true so game music greets players, unless explicitly muted
+    this.bgmEnabled = savedBgm !== 'false';
+
+    let targetTime = (Number.isFinite(savedTime) && savedTime > 0) ? savedTime : 0;
+    if (savedTimestamp > 0 && targetTime > 0) {
+      const elapsed = (Date.now() - savedTimestamp) / 1000;
+      if (elapsed > 0 && elapsed < 60) {
+        targetTime += elapsed;
+      }
+    }
+
+    const applyTargetTime = () => {
+      if (targetTime > 0) {
+        if (this.bgm.duration && Number.isFinite(this.bgm.duration)) {
+          this.bgm.currentTime = targetTime % this.bgm.duration;
+        } else {
+          this.bgm.currentTime = targetTime;
+        }
+      }
+      if (this.bgmEnabled) {
+        this.startBgmPlayback();
+      }
+    };
+
+    if (this.bgm.readyState >= 1) {
+      applyTargetTime();
+    } else {
+      this.bgm.addEventListener('loadedmetadata', applyTargetTime, { once: true });
+      this.bgm.addEventListener('canplay', applyTargetTime, { once: true });
+    }
+
+    // Continuous time persistence while playing (throttled every 500ms)
+    let lastSave = 0;
+    this.bgm.addEventListener('timeupdate', () => {
+      const now = Date.now();
+      if (now - lastSave > 500 && this.bgmEnabled && !this.bgm.paused) {
+        lastSave = now;
+        this.saveBgmState();
+      }
+    });
+
+    // Save on beforeunload / pagehide
+    const saveHandler = () => this.saveBgmState();
+    window.addEventListener('beforeunload', saveHandler);
+    window.addEventListener('pagehide', saveHandler);
+    document.addEventListener('visibilitychange', saveHandler);
+
+    // Save when any navigation link is clicked
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (link && link.href) {
+        this.saveBgmState();
+      }
+    }, true);
+
+    // Initial UI synchronization
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        this.updateBgmUi();
+        this.updateSfxUi();
+      });
+    } else {
+      this.updateBgmUi();
+      this.updateSfxUi();
+    }
+  }
+
+  saveBgmState() {
+    if (this.bgm && !this.bgm.paused) {
+      try {
+        localStorage.setItem('decked_bgm_time', this.bgm.currentTime.toString());
+        localStorage.setItem('decked_bgm_timestamp', Date.now().toString());
+        localStorage.setItem('decked_bgm_enabled', 'true');
+      } catch (e) {}
+    }
+  }
+
+  startBgmPlayback() {
+    this.bgmEnabled = true;
+    try {
+      localStorage.setItem('decked_bgm_enabled', 'true');
+    } catch (e) {}
+
+    this.updateBgmUi(true);
+
+    const playPromise = this.bgm.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        this.updateBgmUi(true);
+      }).catch(() => {
+        // Autoplay policy prevented playback until user interaction
+        this.updateBgmUi(true);
+        const resumeOnGesture = () => {
+          if (this.bgmEnabled && this.bgm.paused) {
+            this.bgm.play().catch(() => {});
+          }
+          window.removeEventListener('pointerdown', resumeOnGesture);
+          window.removeEventListener('keydown', resumeOnGesture);
+          window.removeEventListener('click', resumeOnGesture);
+          window.removeEventListener('touchstart', resumeOnGesture);
+        };
+        window.addEventListener('pointerdown', resumeOnGesture, { once: true });
+        window.addEventListener('keydown', resumeOnGesture, { once: true });
+        window.addEventListener('click', resumeOnGesture, { once: true });
+        window.addEventListener('touchstart', resumeOnGesture, { once: true });
+      });
+    }
+  }
+
+  toggleBGM(forceState) {
     const target = forceState !== undefined ? forceState : !this.bgmEnabled;
     this.bgmEnabled = target;
 
+    try {
+      localStorage.setItem('decked_bgm_enabled', target ? 'true' : 'false');
+    } catch (e) {}
+
     if (this.bgmEnabled) {
-      if (this.ambientOsc) return;
-      const now = this.ctx.currentTime;
-      this.ambientGain = this.ctx.createGain();
-      this.ambientGain.gain.setValueAtTime(0.001, now);
-      this.ambientGain.gain.exponentialRampToValueAtTime(0.12 * this.volume, now + 2);
-
-      // Dual detuned oscillators for atmospheric dungeon mystery
-      const osc1 = this.ctx.createOscillator();
-      osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(110, now); // A2
-
-      const osc2 = this.ctx.createOscillator();
-      osc2.type = 'sawtooth';
-      osc2.frequency.setValueAtTime(165, now); // E3
-
-      const filter = this.ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(350, now);
-
-      osc1.connect(filter);
-      osc2.connect(filter);
-      filter.connect(this.ambientGain);
-      this.ambientGain.connect(this.ctx.destination);
-
-      osc1.start();
-      osc2.start();
-      this.ambientOsc = [osc1, osc2];
+      this.startBgmPlayback();
     } else {
-      if (this.ambientGain && this.ctx) {
-        const now = this.ctx.currentTime;
-        this.ambientGain.gain.exponentialRampToValueAtTime(0.001, now + 1);
-        setTimeout(() => {
-          if (this.ambientOsc) {
-            this.ambientOsc.forEach(o => { try { o.stop(); } catch(e){} });
-            this.ambientOsc = null;
-          }
-        }, 1100);
-      }
+      this.bgm.pause();
+      try {
+        localStorage.setItem('decked_bgm_time', this.bgm.currentTime.toString());
+        localStorage.setItem('decked_bgm_timestamp', Date.now().toString());
+      } catch (e) {}
+      this.updateBgmUi(false);
+    }
+
+    return this.bgmEnabled;
+  }
+
+  // Alias for backward compatibility
+  toggleAmbient(forceState) {
+    return this.toggleBGM(forceState);
+  }
+
+  updateBgmUi(isPlaying) {
+    const state = isPlaying !== undefined ? isPlaying : this.bgmEnabled;
+    const bgmBtn = document.getElementById('toggle-bgm-btn');
+    if (bgmBtn) {
+      bgmBtn.classList.toggle('playing', state);
+      bgmBtn.innerHTML = state ? '🎵' : '🎼';
+      bgmBtn.title = state ? 'Main Menu Music: ON (Click to mute)' : 'Main Menu Music: OFF (Click to play)';
     }
   }
 
   toggleSFX() {
     this.sfxEnabled = !this.sfxEnabled;
     try {
-      localStorage.setItem('decked_sfx', this.sfxEnabled);
+      localStorage.setItem('decked_sfx', this.sfxEnabled ? 'true' : 'false');
     } catch(e) {}
+    this.updateSfxUi();
     return this.sfxEnabled;
+  }
+
+  updateSfxUi() {
+    const sfxBtn = document.getElementById('toggle-sfx-btn');
+    if (sfxBtn) {
+      sfxBtn.innerHTML = this.sfxEnabled ? '🔊' : '🔇';
+      sfxBtn.title = this.sfxEnabled ? 'Sound Effects: ON' : 'Sound Effects: OFF';
+    }
   }
 }
 
-// Global instance
+// Global singleton instance
 window.audioMgr = new AudioManager();

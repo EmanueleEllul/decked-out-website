@@ -269,6 +269,17 @@ class AppController {
       // Update page title
       document.title = doc.title;
 
+      // Ensure target stylesheets are loaded
+      doc.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && !document.querySelector(`link[href="${href}"]`)) {
+          const l = document.createElement('link');
+          l.rel = 'stylesheet';
+          l.href = href;
+          document.head.appendChild(l);
+        }
+      });
+
       // Swap page content
       pageContainer.innerHTML = newContent.innerHTML;
       pageContainer.style.opacity = '1';
@@ -380,14 +391,9 @@ class AppController {
         window.dungeonMap = new DungeonMapManager();
       }
     } else if (pageName === 'lore.html') {
-      const pills = document.querySelectorAll('.lore-nav-pill');
-      pills.forEach(pill => {
-        pill.addEventListener('click', () => {
-          if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
-          pills.forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-        });
-      });
+      if (window.initLoreApp) {
+        window.initLoreApp();
+      }
     }
   }
 

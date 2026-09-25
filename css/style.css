@@ -2132,3 +2132,1310 @@ p, span, a, li, td, th, input, select, button {
   }
 }
 
+
+
+/* LORE CODEX EMBEDDED STYLES */
+/* ========================================================
+   DECKED OUT — LORE CODEX STYLES (css/lore.css)
+   Interactive Worldbuilding, Chronicles & Spire Mythos
+   ======================================================== */
+
+/* Lore Hero Banner */
+.lore-hero {
+  position: relative;
+  background: radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.15) 0%, rgba(8, 11, 16, 0.98) 75%),
+              linear-gradient(180deg, #0d131d 0%, #080b10 100%);
+  border-bottom: 3px solid var(--primary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  padding: clamp(2.5rem, 5vw, 4rem) 1.5rem clamp(2rem, 4vw, 3rem);
+  text-align: center;
+  overflow: hidden;
+}
+
+.lore-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px),
+    radial-gradient(rgba(245, 158, 11, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+  pointer-events: none;
+}
+
+.lore-hero-inner {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.lore-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-family: var(--font-pixel);
+  font-size: clamp(0.42rem, 0.9vw, 0.6rem);
+  padding: 0.45rem 1rem;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+}
+
+.lore-main-title {
+  font-family: var(--font-pixel);
+  font-size: clamp(1.3rem, 3.5vw, 2.4rem);
+  color: #fff;
+  text-shadow: 3px 3px 0 var(--primary-dark), 0 0 25px rgba(245, 158, 11, 0.4);
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+.lore-main-title span {
+  color: var(--primary);
+}
+
+.lore-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  color: #94a3b8;
+  font-style: italic;
+  max-width: 720px;
+  margin: 0 auto 1.75rem;
+  line-height: 1.6;
+}
+
+.lore-quote-box {
+  background: rgba(15, 23, 42, 0.9);
+  border: 2px solid var(--border-glow);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(245, 158, 11, 0.06);
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+  border-radius: 4px;
+  text-align: left;
+  position: relative;
+  margin: 0 auto 1.5rem;
+  max-width: 820px;
+}
+
+.lore-quote-box blockquote {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  color: #e2e8f0;
+  line-height: 1.8;
+  margin: 0 0 0.75rem;
+  font-style: italic;
+  border-left: 3px solid var(--primary);
+  padding-left: 1rem;
+}
+
+.lore-quote-author {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--primary-light);
+  text-align: right;
+  letter-spacing: 0.05em;
+}
+
+/* ========================================================
+   INTERACTIVE LORE TAB CONTROLLER
+   ======================================================== */
+.lore-tabs-nav {
+  position: sticky;
+  top: 61px;
+  z-index: 100;
+  background: rgba(8, 11, 16, 0.98);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 2px solid var(--primary);
+  padding: 0.75rem 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+}
+
+.lore-tabs-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+
+.lore-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  font-family: var(--font-pixel);
+  font-size: clamp(0.38rem, 0.65vw, 0.48rem);
+  padding: 0.55rem 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.lore-tab-btn:hover {
+  background: var(--bg-surface-elevated, #1a2234);
+  color: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.lore-tab-btn.active {
+  background: var(--primary);
+  color: #000;
+  border-color: var(--primary-dark);
+  font-weight: 700;
+  box-shadow: 3px 3px 0 var(--primary-dark);
+}
+
+/* Tab Content Panels */
+.lore-tab-panel {
+  display: none;
+  animation: loreFadeIn 0.25s ease forwards;
+}
+
+.lore-tab-panel.active {
+  display: block;
+}
+
+@keyframes loreFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Common Section Layout */
+.lore-section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(2rem, 4vw, 3.5rem) 1.5rem;
+}
+
+.panel-header-wrap {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.panel-header-wrap h2 {
+  font-family: var(--font-pixel);
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  color: #fff;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.panel-header-wrap h2 span {
+  color: var(--primary);
+}
+
+.panel-header-wrap p {
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  color: #94a3b8;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ========================================================
+   SECTION 1: THE GREAT FRACTURE & 4 LAWS
+   ======================================================== */
+.fracture-feature-box {
+  background: var(--bg-surface);
+  border: 2px solid var(--primary);
+  box-shadow: 6px 6px 0 var(--primary-dark);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.fracture-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 850px) {
+  .fracture-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fracture-lead-text h3 {
+  font-family: var(--font-pixel);
+  font-size: 1rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.fracture-lead-text p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.fracture-visual-monolith {
+  background: #080b10;
+  border: 2px solid var(--border-strong);
+  padding: 1.75rem;
+  text-align: center;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+.monolith-rune-glyph {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+  display: inline-block;
+  animation: runePulse 3s infinite alternate ease-in-out;
+}
+
+@keyframes runePulse {
+  0% { transform: scale(0.95); filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.4)); }
+  100% { transform: scale(1.05); filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.8)); }
+}
+
+.monolith-title {
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  color: var(--mana-glow);
+  margin-bottom: 0.75rem;
+}
+
+.monolith-desc {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* 4 Laws of the Deck Cards */
+.laws-cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.lore-law-card {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-strong);
+  border-top: 4px solid var(--primary);
+  padding: 1.5rem;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.lore-law-card:hover {
+  transform: translateY(-3px);
+  border-top-color: var(--mana-glow);
+}
+
+.law-icon-num {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.law-icon {
+  font-size: 1.8rem;
+}
+
+.law-badge {
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  color: var(--primary);
+  background: rgba(245, 158, 11, 0.12);
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--primary);
+}
+
+.lore-law-card h4 {
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  color: #fff;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.lore-law-card p {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ========================================================
+   SECTION 2: THE LIVING SPIRE (ASCENDING TOWER MAP)
+   ======================================================== */
+.spire-tower-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin-top: 2rem;
+}
+
+.spire-tier-block {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-strong);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.7);
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.spire-tier-block:hover {
+  border-color: var(--primary);
+}
+
+@media (max-width: 820px) {
+  .spire-tier-block {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tier-visual-sidebar {
+  background: #080b10;
+  border-right: 2px solid var(--border-strong);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@media (max-width: 820px) {
+  .tier-visual-sidebar {
+    border-right: none;
+    border-bottom: 2px solid var(--border-strong);
+  }
+}
+
+.tier-rank-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  margin-bottom: 1rem;
+  border-radius: 2px;
+}
+
+.spire-tier-block.tier-catacombs .tier-rank-pill { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+.spire-tier-block.tier-citadel .tier-rank-pill { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+.spire-tier-block.tier-rift .tier-rank-pill { background: rgba(192, 132, 252, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.4); }
+
+.tier-sprites-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.tier-enemy-sprite {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.tier-title-label {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: #fff;
+  margin-top: 0.25rem;
+}
+
+.tier-content-main {
+  padding: 1.75rem;
+}
+
+.tier-content-main h3 {
+  font-family: var(--font-pixel);
+  font-size: 0.95rem;
+  color: #fff;
+  margin-bottom: 0.85rem;
+  line-height: 1.4;
+}
+
+.tier-content-main p {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.tier-hotspots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.hotspot-chip {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border-subtle);
+  padding: 0.85rem;
+}
+
+.hotspot-chip strong {
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--primary);
+  margin-bottom: 0.35rem;
+}
+
+.hotspot-chip span {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  display: block;
+}
+
+/* ========================================================
+   SECTION 3: ARCANA & PACKS (3D PACK INSPECTOR)
+   ======================================================== */
+.packs-interactive-stage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.interactive-pack-item {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-strong);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.7);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  position: relative;
+  user-select: none;
+}
+
+.interactive-pack-item:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--primary);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.8), 0 0 15px rgba(245, 158, 11, 0.3);
+}
+
+.interactive-pack-item.active-pack {
+  border-color: var(--primary);
+  background: rgba(245, 158, 11, 0.08);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4), inset 0 0 15px rgba(245, 158, 11, 0.1);
+}
+
+.pack-emblem-badge {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 0.75rem;
+  transition: transform 0.2s;
+}
+
+.interactive-pack-item:hover .pack-emblem-badge {
+  transform: scale(1.15) rotate(3deg);
+}
+
+.interactive-pack-item h4 {
+  font-family: var(--font-pixel);
+  font-size: 0.68rem;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+
+.pack-seal-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--mana-glow);
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.pack-inspect-pill {
+  font-family: var(--font-pixel);
+  font-size: 0.42rem;
+  color: var(--primary);
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--primary);
+  padding: 0.25rem 0.5rem;
+  display: inline-block;
+}
+
+/* Pack Inspector Display Box */
+.pack-inspection-box {
+  background: #080b10;
+  border: 2px solid var(--primary);
+  box-shadow: 6px 6px 0 var(--primary-dark);
+  padding: 1.75rem;
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .pack-inspection-box {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.inspect-pack-icon {
+  font-size: 4rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.inspect-pack-info h3 {
+  font-family: var(--font-pixel);
+  font-size: 0.95rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.inspect-pack-info .inspect-seal-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--mana-glow);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.inspect-pack-info p {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Foil Tiers Live Cards */
+.foil-tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.foil-tier-card {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-strong);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
+  padding: 1.25rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.foil-tier-card:hover {
+  transform: translateY(-4px);
+}
+
+.foil-tier-card.tier-common { border-color: #8d6e63; }
+.foil-tier-card.tier-uncommon { border-color: #22c55e; }
+.foil-tier-card.tier-rare { border-color: #3b82f6; }
+.foil-tier-card.tier-epic { border-color: #a855f7; }
+.foil-tier-card.tier-legendary { border-color: #f59e0b; }
+.foil-tier-card.tier-exotic { 
+  border-color: #ec4899; 
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+}
+
+.foil-sample-frame {
+  height: 90px;
+  background: #080b10;
+  border: 1px dashed var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.foil-frame-label {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  letter-spacing: 0.05em;
+}
+
+.tier-common .foil-frame-label { color: #d7ccc8; }
+.tier-uncommon .foil-frame-label { color: #86efac; }
+.tier-rare .foil-frame-label { color: #93c5fd; }
+.tier-epic .foil-frame-label { color: #d8b4fe; }
+.tier-legendary .foil-frame-label { color: #fde047; }
+.tier-exotic .foil-frame-label { color: #fff; text-shadow: 0 0 8px rgba(236, 72, 153, 0.8); }
+
+.foil-tier-card p {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ========================================================
+   SECTION 4: THE SIX ORDERS & DISCIPLINES
+   ======================================================== */
+.orders-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.order-box {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-strong);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.6);
+  padding: 1.75rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.order-box:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+}
+
+.order-header-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.85rem;
+}
+
+.order-crest-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.order-header-titles h4 {
+  font-family: var(--font-pixel);
+  font-size: 0.8rem;
+  color: #fff;
+  margin: 0 0 0.35rem;
+}
+
+.order-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--mana-glow);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.order-stats-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  font-size: 0.84rem;
+}
+
+.order-stats-list li {
+  color: #94a3b8;
+  margin-bottom: 0.35rem;
+  line-height: 1.5;
+}
+
+.order-stats-list li strong {
+  color: #e2e8f0;
+}
+
+.order-prose {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* ========================================================
+   SECTION 5: CHAMPIONS & HERO ORIGINS DOSSIER
+   ======================================================== */
+.champions-workbench {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  background: var(--bg-surface);
+  border: 2px solid var(--primary);
+  box-shadow: 8px 8px 0 var(--primary-dark);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  margin-top: 2rem;
+}
+
+@media (max-width: 900px) {
+  .champions-workbench {
+    grid-template-columns: 1fr;
+  }
+}
+
+.roster-picker-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.roster-picker-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #080b10;
+  border: 1px solid var(--border-strong);
+  padding: 0.65rem 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.roster-picker-btn:hover {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: var(--primary);
+}
+
+.roster-picker-btn.active {
+  background: var(--primary);
+  border-color: var(--primary-dark);
+  box-shadow: 3px 3px 0 var(--primary-dark);
+}
+
+.roster-mini-sprite {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  flex-shrink: 0;
+}
+
+.roster-btn-meta {
+  flex-grow: 1;
+}
+
+.roster-btn-meta strong {
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: #fff;
+  transition: color 0.15s;
+}
+
+.roster-picker-btn.active .roster-btn-meta strong {
+  color: #000;
+}
+
+.roster-btn-meta span {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.roster-picker-btn.active .roster-btn-meta span {
+  color: #1e293b;
+}
+
+/* Spotlight Dossier */
+.champion-spotlight-dossier {
+  background: #080b10;
+  border: 2px solid var(--border-strong);
+  padding: clamp(1.25rem, 2vw, 2rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.dossier-top {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-bottom: 2px solid var(--border-subtle);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .dossier-top {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.dossier-sprite-display {
+  width: 72px;
+  height: 72px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 2px solid var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+}
+
+.dossier-sprite-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.dossier-titles-wrap h3 {
+  font-family: var(--font-pixel);
+  font-size: 1.05rem;
+  color: #fff;
+  margin: 0 0 0.4rem;
+}
+
+.dossier-titles-wrap .dossier-epithet {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: block;
+}
+
+.dossier-stats-matrix {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.dossier-stat-box {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--border-subtle);
+  padding: 0.6rem;
+  text-align: center;
+}
+
+.dossier-stat-box .d-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+}
+
+.dossier-stat-box .d-val {
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+}
+
+.dossier-stat-box.hp .d-val { color: #f87171; }
+.dossier-stat-box.atk .d-val { color: #fbbf24; }
+.dossier-stat-box.mana .d-val { color: #38bdf8; }
+
+.dossier-trait-alert {
+  background: rgba(56, 189, 248, 0.1);
+  border-left: 3px solid var(--mana-glow);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+  color: #e2e8f0;
+  line-height: 1.6;
+}
+
+.dossier-trait-alert strong {
+  font-family: var(--font-mono);
+  color: var(--mana-glow);
+  text-transform: uppercase;
+}
+
+.dossier-story-prose {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  line-height: 1.8;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* ========================================================
+   SECTION 6: DENIZENS & INTERACTIVE ENCLAVES
+   ======================================================== */
+.npc-enclaves-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.npc-enclave-card {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-strong);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.7);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.npc-enclave-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+}
+
+.npc-header-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.85rem;
+}
+
+.npc-icon-glyph {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.npc-titles h4 {
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  color: #fff;
+  margin: 0 0 0.35rem;
+}
+
+.npc-titles span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.npc-desc-text {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+/* Interactive Mini-Games / Widgets inside NPC cards */
+.interactive-widget-box {
+  background: #080b10;
+  border: 1px solid var(--border-strong);
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.widget-title {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+/* Gambler Coin Flip */
+.coin-flip-arena {
+  text-align: center;
+}
+
+.astral-coin-disc {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fbbf24 30%, #d97706 100%);
+  border: 2px solid #fff;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+  margin: 0 auto 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-pixel);
+  font-size: 1.2rem;
+  color: #000;
+  transition: transform 0.6s cubic-bezier(0.4, 2, 0.6, 1);
+}
+
+.astral-coin-disc.flipping {
+  transform: rotateY(1080deg) scale(1.15);
+}
+
+.gambler-btn {
+  background: var(--primary);
+  color: #000;
+  font-family: var(--font-pixel);
+  font-size: 0.48rem;
+  font-weight: 700;
+  padding: 0.5rem 0.85rem;
+  border: 2px solid var(--primary-dark);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.gambler-btn:hover {
+  transform: scale(1.04);
+}
+
+.gambler-result-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #e2e8f0;
+  margin-top: 0.6rem;
+  min-height: 1.2rem;
+}
+
+/* Trader Converter */
+.trader-converter-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.trader-input {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--border-strong);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.6rem;
+  width: 80px;
+}
+
+.trader-arrow {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.trader-output {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: var(--mana-glow);
+}
+
+/* ========================================================
+   SECTION 7: THE DRAGON LORD & 1,000,000 HP GOD
+   ======================================================== */
+.boss-encounter-stage {
+  background: radial-gradient(circle at 50% 30%, rgba(192, 132, 252, 0.15) 0%, rgba(8, 11, 16, 0.98) 75%),
+              linear-gradient(180deg, #120b22 0%, #080b10 100%);
+  border: 3px solid #a855f7;
+  box-shadow: 0 0 35px rgba(168, 85, 247, 0.25), inset 0 0 25px rgba(168, 85, 247, 0.08);
+  padding: clamp(1.75rem, 4vw, 3rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.godslayer-header-text {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+.godslayer-header-text h3 {
+  font-family: var(--font-pixel);
+  font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+  color: #fff;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+  text-shadow: 0 0 20px rgba(192, 132, 252, 0.6);
+}
+
+.godslayer-header-text h3 span {
+  color: #c084fc;
+}
+
+.godslayer-header-text p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+/* Interactive Boss Health Gauge */
+.god-boss-meter-wrap {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  background: #080b10;
+  border: 2px solid #a855f7;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  padding: 1.25rem;
+}
+
+.god-meter-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.god-name-tag {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: #fff;
+}
+
+.god-hp-counter {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #c084fc;
+  font-weight: 700;
+}
+
+.god-hp-bar-track {
+  height: 24px;
+  background: #05070a;
+  border: 1px solid var(--border-strong);
+  position: relative;
+  overflow: hidden;
+}
+
+.god-hp-bar-fill {
+  height: 100%;
+  width: 98.5%;
+  background: linear-gradient(90deg, #ef4444 0%, #f59e0b 45%, #a855f7 100%);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.8);
+  transition: width 0.3s ease;
+}
+
+.god-strike-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.btn-strike-god {
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+  color: #fff;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  padding: 0.75rem 1.4rem;
+  border: 2px solid #f87171;
+  box-shadow: 4px 4px 0 #7f1d1d, 0 0 15px rgba(239, 68, 68, 0.4);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.btn-strike-god:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 6px 0 #7f1d1d, 0 0 25px rgba(239, 68, 68, 0.6);
+}
+
+.strike-floating-feedback {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #fbbf24;
+  min-height: 1.2rem;
+}
+
+/* Generational Rules Tri-Box */
+.generational-rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.gen-law-item {
+  background: rgba(8, 11, 16, 0.75);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid #c084fc;
+  padding: 1.25rem;
+}
+
+.gen-law-item strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #c084fc;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.gen-law-item p {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Prophecy Box */
+.prophecy-scroll-box {
+  background: rgba(168, 85, 247, 0.1);
+  border: 2px solid #a855f7;
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.prophecy-scroll-box h4 {
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  color: #d8b4fe;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.prophecy-scroll-box p {
+  font-size: 0.95rem;
+  color: #f1f5f9;
+  line-height: 1.8;
+  font-style: italic;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Epilogue Designation */
+.decked-out-designation-card {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(15, 23, 42, 0.98) 100%);
+  border: 2px solid var(--primary);
+  box-shadow: 6px 6px 0 var(--primary-dark);
+  padding: clamp(2rem, 3.5vw, 3rem);
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.decked-out-designation-card h3 {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.95rem, 2vw, 1.4rem);
+  color: var(--primary);
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+}
+
+.decked-out-designation-card p {
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  color: #f1f5f9;
+  line-height: 1.9;
+  max-width: 820px;
+  margin: 0 auto 1.5rem;
+  font-style: italic;
+}
+

@@ -20,42 +20,80 @@ class HeroesRelicsManager {
     this.renderRelics();
   }
 
+  ensureHeroes(callback, maxRetries = 25) {
+    if (this.heroes && this.heroes.length > 0) {
+      callback();
+      return;
+    }
+    if (typeof window !== 'undefined' && window.GAME_HEROES && window.GAME_HEROES.length > 0) {
+      this.heroes = window.GAME_HEROES;
+      callback();
+      return;
+    }
+    if (typeof GAME_HEROES !== 'undefined' && GAME_HEROES.length > 0) {
+      this.heroes = GAME_HEROES;
+      callback();
+      return;
+    }
+    if (maxRetries > 0) {
+      setTimeout(() => this.ensureHeroes(callback, maxRetries - 1), 100);
+    }
+  }
+
+  ensureRelics(callback, maxRetries = 25) {
+    if (this.relics && this.relics.length > 0) {
+      callback();
+      return;
+    }
+    if (typeof window !== 'undefined' && window.GAME_RELICS && window.GAME_RELICS.length > 0) {
+      this.relics = window.GAME_RELICS;
+      callback();
+      return;
+    }
+    if (typeof GAME_RELICS !== 'undefined' && GAME_RELICS.length > 0) {
+      this.relics = GAME_RELICS;
+      callback();
+      return;
+    }
+    if (maxRetries > 0) {
+      setTimeout(() => this.ensureRelics(callback, maxRetries - 1), 100);
+    }
+  }
+
   renderHeroes() {
     const listContainer = document.getElementById('heroes-roster-shelf');
     if (!listContainer) return;
 
-    if (this.heroes.length === 0 && typeof window !== 'undefined' && window.GAME_HEROES) {
-      this.heroes = window.GAME_HEROES;
-    }
-
-    listContainer.innerHTML = this.heroes.map((h, idx) => {
-      const anim = this.animPath(h.sprite);
-      return `
-        <div class="hero-roster-card ${idx === this.selectedHeroIndex ? 'active' : ''}" data-hero-idx="${idx}">
-          <div class="hero-roster-avatar">
-            ${h.sprite
-              ? `<img src="${anim}" alt="${h.name}" class="pixel-art" onerror="this.src='${h.sprite}'" />`
-              : `<span class="hero-fallback-icon">🛡️</span>`}
+    this.ensureHeroes(() => {
+      listContainer.innerHTML = this.heroes.map((h, idx) => {
+        const anim = this.animPath(h.sprite);
+        return `
+          <div class="hero-roster-card ${idx === this.selectedHeroIndex ? 'active' : ''}" data-hero-idx="${idx}">
+            <div class="hero-roster-avatar">
+              ${h.sprite
+                ? `<img src="${anim}" alt="${h.name}" class="pixel-art" onerror="this.src='${h.sprite}'" />`
+                : `<span class="hero-fallback-icon">🛡️</span>`}
+            </div>
+            <div class="hero-roster-info">
+              <strong class="hero-roster-name">${h.name}</strong>
+              <span class="hero-roster-title">${h.title}</span>
+            </div>
+            <span class="hero-roster-arrow">➔</span>
           </div>
-          <div class="hero-roster-info">
-            <strong class="hero-roster-name">${h.name}</strong>
-            <span class="hero-roster-title">${h.title}</span>
-          </div>
-          <span class="hero-roster-arrow">➔</span>
-        </div>
-      `;
-    }).join('');
+        `;
+      }).join('');
 
-    listContainer.querySelectorAll('.hero-roster-card').forEach(el => {
-      el.addEventListener('click', () => {
-        this.selectedHeroIndex = parseInt(el.dataset.heroIdx, 10);
-        if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
-        this.renderHeroes();
-        this.updateHeroDetail();
+      listContainer.querySelectorAll('.hero-roster-card').forEach(el => {
+        el.addEventListener('click', () => {
+          this.selectedHeroIndex = parseInt(el.dataset.heroIdx, 10);
+          if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
+          this.renderHeroes();
+          this.updateHeroDetail();
+        });
       });
-    });
 
-    this.updateHeroDetail();
+      this.updateHeroDetail();
+    });
   }
 
   updateHeroDetail() {
@@ -81,7 +119,6 @@ class HeroesRelicsManager {
     if (avatarEl) {
       if (h.sprite) {
         const anim = this.animPath(h.sprite);
-        // Detail card shows animated GIF — just a normal img tag, browser plays it
         avatarEl.innerHTML = `
           <img src="${anim}" alt="${h.name}" class="pixel-art"
                onerror="this.src='${h.sprite}'" />
@@ -96,28 +133,26 @@ class HeroesRelicsManager {
     const container = document.getElementById('relics-grid-container');
     if (!container) return;
 
-    if (this.relics.length === 0 && typeof window !== 'undefined' && window.GAME_RELICS) {
-      this.relics = window.GAME_RELICS;
-    }
-
-    container.innerHTML = this.relics.map(r => `
-      <div class="relic-showcase-card">
-        <div class="relic-card-header">
-          <div class="relic-icon-frame">🏺</div>
-          <div class="relic-header-text">
-            <h4 class="relic-name">${r.name}</h4>
-            <span class="relic-effect-badge">${r.effect}</span>
+    this.ensureRelics(() => {
+      container.innerHTML = this.relics.map(r => `
+        <div class="relic-showcase-card">
+          <div class="relic-card-header">
+            <div class="relic-icon-frame">🏺</div>
+            <div class="relic-header-text">
+              <h4 class="relic-name">${r.name}</h4>
+              <span class="relic-effect-badge">${r.effect}</span>
+            </div>
+          </div>
+          <div class="relic-body">
+            <p class="relic-tactical">${r.tactical}</p>
+          </div>
+          <div class="relic-footer">
+            <span class="relic-cost-pill">Cost: ${r.cost} Relic Shards</span>
+            <span class="relic-tier-pill">Tier ${r.cost > 3 ? 'II' : 'I'} Artifact</span>
           </div>
         </div>
-        <div class="relic-body">
-          <p class="relic-tactical">${r.tactical}</p>
-        </div>
-        <div class="relic-footer">
-          <span class="relic-cost-pill">Cost: ${r.cost} Relic Shards</span>
-          <span class="relic-tier-pill">Tier ${r.cost > 3 ? 'II' : 'I'} Artifact</span>
-        </div>
-      </div>
-    `).join('');
+      `).join('');
+    });
   }
 }
 

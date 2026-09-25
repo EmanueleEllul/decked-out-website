@@ -377,51 +377,60 @@ class AppController {
     const cleanPage = pageName.split('?')[0].split('#')[0];
 
     if (cleanPage === 'cards.html') {
-      if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=5');
+      if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=9');
       if (!window.CompendiumManager && typeof CompendiumManager === 'undefined') {
-        await this.loadScript('js/compendium.js?v=5');
+        await this.loadScript('js/compendium.js?v=9');
       }
       const CompendiumClass = window.CompendiumManager || (typeof CompendiumManager !== 'undefined' ? CompendiumManager : null);
       if (CompendiumClass) {
         window.compendium = new CompendiumClass();
       }
-    } else if (cleanPage === 'heroes.html' || cleanPage === 'relics.html') {
-      if (!window.GAME_HEROES) await this.loadScript('js/data.js?v=5');
+    } else if (cleanPage === 'heroes.html') {
+      if (!window.GAME_HEROES) await this.loadScript('js/data.js?v=9');
       if (!window.HeroesRelicsManager && typeof HeroesRelicsManager === 'undefined') {
-        await this.loadScript('js/heroes-relics.js?v=5');
+        await this.loadScript('js/heroes-relics.js?v=9');
+      }
+      const HeroesClass = window.HeroesRelicsManager || (typeof HeroesRelicsManager !== 'undefined' ? HeroesRelicsManager : null);
+      if (HeroesClass) {
+        window.heroesRelics = new HeroesClass();
+      }
+    } else if (cleanPage === 'relics.html') {
+      if (!window.GAME_RELICS) await this.loadScript('js/data.js?v=9');
+      if (!window.HeroesRelicsManager && typeof HeroesRelicsManager === 'undefined') {
+        await this.loadScript('js/heroes-relics.js?v=9');
       }
       const HeroesClass = window.HeroesRelicsManager || (typeof HeroesRelicsManager !== 'undefined' ? HeroesRelicsManager : null);
       if (HeroesClass) {
         window.heroesRelics = new HeroesClass();
       }
     } else if (cleanPage === 'deck-builder.html') {
-      if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=5');
+      if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=9');
       if (!window.CompendiumManager && typeof CompendiumManager === 'undefined') {
-        await this.loadScript('js/compendium.js?v=5');
+        await this.loadScript('js/compendium.js?v=9');
       }
       if (!window.DeckBuilder && typeof DeckBuilder === 'undefined') {
-        await this.loadScript('js/deck-builder.js?v=5');
+        await this.loadScript('js/deck-builder.js?v=9');
       }
       const BuilderClass = window.DeckBuilder || (typeof DeckBuilder !== 'undefined' ? DeckBuilder : null);
       if (BuilderClass) {
         window.deckBuilder = new BuilderClass();
       }
     } else if (cleanPage === 'combat.html') {
-      if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=5');
+      if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=9');
       if (!window.CompendiumManager && typeof CompendiumManager === 'undefined') {
-        await this.loadScript('js/compendium.js?v=5');
+        await this.loadScript('js/compendium.js?v=9');
       }
       if (!window.CombatDemo && typeof CombatDemo === 'undefined') {
-        await this.loadScript('js/combat-demo.js?v=5');
+        await this.loadScript('js/combat-demo.js?v=9');
       }
       const CombatClass = window.CombatDemo || (typeof CombatDemo !== 'undefined' ? CombatDemo : null);
       if (CombatClass) {
         window.combatDemo = new CombatClass();
       }
     } else if (cleanPage === 'dungeon.html') {
-      if (!window.GAME_ACTS) await this.loadScript('js/data.js?v=5');
+      if (!window.GAME_ACTS || !window.MYSTERY_EVENTS) await this.loadScript('js/data.js?v=9');
       if (!window.DungeonMapManager && typeof DungeonMapManager === 'undefined') {
-        await this.loadScript('js/dungeon-map.js?v=5');
+        await this.loadScript('js/dungeon-map.js?v=9');
       }
       const DungeonClass = window.DungeonMapManager || (typeof DungeonMapManager !== 'undefined' ? DungeonMapManager : null);
       if (DungeonClass) {

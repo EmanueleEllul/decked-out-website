@@ -91,17 +91,39 @@ class DeckBuilder {
     this.init();
   }
 
+  ensureCards(callback, maxRetries = 25) {
+    if (this.allCards && this.allCards.length > 0) {
+      callback();
+      return;
+    }
+    if (typeof window !== 'undefined' && window.GAME_CARDS && window.GAME_CARDS.length > 0) {
+      this.allCards = window.GAME_CARDS;
+      callback();
+      return;
+    }
+    if (typeof GAME_CARDS !== 'undefined' && GAME_CARDS.length > 0) {
+      this.allCards = GAME_CARDS;
+      callback();
+      return;
+    }
+    if (maxRetries > 0) {
+      setTimeout(() => this.ensureCards(callback, maxRetries - 1), 100);
+    }
+  }
+
   loadDeck() {
     try {
       const saved = localStorage.getItem('decked_active_deck');
       if (saved) {
         this.deck = JSON.parse(saved);
-        // Clean out any invalid card IDs
-        Object.keys(this.deck).forEach(id => {
-          if (!this.allCards.find(c => c.id === id)) {
-            delete this.deck[id];
-          }
-        });
+        // Clean out any invalid card IDs only if cards are loaded
+        if (this.allCards && this.allCards.length > 0) {
+          Object.keys(this.deck).forEach(id => {
+            if (!this.allCards.find(c => c.id === id)) {
+              delete this.deck[id];
+            }
+          });
+        }
       } else {
         this.deck = { ...this.starterPresets.monk.cards };
       }
@@ -118,12 +140,12 @@ class DeckBuilder {
   }
 
   init() {
-    if (this.allCards.length === 0 && typeof window !== 'undefined' && window.GAME_CARDS) {
-      this.allCards = window.GAME_CARDS;
-    }
     this.bindEvents();
     this.renderPresets();
-    this.renderWorkbench();
+    this.ensureCards(() => {
+      this.loadDeck();
+      this.renderWorkbench();
+    });
   }
 
   bindEvents() {

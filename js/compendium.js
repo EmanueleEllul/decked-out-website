@@ -72,54 +72,72 @@ class CompendiumManager {
     });
   }
 
-  applyFilters() {
-    if (this.cards.length === 0 && typeof window !== 'undefined' && window.GAME_CARDS) {
-      this.cards = window.GAME_CARDS;
+  ensureCards(callback, maxRetries = 25) {
+    if (this.cards && this.cards.length > 0) {
+      callback();
+      return;
     }
+    if (typeof window !== 'undefined' && window.GAME_CARDS && window.GAME_CARDS.length > 0) {
+      this.cards = window.GAME_CARDS;
+      callback();
+      return;
+    }
+    if (typeof GAME_CARDS !== 'undefined' && GAME_CARDS.length > 0) {
+      this.cards = GAME_CARDS;
+      callback();
+      return;
+    }
+    if (maxRetries > 0) {
+      setTimeout(() => this.ensureCards(callback, maxRetries - 1), 100);
+    }
+  }
 
-    const rarityWeights = { 'Common': 0, 'Uncommon': 1, 'Rare': 2, 'Epic': 3, 'Legendary': 4, 'Exotic': 5 };
+  applyFilters() {
+    this.ensureCards(() => {
+      const rarityWeights = { 'Common': 0, 'Uncommon': 1, 'Rare': 2, 'Epic': 3, 'Legendary': 4, 'Exotic': 5 };
 
-    this.filteredCards = this.cards.filter(card => {
-      // Class filter
-      if (this.selectedClass !== 'all' && card.class !== this.selectedClass) {
-        return false;
-      }
-      // Rarity filter
-      if (this.selectedRarity !== 'all' && card.rarity !== this.selectedRarity) {
-        return false;
-      }
-      // Search query
-      if (this.searchQuery) {
-        const text = `${card.name} ${card.code} ${card.class} ${card.description} ${card.damageType}`.toLowerCase();
-        if (!text.includes(this.searchQuery)) {
+      this.filteredCards = this.cards.filter(card => {
+        // Class filter
+        if (this.selectedClass !== 'all' && card.class !== this.selectedClass) {
           return false;
         }
-      }
-      return true;
-    });
+        // Rarity filter
+        if (this.selectedRarity !== 'all' && card.rarity !== this.selectedRarity) {
+          return false;
+        }
+        // Search query
+        if (this.searchQuery) {
+          const text = `${card.name} ${card.code} ${card.class} ${card.description} ${card.damageType}`.toLowerCase();
+          if (!text.includes(this.searchQuery)) {
+            return false;
+          }
+        }
+        return true;
+      });
 
-    // Sort
-    this.filteredCards.sort((a, b) => {
-      if (this.selectedSort === 'number') {
-        return a.number - b.number;
-      }
-      if (this.selectedSort === 'name') {
-        return a.name.localeCompare(b.name);
-      }
-      if (this.selectedSort === 'cost') {
-        return a.cost - b.cost;
-      }
-      if (this.selectedSort === 'damage') {
-        return b.damage - a.damage;
-      }
-      if (this.selectedSort === 'rarity') {
-        return (rarityWeights[b.rarity] || 0) - (rarityWeights[a.rarity] || 0);
-      }
-      return 0;
-    });
+      // Sort
+      this.filteredCards.sort((a, b) => {
+        if (this.selectedSort === 'number') {
+          return a.number - b.number;
+        }
+        if (this.selectedSort === 'name') {
+          return a.name.localeCompare(b.name);
+        }
+        if (this.selectedSort === 'cost') {
+          return a.cost - b.cost;
+        }
+        if (this.selectedSort === 'damage') {
+          return b.damage - a.damage;
+        }
+        if (this.selectedSort === 'rarity') {
+          return (rarityWeights[b.rarity] || 0) - (rarityWeights[a.rarity] || 0);
+        }
+        return 0;
+      });
 
-    this.renderCards();
-    this.updateCardCounts();
+      this.renderCards();
+      this.updateCardCounts();
+    });
   }
 
   updateCardCounts() {

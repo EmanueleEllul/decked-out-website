@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DECKED OUT - Lore Codex | The Chronicles of the Spire & The Slumbering God</title>
+  <meta name="description" content="Explore the official lore of Decked Out: The Great Fracture, the living Spire, the 6 Orders, the Chronicles of the Champions, the mysterious Denizens of the Threshold, and the 1,000,000 HP Slumbering God.">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/card-foil.css?v=3">
+  <link rel="stylesheet" href="css/lore.css?v=1">
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Header -->
+  <header class="site-header" id="top">
+    <div class="header-container">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-icon">
+          <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
+        </div>
+        <div class="brand-text">
+          <h1>DECKED OUT</h1>
+          <span>ROGUELIKE TCG</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Overview</a></li>
+          <li><a href="mechanics.html" class="nav-link">Mechanics</a></li>
+          <li><a href="heroes.html" class="nav-link">Heroes</a></li>
+          <li><a href="cards.html" class="nav-link">Cards</a></li>
+          <li><a href="deck-builder.html" class="nav-link">Deck Builder</a></li>
+          <li><a href="combat.html" class="nav-link">Battle Test</a></li>
+          <li><a href="relics.html" class="nav-link">Relics</a></li>
+          <li><a href="dungeon.html" class="nav-link">Dungeon</a></li>
+          <li><a href="lore.html" class="nav-link active">Lore</a></li>
+          <li><a href="specs.html" class="nav-link">Game Info</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="header-actions">
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn-wishlist" title="Wishlist Decked Out on Steam">
+          <span>⭐</span> Wishlist on Steam
+        </a>
+        <button id="toggle-sfx-btn" class="audio-btn" title="Toggle Sound Effects">🔊</button>
+        <button id="toggle-bgm-btn" class="audio-btn" title="Toggle Ambient Music">🎼</button>
+        <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Lore Hero Header -->
+  <header class="lore-hero">
+    <div class="lore-hero-inner">
+      <div class="lore-kicker">📖 The Official Lore Bible</div>
+      <h1 class="lore-main-title">THE <span>LORE</span> CODEX</h1>
+      <p class="lore-subtitle">
+        The Chronicles of the Shattered Deck, the Ascended Spire, and the Slumbering God.
+      </p>
+
+      <div class="lore-quote-box">
+        <blockquote>
+          &ldquo;In the beginning, reality was not written in stone or starfire. It was dealt from a cosmic deck. And when that deck was scattered across the void, the mortal world shattered with it.&rdquo;
+        </blockquote>
+        <span class="lore-quote-author">— Elder Archivist of the Binder</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Chapter Fast-Jump Bar -->
+  <nav class="lore-nav-shelf" aria-label="Lore Chapter Navigation">
+    <div class="lore-nav-container">
+      <a href="#vol-1" class="lore-nav-pill active"><span>🌌</span> I. Shattered Spire</a>
+      <a href="#vol-2" class="lore-nav-pill"><span>🃏</span> II. Arcana &amp; Packs</a>
+      <a href="#vol-3" class="lore-nav-pill"><span>⚔️</span> III. Six Orders</a>
+      <a href="#vol-4" class="lore-nav-pill"><span>🛡️</span> IV. Champions</a>
+      <a href="#vol-5" class="lore-nav-pill"><span>💼</span> V. Denizens</a>
+      <a href="#vol-6" class="lore-nav-pill"><span>👑</span> VI. Slumbering God</a>
+      <a href="#currencies" class="lore-nav-pill"><span>🪙</span> Currencies &amp; Binder</a>
+    </div>
+  </nav>
+
+  <!-- Main Website Content -->
+  <main class="main-wrapper">
+
+    <!-- ==========================================
+         VOLUME 01: THE SHATTERED REALMS & THE SPIRE
+         ========================================== -->
+    <section class="lore-volume-section" id="vol-1">
+      <div class="lore-container">
+        <div class="volume-header">
+          <div class="volume-number-badge">VOL. 01</div>
+          <div class="volume-title-meta">
+            <span class="volume-kicker">COSMOLOGY &amp; ANATOMY</span>
+            <h2>The Shattered Realms &amp; The Spire</h2>
+            <p>The primordial cataclysm, the birth of the cards, and the procedural engine of the dungeon.</p>
+          </div>
+        </div>
+
+        <div class="lore-spotlight-card">
+          <div class="lore-text-wrap">
+            <h3 class="lore-title">🌌 The Great Fracture</h3>
+            <p class="lore-body">
+              Long before the current age, the world was unified beneath the cosmic decree of <strong>The Primordial God</strong>. In that golden era, power was not hoarded or weaponized; it flowed in an unbroken current through the ley lines of the realm.
+            </p>
+            <p class="lore-body">
+              Legend recounts that a collective hubris seized the ancient orders—the Grand Swordsmen, the primordial Wild Mages, the Alchemical guilds, and the First Beastmasters. In an attempt to bottle eternity, they cast a forbidden celestial rite known as the <strong>Grand Deal</strong>.
+            </p>
+            <p class="lore-body">
+              The spell rebounded with cataclysmic fury. Reality shattered into fragmented shards called <strong>Cards</strong>. Flesh, incantations, living beasts, and raw magical cataclysms were flattened and sealed into planar parchment. The continents sank, the sky fractured into kaleidoscopic auroras, and at the epicenter of the cataclysm erupted <strong>The Spire</strong>—a shifting, living megalith extending from the deepest subterranean vaults of the earth to the edges of the astral void.
+            </p>
+          </div>
+        </div>
+
+        <h3 style="font-family: var(--font-pixel); font-size: 0.95rem; color: #fff; margin-top: 3rem; margin-bottom: 0.5rem;">
+          🏰 The Three Strata of the Spire
+        </h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          The Spire is not a static tower; it is a dimensional engine that reshuffles itself with every sunrise. Explorers traverse three distinct strata:
+        </p>
+
+        <div class="spire-strata-grid">
+          <!-- Act 1 -->
+          <div class="strata-card">
+            <span class="strata-badge act1">ACT 1: FLOORS 1–10</span>
+            <h3>The Sunken Catacombs &amp; Rust Wastes</h3>
+            <p>
+              The lower strata are an eerie amalgamation of forgotten crypts, overgrown sewer mazes, and clanking junk graveyards where discarded remnants fight for survival.
+            </p>
+            <ul class="strata-subregions">
+              <li><strong>The Bone Pits:</strong> Mass graves stitched back to unlife by necro-arcana, giving rise to the lumbering <em>Bone Amalgam</em>.</li>
+              <li><strong>Pyromancer's Vaults:</strong> Searing furnace tunnels where disgraced mages like <em>Archmage Ignis</em> dwell in self-inflicted exile.</li>
+              <li><strong>The Wreckyards:</strong> Sprawling subterranean junkyards ruled by eccentric Goblins piloting the scrap-welded <em>Wreckyard Colossus</em>.</li>
+            </ul>
+          </div>
+
+          <!-- Act 2 -->
+          <div class="strata-card">
+            <span class="strata-badge act2">ACT 2: FLOORS 11–20</span>
+            <h3>The Ascended Spire &amp; Draconic Citadel</h3>
+            <p>
+              Crossing the planar gate into the upper tiers reveals walls transformed from stone to crystalline obsidian, pulsing with raw draconic mana and void-auroras.
+            </p>
+            <ul class="strata-subregions">
+              <li><strong>Floating Terraces:</strong> Ancient aerial walkways suspended over a fathomless abyss where gravity itself weakens.</li>
+              <li><strong>Mana Sanctuaries:</strong> Crystalline spires humming with raw arcane radiation that supercharges magical incantations.</li>
+              <li><strong>The Dragon Lord's Perch:</strong> The apex summit guarded by the ancient elemental titan whose scales deflect mortal steel.</li>
+            </ul>
+          </div>
+
+          <!-- Act 3 / Divine -->
+          <div class="strata-card">
+            <span class="strata-badge divine">THE DIVINE FRACTURE</span>
+            <h3>The Slumbering Domain of The God</h3>
+            <p>
+              Beyond the Dragon Lord's carcass lies no mortal exit, but a rift torn through reality itself into a blinding cosmos of nebula dust and celestial cards.
+            </p>
+            <ul class="strata-subregions">
+              <li><strong>The Cosmic Rift:</strong> Space-time inverted into a sea of stars and celestial parchment orbiting like planets.</li>
+              <li><strong>The Dreaming Creator:</strong> A celestial titan of 1,000,000 HP whose slumber sustains the Spire's heartbeat.</li>
+              <li><strong>The Generational Siege:</strong> Mortals test their decks across lifetimes, permanently draining divine lifeblood.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="font-family: var(--font-pixel); font-size: 0.95rem; color: #fff; margin-top: 3rem; margin-bottom: 0.5rem;">
+          🔄 The Four Immutable Laws of the Deck
+        </h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          Physical reality within the Spire conforms strictly to four cosmic principles:
+        </p>
+
+        <div class="four-laws-grid">
+          <div class="law-card">
+            <span class="law-number">First Law</span>
+            <h4>The Law of the Hand</h4>
+            <p>Even the greatest champion can only focus their mind on 5 cards at any single moment. Mastery lies in knowing what to hold and what to cast.</p>
+          </div>
+
+          <div class="law-card">
+            <span class="law-number">Second Law</span>
+            <h4>The Law of the Discard</h4>
+            <p>Nothing played is truly lost. Spells and strikes dissolve into the astral slipstream, waiting for the deck to run dry so the cosmic wheel can reshuffle them.</p>
+          </div>
+
+          <div class="law-card">
+            <span class="law-number">Third Law</span>
+            <h4>The Law of Armor &amp; Ward</h4>
+            <p>Steel stops iron, while sorcery absorbs spells. Striking a foe requires reading their mantle—knights laugh at arrows, but crumble before arcane hexes.</p>
+          </div>
+
+          <div class="law-card">
+            <span class="law-number">Fourth Law</span>
+            <h4>The Law of the Draw</h4>
+            <p>At the dawn of every clash, fate deals fresh possibilities. To survive is to adapt to whatever hand the Spire delivers into your grasp.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         VOLUME 02: THE ARCANA OF THE CARDS & PACKS
+         ========================================== -->
+    <section class="lore-volume-section" id="vol-2">
+      <div class="lore-container">
+        <div class="volume-header">
+          <div class="volume-number-badge">VOL. 02</div>
+          <div class="volume-title-meta">
+            <span class="volume-kicker">ARTIFACTS &amp; RARITIES</span>
+            <h2>The Arcana of the Cards &amp; Booster Packs</h2>
+            <p>Planar singularities, astral foil seals, rarity gradations, and the eternal Binder of Remembrance.</p>
+          </div>
+        </div>
+
+        <div class="lore-spotlight-card">
+          <div class="lore-text-wrap">
+            <h3 class="lore-title">🃏 What Are Cards?</h3>
+            <p class="lore-body">
+              In the waking world of mortals, weapons are forged in fire and spells are spoken with breath. But within the Spire, physical objects and spiritual intent are compressed into <strong>Arcane Parchments</strong> known as <strong>Cards</strong>.
+            </p>
+            <p class="lore-body">
+              When the ancient world fractured, entire legions, legendary beasts, ancient relics, and secret alchemical brews were flattened by planar compression. A card is a stable, pocket-sized singularity containing a preserved fragment of that lost world:
+            </p>
+            <div class="lore-highlights">
+              <span class="highlight-tag">⚔️ <strong>Alley Cutlass</strong> momentarily phases an authentic pirate cutlass across time to slash an enemy's throat.</span>
+              <span class="highlight-tag">🐺 <strong>Fenrir</strong> pulls the dread frost-wolf of myth through a sliver in the void to rend flesh before dissolving back into discard.</span>
+              <span class="highlight-tag">🧪 <strong>Orange Juice &amp; Spirit Broth</strong> channel the restored life-waters of the ancient world straight into the hero's bloodstream.</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-family: var(--font-pixel); font-size: 0.95rem; color: #fff; margin-top: 3rem; margin-bottom: 0.5rem;">
+          📦 The Mystery of Sealed Booster Packs
+        </h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          Originally sealed by the Archivists of the Great Deal in the final seconds before reality cracked, these metallic pouches preserve curated echoes of ancient power:
+        </p>
+
+        <div class="packs-grid">
+          <div class="pack-card common-pack">
+            <span class="pack-seal-icon">📦</span>
+            <h4>Common Pack</h4>
+            <span class="pack-seal-badge">Brown Bronze Seal</span>
+            <p>The workhorse packs of the ancient vanguard. Holds foundational maneuvers, basic elixirs, and reliable animal companions.</p>
+          </div>
+
+          <div class="pack-card rare-pack">
+            <span class="pack-seal-icon">🔷</span>
+            <h4>Rare Pack</h4>
+            <span class="pack-seal-badge">Sapphire Blue Seal</span>
+            <p>Sealed inside heavy indigo foil. Holds refined martial stances, forbidden sorceries, and disciplined war beasts.</p>
+          </div>
+
+          <div class="pack-card exotic-pack">
+            <span class="pack-seal-icon">✨</span>
+            <h4>Exotic Pack</h4>
+            <span class="pack-seal-badge">Prismatic Starlight Seal</span>
+            <p>The holy grail of deck-builders. Emits a celestial hum and guarantees an Exotic or Legendary manifestation of reality-bending power.</p>
+          </div>
+
+          <div class="pack-card class-pack">
+            <span class="pack-seal-icon">🏛️</span>
+            <h4>Specialty Class Pack</h4>
+            <span class="pack-seal-badge">Guild Master Seal</span>
+            <p>Curated by ancient guild masters, strictly containing cards resonating with a single magical discipline (Elixirs, Mages, Beasts, etc.).</p>
+          </div>
+
+          <div class="pack-card bundle-pack">
+            <span class="pack-seal-icon">👑</span>
+            <h4>Collector's Bundle</h4>
+            <span class="pack-seal-badge">Gilded Coffer Seal</span>
+            <p>An ornate coffer containing multiple preserved packs in stasis, prized by adventurers seeking immediate collection dominance.</p>
+          </div>
+        </div>
+
+        <h3 style="font-family: var(--font-pixel); font-size: 0.95rem; color: #fff; margin-top: 3rem; margin-bottom: 0.5rem;">
+          ✨ Foil Rarity Tiers &amp; Planar Resonances
+        </h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          Not all cards hold the same density of the ancient world. Six distinct gradations of power exist across the card collection:
+        </p>
+
+        <div class="foil-tiers-table-wrap">
+          <table class="foil-table">
+            <thead>
+              <tr>
+                <th>Rarity Tier</th>
+                <th>Frame Hue</th>
+                <th>Planar Origin &amp; Lore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="rarity-pill common">Common</span></td>
+                <td>Earthen Brown</td>
+                <td>The everyday tools, beasts, and minor brews of the old civilization. Abundant, dependable, and swift to cast.</td>
+              </tr>
+              <tr>
+                <td><span class="rarity-pill uncommon">Uncommon</span></td>
+                <td>Jade Green</td>
+                <td>Crafted martial techniques, trained apex predators, and potent concoctions brewed with precision.</td>
+              </tr>
+              <tr>
+                <td><span class="rarity-pill rare">Rare</span></td>
+                <td>Deep Sapphire</td>
+                <td>Lost royal armaments, arcane archivist spells, and mythic beasts of the elder wild.</td>
+              </tr>
+              <tr>
+                <td><span class="rarity-pill epic">Epic</span></td>
+                <td>Royal Amethyst</td>
+                <td>Devastating planar rifts, catastrophic monsters, and forgotten battlefield rites that reshape encounters.</td>
+              </tr>
+              <tr>
+                <td><span class="rarity-pill legendary">Legendary</span></td>
+                <td>Blazing Amber</td>
+                <td>Mythological entities like the <em>Grim Reaper</em> or apex horrors like <em>Fenrir</em>. Rare enough to topple kingdoms.</td>
+              </tr>
+              <tr>
+                <td><span class="rarity-pill exotic">Exotic</span></td>
+                <td>Holographic Prism</td>
+                <td>The rarest echoes in existence. Features living artwork pulsing beneath the surface with divine auroras that defy physics.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="currencies-grid" style="margin-top: 2.5rem;">
+          <div class="currency-card gem-card">
+            <div class="currency-icon">📖</div>
+            <div class="currency-body">
+              <h4>The Binder of Remembrance</h4>
+              <span class="currency-type-tag">The Eternal Collection</span>
+              <p>
+                When a hero perishes in the Spire, their flesh is reclaimed by the stones. But cards bound with <strong>Gems</strong> into the Binder are etched into the player's soul forever. From this ledger, heroes draft starter decks with the wisdom of all fallen ancestors.
+              </p>
+            </div>
+          </div>
+
+          <div class="currency-card gold-card">
+            <div class="currency-icon">🎒</div>
+            <div class="currency-body">
+              <h4>The Sideboard Satchel</h4>
+              <span class="currency-type-tag">5 Strategic Substitute Slots</span>
+              <p>
+                Strapped to every crawler's belt are 5 dedicated substitute slots. Cards held in reserve do not dilute the combat draw deck, allowing seamless swaps between chambers to counter specific boss resistances without losing tempo.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         VOLUME 03: THE SIX ORDERS & CLASSES
+         ========================================== -->
+    <section class="lore-volume-section" id="vol-3">
+      <div class="lore-container">
+        <div class="volume-header">
+          <div class="volume-number-badge">VOL. 03</div>
+          <div class="volume-title-meta">
+            <span class="volume-kicker">FACTIONS &amp; DISCIPLINES</span>
+            <h2>The Six Orders &amp; Classes</h2>
+            <p>In the wake of the Great Fracture, civilization condensed into six strategic philosophies.</p>
+          </div>
+        </div>
+
+        <div class="orders-grid">
+          <!-- 1. Elixir -->
+          <div class="order-card">
+            <div class="order-top">
+              <div class="order-icon">🧪</div>
+              <div class="order-titles">
+                <h3>The Alchemical Order</h3>
+                <span class="order-class-tag">Class: Elixir</span>
+              </div>
+            </div>
+            <ul class="order-details">
+              <li><strong>Philosophy:</strong> Vitality, Transmutation, &amp; Bodily Mastery</li>
+              <li><strong>Dedicated Domain:</strong> 2 Dedicated Elixir Pockets (instant combat access)</li>
+              <li><strong>Key Draughts:</strong> <em>Magic Milkshake</em>, <em>Mystic Tea</em>, <em>Moonbrew</em></li>
+            </ul>
+            <p class="order-lore-text">
+              The Alchemists were the scholars who sought to distill the life-essence of the pre-shattered world. Their distillations do not clutter the main deck; slotted into belt pockets, they can stave off death, mend shattered bones in seconds, and flood mortal limbs with divine haste.
+            </p>
+          </div>
+
+          <!-- 2. Wild Mages -->
+          <div class="order-card">
+            <div class="order-top">
+              <div class="order-icon">🔮</div>
+              <div class="order-titles">
+                <h3>Circle of Wild Mages</h3>
+                <span class="order-class-tag">Class: Wild Mages</span>
+              </div>
+            </div>
+            <ul class="order-details">
+              <li><strong>Philosophy:</strong> Planar Rupture, Cosmic Gamble, Ward-Shredding</li>
+              <li><strong>Damage Profile:</strong> Pure <strong>Magic Damage</strong> (Reduced by Ward, bypasses Armor)</li>
+              <li><strong>Key Spells:</strong> <em>Static Arcanist</em>, <em>Blink</em>, <em>Void Dice Savant</em></li>
+            </ul>
+            <p class="order-lore-text">
+              Rejecting sterile academe, Wild Mages channel the planar tears left by the Fracture. Their unstable lightning and spatial rifts bypass physical steel armor entirely—scorching through ethereal defensive wards to strike directly at the foe's celestial essence.
+            </p>
+          </div>
+
+          <!-- 3. Swordsman -->
+          <div class="order-card">
+            <div class="order-top">
+              <div class="order-icon">⚔️</div>
+              <div class="order-titles">
+                <h3>The Iron Vanguard</h3>
+                <span class="order-class-tag">Class: Swordsman</span>
+              </div>
+            </div>
+            <ul class="order-details">
+              <li><strong>Philosophy:</strong> Unyielding Discipline, Martial Honor, Heavy Steel</li>
+              <li><strong>Damage Profile:</strong> Pure <strong>Physical Damage</strong> (Reduced by Armor)</li>
+              <li><strong>Key Techniques:</strong> <em>Pureblade</em>, <em>Anvil</em>, <em>Execution Cadets</em></li>
+            </ul>
+            <p class="order-lore-text">
+              When magic failed to avert the cataclysm, the knights of the Vanguard placed their faith in tempered iron. Carrying heirloom blades and crushing warhammers, their rigorous physical conditioning cracks stone, deflects claws, and executes weakened adversaries without pity.
+            </p>
+          </div>
+
+          <!-- 4. Animal -->
+          <div class="order-card">
+            <div class="order-top">
+              <div class="order-icon">🐾</div>
+              <div class="order-titles">
+                <h3>Pack of the Primal Wild</h3>
+                <span class="order-class-tag">Class: Animal</span>
+              </div>
+            </div>
+            <ul class="order-details">
+              <li><strong>Philosophy:</strong> Instinct, Bleed Sunder, Swarm Synergy</li>
+              <li><strong>Combat Style:</strong> Rapid attack flurries, deep Bleed lacerations, pack-wide buffs</li>
+              <li><strong>Key Beasts:</strong> <em>Dog</em>, <em>Cat</em>, <em>Fenrir</em>, <em>Howls</em></li>
+            </ul>
+            <p class="order-lore-text">
+              The beasts of the wild survived the Fracture through fierce pack solidarity. From faithful hounds to mythic predators like Fenrir, the Animal cards excel together: a single pack howl bolsters every following strike, opening ragged wounds that bleed enemies dry over time.
+            </p>
+          </div>
+
+          <!-- 5. Monster -->
+          <div class="order-card">
+            <div class="order-top">
+              <div class="order-icon">👹</div>
+              <div class="order-titles">
+                <h3>The Abyssal Horrors</h3>
+                <span class="order-class-tag">Class: Monster</span>
+              </div>
+            </div>
+            <ul class="order-details">
+              <li><strong>Philosophy:</strong> Reckless Power, Dread Necromancy, Cataclysmic Splash</li>
+              <li><strong>Risk Profile:</strong> High-damage board explosions with hazardous self-splash</li>
+              <li><strong>Key Horrors:</strong> <em>Ashmaw Colossus</em>, <em>Daddy Demon Litionist</em>, <em>Grim Reaper</em></li>
+            </ul>
+            <p class="order-lore-text">
+              Crawling from the deepest chasms beneath the Spire, Monsters are violent anomalies that defy planar laws. Titans like Ashmaw Colossus obliterate entire enemy lines—at the terrifying risk of collateral splash back onto the summoner. Here too walks the Grim Reaper, harvesting souls with cold finality.
+            </p>
+          </div>
+
+          <!-- 6. Goblins -->
+          <div class="order-card">
+            <div class="order-top">
+              <div class="order-icon">⚙️</div>
+              <div class="order-titles">
+                <h3>Scrappers of the Under-Spire</h3>
+                <span class="order-class-tag">Class: Goblins</span>
+              </div>
+            </div>
+            <ul class="order-details">
+              <li><strong>Philosophy:</strong> Scavenging, Improvisation, Explosive Recycling</li>
+              <li><strong>Special Core Mechanic:</strong> <strong>Scrap Generation &amp; Conversion</strong></li>
+              <li><strong>Key Inventions:</strong> <em>Scrap Turret</em>, <em>Scrap Shield</em>, <em>Wreckyard Colossus</em></li>
+            </ul>
+            <p class="order-lore-text">
+              Where other races mourn spent cards as trash, Goblins see pure gold. Guided by junkyard tinkerers, they salvage battle debris into raw Scrap, hammering together spring-loaded traps, automated turrets, and armored siege automatons mid-battle with manic glee.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         VOLUME 04: CHRONICLES OF THE CHAMPIONS
+         ========================================== -->
+    <section class="lore-volume-section" id="vol-4">
+      <div class="lore-container">
+        <div class="volume-header">
+          <div class="volume-number-badge">VOL. 04</div>
+          <div class="volume-title-meta">
+            <span class="volume-kicker">HERO ORIGINS &amp; MYTHOS</span>
+            <h2>Chronicles of the Champions</h2>
+            <p>Eight champions stepped into the shadow of the Spire. Not all returned in flesh, but their echoes refused to die.</p>
+          </div>
+        </div>
+
+        <div class="champions-lore-grid">
+          <!-- 1. Monk -->
+          <div class="champion-lore-card">
+            <div class="champ-card-header">
+              <div class="champ-sprite-wrap">
+                <img src="assets/heroes/anim/DeckMonk.gif" alt="Deck Monk Sprite" class="champ-sprite pixel-art" />
+              </div>
+              <div class="champ-title-info">
+                <span class="champ-epithet">The Balanced Wayfarer</span>
+                <h3>The Deck Monk</h3>
+              </div>
+            </div>
+            <div class="champ-card-body">
+              <div class="champ-meta-pills">
+                <span class="champ-stat-pill">Origin: <strong>Shuffled Palm</strong></span>
+                <span class="champ-stat-pill">Stats: <strong>100 HP • 10 ATK • 15 Mana</strong></span>
+              </div>
+              <div class="champ-gift-banner">
+                <strong>Inborn Trait: Cosmic Harmony</strong> — Perfect equilibrium between martial strikes and arcane flow.
+              </div>
+              <p class="champ-lore-prose">
+                High above the cloudline on the peaks overlooking the Spire, the Order of the Shuffled Palm spent centuries meditating upon the cosmic shuffle. The Deck Monk is their chosen envoy. Serene, unshakeable, and unburdened by dogma, he views every card drawn as a verse in an ongoing hymn of universal balance.
+              </p>
+            </div>
+          </div>
+
+          <!-- 2. Gabe -->
+          <div class="champion-lore-card">
+            <div class="champ-card-header">
+              <div class="champ-sprite-wrap">
+                <img src="assets/heroes/anim/GorillaGabe.gif" alt="Gorilla Gabe Sprite" class="champ-sprite pixel-art" />
+              </div>
+              <div class="champ-title-info">
+                <span class="champ-epithet">The Primal Bulwark</span>
+                <h3>Gorilla Gabe</h3>
+              </div>
+            </div>
+            <div class="champ-card-body">
+              <div class="champ-meta-pills">
+                <span class="champ-stat-pill">Origin: <strong>Great Canopy</strong></span>
+                <span class="champ-stat-pill">Stats: <strong>150 HP • 12 ATK • 10 Mana</strong></span>
+              </div>
+              <div class="champ-gift-banner">
+                <strong>Inborn Trait: Colossal Constitution</strong> — Unmatched 150 health pool absorbs catastrophic punishment.
+              </div>
+              <p class="champ-lore-prose">
+                When the Fracture tore through the primeval jungle, Gabe stood between the planar rift and his kin, absorbing the shockwave on his chest. He entered the Spire not to master delicate sorceries, but to smash stone with fist. His primal vigor shrugs off blows that would shatter lesser heroes.
+              </p>
+            </div>
+          </div>
+
+          <!-- 3. Lost Spirit -->
+          <div class="champion-lore-card">
+            <div class="champ-card-header">
+              <div class="champ-sprite-wrap">
+                <img src="assets/heroes/anim/lostspirit.gif" alt="Lost Spirit Sprite" class="champ-sprite pixel-art" />
+              </div>
+              <div class="champ-title-info">
+                <span class="champ-epithet">The Ethereal Echo</span>
+                <h3>The Lost Spirit</h3>
+              </div>
+            </div>
+            <div class="champ-card-body">
+              <div class="champ-meta-pills">
+                <span class="champ-stat-pill">Origin: <strong>Sea of Memories</strong></span>
+                <span class="champ-stat-pill">Stats: <strong>80 HP • 15 ATK • 14 Mana</strong></span>
+              </div>
+              <div class="champ-gift-banner">
+                <strong>Inborn Trait: Ethereal Grasp</strong> — +1 Draw per turn (4 cards) and deep discard pile manipulation.
+              </div>
+              <p class="champ-lore-prose">
+                The Lost Spirit remembers nothing of its mortal life before the Fracture, only the chilling whisper of the void. Tethered to existence through the resonance of discarded cards, the Spirit defies physical rules: drawing 4 cards each turn and pulling spent memories straight from the graveyard into reality.
+              </p>
+            </div>
+          </div>
+
+          <!-- 4. Necri -->
+          <div class="champion-lore-card">
+            <div class="champ-card-header">
+              <div class="champ-sprite-wrap">
+                <img src="assets/heroes/anim/Necri.gif" alt="Necri Sprite" class="champ-sprite pixel-art" />
+              </div>
+              <div class="champ-title-info">
+                <span class="champ-epithet">Mistress of the Bone Ward</span>
+                <h3>Necri</h3>
+              </div>
+            </div>
+            <div class="champ-card-body">
+              <div class="champ-meta-pills">
+                <span class="champ-stat-pill">Origin: <strong>The Ossuary</strong></span>
+                <span class="champ-stat-pill">Stats: <strong>70 HP • 12 ATK • 20 Mana</strong></span>
+              </div>
+              <div class="champ-gift-banner">
+                <strong>Inborn Trait: Bone Ward &amp; Minions</strong> — Permanent 8 Bone Ward, passive regen, summons a Skeleton each turn.
+              </div>
+              <p class="champ-lore-prose">
+                Necri knows that flesh is a fleeting illusion; bone is eternal. Born in the subterranean tombs beneath Floor 1, she learned to sing to calcium resting in soil. Protected by levitating skull plates and ribcages, she weaves massive 20-mana death incantations while loyal skeleton minions absorb oncoming blows.
+              </p>
+            </div>
+          </div>
+
+          <!-- 5. Demonling -->
+          <div class="champion-lore-card">
+            <div class="champ-card-header">
+              <div class="champ-sprite-wrap">
+                <img src="assets/heroes/anim/Demonling.gif" alt="Demonling Sprite" class="champ-sprite pixel-art" />
+              </div>
+              <div class="champ-title-info">
+                <span class="champ-epithet">The Spark of Ruin</span>
+                <h3>Demonling</h3>
+              </div>
+            </div>
+            <div class="champ-card-body">
+              <div class="champ-meta-pills">
+                <span class="champ-stat-pill">Origin: <strong>Brimstone Fissures</strong></span>
+                <span class="champ-stat-pill">Stats: <strong>90 HP • 11 ATK • 15 Mana</strong></span>
+              </div>
+              <div class="champ-gift-banner">
+                <strong>Inborn Trait: Infernal Demolition</strong> — Strikes ignite Burn; summons Lil Demon or Daddy Demon Litionist.
+              </div>
+              <p class="champ-lore-prose">
+                Born from a bubbling sulfur pool at the base of the Spire, Demonling views the shifting labyrinth as one massive playground waiting to be detonated. His fiery touch roasts foes from within, and when pressured, he calls in his explosive family to blow up friend and foe in glorious fireworks.
+              </p>
+            </div>
+          </div>
+
+          <!-- 6. Hunter -->
+          <div class="champion-lore-card">
+            <div class="champ-card-header">
+              <div class="champ-sprite-wrap">
+                <img src="assets/heroes/anim/Hunter the Hedgehog.gif" alt="Hunter The Hedgehog Sprite" class="champ-sprite pixel-art" />
+              </div>
+              <div class="champ-title-info">
+                <span class="champ-epithet">The Quill Tempest</span>
+                <h3>Hunter The Hedgehog</h3>
+              </div>
+            </div>
+            <div class="champ-card-body">
+              <div class="champ-meta-pills">
+                <span class="champ-stat-pill">Origin: <strong>Bramblewood</strong></span>
+                <span class="champ-stat-pill">Stats: <strong>140 HP • 10 ATK • 8 Mana</strong></span>
+              </div>
+              <div class="champ-gift-banner">
+                <strong>Inborn Trait: Quill Flurry</strong> — Basic attacks hit ALL enemies simultaneously, inflicting deep Bleed.
+              </div>
+              <p class="champ-lore-prose">
+                Do not mistake his diminutive size for frailty. Hunter is a veteran tracker of the perilous Bramblewood. Surrounded by monsters, he curls into a whirling tempest of needle-sharp quills, lacerating every enemy on the battlefield at once until their bleeding wounds drain them dry.
+              </p>
+            </div>
+          </div>
+
+          <!-- 7. Scrap Goblin -->
+          <div class="champion-lore-card">
+            <div class="champ-card-header">
+              <div class="champ-sprite-wrap">
+                <img src="assets/heroes/anim/Goblin.gif" alt="Scrap Goblin Sprite" class="champ-sprite pixel-art" />
+              </div>
+              <div class="champ-title-info">
+                <span class="champ-epithet">Master of Junkyard Alchemy</span>
+                <h3>Scrap Goblin</h3>
+              </div>
+            </div>
+            <div class="champ-card-body">
+              <div class="champ-meta-pills">
+                <span class="champ-stat-pill">Origin: <strong>Cog-Trench</strong></span>
+                <span class="champ-stat-pill">Stats: <strong>90 HP • 9 ATK • 13 Mana</strong></span>
+              </div>
+              <div class="champ-gift-banner">
+                <strong>Inborn Trait: Scrap Mastery</strong> — Generates Scrap each turn to assemble shields, bombs, and turrets on the fly.
+              </div>
+              <p class="champ-lore-prose">
+                Armed with a rusted pipe-wrench and manic curiosity, the Scrap Goblin proves that one creature's refuse is an army's doom. Where others discard spent cards, he breaks them down into cogs and gunpowder, hammering together scrap shields and rapid-fire turrets mid-battle.
+              </p>
+            </div>
+          </div>
+
+          <!-- 8. The Dragon -->
+          <div class="champion-lore-card">
+            <div class="champ-card-header">
+              <div class="champ-sprite-wrap" style="border-color: #f59e0b;">
+                <span style="font-size: 1.8rem;">🐲</span>
+              </div>
+              <div class="champ-title-info">
+                <span class="champ-epithet">The Ancient Progenitor</span>
+                <h3>The Dragon</h3>
+              </div>
+            </div>
+            <div class="champ-card-body">
+              <div class="champ-meta-pills">
+                <span class="champ-stat-pill">Origin: <strong>Primordial Aether</strong></span>
+                <span class="champ-stat-pill">Stats: <strong>95 HP • 10 ATK • 14 Mana</strong></span>
+              </div>
+              <div class="champ-gift-banner">
+                <strong>Inborn Trait: Quad-Elemental Evolution</strong> — Stun claws (35%); morphs into Fire, Ice, Poison, or Earth forms.
+              </div>
+              <p class="champ-lore-prose">
+                A scion of the primordial wyrms who ruled the skies before reality was divided into cards. Sleeping for eons within an amber shell, this hatchling commands up to 100 Dragon cards and adapts dynamically—evolving into magma, frost, venom, or tectonic forms based on mastery.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         VOLUME 05: DENIZENS OF THE THRESHOLD
+         ========================================== -->
+    <section class="lore-volume-section" id="vol-5">
+      <div class="lore-container">
+        <div class="volume-header">
+          <div class="volume-number-badge">VOL. 05</div>
+          <div class="volume-title-meta">
+            <span class="volume-kicker">ENCLAVES &amp; ROGUES</span>
+            <h2>Denizens of the Threshold</h2>
+            <p>Not everything lurking in the dark wants to gnaw on your bones. Some just want your coin, your soul, or the ace in your sleeve.</p>
+          </div>
+        </div>
+
+        <div class="denizens-grid">
+          <!-- The Trader -->
+          <div class="denizen-card">
+            <div class="denizen-header">
+              <div class="denizen-icon">💼</div>
+              <div class="denizen-titles">
+                <h3>The Trader</h3>
+                <span>The Planar Broker</span>
+              </div>
+            </div>
+            <p>
+              A cloaked figure draped in velvet scarves, brass scales, and spectacles forged from compressed foil. Some whisper he was head appraiser for the ancient Archivists. To him, mortals, monsters, and gods are all merely paying customers.
+            </p>
+            <ul class="denizen-pacts">
+              <li><strong>Card Barter:</strong> Trades cards from his personal satchel in equal rarity measure.</li>
+              <li><strong>The Permanent Imprint:</strong> Burns a card's pattern into your soul with a brass stylus, adding it to your <strong>Binder</strong> forever for a fee in Gems.</li>
+              <li><strong>Currency Exchange:</strong> Exchanges ephemeral in-run Gold for eternal Gems (150:100) or sells liquid Gold to desperate crawlers (100 Gems for 50 Gold).</li>
+            </ul>
+          </div>
+
+          <!-- The Chemist -->
+          <div class="denizen-card">
+            <div class="denizen-header">
+              <div class="denizen-icon">🧪</div>
+              <div class="denizen-titles">
+                <h3>The Chemist</h3>
+                <span>The Volatile Apothecary</span>
+              </div>
+            </div>
+            <p>
+              Wearing cracked goggles and an apron drenched in iridescent stains, the Chemist is obsessed with the culinary and physiological properties of compressed cards. Where others see rations, he sees divine immortality.
+            </p>
+            <ul class="denizen-pacts">
+              <li><strong>The Welcome Phial:</strong> Greets every battered traveler with one free elixir draught—part hospitality, part experimental trial.</li>
+              <li><strong>Elixir Fusion:</strong> Combines two distinct elixir cards over a crucible of raw essence, creating a devastatingly potent upgraded tonic that slots directly into belt pockets.</li>
+            </ul>
+          </div>
+
+          <!-- The Gambler -->
+          <div class="denizen-card">
+            <div class="denizen-header">
+              <div class="denizen-icon">🎲</div>
+              <div class="denizen-titles">
+                <h3>The Gambler</h3>
+                <span>The Archon of Hazard</span>
+              </div>
+            </div>
+            <p>
+              A dapper rogue in a frayed silk waistcoat, perpetually flipping a gold doubloon between knuckle joints. He knows the secret truth: the Great Fracture wasn't a tragedy—it was the ultimate cosmic game of chance.
+            </p>
+            <ul class="denizen-pacts">
+              <li><strong>Gold for Gems Flip:</strong> Stake your purse on an astral coin flip. Win, and receive 2.5x in permanent Gems. Lose, and the coin burns directly into your flesh.</li>
+              <li><strong>High-Risk Card Bet:</strong> Stake a beloved card. Win, and it becomes permanent in your collection plus a bounty of Gems. Lose, and it dissolves into ash.</li>
+              <li><strong>Reaper's Frenzy Mode:</strong> +100% damage output for the next two battles, at the permanent cost of 25% maximum health.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="font-family: var(--font-pixel); font-size: 0.95rem; color: #fff; margin-top: 3rem; margin-bottom: 0.5rem;">
+          🕯️ Whispering Shrines &amp; Mystery Encounters
+        </h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          Strange ancient monuments pulse with residual magic across the dungeon crossroads:
+        </p>
+
+        <div class="shrines-grid">
+          <div class="shrine-card">
+            <h4>The Whispering Deck</h4>
+            <p>An ethereal card table hovering over a void chasm. Crawlers can reach into swirling cards to infuse their spirit with martial power, trading lifeblood for celestial insight.</p>
+          </div>
+
+          <div class="shrine-card">
+            <h4>The Cursed Altar</h4>
+            <p>A jagged crimson monolith demanding sacrifice. Crawlers accept permanent combat afflictions in exchange for surging base attack damage that cleaves foes apart.</p>
+          </div>
+
+          <div class="shrine-card">
+            <h4>The Arcane Anvil</h4>
+            <p>A celestial forge where ghostly blue flames temper the spirit, mending weary bodies and transmuting mortal coin into eternal astral jewels.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         VOLUME 06: THE DRAGON LORD & THE SLUMBERING GOD
+         ========================================== -->
+    <section class="lore-volume-section" id="vol-6">
+      <div class="lore-container">
+        <div class="volume-header">
+          <div class="volume-number-badge">VOL. 06</div>
+          <div class="volume-title-meta">
+            <span class="volume-kicker">APEX OF THE LABYRINTH</span>
+            <h2>The Dragon Lord &amp; The Slumbering God</h2>
+            <p>The pinnacle of Act 2, the rupture of the firmament, and the eternal 1,000,000 HP siege.</p>
+          </div>
+        </div>
+
+        <div class="lore-spotlight-card">
+          <div class="lore-text-wrap">
+            <h3 class="lore-title">🐉 The Dragon Lord — Warden of the Mortal Ceiling</h3>
+            <p class="lore-body">
+              For millenia, mortals believed the Dragon Lord was the end of all things. Perched atop Floor 10 where the air thins into void, he rests on a mountain of petrified adventurer bones, melted gold, and ancient foil wrappers.
+            </p>
+            <p class="lore-body">
+              His physiology is a masterclass in elemental balance:
+            </p>
+            <div class="lore-highlights">
+              <span class="highlight-tag">🛡️ <strong>Diamond Scales (Armor)</strong> glance off heavy steel cutlasses and hammers.</span>
+              <span class="highlight-tag">🔮 <strong>Astral Mantle (Ward)</strong> absorbs the rawest arcane bombardments of Wild Mages.</span>
+              <span class="highlight-tag">🔥 <strong>Infernal Breath</strong> ignites the air itself, inflicting stacking, devastating Burn.</span>
+            </div>
+            <p class="lore-body" style="margin-top: 1.5rem;">
+              To slay the Dragon Lord is to reach the summit of mortal martial achievement. When he falls, the spire trembles, the run is consecrated in <strong>Victory</strong>, and the hero's deck and vitality are completely revitalized. Yet as the dragon exhales his dying flame, reality cracks like brittle glass... and gravity inverts.
+            </p>
+          </div>
+        </div>
+
+        <!-- The Slumbering God Banner -->
+        <div class="godslayer-banner-card">
+          <span class="volume-kicker" style="color: #c084fc;">DIVINE RIFT ENCOUNTER</span>
+          <h3>🌌 The Slumbering Titan of <span>1,000,000 HP</span></h3>
+          <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem;">
+            Floating at the center of infinity lies <strong>The God</strong>. Unlike any beast or boss encountered before, He does not belong to the mortal cycle. He is the cosmic dealer who authored the deck, radiating <strong>Divine Judgement</strong> and crushing mortals with the <strong>Wrath of the Heavens</strong>.
+          </p>
+
+          <div class="godslayer-hp-meter">
+            <div class="hp-meter-fill"></div>
+            <span class="hp-meter-label">THE SLUMBERING GOD — 1,000,000 / 1,000,000 HP</span>
+          </div>
+
+          <h4 style="font-family: var(--font-pixel); font-size: 0.8rem; color: #fff; margin-top: 2rem; margin-bottom: 0.75rem;">
+            ⚡ The Law of the Generational Siege
+          </h4>
+          <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.6;">
+            No single mortal is expected to extinguish a million divine hit points in one encounter. The battle against The God operates under cosmic rules:
+          </p>
+
+          <div class="generational-rules-grid">
+            <div class="gen-rule-card">
+              <strong>1. It Is Never Defeat</strong>
+              <p>Reaching The God is already a total Spire triumph. When the mortal body gives out, the expedition concludes in glorious <strong>Victory</strong>.</p>
+            </div>
+
+            <div class="gen-rule-card">
+              <strong>2. The Permanent Wound</strong>
+              <p>Every point of damage dealt to The God is permanently scarred into His divine flesh across all runs and all generations of heroes.</p>
+            </div>
+
+            <div class="gen-rule-card">
+              <strong>3. The Lineage of Defiance</strong>
+              <p>Generations of Monks, Beasts, Goblins, and Spirits chip away at the million-point pool. Bit by bit, mortal defiance drains divine lifeblood.</p>
+            </div>
+          </div>
+
+          <div style="background: rgba(168, 85, 247, 0.1); border: 1px solid #a855f7; padding: 1.25rem; border-radius: 4px; margin-top: 2rem;">
+            <h4 style="font-family: var(--font-pixel); font-size: 0.75rem; color: #d8b4fe; margin-bottom: 0.6rem;">
+              👑 The Prophecy of the Godslayer
+            </h4>
+            <p style="font-size: 0.88rem; color: #f1f5f9; line-height: 1.7; margin: 0; font-style: italic;">
+              &ldquo;When the millionth drop of divine blood touches the void, the slumber shall shatter. The Godslayer shall receive ten thousand celestial gems, and the vault of creation shall burst open—delivering pairs of every sealed pack ever conceived by mortal and immortal minds.&rdquo;
+            </p>
+          </div>
+        </div>
+
+        <!-- Epilogue: What it means to be Decked Out -->
+        <div class="decked-out-epilogue-card">
+          <div class="volume-kicker" style="color: var(--primary);">THE ULTIMATE DESIGNATION</div>
+          <h3>What It Truly Means to Be &ldquo;Decked Out&rdquo;</h3>
+          <p>
+            &ldquo;In the dialect of the Spire crawlers, many confuse the name with carrying full armor or heavy weapons. But the elders of the Binder know the true origin of the phrase: To be <strong>Decked Out</strong> is to stand at the precipice of reality with a deck so refined, a soul so resilient, and a collection so vast that not even the gods can shuffle you away into discard.&rdquo;
+          </p>
+          <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn-wishlist" style="display: inline-block; text-decoration: none; padding: 0.75rem 1.5rem; font-size: 0.65rem;">
+            ⭐ Wishlist Decked Out on Steam
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         CURRENCIES & THE BINDER
+         ========================================== -->
+    <section class="site-section" id="currencies">
+      <div class="lore-container">
+        <div class="section-header center">
+          <div class="section-title-wrap">
+            <span class="section-kicker">THE DUAL ECONOMY</span>
+            <h2><span>🪙</span> Currencies in the Cosmic Order</h2>
+            <p>How fleeting dungeon coin and immortal astral gems govern progression across timelines.</p>
+          </div>
+        </div>
+
+        <div class="currencies-grid">
+          <div class="currency-card gold-card">
+            <div class="currency-icon">🪙</div>
+            <div class="currency-body">
+              <h4>Gold (In-Run Currency)</h4>
+              <span class="currency-type-tag">Ephemeral Dungeon Dust</span>
+              <p>
+                Born from pulverized dungeon stone and fallen monstrosities, Gold holds physical weight only inside the Spire's unstable spacetime. It buys booster packs at the Trader's stall, funds Chemist elixir fusions, and fuels Gambler wagers—dissolving when the hero perishes.
+              </p>
+            </div>
+          </div>
+
+          <div class="currency-card gem-card">
+            <div class="currency-icon">💎</div>
+            <div class="currency-body">
+              <h4>Gems (Out-Run Currency)</h4>
+              <span class="currency-type-tag">Eternal Astral Crystals</span>
+              <p>
+                Permanent cosmic jewels that transcend mortal death. Gems capture the memories, scars, and triumphs of heroes across timelines. They are used to etch cards permanently into the <strong>Grand Binder of Remembrance</strong> and unlock ancient champion evolutions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="brand-wrapper">
+        <div class="brand-icon">
+          <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
+        </div>
+        <div class="brand-text">
+          <h1>DECKED OUT</h1>
+          <span>ROGUELIKE TCG</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">Overview</a>
+        <a href="mechanics.html">Mechanics</a>
+        <a href="heroes.html">Heroes</a>
+        <a href="cards.html">Cards</a>
+        <a href="deck-builder.html">Deck Builder</a>
+        <a href="combat.html">Battle Test</a>
+        <a href="relics.html">Relics</a>
+        <a href="dungeon.html">Dungeon</a>
+        <a href="lore.html" class="active">Lore</a>
+        <a href="specs.html">Game Info</a>
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Steam</a>
+      </div>
+
+      <div class="footer-credits">
+        <p>Decked Out — Built with Godot 4.7 Forward+.</p>
+        <p style="margin-top: 0.25rem;">Official Companion Website. All game assets &amp; characters &copy; Emanuele Ellul.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/audio.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
+  <script>
+    // Chapter quick-jump pill highlight
+    document.addEventListener('DOMContentLoaded', () => {
+      const pills = document.querySelectorAll('.lore-nav-pill');
+      pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
+          pills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

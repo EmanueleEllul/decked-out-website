@@ -62,13 +62,19 @@ decked-out-website/
 ├── mechanics.html          # Combat formulas & status ailments
 ├── heroes.html             # 7 Champions & animated character showcase
 ├── cards.html              # 62 Cards compendium & modal inspector
+├── deck-builder.html       # Interactive deck builder & card analytics
+├── combat.html             # Battle Test combat arena simulator
 ├── relics.html             # 9 Ancient Relics vault
 ├── dungeon.html            # 3-Act Dungeon & Bestiary
+├── lore.html               # Lore Codex & 6 Volumes of Spire Chronicles
 ├── specs.html              # Technical specifications & developer info
 ├── README.md               # Documentation
 ├── css/
 │   ├── style.css           # Pixel RPG retro UI & responsive layout
-│   └── card-foil.css       # Card hover shaders & rarity foil effects
+│   ├── lore.css            # Lore Codex layout & chapter navigation
+│   ├── card-foil.css       # Card hover shaders & rarity foil effects
+│   ├── deck-builder.css    # Deck builder styling
+│   └── combat.css          # Battle simulator styling
 ├── js/
 │   ├── data.js             # 62 cards, 7 heroes, 9 relics, acts data
 │   ├── audio.js            # Game SFX player & Web Audio ambient synthesizer

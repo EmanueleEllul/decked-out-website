@@ -61,7 +61,7 @@
   --px-badge:  clamp(0.36rem, 0.9vw, 0.55rem);
   --px-micro:  clamp(0.32rem, 0.8vw, 0.45rem);
   --px-btn:    clamp(0.4rem,  1vw,   0.55rem);
-  --px-nav:    clamp(0.36rem, 0.9vw, 0.5rem);
+  --px-nav:    clamp(0.34rem, 0.75vw, 0.48rem);
   --px-stat:   clamp(0.45rem, 1.2vw, 0.7rem);
 
   /* Fluid spacing */
@@ -1903,13 +1903,17 @@ p, span, a, li, td, th, input, select, button {
   .mobile-toggle-btn { display: block; }
 }
 
-@media (min-width: 1025px) and (max-width: 1250px) {
+@media (min-width: 1025px) and (max-width: 1320px) {
   .brand-text span {
     display: none;
   }
-  .nav-link {
-    font-size: clamp(0.36rem, 0.65vw, 0.45rem);
-    padding: 0.45rem clamp(0.3rem, 0.55vw, 0.6rem);
+  .site-header .nav-link {
+    font-size: clamp(0.33rem, 0.58vw, 0.44rem) !important;
+    padding: 0.45rem clamp(0.24rem, 0.45vw, 0.55rem) !important;
+  }
+  .btn-wishlist {
+    font-size: 0.44rem !important;
+    padding: 0.5rem 0.75rem !important;
   }
 }
 
@@ -1937,7 +1941,7 @@ p, span, a, li, td, th, input, select, button {
 .brand-text span              { font-size: clamp(0.42rem, 1vw, 0.6rem); }
 
 /* Nav */
-.nav-link                     { font-size: var(--px-nav); padding: 0.5rem clamp(0.35rem, 0.7vw, 0.75rem); white-space: nowrap; }
+.nav-link                     { font-size: var(--px-nav); padding: 0.5rem clamp(0.28rem, 0.55vw, 0.65rem); white-space: nowrap; }
 .btn-wishlist                 { font-size: var(--px-btn); padding: 0.55rem clamp(0.5rem, 1vw, 1rem); white-space: nowrap; }
 
 /* Hero */

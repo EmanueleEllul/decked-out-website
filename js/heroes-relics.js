@@ -24,21 +24,23 @@ class HeroesRelicsManager {
     const listContainer = document.getElementById('heroes-roster-shelf');
     if (!listContainer) return;
 
-    // Roster list — static sprite thumbnails, no interaction tricks
-    listContainer.innerHTML = this.heroes.map((h, idx) => `
-      <div class="hero-roster-card ${idx === this.selectedHeroIndex ? 'active' : ''}" data-hero-idx="${idx}">
-        <div class="hero-roster-avatar">
-          ${h.sprite
-            ? `<img src="${h.sprite}" alt="${h.name}" class="pixel-art" />`
-            : `<span class="hero-fallback-icon">🛡️</span>`}
+    listContainer.innerHTML = this.heroes.map((h, idx) => {
+      const anim = this.animPath(h.sprite);
+      return `
+        <div class="hero-roster-card ${idx === this.selectedHeroIndex ? 'active' : ''}" data-hero-idx="${idx}">
+          <div class="hero-roster-avatar">
+            ${h.sprite
+              ? `<img src="${anim}" alt="${h.name}" class="pixel-art" onerror="this.src='${h.sprite}'" />`
+              : `<span class="hero-fallback-icon">🛡️</span>`}
+          </div>
+          <div class="hero-roster-info">
+            <strong class="hero-roster-name">${h.name}</strong>
+            <span class="hero-roster-title">${h.title}</span>
+          </div>
+          <span class="hero-roster-arrow">➔</span>
         </div>
-        <div class="hero-roster-info">
-          <strong class="hero-roster-name">${h.name}</strong>
-          <span class="hero-roster-title">${h.title}</span>
-        </div>
-        <span class="hero-roster-arrow">➔</span>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     listContainer.querySelectorAll('.hero-roster-card').forEach(el => {
       el.addEventListener('click', () => {

@@ -13,9 +13,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css?v=1790369876236">
+  <link rel="stylesheet" href="css/style.css?v=1790369919719">
   <link rel="stylesheet" href="css/card-foil.css?v=4">
-  <link rel="stylesheet" href="css/lore.css?v=1790369876236">
+  <link rel="stylesheet" href="css/lore.css?v=1790369919719">
 </head>
 <body>
 
@@ -909,41 +909,6 @@
             <p>The sovereign Dragon Lord, the Celestial Rift, and the Generational War.</p>
           </div>
 
-          <!-- Interactive 1,000,000 HP Generational Siege Station -->
-          <div class="god-strike-section">
-            <div class="god-strike-header">
-              <span class="god-strike-kicker">⚔️ THE GENERATIONAL SIEGE OF AETHELOS</span>
-              <h3>The 1,000,000 HP Mortal Defiance</h3>
-              <p>Every strike across generations chips away at the sleeping creator. No damage is ever undone.</p>
-            </div>
-
-            <div class="god-hp-tracker-box">
-              <div class="hp-meta-labels">
-                <span class="hp-boss-title">👑 AETHELOS, THE SLUMBERING GOD</span>
-                <span id="god-hp-text" class="hp-numeric-display">987,500 / 1,000,000 HP</span>
-              </div>
-              <div class="god-bar-track">
-                <div id="god-hp-bar" class="god-bar-fill" style="width: 98.75%;"></div>
-              </div>
-              <div class="hp-bar-subline">
-                <span>Phase: Deep Stasis Coma</span>
-                <span>Cumulative Generations: 1,420 Fallen Crusaders</span>
-              </div>
-            </div>
-
-            <div class="strike-controls-row">
-              <button id="btn-strike-god" class="btn-strike-action">
-                <span>⚔️</span> Strike The Slumbering God
-              </button>
-              <button id="btn-reset-god" class="btn-reset-strike" title="Reset demonstration to timeline default">
-                ↺ Recalibrate Timeline
-              </button>
-            </div>
-            <div id="strike-feedback" class="strike-feedback-log">
-              Step forward and strike. Your wound will be preserved across lifetimes.
-            </div>
-          </div>
-
           <div class="lore-prose-card">
             <div class="panel-header-wrap"><h2>Volume 07: Mount Calamity &amp; Aethelos the Slumbering God</h2></div>
 <div class="lore-quote-box"><blockquote><em>"Mortal kings boasted of slaying wyverns in the old world. But what happens when you strike down the apex lord of dragons, and the heavens themselves tear open to reveal that your entire war was merely a desperate mortal knock upon the gates of an immortal god?"</em></blockquote></div>
@@ -1220,40 +1185,6 @@
             }
             isFlipping = false;
           }, 600);
-        });
-      }
-
-      // 7. Interactive Slumbering God Generational Strike
-      let godHp = 987500;
-      const godHpText = document.getElementById('god-hp-text');
-      const godHpBar = document.getElementById('god-hp-bar');
-      const strikeBtn = document.getElementById('btn-strike-god');
-      const resetGodBtn = document.getElementById('btn-reset-god');
-      const strikeFeedback = document.getElementById('strike-feedback');
-
-      if (strikeBtn) {
-        strikeBtn.addEventListener('click', () => {
-          if (window.audioMgr) window.audioMgr.playSFX('enemyHit');
-          const dmg = Math.floor(Math.random() * 850) + 1250;
-          godHp = Math.max(0, godHp - dmg);
-          
-          const pct = ((godHp / 1000000) * 100).toFixed(2);
-          if (godHpBar) godHpBar.style.width = pct + '%';
-          if (godHpText) godHpText.textContent = godHp.toLocaleString() + ' / 1,000,000 HP';
-
-          if (strikeFeedback) {
-            strikeFeedback.innerHTML = `<span style="color: #f87171; font-weight: 700;">⚔️ Strike landed! Inflicted -${dmg.toLocaleString()} DMG!</span> <span style="color: #94a3b8;">Permanent wound etched into Aethelos across generations!</span>`;
-          }
-        });
-      }
-
-      if (resetGodBtn) {
-        resetGodBtn.addEventListener('click', () => {
-          if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
-          godHp = 987500;
-          if (godHpBar) godHpBar.style.width = '98.75%';
-          if (godHpText) godHpText.textContent = '987,500 / 1,000,000 HP';
-          if (strikeFeedback) strikeFeedback.textContent = 'Generational Siege recalibrated to current timeline.';
         });
       }
     };

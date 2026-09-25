@@ -46,7 +46,7 @@ Every volume continues directly into the next, forming an unbroken epic history:
 
 | Volume | Title | Period | Description |
 | :---: | :--- | :---: | :--- |
-| **00** | [The Age of Empires & The Eve of Ruin (Prequel)](file:///c:/Users/ellul/Documents/decked-out/lore/00_prequel_the_age_of_empires.md) | `1000–0 BRB` | The Five Empires, the discovery of the Whispering Glyphs, imperial hubris, the Firmament Siphon, and the exact moment reality broke. |
+| **00** | [The Golden Age & The Eve of Ruin (Prequel)](file:///c:/Users/ellul/Documents/decked-out/lore/00_prequel_the_age_of_empires.md) | `1000–0 BRB` | The Five Empires, the discovery of the Whispering Glyphs, imperial hubris, the Firmament Siphon, and the exact moment reality broke. |
 | **01** | [The Shattered World & The Great War](file:///c:/Users/ellul/Documents/decked-out/lore/01_the_shattered_realms.md) | `0–25 ARB` | The inrush of wild magic, monsters, and dragons; the Great World War; the Age of Splinters; and the Monk's crusade. |
 | **02** | [Atlas of the Broken World (Cartography & Maps)](file:///c:/Users/ellul/Documents/decked-out/lore/02_atlas_of_the_broken_world.md) | `10 BRB / 25 ARB` | Visual maps of Aethelgard Before and After the war, regional territories, frontlines, and major historical campaigns. |
 | **03** | [The Arts of War & Relics of the Fallen](file:///c:/Users/ellul/Documents/decked-out/lore/03_the_arts_of_war_and_relics.md) | `Ongoing` | Tactical focus, Armor vs. Ward defenses, quick-draw satchels, heirloom relics, and dedicated combat elixirs. |

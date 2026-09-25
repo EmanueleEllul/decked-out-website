@@ -151,22 +151,28 @@ p, span, a, li, td, th, input, select, button {
 }
 
 .brand-icon {
-  width: 44px;
-  height: 44px;
+  width: 32px;
+  height: 32px;
+  max-width: 32px;
+  max-height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .brand-logo-img {
-  width: 100%;
-  height: 100%;
+  width: 32px;
+  height: 32px;
+  max-width: 32px;
+  max-height: 32px;
   object-fit: contain;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
   filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.6));
+  display: block;
 }
 
 .brand-text h1 {

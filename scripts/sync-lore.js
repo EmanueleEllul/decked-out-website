@@ -89,8 +89,8 @@ function parseMarkdown(md) {
       .replace(/`([^`]+)`/g, '<code>$1</code>')
       .replace(/!\[([^\]]*)\]\((.*?)\)/g, (match, alt, src) => {
         let cleanSrc = src.trim();
-        if (cleanSrc.includes('map_before_war.jpg')) cleanSrc = 'assets/lore/map_before_war.jpg';
-        if (cleanSrc.includes('map_after_war.jpg')) cleanSrc = 'assets/lore/map_after_war.jpg';
+        if (cleanSrc.includes('map_before_war.jpg')) cleanSrc = `assets/lore/map_before_war.jpg?v=${Date.now()}`;
+        if (cleanSrc.includes('map_after_war.jpg')) cleanSrc = `assets/lore/map_after_war.jpg?v=${Date.now()}`;
         return `<div class="map-card"><img src="${cleanSrc}" alt="${alt}" class="lore-map-img" /></div>`;
       })
       .replace(/\[([^\]]+)\]\((.*?)\)/g, (match, text, url) => {
@@ -412,7 +412,7 @@ function generateLoreHtml(volumes) {
                   <span class="map-note">The Golden Age: clear borders, prosperous cities, tranquil seas, Valley of Anchor</span>
                 </div>
                 <div class="map-image-wrapper">
-                  <img src="assets/lore/map_before_war.jpg" alt="Aethelgard Before the Shatter (10 BRB)" class="lore-map-img" id="img-map-before" />
+                  <img src="assets/lore/map_before_war.jpg?v=${version}" alt="Aethelgard Before the Shatter (10 BRB)" class="lore-map-img" id="img-map-before" />
                   <div class="map-zoom-hint">🔍 Click to View Fullscreen</div>
                 </div>
               </div>
@@ -424,7 +424,7 @@ function generateLoreHtml(volumes) {
                   <span class="map-note">The Ruined Continent: Mount Calamity erupting, Celestial Rift, shattered citadels, trenches</span>
                 </div>
                 <div class="map-image-wrapper">
-                  <img src="assets/lore/map_after_war.jpg" alt="Aethelgard After the Shatter (25 ARB)" class="lore-map-img" id="img-map-after" />
+                  <img src="assets/lore/map_after_war.jpg?v=${version}" alt="Aethelgard After the Shatter (25 ARB)" class="lore-map-img" id="img-map-after" />
                   <div class="map-zoom-hint">🔍 Click to View Fullscreen</div>
                 </div>
               </div>
@@ -766,12 +766,12 @@ function generateLoreHtml(volumes) {
 
       if (imgBefore) {
         imgBefore.addEventListener('click', () => {
-          openLightbox('assets/lore/map_before_war.jpg', 'Map I: Aethelgard Before the Cataclysm (10 BRB)');
+          openLightbox('assets/lore/map_before_war.jpg?v=' + ${version}, 'Map I: Aethelgard Before the Cataclysm (10 BRB)');
         });
       }
       if (imgAfter) {
         imgAfter.addEventListener('click', () => {
-          openLightbox('assets/lore/map_after_war.jpg', 'Map II: Aethelgard After the Shattering (25 ARB)');
+          openLightbox('assets/lore/map_after_war.jpg?v=' + ${version}, 'Map II: Aethelgard After the Shattering (25 ARB)');
         });
       }
 

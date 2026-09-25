@@ -3,7 +3,7 @@
 
 class CompendiumManager {
   constructor() {
-    this.cards = window.GAME_CARDS || [];
+    this.cards = (typeof window !== 'undefined' && window.GAME_CARDS) ? window.GAME_CARDS : (typeof GAME_CARDS !== 'undefined' ? GAME_CARDS : []);
     this.filteredCards = [...this.cards];
     this.searchQuery = '';
     this.selectedClass = 'all';
@@ -73,6 +73,10 @@ class CompendiumManager {
   }
 
   applyFilters() {
+    if (this.cards.length === 0 && typeof window !== 'undefined' && window.GAME_CARDS) {
+      this.cards = window.GAME_CARDS;
+    }
+
     const rarityWeights = { 'Common': 0, 'Uncommon': 1, 'Rare': 2, 'Epic': 3, 'Legendary': 4, 'Exotic': 5 };
 
     this.filteredCards = this.cards.filter(card => {
@@ -304,6 +308,20 @@ class CompendiumManager {
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  window.compendium = new CompendiumManager();
-});
+if (typeof window !== 'undefined') {
+  window.CompendiumManager = CompendiumManager;
+}
+
+function initCompendium() {
+  if (document.getElementById('cards-display-grid')) {
+    window.compendium = new CompendiumManager();
+  }
+}
+
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCompendium);
+  } else {
+    initCompendium();
+  }
+}

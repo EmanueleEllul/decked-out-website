@@ -2,8 +2,8 @@
 
 class HeroesRelicsManager {
   constructor() {
-    this.heroes = window.GAME_HEROES || [];
-    this.relics = window.GAME_RELICS || [];
+    this.heroes = (typeof window !== 'undefined' && window.GAME_HEROES) ? window.GAME_HEROES : (typeof GAME_HEROES !== 'undefined' ? GAME_HEROES : []);
+    this.relics = (typeof window !== 'undefined' && window.GAME_RELICS) ? window.GAME_RELICS : (typeof GAME_RELICS !== 'undefined' ? GAME_RELICS : []);
     this.selectedHeroIndex = 0;
     this.init();
   }
@@ -23,6 +23,10 @@ class HeroesRelicsManager {
   renderHeroes() {
     const listContainer = document.getElementById('heroes-roster-shelf');
     if (!listContainer) return;
+
+    if (this.heroes.length === 0 && typeof window !== 'undefined' && window.GAME_HEROES) {
+      this.heroes = window.GAME_HEROES;
+    }
 
     listContainer.innerHTML = this.heroes.map((h, idx) => {
       const anim = this.animPath(h.sprite);
@@ -92,6 +96,10 @@ class HeroesRelicsManager {
     const container = document.getElementById('relics-grid-container');
     if (!container) return;
 
+    if (this.relics.length === 0 && typeof window !== 'undefined' && window.GAME_RELICS) {
+      this.relics = window.GAME_RELICS;
+    }
+
     container.innerHTML = this.relics.map(r => `
       <div class="relic-showcase-card">
         <div class="relic-card-header">
@@ -113,6 +121,20 @@ class HeroesRelicsManager {
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  window.heroesRelics = new HeroesRelicsManager();
-});
+if (typeof window !== 'undefined') {
+  window.HeroesRelicsManager = HeroesRelicsManager;
+}
+
+function initHeroesRelics() {
+  if (document.getElementById('heroes-roster-shelf') || document.getElementById('relics-grid-container')) {
+    window.heroesRelics = new HeroesRelicsManager();
+  }
+}
+
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroesRelics);
+  } else {
+    initHeroesRelics();
+  }
+}

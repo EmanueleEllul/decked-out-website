@@ -3,7 +3,7 @@
 
 class DeckBuilder {
   constructor() {
-    this.allCards = window.GAME_CARDS || [];
+    this.allCards = (typeof window !== 'undefined' && window.GAME_CARDS) ? window.GAME_CARDS : (typeof GAME_CARDS !== 'undefined' ? GAME_CARDS : []);
     this.deck = {}; // { cardId: count }
     this.searchQuery = '';
     this.selectedClass = 'all';
@@ -118,6 +118,9 @@ class DeckBuilder {
   }
 
   init() {
+    if (this.allCards.length === 0 && typeof window !== 'undefined' && window.GAME_CARDS) {
+      this.allCards = window.GAME_CARDS;
+    }
     this.bindEvents();
     this.renderPresets();
     this.renderWorkbench();
@@ -751,6 +754,20 @@ class DeckBuilder {
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  window.deckBuilder = new DeckBuilder();
-});
+if (typeof window !== 'undefined') {
+  window.DeckBuilder = DeckBuilder;
+}
+
+function initDeckBuilder() {
+  if (document.getElementById('builder-cards-grid') || document.getElementById('deck-summary-panel')) {
+    window.deckBuilder = new DeckBuilder();
+  }
+}
+
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDeckBuilder);
+  } else {
+    initDeckBuilder();
+  }
+}

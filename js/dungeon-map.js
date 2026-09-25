@@ -2,8 +2,8 @@
 
 class DungeonMapManager {
   constructor() {
-    this.acts = window.GAME_ACTS || [];
-    this.mysteryEvents = window.MYSTERY_EVENTS || [];
+    this.acts = (typeof window !== 'undefined' && window.GAME_ACTS) ? window.GAME_ACTS : (typeof GAME_ACTS !== 'undefined' ? GAME_ACTS : []);
+    this.mysteryEvents = (typeof window !== 'undefined' && window.MYSTERY_EVENTS) ? window.MYSTERY_EVENTS : (typeof MYSTERY_EVENTS !== 'undefined' ? MYSTERY_EVENTS : []);
 
     this.commonFoes = [
       {
@@ -74,6 +74,10 @@ class DungeonMapManager {
     const container = document.getElementById('bestiary-grid-container');
     if (!container) return;
 
+    if (this.acts.length === 0 && typeof window !== 'undefined' && window.GAME_ACTS) {
+      this.acts = window.GAME_ACTS;
+    }
+
     // Collect all bosses from all acts
     const allBosses = this.acts.flatMap(a =>
       (a.bossPool || []).map(b => ({ ...b, act: a.act, actName: a.name }))
@@ -137,6 +141,20 @@ class DungeonMapManager {
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  window.dungeonMap = new DungeonMapManager();
-});
+if (typeof window !== 'undefined') {
+  window.DungeonMapManager = DungeonMapManager;
+}
+
+function initDungeonMap() {
+  if (document.getElementById('bestiary-grid-container') || document.getElementById('acts-showcase-container')) {
+    window.dungeonMap = new DungeonMapManager();
+  }
+}
+
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDungeonMap);
+  } else {
+    initDungeonMap();
+  }
+}

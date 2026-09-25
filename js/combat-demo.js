@@ -3,8 +3,8 @@
 
 class CombatDemo {
   constructor() {
-    this.heroes = window.GAME_HEROES || [];
-    this.cards = window.GAME_CARDS || [];
+    this.heroes = (typeof window !== 'undefined' && window.GAME_HEROES) ? window.GAME_HEROES : (typeof GAME_HEROES !== 'undefined' ? GAME_HEROES : []);
+    this.cards = (typeof window !== 'undefined' && window.GAME_CARDS) ? window.GAME_CARDS : (typeof GAME_CARDS !== 'undefined' ? GAME_CARDS : []);
 
     this.selectedHero = this.heroes[0] || {
       name: 'Deck Monk',
@@ -64,6 +64,13 @@ class CombatDemo {
   }
 
   init() {
+    if (this.heroes.length === 0 && typeof window !== 'undefined' && window.GAME_HEROES) {
+      this.heroes = window.GAME_HEROES;
+      if (!this.selectedHero && this.heroes[0]) this.selectedHero = this.heroes[0];
+    }
+    if (this.cards.length === 0 && typeof window !== 'undefined' && window.GAME_CARDS) {
+      this.cards = window.GAME_CARDS;
+    }
     this.bindEvents();
     this.resetCombat();
   }
@@ -922,6 +929,20 @@ class CombatDemo {
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  window.combatDemo = new CombatDemo();
-});
+if (typeof window !== 'undefined') {
+  window.CombatDemo = CombatDemo;
+}
+
+function initCombatDemo() {
+  if (document.getElementById('battle-arena') || document.getElementById('combat-log-box')) {
+    window.combatDemo = new CombatDemo();
+  }
+}
+
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCombatDemo);
+  } else {
+    initCombatDemo();
+  }
+}

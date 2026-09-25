@@ -51,15 +51,26 @@ function parseMarkdown(md) {
 
   function flushTable() {
     if (inTable && tableRows.length > 0) {
-      out.push('<div class="timeline-table-wrapper"><table class="campaigns-table">');
+      const isVolumeTable = tableRows[0].toLowerCase().includes('volume');
+      out.push('<div class="timeline-table-wrapper codex-table-wrap"><table class="campaigns-table lore-index-table">');
       tableRows.forEach((row, idx) => {
         const cells = row.split('|').map(c => c.trim()).filter((c, i, a) => !(i === 0 && c === '') && !(i === a.length - 1 && c === ''));
         if (idx === 0) {
-          out.push('<thead><tr>' + cells.map(c => `<th>${formatInline(c)}</th>`).join('') + '</tr></thead><tbody>');
+          let headers = cells.map(c => `<th>${formatInline(c)}</th>`);
+          if (isVolumeTable) {
+            headers.push('<th>Read More</th>');
+          }
+          out.push('<thead><tr>' + headers.join('') + '</tr></thead><tbody>');
         } else if (idx === 1 && cells.every(c => /^:?-+:?$/.test(c))) {
           // delimiter
         } else {
-          out.push('<tr>' + cells.map(c => `<td>${formatInline(c)}</td>`).join('') + '</tr>');
+          let rowCells = cells.map(c => `<td>${formatInline(c)}</td>`);
+          if (isVolumeTable) {
+            const volMatch = (cells[0] || '').match(/\d+/);
+            const volId = volMatch ? `tab-vol${volMatch[0].padStart(2, '0')}` : 'tab-overview';
+            rowCells.push(`<td><button class="btn-jump-tab" data-target="${volId}">Read More &rarr;</button></td>`);
+          }
+          out.push('<tr>' + rowCells.join('') + '</tr>');
         }
       });
       out.push('</tbody></table></div>');
@@ -82,7 +93,13 @@ function parseMarkdown(md) {
         if (cleanSrc.includes('map_after_war.jpg')) cleanSrc = 'assets/lore/map_after_war.jpg';
         return `<div class="map-card"><img src="${cleanSrc}" alt="${alt}" class="lore-map-img" /></div>`;
       })
-      .replace(/\[([^\]]+)\]\((.*?)\)/g, '<span class="lore-link-term">$1</span>');
+      .replace(/\[([^\]]+)\]\((.*?)\)/g, (match, text, url) => {
+        const volMatch = url.match(/0[0-7]/);
+        if (volMatch) {
+          return `<button class="btn-jump-tab-link" data-target="tab-vol${volMatch[0]}" title="Read Volume ${volMatch[0]}">${text}</button>`;
+        }
+        return `<span class="lore-link-term">${text}</span>`;
+      });
   }
 
   for (let i = 0; i < lines.length; i++) {
@@ -716,6 +733,14 @@ function generateLoreHtml(volumes) {
       tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const target = btn.getAttribute('data-tab');
+          if (target) switchTab(target);
+        });
+      });
+
+      // Jump buttons in overview table and inline volume links
+      document.querySelectorAll('.btn-jump-tab, .btn-jump-tab-link').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-target');
           if (target) switchTab(target);
         });
       });

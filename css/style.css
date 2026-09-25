@@ -4997,3 +4997,46 @@ p, span, a, li, td, th, input, select, button {
   border: none;
   padding: 0;
 }
+
+/* Jump buttons & Volume Table Navigation */
+.btn-jump-tab {
+  background: var(--primary);
+  border: 1px solid var(--primary-dark);
+  color: #000 !important;
+  font-family: var(--font-pixel);
+  font-size: 0.48rem;
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #000;
+  transition: all 0.15s;
+  white-space: nowrap;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.btn-jump-tab:hover {
+  background: #fff;
+  color: #000 !important;
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0 var(--primary-dark);
+}
+
+.btn-jump-tab-link {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-align: left;
+  transition: color 0.15s;
+}
+
+.btn-jump-tab-link:hover {
+  color: var(--primary-light);
+  text-decoration-color: #fff;
+}

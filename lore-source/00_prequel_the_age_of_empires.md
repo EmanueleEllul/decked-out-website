@@ -1,4 +1,4 @@
-# Volume 00: The Age of Empires & The Eve of Ruin (Prequel)
+# Volume 00: The Golden Age & The Eve of Ruin (Prequel)
 
 > *"In the days before the sky bled, we believed our peace was eternal. We built towers to touch the stars, forged steel to tame the earth, and forgot that the ground beneath our boots was only solid because the Creator was asleep."*
 > — *High Scholar Elenor of Sol-Mora (Recorded 2 BRB)*

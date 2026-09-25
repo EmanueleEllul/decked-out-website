@@ -14,6 +14,7 @@ class DungeonMapManager {
         armor: 2,
         ward: 0,
         icon: "⚙️",
+        sprite: "assets/enemies/anim/Goblin.gif",
         desc: "Fast, scurrying scavengers that strip scrap from fallen adventurers. Attacks in sudden aggressive bursts."
       },
       {
@@ -24,6 +25,7 @@ class DungeonMapManager {
         armor: 4,
         ward: 2,
         icon: "🗡️",
+        sprite: "assets/enemies/anim/Bandit.gif",
         desc: "Ruthless brigands lurking in dungeon choke points. Uses Bleed-inducing blades and swift evasion."
       },
       {
@@ -34,6 +36,7 @@ class DungeonMapManager {
         armor: 0,
         ward: 8,
         icon: "🔮",
+        sprite: "assets/enemies/anim/Cultist.gif",
         desc: "Chants dark prayers in the catacombs. Casts high-damage magical spells that test your Ward mitigation."
       },
       {
@@ -44,6 +47,7 @@ class DungeonMapManager {
         armor: 3,
         ward: 5,
         icon: "⚡",
+        sprite: "assets/enemies/anim/Gnome.gif",
         desc: "Tinkers with erratic arcane devices that apply Stun and volatile elemental damage."
       },
       {
@@ -54,6 +58,7 @@ class DungeonMapManager {
         armor: 14,
         ward: 4,
         icon: "🛡️",
+        sprite: "assets/enemies/anim/EliteKnight.gif",
         desc: "Heavily armored guardian in runic plate. Requires armor-piercing attacks or strong magical spells to vanquish."
       }
     ];
@@ -109,7 +114,7 @@ class DungeonMapManager {
             <div class="foe-card">
               <div class="foe-card-top">
                 <div class="foe-avatar-box">
-                  <span class="foe-icon-glyph">${f.icon}</span>
+                  <img src="${f.sprite}" alt="${f.name}" class="pixel-art" onerror="this.outerHTML='<span class=\\'foe-icon-glyph\\'>${f.icon}</span>'" />
                 </div>
                 <div class="foe-identity">
                   <span class="foe-rank-tag">${f.title}</span>

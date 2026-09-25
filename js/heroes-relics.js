@@ -1,12 +1,11 @@
 // Decked Out - Heroes & Relics Hub Manager
-// Features 7 Core Heroes, Upgrade calculators (+3% per level), and 3-Relic Active Loadout Builder
+// Features 7 Core Heroes and 3-Relic Active Loadout Builder
 
 class HeroesRelicsManager {
   constructor() {
     this.heroes = window.GAME_HEROES || [];
     this.relics = window.GAME_RELICS || [];
     this.selectedHeroIndex = 0;
-    this.heroUpgradeLevel = 0;
     this.equippedRelics = [];
 
     this.init();
@@ -19,15 +18,7 @@ class HeroesRelicsManager {
   }
 
   bindEvents() {
-    const levelSlider = document.getElementById('hero-upgrade-slider');
-    const levelVal = document.getElementById('hero-upgrade-level-val');
-    if (levelSlider && levelVal) {
-      levelSlider.addEventListener('input', (e) => {
-        this.heroUpgradeLevel = parseInt(e.target.value, 10);
-        levelVal.textContent = `Tier Level ${this.heroUpgradeLevel} (+${this.heroUpgradeLevel * 3}% stats)`;
-        this.updateHeroStatsDisplay();
-      });
-    }
+    // Interactive bindings for heroes roster and relics
   }
 
   renderHeroes() {
@@ -62,11 +53,6 @@ class HeroesRelicsManager {
     const h = this.heroes[this.selectedHeroIndex];
     if (!h) return;
 
-    const mult = 1 + (this.heroUpgradeLevel * 0.03);
-    const scaledHp = Math.round(h.hp * mult);
-    const scaledAtk = Math.round(h.damage * mult);
-    const scaledMana = Math.round(h.mana * mult);
-
     const nameEl = document.getElementById('hero-detail-name');
     const titleEl = document.getElementById('hero-detail-title');
     const avatarEl = document.getElementById('hero-detail-avatar');
@@ -82,9 +68,9 @@ class HeroesRelicsManager {
     if (unlockEl) unlockEl.textContent = h.unlock;
     if (passiveEl) passiveEl.textContent = h.passive;
     if (affinityEl) affinityEl.textContent = h.affinity;
-    if (hpEl) hpEl.textContent = `${scaledHp} HP (Base ${h.hp})`;
-    if (atkEl) atkEl.textContent = `${scaledAtk} ATK (Base ${h.damage})`;
-    if (manaEl) manaEl.textContent = `${scaledMana} Mana (Base ${h.mana})`;
+    if (hpEl) hpEl.textContent = `${h.hp} HP`;
+    if (atkEl) atkEl.textContent = `${h.damage} ATK`;
+    if (manaEl) manaEl.textContent = `${h.mana} Mana`;
 
     if (avatarEl) {
       if (h.sprite) {

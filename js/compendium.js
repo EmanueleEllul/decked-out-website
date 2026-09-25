@@ -9,7 +9,6 @@ class CompendiumManager {
     this.selectedClass = 'all';
     this.selectedRarity = 'all';
     this.selectedSort = 'number';
-    this.isUpgraded = false;
     this.currentModalCard = null;
 
     this.init();
@@ -56,15 +55,6 @@ class CompendiumManager {
         this.selectedSort = e.target.value;
         window.audioMgr.playSFX('buttonClick');
         this.applyFilters();
-      });
-    }
-
-    const upgradeToggle = document.getElementById('upgrade-stats-toggle');
-    if (upgradeToggle) {
-      upgradeToggle.addEventListener('change', (e) => {
-        this.isUpgraded = e.target.checked;
-        window.audioMgr.playSFX('cardPlay');
-        this.renderCards();
       });
     }
 
@@ -167,11 +157,10 @@ class CompendiumManager {
   }
 
   generateCardHTML(card) {
-    const mult = this.isUpgraded ? 1.1 : 1.0;
-    const dmg = card.damage > 0 ? Math.round(card.damage * mult) : 0;
-    const armor = card.armor > 0 ? Math.round(card.armor * mult) : 0;
-    const ward = card.ward > 0 ? Math.round(card.ward * mult) : 0;
-    const heal = card.healing > 0 ? Math.round(card.healing * mult) : 0;
+    const dmg = card.damage > 0 ? card.damage : 0;
+    const armor = card.armor > 0 ? card.armor : 0;
+    const ward = card.ward > 0 ? card.ward : 0;
+    const heal = card.healing > 0 ? card.healing : 0;
 
     const classIcons = {
       'Elixir': '🧪',
@@ -183,10 +172,6 @@ class CompendiumManager {
     };
 
     let imageSrc = card.image || card.staticImage;
-    // If upgraded toggle is on and Goblin card has alternate image
-    if (this.isUpgraded && card.altImage) {
-      imageSrc = card.altImage;
-    }
 
     let statsRowHTML = '';
     const stats = [];
@@ -249,11 +234,10 @@ class CompendiumManager {
     const container = document.getElementById('card-detail-content');
     if (!modal || !container) return;
 
-    const mult = this.isUpgraded ? 1.1 : 1.0;
-    const dmg = card.damage > 0 ? Math.round(card.damage * mult) : 0;
-    const armor = card.armor > 0 ? Math.round(card.armor * mult) : 0;
-    const ward = card.ward > 0 ? Math.round(card.ward * mult) : 0;
-    const heal = card.healing > 0 ? Math.round(card.healing * mult) : 0;
+    const dmg = card.damage > 0 ? card.damage : 0;
+    const armor = card.armor > 0 ? card.armor : 0;
+    const ward = card.ward > 0 ? card.ward : 0;
+    const heal = card.healing > 0 ? card.healing : 0;
 
     container.innerHTML = `
       <div style="display: flex; justify-content: center; align-items: center;">

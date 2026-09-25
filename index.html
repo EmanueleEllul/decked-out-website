@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DECKED OUT - Roguelike Deck-Building RPG & TCG Compendium</title>
-  <meta name="description" content="Draft, Battle, Collect, and Upgrade in Decked Out. A single-player roguelike deck-builder RPG featuring 62 cards, 7 heroes, 3-act procedural dungeons, and persistent CCG booster packs.">
+  <meta name="description" content="Draft, Battle, and Collect in Decked Out. Official database and compendium for the roguelike deck-builder RPG featuring 62 cards, 7 heroes, 3-act procedural dungeons, and CCG booster packs.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23f59e0b'/><text y='70' x='50' font-size='60' text-anchor='middle' fill='%230f172a'>🃏</text></svg>">
   
   <!-- Fonts -->
@@ -63,7 +63,7 @@
     <div class="hero-bg-glow"></div>
     <div class="hero-content">
       <div class="hero-pill">🔥 Godot 4.7 Forward+ Roguelike RPG</div>
-      <h1 class="hero-title">DRAFT. BATTLE. COLLECT. UPGRADE.</h1>
+      <h1 class="hero-title">DRAFT. BATTLE. COLLECT.</h1>
       <p class="hero-subtitle">
         Confront branching 3-act dungeon expeditions, master dual-layered Armor & Ward mitigation, 
         crack open booster packs into your binder, and bleed the persistent 1,000,000 HP cosmic World Boss.
@@ -162,12 +162,7 @@
           </div>
         </div>
 
-        <!-- Upgrade Switch -->
-        <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem; font-size: 0.85rem;">
-          <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; color: var(--text-muted);">
-            <input type="checkbox" id="upgrade-stats-toggle" style="accent-color: var(--primary);" />
-            <span>Show Upgraded Stats (+10% Boost & Goblin Contraptions)</span>
-          </label>
+        <div style="display: flex; align-items: center; justify-content: flex-end; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem; font-size: 0.85rem;">
           <span style="color: var(--text-faint);">💡 Spritesheets are spliced & animated. Click any card to inspect full stats!</span>
         </div>
       </div>
@@ -222,24 +217,12 @@
           </div>
 
           <!-- Passive Details -->
-          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem;">
             <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.5rem;">Special Trait & Passives</h4>
             <p id="hero-detail-passive" style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6;"></p>
             <div style="margin-top: 0.75rem; font-size: 0.82rem; color: var(--text-muted);">
               <strong>Class Affinity:</strong> <span id="hero-detail-affinity" style="color: #fbbf24;"></span>
             </div>
-          </div>
-
-          <!-- Permanent Upgrade Slider -->
-          <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: var(--radius-md); padding: 1.25rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-              <strong style="color: #fff; font-size: 0.95rem;">Permanent Hero Upgrades (Meta-Gems)</strong>
-              <span id="hero-upgrade-level-val" style="color: #fbbf24; font-weight: 700; font-size: 0.88rem;">Tier Level 0 (+0% stats)</span>
-            </div>
-            <input type="range" id="hero-upgrade-slider" min="0" max="10" value="0" style="width: 100%; accent-color: var(--primary); cursor: pointer;" />
-            <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.4rem;">
-              Upgrades scale Hero Max HP, Attack, and Mana by +3% per tier level outside of runs using Gems.
-            </span>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 # 🃏 Decked Out - Official Game Companion & TCG Compendium
 
-> **"Draft. Battle. Collect. Upgrade."**
+> **"Draft. Battle. Collect."**
 
 An interactive, responsive single-page web application and comprehensive companion portal for **Decked Out**, a single-player roguelike deck-building RPG built in Godot 4.7 Forward+.
 
@@ -14,12 +14,11 @@ Live showcase ready to deploy directly to **GitHub Pages** with zero build steps
 - **All 62 Cards**: Browse the complete authentic pixel-art catalog across **Series 1 (Core & Goblins)**.
 - **Realistic 3D Holographic Foil Shaders**: Cards tilt dynamically in 3D based on cursor position (`rotateX`, `rotateY`) with iridescent color-dodge sheen effects on Exotic and Legendary cards.
 - **Search & Multi-Filters**: Instant client-side filtering by Series, Class, Rarity, Cost, Damage Type, and text query.
-- **Upgraded Mode Toggle**: Switch between base card stats and upgraded stats (+10% multipliers and Goblin Scrap contraptions).
 - **Interactive Card Modal**: Full inspection with combat properties, defense ratings, status ailments, and a 1-click "Add to Deck" button.
 
 ### 2. 🛡️ Heroes & Relics Hub
 - **All 7 Unique Heroes**: Deck Monk, Gorilla Gabe, Lost Spirit, Necri, Demonling, Hunter The Hedgehog, and Scrap Goblin.
-- **Hero Upgrade Calculator**: Interactive slider simulating meta-progression upgrades (+3% HP, ATK, and Mana per tier level outside of runs).
+- **Hero Profile & Stats Viewer**: Detailed view of baseline health, attack, mana, unique traits, passives, and unlock criteria.
 - **Relic Compendium**: The 9 ancient artifacts (Iron Heart, Keen Edge, Mana Lens, Quick Study, Golden Pouch, Hexglass Lens, Ruinous Seal, Sundered Chisel, Withering Banner).
 - **3-Relic Active Loadout Builder**: Equip up to 3 active relics and view their combined combat impacts.
 
@@ -98,7 +97,7 @@ decked-out-website/
 │   ├── deck-builder.js     # Deck construction, mana curve & export/import
 │   ├── combat-demo.js      # Playable tactical combat sandbox arena
 │   ├── dungeon-map.js      # 3-act map timeline, gambler minigames & The God raid
-│   ├── heroes-relics.js    # Hero stats, upgrade calculator & relic loadout builder
+│   ├── heroes-relics.js    # Hero stats, traits & relic loadout builder
 │   ├── wiki-viewer.js      # Markdown wiki reader with wikilinks & search
 │   └── app.js              # Application controller, tab navigation & toast alerts
 └── assets/

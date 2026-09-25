@@ -293,59 +293,164 @@
     <!-- ==========================================
          TAB 4: DECK BUILDER
          ========================================== -->
+    <!-- ==========================================
+         TAB 4: DECK BUILDER WORKSHOP
+         ========================================== -->
     <section id="tab-deckbuilder" class="tab-pane">
       <div class="section-header">
         <div class="section-title-wrap">
-          <h2><span>🛠️</span> Starter Deck Builder & Exporter</h2>
-          <p>Assemble and validate your 10-100 card expedition deck. Enforces 15 duplicate limits and starter restrictions.</p>
+          <h2><span>🛠️</span> Tactical Deck Builder & Workshop</h2>
+          <p>Assemble and fine-tune your legal 10-100 card expedition deck. Enforces 15 duplicate limits and starter restrictions.</p>
         </div>
-        <div style="display: flex; gap: 0.75rem;">
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <button id="import-deck-btn" class="btn btn-secondary">📥 Import Deck</button>
-          <button id="export-deck-btn" class="btn btn-primary">📋 Export / Copy Code</button>
+          <button id="export-deck-btn" class="btn btn-secondary">📋 Export Code</button>
+          <button id="test-in-arena-btn" class="btn btn-primary" title="Load active deck into Combat Arena and fight!">⚔️ Test in Arena</button>
         </div>
       </div>
 
-      <!-- Starter Presets Row -->
-      <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-        <span style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">⚡ Quick Starter Presets:</span>
-        <div id="deck-presets-container" style="display: flex; gap: 0.5rem; flex-wrap: wrap;"></div>
-        <button id="clear-deck-btn" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.35rem 0.75rem; color: #f87171;">Clear Deck</button>
+      <!-- Quick Archetype Presets Bar -->
+      <div class="deck-presets-bar">
+        <span class="presets-label">⚡ Archetype Presets:</span>
+        <div id="deck-presets-container" class="presets-buttons-wrap"></div>
+        <button id="clear-deck-btn" class="btn btn-secondary clear-deck-btn">🗑️ Clear Deck</button>
       </div>
 
-      <div style="display: grid; grid-template-columns: 360px 1fr; gap: 2rem;">
-        <!-- Left: Curve & Rules -->
-        <div>
-          <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-              <h3 style="font-size: 1.1rem; color: #fff;">Deck Statistics</h3>
-              <span id="deck-total-count" style="font-size: 1rem; font-weight: 800; font-family: var(--font-mono);">0 / 100</span>
+      <!-- Main Deck Builder Split Workbench -->
+      <div class="deckbuilder-workbench">
+        <!-- LEFT: Card Vault (Browse, Search, Filter & Add Cards) -->
+        <div class="deck-vault-column">
+          <div class="deck-vault-header">
+            <div class="vault-search-row">
+              <div class="search-input-wrap" style="flex: 1;">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="deck-card-search" placeholder="Search cards by name, description, damage, mechanics..." />
+              </div>
+              <span id="deck-vault-count-badge" class="stat-pill" style="white-space: nowrap; font-size: 0.8rem; padding: 0.4rem 0.8rem; background: var(--bg-deep); border-radius: var(--radius-full);">
+                62 Cards
+              </span>
             </div>
-            <div id="deck-validity-status" style="margin-bottom: 1.25rem; font-size: 0.85rem;"></div>
+
+            <!-- Class Filter Pills -->
+            <div class="deck-filter-pills-row">
+              <div id="deck-class-pills" class="pill-group">
+                <span class="filter-pill active" data-class="all">All Classes</span>
+                <span class="filter-pill" data-class="Swordsman">⚔️ Swordsman</span>
+                <span class="filter-pill" data-class="Monster">👹 Monster</span>
+                <span class="filter-pill" data-class="Animal">🐾 Animal</span>
+                <span class="filter-pill" data-class="Goblins">⚙️ Goblins</span>
+                <span class="filter-pill" data-class="Wild Mages">🔮 Wild Mages</span>
+                <span class="filter-pill" data-class="Elixir">🧪 Elixir</span>
+              </div>
+            </div>
+
+            <!-- Rarity Filter Pills & Tip -->
+            <div class="deck-filter-pills-row" style="margin-top: 0.5rem; justify-content: space-between;">
+              <div id="deck-rarity-pills" class="pill-group">
+                <span class="filter-pill active" data-rarity="all">All Rarities</span>
+                <span class="filter-pill" data-rarity="Common">Common</span>
+                <span class="filter-pill" data-rarity="Uncommon">Uncommon</span>
+                <span class="filter-pill" data-rarity="Rare">Rare</span>
+                <span class="filter-pill" data-rarity="Epic">Epic</span>
+                <span class="filter-pill" data-rarity="Legendary">Legendary</span>
+                <span class="filter-pill" data-rarity="Exotic">Exotic</span>
+              </div>
+              <div class="vault-tip">💡 Click card to add (+1)</div>
+            </div>
+          </div>
+
+          <!-- Card Vault Grid -->
+          <div id="deck-vault-grid" class="deck-vault-grid"></div>
+        </div>
+
+        <!-- RIGHT: Active Deck Tray, Stats & Analytics -->
+        <div class="deck-tray-column">
+          <!-- Active Deck Summary Box -->
+          <div class="deck-summary-box">
+            <div class="deck-summary-top">
+              <div>
+                <span class="deck-hero-tag" id="deck-assigned-hero">🛡️ Deck Monk Standard</span>
+                <h3 style="font-size: 1.25rem; color: #fff; margin: 0.2rem 0 0;">Active Expedition Deck</h3>
+              </div>
+              <div class="deck-card-counter-wrap">
+                <span id="deck-total-count" class="deck-count-num">16 / 100</span>
+                <span class="deck-count-sub">Cards in Deck</span>
+              </div>
+            </div>
+
+            <!-- Deck Progress Bar -->
+            <div class="deck-progress-track">
+              <div id="deck-count-progress-fill" class="deck-progress-fill" style="width: 16%;"></div>
+            </div>
+
+            <!-- Rules Validation Checklist -->
+            <div id="deck-rules-checklist" class="deck-rules-checklist">
+              <div id="rule-size-item" class="rule-check-item valid">
+                <span class="rule-icon">✅</span>
+                <span class="rule-label">Deck Size: <strong id="rule-size-text">16 Cards (10-100 required)</strong></span>
+              </div>
+              <div id="rule-starter-item" class="rule-check-item valid">
+                <span class="rule-icon">✅</span>
+                <span class="rule-label">Starter Limits: <strong id="rule-starter-text">0 / 1 Exotic or Legendary</strong></span>
+              </div>
+              <div id="rule-copies-item" class="rule-check-item valid">
+                <span class="rule-icon">✅</span>
+                <span class="rule-label">Duplicate Limit: <strong id="rule-copies-text">All cards ≤ 15 copies</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tactical Analytics & Mana Curve Matrix -->
+          <div class="deck-analytics-box">
+            <div class="analytics-header">
+              <span class="analytics-title">Mana Curve & Combat Power</span>
+              <span id="deck-avg-mana" class="avg-mana-pill">Avg: 1.6 Mana</span>
+            </div>
 
             <!-- Mana Histogram -->
-            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-faint); display: block; margin-bottom: 0.5rem; font-weight: 700;">Mana Cost Distribution</span>
-            <div id="mana-curve-chart" style="display: flex; align-items: flex-end; gap: 0.5rem; background: var(--bg-deep); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);"></div>
+            <div id="mana-curve-chart" class="deck-curve-chart"></div>
+
+            <!-- Combat Synergy Breakdown -->
+            <div class="deck-synergy-matrix">
+              <div class="synergy-stat-chip">
+                <span class="chip-label">Physical DMG</span>
+                <strong id="deck-total-phys" class="chip-val phys">0</strong>
+              </div>
+              <div class="synergy-stat-chip">
+                <span class="chip-label">Magic DMG</span>
+                <strong id="deck-total-mag" class="chip-val magic">0</strong>
+              </div>
+              <div class="synergy-stat-chip">
+                <span class="chip-label">Total Armor</span>
+                <strong id="deck-total-armor" class="chip-val armor">0</strong>
+              </div>
+              <div class="synergy-stat-chip">
+                <span class="chip-label">Total Ward</span>
+                <strong id="deck-total-ward" class="chip-val ward">0</strong>
+              </div>
+              <div class="synergy-stat-chip">
+                <span class="chip-label">Total Healing</span>
+                <strong id="deck-total-heal" class="chip-val heal">0</strong>
+              </div>
+            </div>
+
+            <!-- Class Composition Progress Bars -->
+            <div id="deck-class-composition" class="deck-class-comp-wrap"></div>
           </div>
 
-          <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.25rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
-            <strong style="color: #fff; display: block; margin-bottom: 0.4rem;">📜 Official Deck Building Rules:</strong>
-            <ul style="margin-left: 1.25rem; display: flex; flex-direction: column; gap: 0.35rem;">
-              <li>Deck size: 10 cards minimum, 100 cards maximum.</li>
-              <li>At most 15 copies of any single card.</li>
-              <li>Starter decks may only contain <strong>1 Exotic OR 1 Legendary</strong> card.</li>
-              <li>Dedicated Elixir slots do not count towards normal hand size in combat.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Right: Current Cards List -->
-        <div>
-          <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem;">
-            <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 1rem;">Cards in Deck</h3>
-            <div id="deck-cards-list" style="max-height: 550px; overflow-y: auto;"></div>
+          <!-- Cards in Deck List -->
+          <div class="deck-list-box">
+            <div class="deck-list-header">
+              <h4 style="font-size: 0.95rem; color: #fff; margin: 0;">Deck Composition (<span id="deck-unique-count">0</span> Unique Cards)</h4>
+              <span style="font-size: 0.72rem; color: var(--text-faint);">Hover row to preview card</span>
+            </div>
+            <div id="deck-cards-list" class="deck-cards-scroll-list"></div>
           </div>
         </div>
       </div>
+
+      <!-- Floating Card Hover Preview Tooltip -->
+      <div id="deck-card-hover-preview" class="deck-card-preview-popover" style="display: none;"></div>
     </section>
 
     <!-- ==========================================

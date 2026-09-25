@@ -3,7 +3,7 @@
 
 class HeroesRelicsManager {
   constructor() {
-    this.heroes = (window.GAME_HEROES || []).filter(h => h.name !== 'Dragon');
+    this.heroes = window.GAME_HEROES || [];
     this.relics = window.GAME_RELICS || [];
     this.selectedHeroIndex = 0;
     this.heroUpgradeLevel = 0;

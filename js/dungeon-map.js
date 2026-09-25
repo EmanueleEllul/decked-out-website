@@ -88,7 +88,7 @@ class DungeonMapManager {
       { type: 'Chemist', icon: '🧪', name: 'The Chemist (Alchemy)' },
       { type: 'Gambler', icon: '🎲', name: 'The Gambler (Wagers)' },
       { type: 'Relic', icon: '🏺', name: 'Relic Chamber' },
-      { type: 'Boss', icon: '🐉', name: 'Act Climax Boss' }
+      { type: 'Boss', icon: '👑', name: 'Act Climax Boss' }
     ];
 
     let html = `

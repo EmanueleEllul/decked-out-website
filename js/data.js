@@ -1,5 +1,5 @@
 // Decked Out - Official Complete Database
-// Synchronized: 0 Dragons, Only Cards with UI, Animated Spritesheets
+// Synchronized: 62 Series 1 Cards with UI, Animated Spritesheets
 
 const GAME_CARDS = [
   {
@@ -2594,12 +2594,12 @@ const GAME_ACTS = [
     theme: "Astral Peak & Sky Realm",
     bossPool: [
       {
-        name: "Dragon Lord",
+        name: "Ascended Sovereign",
         hp: 650,
         atk: 28,
         armor: 30,
         ward: 25,
-        desc: "Act 3 Final Boss. Supreme ruler of all dragon subclasses. Slaying him tears open the rift to The God.",
+        desc: "Act 3 Final Boss. Supreme ruler of the celestial summit. Slaying him tears open the rift to The God.",
         sprite: "assets/cards/Ashmaw Colossus.png"
       },
       {
@@ -2640,12 +2640,12 @@ const MYSTERY_EVENTS = [
   },
   {
     id: 3,
-    name: "The Sleeping Drake's Hoard",
-    icon: "🐉",
-    lore: "A slumbering young drake lies curled around a glittering pile of gold coins and charred bone.",
+    name: "The Slumbering Golem's Cache",
+    icon: "🗿",
+    lore: "A dormant runic golem lies slumped over a glittering cache of ancient gold and gemstone shards.",
     choices: [
-      { label: "Carefully Pocket Gold", outcome: "Gain +75 Gold safely without waking the beast", effect: { gold: 75 } },
-      { label: "Seize Drake Relic!", outcome: "Wake the drake! Take 20 damage -> Gain 3 Relic Shards & 100 Gold", effect: { hp: -20, relicShards: 3, gold: 100 } },
+      { label: "Carefully Pocket Gold", outcome: "Gain +75 Gold safely without disturbing the guardian", effect: { gold: 75 } },
+      { label: "Pry Core Relic!", outcome: "Disturb the golem! Take 20 kinetic damage -> Gain 3 Relic Shards & 100 Gold", effect: { hp: -20, relicShards: 3, gold: 100 } },
       { label: "Tiptoe Past Silently", outcome: "Rest quietly (+15 HP)", effect: { hp: 15 } }
     ]
   },

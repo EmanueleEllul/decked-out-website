@@ -22,7 +22,17 @@ class PackSimulator {
       const savedGold = localStorage.getItem('decked_gold');
       if (savedGold !== null) this.gold = parseInt(savedGold, 10);
       const savedCol = localStorage.getItem('decked_collection');
-      if (savedCol) this.collection = JSON.parse(savedCol);
+      if (savedCol) {
+        const parsed = JSON.parse(savedCol);
+        const validIds = new Set(this.allCards.map(c => c.id));
+        this.collection = {};
+        for (const [id, count] of Object.entries(parsed)) {
+          if (validIds.has(id)) {
+            this.collection[id] = count;
+          }
+        }
+        localStorage.setItem('decked_collection', JSON.stringify(this.collection));
+      }
     } catch(e) {}
   }
 

@@ -1,5 +1,5 @@
-// Decked Out - Interactive Dungeon Map, Encounters, Gambler Minigames & World Boss Tracker
-// Features Act 1-3 branching paths, Mystery Event simulator, Gambler wagers & 1,000,000 HP World Boss raid
+// Decked Out - Interactive Dungeon Map, Encounters & Gambler Minigames
+// Features Act 1-3 branching paths, Mystery Event simulator & Gambler wagers
 
 class DungeonMapManager {
   constructor() {
@@ -7,37 +7,17 @@ class DungeonMapManager {
     this.mysteryEvents = window.MYSTERY_EVENTS || [];
     this.activeAct = 1;
 
-    // World boss persistent state
-    this.godMaxHp = 1000000;
-    this.godHp = 1000000;
-    this.loadWorldBoss();
+    try {
+      localStorage.removeItem('decked_god_hp');
+    } catch(e) {}
 
     this.init();
-  }
-
-  loadWorldBoss() {
-    try {
-      const saved = localStorage.getItem('decked_god_hp');
-      if (saved !== null) {
-        this.godHp = parseInt(saved, 10);
-      } else {
-        this.godHp = 874520; // Default partially chipped by previous heroes
-      }
-    } catch(e) {}
-  }
-
-  saveWorldBoss() {
-    try {
-      localStorage.setItem('decked_god_hp', this.godHp);
-    } catch(e) {}
-    this.renderWorldBoss();
   }
 
   init() {
     this.bindEvents();
     this.renderActMap(this.activeAct);
     this.renderMysteryEvents();
-    this.renderWorldBoss();
   }
 
   bindEvents() {
@@ -63,12 +43,6 @@ class DungeonMapManager {
     const wheelSpinBtn = document.getElementById('gambler-wheel-spin-btn');
     if (wheelSpinBtn) {
       wheelSpinBtn.addEventListener('click', () => this.spinWheelOfFate());
-    }
-
-    // World Boss Strike
-    const godStrikeBtn = document.getElementById('god-raid-strike-btn');
-    if (godStrikeBtn) {
-      godStrikeBtn.addEventListener('click', () => this.strikeTheGod());
     }
   }
 
@@ -132,27 +106,6 @@ class DungeonMapManager {
     }
 
     html += `
-        </div>
-      </div>
-    `;
-
-    // Render Boss Pool for this Act
-    html += `
-      <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 2rem;">
-        <h4 style="font-size: 1.1rem; color: #fff; margin-bottom: 1rem;">💀 Act ${actData.act} Climax Boss Pool</h4>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-          ${actData.bossPool.map(b => `
-            <div style="display: flex; gap: 1rem; align-items: center; background: var(--bg-deep); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
-              <div style="width: 60px; height: 60px; border-radius: var(--radius-md); overflow: hidden; background: #000; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                <img src="${b.sprite}" alt="${b.name}" style="width: 100%; height: 100%; object-fit: contain;" />
-              </div>
-              <div>
-                <strong style="color: #fff; font-size: 1rem; display: block;">${b.name}</strong>
-                <span style="font-size: 0.8rem; color: #f87171; font-weight: 700;">${b.hp.toLocaleString()} HP • ${b.atk} ATK</span>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">${b.desc}</p>
-              </div>
-            </div>
-          `).join('')}
         </div>
       </div>
     `;
@@ -280,38 +233,6 @@ class DungeonMapManager {
         </div>
       `;
     }
-  }
-
-  strikeTheGod() {
-    const strikeDmg = Math.floor(Math.random() * 25000) + 15000;
-    this.godHp = Math.max(0, this.godHp - strikeDmg);
-    this.saveWorldBoss();
-
-    window.audioMgr.playSFX('enemyHit');
-    if (window.packSim) {
-      window.packSim.gems += 50;
-      window.packSim.saveState();
-    }
-
-    if (window.showToast) {
-      window.showToast(`⚡ Celestial Strike dealt ${strikeDmg.toLocaleString()} damage to The God!`);
-    }
-
-    if (this.godHp <= 0) {
-      window.audioMgr.playFanfare('Exotic');
-      alert('🏆 THE GOD HAS FALLEN! 10,000 Gems and Divine Godslayer Mastery Unlocked!');
-      this.godHp = 1000000;
-      this.saveWorldBoss();
-    }
-  }
-
-  renderWorldBoss() {
-    const barEl = document.getElementById('god-hp-fill');
-    const labelEl = document.getElementById('god-hp-label');
-    const pct = Math.max(0, (this.godHp / this.godMaxHp) * 100);
-
-    if (barEl) barEl.style.width = `${pct}%`;
-    if (labelEl) labelEl.textContent = `${this.godHp.toLocaleString()} / ${this.godMaxHp.toLocaleString()} HP (${pct.toFixed(2)}%)`;
   }
 }
 

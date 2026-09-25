@@ -37,7 +37,7 @@
           <li><button class="nav-btn" data-tab="packs"><span class="icon">📦</span> Booster Packs</button></li>
           <li><button class="nav-btn" data-tab="deckbuilder"><span class="icon">🛠️</span> Deck Builder</button></li>
           <li><button class="nav-btn" data-tab="combat"><span class="icon">⚔️</span> Combat Arena</button></li>
-          <li><button class="nav-btn" data-tab="dungeon"><span class="icon">🗺️</span> Dungeon & Bosses</button></li>
+          <li><button class="nav-btn" data-tab="dungeon"><span class="icon">🗺️</span> Dungeon Map</button></li>
           <li><button class="nav-btn" data-tab="wiki"><span class="icon">📖</span> Obsidian Wiki</button></li>
         </ul>
       </nav>
@@ -647,13 +647,13 @@
     </section>
 
     <!-- ==========================================
-         TAB 6: DUNGEON MAP & WORLD BOSS
+         TAB 6: DUNGEON MAP
          ========================================== -->
     <section id="tab-dungeon" class="tab-pane">
       <div class="section-header">
         <div class="section-title-wrap">
-          <h2><span>🗺️</span> 3-Act Dungeon Map & World Boss</h2>
-          <p>Explore procedural floor layouts, Climax Bosses, the Gambler's wagers, and the persistent World Boss.</p>
+          <h2><span>🗺️</span> 3-Act Dungeon Map</h2>
+          <p>Explore procedural floor layouts, node pathways, and authentic dungeon mechanics.</p>
         </div>
       </div>
 
@@ -666,30 +666,6 @@
 
       <!-- Interactive Map Visualizer -->
       <div id="dungeon-map-visualizer"></div>
-
-      <!-- Persistent Cosmic World Boss Raid -->
-      <div style="background: radial-gradient(ellipse at center, rgba(147, 51, 234, 0.15) 0%, var(--bg-surface) 100%); border: 2px solid #a855f7; border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 3rem; box-shadow: 0 0 30px rgba(168, 85, 247, 0.25);">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-          <div>
-            <span class="tag-badge" style="background: rgba(168, 85, 247, 0.3); color: #e9d5ff; font-weight: 800;">SECRET PERSISTENT RAID BOSS</span>
-            <h3 style="font-size: 2rem; color: #fff; margin: 0.5rem 0 0.25rem;">⚡ The God (Persistent Cosmic Entity)</h3>
-            <p style="color: #cbd5e1; font-size: 0.9rem; max-width: 700px;">
-              Appears immediately after defeating Act 3's Ascended Sovereign. His 1,000,000 HP <strong>never resets</strong> on hero defeat—damage dealt is permanently saved in the cosmos!
-            </p>
-          </div>
-          <button id="god-raid-strike-btn" class="btn btn-primary" style="background: linear-gradient(135deg, #a855f7, #6b21a8); color: #fff;">
-            <span>⚡ Strike The God (Simulate Raid Run)</span>
-          </button>
-        </div>
-
-        <div style="margin-bottom: 0.5rem; display: flex; justify-content: space-between; font-weight: 700;">
-          <span style="color: var(--text-faint); text-transform: uppercase; font-size: 0.8rem;">World Boss Remaining Divine Lifeblood:</span>
-          <span id="god-hp-label" style="color: #c084fc; font-family: var(--font-mono);">1,000,000 / 1,000,000 HP</span>
-        </div>
-        <div class="health-bar-wrapper" style="height: 18px;">
-          <div id="god-hp-fill" class="health-bar-fill" style="width: 100%; background: linear-gradient(90deg, #ec4899, #a855f7, #3b82f6);"></div>
-        </div>
-      </div>
 
       <!-- The Gambler Minigames -->
       <div class="section-header">

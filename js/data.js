@@ -2599,17 +2599,8 @@ const GAME_ACTS = [
         atk: 28,
         armor: 30,
         ward: 25,
-        desc: "Act 3 Final Boss. Supreme ruler of the celestial summit. Slaying him tears open the rift to The God.",
+        desc: "Act 3 Final Boss. Supreme ruler of the celestial summit commanding astral magic and radiant defenses.",
         sprite: "assets/cards/Ashmaw Colossus.png"
-      },
-      {
-        name: "The God (Persistent Cosmic World Boss)",
-        hp: 1000000,
-        atk: 35,
-        armor: 20,
-        ward: 25,
-        desc: "Secret Endgame Raid Boss. Has 1,000,000 HP that PERSISTS across all runs! Falling to Him still grants full victory rewards!",
-        sprite: "assets/cards/GrimReaper.png"
       }
     ]
   }

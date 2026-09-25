@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DECKED OUT - Roguelike Deck-Building RPG & TCG Compendium</title>
-  <meta name="description" content="Draft, Battle, and Collect in Decked Out. Official database and compendium for the roguelike deck-builder RPG featuring 62 cards, 7 heroes, 3-act procedural dungeons, and CCG booster packs.">
+  <title>DECKED OUT - Official Roguelike Deck-Building RPG Website</title>
+  <meta name="description" content="Official website for Decked Out, a single-player roguelike deckbuilding RPG built in Godot 4.7 Forward+. Explore the 62-card compendium, 7 heroes, 3-act dungeon descent, and tactical combat mechanics.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23f59e0b'/><text y='70' x='50' font-size='60' text-anchor='middle' fill='%230f172a'>🃏</text></svg>">
   
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -18,126 +18,332 @@
 </head>
 <body>
 
-  <!-- Top Navigation Header -->
-  <header class="site-header">
+  <!-- Top Sticky Navigation Header -->
+  <header class="site-header" id="top">
     <div class="header-container">
-      <a href="#" class="brand-wrapper" data-jump-tab="compendium">
+      <a href="#hero" class="brand-wrapper">
         <div class="brand-icon">🃏</div>
         <div class="brand-text">
           <h1>DECKED OUT</h1>
-          <span>ROGUELIKE TCG</span>
+          <span>ROGUELIKE DECKBUILDER</span>
         </div>
       </a>
 
-      <!-- Primary Tabs -->
+      <!-- Navigation Links -->
       <nav>
-        <ul class="nav-tabs">
-          <li><button class="nav-btn active" data-tab="compendium"><span class="icon">🃏</span> Compendium</button></li>
-          <li><button class="nav-btn" data-tab="heroes"><span class="icon">🛡️</span> Heroes & Relics</button></li>
-          <li><button class="nav-btn" data-tab="packs"><span class="icon">📦</span> Booster Packs</button></li>
-          <li><button class="nav-btn" data-tab="deckbuilder"><span class="icon">🛠️</span> Deck Builder</button></li>
-          <li><button class="nav-btn" data-tab="combat"><span class="icon">⚔️</span> Combat Arena</button></li>
-          <li><button class="nav-btn" data-tab="dungeon"><span class="icon">🗺️</span> Dungeon Map</button></li>
+        <ul class="nav-links">
+          <li><a href="#overview" class="nav-link">Overview</a></li>
+          <li><a href="#mechanics" class="nav-link">Mechanics</a></li>
+          <li><a href="#heroes" class="nav-link">Heroes</a></li>
+          <li><a href="#compendium" class="nav-link">Cards</a></li>
+          <li><a href="#relics" class="nav-link">Relics</a></li>
+          <li><a href="#dungeon" class="nav-link">Dungeon</a></li>
+          <li><a href="#specs" class="nav-link">Game Info</a></li>
         </ul>
       </nav>
 
-      <!-- User Stats & Audio -->
+      <!-- Action Controls -->
       <div class="header-actions">
-        <div class="currency-badge gems" title="Out-Run Currency: Gems">
-          <span>💎</span>
-          <span class="user-gems-count">1,500</span>
-        </div>
-        <div class="currency-badge gold" title="In-Run Currency: Gold">
-          <span>🪙</span>
-          <span class="user-gold-count">500</span>
-        </div>
+        <button class="btn btn-wishlist" data-action="wishlist" title="Wishlist Decked Out on Steam">
+          <span>⭐</span> Wishlist on Steam
+        </button>
         <button id="toggle-sfx-btn" class="audio-btn" title="Toggle Sound Effects">🔊</button>
         <button id="toggle-bgm-btn" class="audio-btn" title="Toggle Ambient Music">🎼</button>
+        <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Toggle Navigation Menu">☰</button>
       </div>
     </div>
   </header>
 
   <!-- Hero Banner -->
-  <section class="hero-section">
+  <header class="hero-section" id="hero">
     <div class="hero-bg-glow"></div>
     <div class="hero-content">
-      <div class="hero-pill">🔥 Godot 4.7 Forward+ Roguelike RPG</div>
-      <h1 class="hero-title">DRAFT. BATTLE. COLLECT.</h1>
+      <div class="hero-pill">🔥 Godot 4.7 Forward+ Roguelike Deck-Building RPG</div>
+      <h1 class="hero-title">DRAFT YOUR DECK.<br>CONQUER THE DEPTHS.</h1>
       <p class="hero-subtitle">
-        Confront branching 3-act dungeon expeditions, master dual-layered Armor & Ward mitigation, 
-        crack open booster packs into your binder, and bleed the persistent 1,000,000 HP cosmic World Boss.
+        Descend into the Primordial Labyrinth—a shifting subterranean dungeon of forgotten horrors and scrap-forged automatons. 
+        Master dual-layered Armor &amp; Ward mitigation, draft lethal card synergies, and lead 7 unique heroes to victory.
       </p>
 
       <div class="hero-cta-group">
-        <button class="btn btn-primary" data-jump-tab="compendium">
-          <span>Explore 62 Cards</span>
+        <button class="btn btn-primary btn-wishlist" data-action="wishlist">
+          <span>⭐ Wishlist on Steam</span>
           <span>➔</span>
         </button>
-        <button class="btn btn-secondary" data-jump-tab="packs">
-          <span>Open Gacha Packs</span>
-          <span>📦</span>
-        </button>
-        <button class="btn btn-secondary" data-jump-tab="combat">
-          <span>Play Combat Demo</span>
-          <span>⚔️</span>
-        </button>
+        <a href="#compendium" class="btn btn-secondary">
+          <span>🃏 Explore 62 Cards</span>
+        </a>
+        <a href="#heroes" class="btn btn-secondary">
+          <span>🛡️ Meet The Heroes</span>
+        </a>
       </div>
 
-      <!-- Quick Stats Counter -->
-      <div class="hero-stats-row">
-        <div class="stat-box">
-          <span class="num">62</span>
-          <span class="lbl">Cards with UI</span>
-        </div>
-        <div class="stat-box">
-          <span class="num">7</span>
-          <span class="lbl">Unique Heroes</span>
-        </div>
-        <div class="stat-box">
-          <span class="num">3</span>
-          <span class="lbl">Dungeon Acts</span>
-        </div>
-        <div class="stat-box">
-          <span class="num">1M</span>
-          <span class="lbl">The God World Boss HP</span>
-        </div>
-      </div>
+
     </div>
-  </section>
+  </header>
 
-  <!-- Main Tabs Workspace -->
+  <!-- Main Website Content -->
   <main class="main-wrapper">
 
     <!-- ==========================================
-         TAB 1: CARDS COMPENDIUM
+         SECTION 1: GAME OVERVIEW & PILLARS
          ========================================== -->
-    <section id="tab-compendium" class="tab-pane active">
+    <section id="overview" class="site-section">
+      <div class="section-header center">
+        <div class="section-title-wrap">
+          <span class="section-kicker">THE PREMISE</span>
+          <h2><span>📖</span> About Decked Out</h2>
+          <p>A deep, deterministic roguelike deckbuilding RPG engineered in Godot 4.7 Forward+.</p>
+        </div>
+      </div>
+
+      <!-- Lore & Hook Card -->
+      <div class="lore-spotlight-card">
+        <div class="lore-text-wrap">
+          <h3 class="lore-title">Enter The Primordial Labyrinth</h3>
+          <p class="lore-body">
+            Deep beneath the ruined surface lies the Primordial Labyrinth, an ancient shifting complex where forgotten horrors, rogue clockwork golems, and cultist ritualists dwell. In <em>Decked Out</em>, your deck is your weapon, armor, and survival tool. Every card played demands tactical precision, every path chosen brings unforeseen perils, and every relic discovered transforms your combat potential.
+          </p>
+          <div class="lore-highlights">
+            <span class="highlight-tag">⚔️ Turn-Based Tactical Deckbuilder</span>
+            <span class="highlight-tag">🗺️ Branching Procedural Encounters</span>
+            <span class="highlight-tag">🎨 Genuine Retro Pixel-Art Aesthetic</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Core Pillars Grid -->
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">⚔️</div>
+          <h3 class="pillar-title">Deterministic Combat</h3>
+          <p class="pillar-desc">
+            No hidden roll RNG. Physical attacks test <strong>Armor</strong>, while magical spells test <strong>Ward</strong>. Plan every move with mathematical clarity: <code>Damage = max(1, Attack - Defense)</code>.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🧙‍♂️</div>
+          <h3 class="pillar-title">7 Asymmetric Champions</h3>
+          <p class="pillar-desc">
+            From the serene martial arts of the Deck Monk to the frantic mechanical scavenging of the Scrap Goblin, each hero features custom baseline stats, unique passives, and dedicated archetypes.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🗺️</div>
+          <h3 class="pillar-title">Branching 3-Act Descent</h3>
+          <p class="pillar-desc">
+            Navigate 40 floors through Catacombs, Molten Core, and Astral Summits. Decide your route between battles, elite encounters, wandering merchants, alchemists, and narrative mystery dilemmas.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🏺</div>
+          <h3 class="pillar-title">Relics & Status Synergies</h3>
+          <p class="pillar-desc">
+            Stack devastating status ailments including <strong>Burn</strong>, <strong>Bleed</strong>, <strong>Poison</strong>, and <strong>Stun</strong>. Pair elemental combos with 9 ancient relics to shatter enemy resistances.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: GAMEPLAY & COMBAT MECHANICS
+         ========================================== -->
+    <section id="mechanics" class="site-section">
+      <div class="section-header center">
+        <div class="section-title-wrap">
+          <span class="section-kicker">CORE SYSTEMS</span>
+          <h2><span>⚔️</span> Combat & Gameplay Mechanics</h2>
+          <p>Transparent mitigation formulas and deep tactical status combinations.</p>
+        </div>
+      </div>
+
+      <!-- Deterministic Damage Breakdown -->
+      <div class="mechanics-formula-card">
+        <div class="formula-banner">
+          <span class="formula-label">The Mitigation Formula:</span>
+          <code class="formula-code">Final Damage = max(1, Base Damage - Relevant Defense)</code>
+        </div>
+        <p class="formula-explanation">
+          Every strike in Decked Out respects absolute defense thresholds. You will always deal at least 1 chipping damage on a successful hit, rewarding tactical planning over random critical rolls.
+        </p>
+
+        <div class="mitigation-dual-grid">
+          <div class="mitigation-card phys">
+            <div class="mitigation-header">
+              <span class="mitigation-icon">🛡️</span>
+              <div>
+                <h4>Physical Mitigation: Armor</h4>
+                <span class="types-tag">Slash • Blunt • Piercing • Ballistic</span>
+              </div>
+            </div>
+            <p>
+              Armor directly absorbs incoming physical blows. Heavy warriors like the Elite Knight wield thick armor plating that requires armor-shredding attacks or pure magical bypassing.
+            </p>
+          </div>
+
+          <div class="mitigation-card magic">
+            <div class="mitigation-header">
+              <span class="mitigation-icon">🔮</span>
+              <div>
+                <h4>Magical Mitigation: Ward</h4>
+                <span class="types-tag">Fire • Frost • Arcane • Shadow • Holy</span>
+              </div>
+            </div>
+            <p>
+              Ward generates an ethereal magical barrier that deflects arcane spells and elemental incantations. Cultists and ancient liches rely on Ward to shield against destructive magic.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tactical Status Ailments Grid -->
+      <div class="status-ailments-container">
+        <h3 class="subheading-center">Tactical Status Ailments & Resources</h3>
+        <div class="status-grid">
+          <div class="status-card">
+            <div class="status-top">
+              <span class="status-icon">🔥</span>
+              <h4>Burn</h4>
+            </div>
+            <p>Deals searing damage directly to health at the end of each round. Perfect for melting high-armor foes over extended battles.</p>
+          </div>
+
+          <div class="status-card">
+            <div class="status-top">
+              <span class="status-icon">🩸</span>
+              <h4>Bleed</h4>
+            </div>
+            <p>Inflicts punishing internal hemorrhaging. Each time the afflicted enemy attacks, they suffer immediate recoil damage.</p>
+          </div>
+
+          <div class="status-card">
+            <div class="status-top">
+              <span class="status-icon">☠️</span>
+              <h4>Poison</h4>
+            </div>
+            <p>A corrosive venom that pierces straight through defensive barriers, chipping away vitality round after round.</p>
+          </div>
+
+          <div class="status-card">
+            <div class="status-top">
+              <span class="status-icon">⚡</span>
+              <h4>Stun</h4>
+            </div>
+            <p>Overwhelms and disorients the target, completely disabling their upcoming turn intent and giving your hero breathing room.</p>
+          </div>
+
+          <div class="status-card">
+            <div class="status-top">
+              <span class="status-icon">⚙️</span>
+              <h4>Scrap</h4>
+            </div>
+            <p>A unique mechanical resource scavenged by the Scrap Goblin from discarded cards to construct and upgrade devastating contraptions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: HEROES ROSTER
+         ========================================== -->
+    <section id="heroes" class="site-section">
       <div class="section-header">
         <div class="section-title-wrap">
-          <h2><span>🃏</span> Card Compendium & Binder</h2>
-          <p>Browse all 62 official cards with complete pixel-art UI, animated spritesheets, and combat stats.</p>
+          <span class="section-kicker">CHAMPIONS OF THE LABYRINTH</span>
+          <h2><span>🛡️</span> Meet The Heroes</h2>
+          <p>Select any champion to inspect their authentic pixel art portrait, baseline stats, signature trait, and playstyle lore.</p>
         </div>
-        <div id="card-count-badge" style="font-size: 0.85rem; font-weight: 700; color: var(--primary);">
+      </div>
+
+      <div class="heroes-workbench">
+        <!-- Hero Roster Selector Shelf -->
+        <div class="heroes-roster-column">
+          <h3 class="roster-headline">Choose Champion</h3>
+          <div id="heroes-roster-shelf" class="heroes-roster-list"></div>
+        </div>
+
+        <!-- Hero Profile Card Display -->
+        <div class="hero-detail-column">
+          <div class="hero-detail-card">
+            <div class="hero-detail-top">
+              <div id="hero-detail-avatar" class="hero-avatar-display"></div>
+              <div class="hero-title-meta">
+                <span id="hero-detail-title" class="hero-role-title">Title</span>
+                <h2 id="hero-detail-name" class="hero-character-name">Hero Name</h2>
+                <span id="hero-detail-unlock" class="hero-unlock-badge">Unlock Condition</span>
+              </div>
+            </div>
+
+            <!-- Base Stats Grid -->
+            <div class="hero-stats-matrix">
+              <div class="hero-stat-cell hp">
+                <span class="stat-cell-label">Life Pool</span>
+                <strong id="hero-scaled-hp" class="stat-cell-value">100 HP</strong>
+              </div>
+              <div class="hero-stat-cell atk">
+                <span class="stat-cell-label">Hero Strike</span>
+                <strong id="hero-scaled-atk" class="stat-cell-value">10 ATK</strong>
+              </div>
+              <div class="hero-stat-cell mana">
+                <span class="stat-cell-label">Turn Mana</span>
+                <strong id="hero-scaled-mana" class="stat-cell-value">15 Mana</strong>
+              </div>
+            </div>
+
+            <!-- Passive Trait Box -->
+            <div class="hero-passive-box">
+              <h4 class="box-label">Signature Trait &amp; Passives</h4>
+              <p id="hero-detail-passive" class="passive-desc"></p>
+              <div class="affinity-row">
+                <strong>Primary Class Affinity:</strong> 
+                <span id="hero-detail-affinity" class="affinity-val"></span>
+              </div>
+            </div>
+
+            <!-- Hero Lore Bio -->
+            <div class="hero-bio-box">
+              <h4 class="box-label">Combat Lore &amp; Tactics</h4>
+              <p id="hero-detail-description" class="bio-text"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4: CARD COMPENDIUM
+         ========================================== -->
+    <section id="compendium" class="site-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-kicker">OFFICIAL CARD DATABASE</span>
+          <h2><span>🃏</span> Series 1 Card Compendium</h2>
+          <p>Browse all 62 authentic cards with multi-frame animated spritesheets and 3D holographic tilt shaders.</p>
+        </div>
+        <div id="card-count-badge" class="card-counter-badge">
           Showing 62 Cards
         </div>
       </div>
 
-      <!-- Filter Controls Bar -->
-      <div class="controls-bar">
+      <!-- Controls & Filters Bar -->
+      <div class="compendium-controls">
         <div class="search-and-filters">
           <div class="search-input-wrap">
             <span class="search-icon">🔍</span>
-            <input type="text" id="compendium-search" placeholder="Search card name, effect, code, or class..." />
+            <input type="text" id="compendium-search" placeholder="Search card name, description, code, or class..." />
           </div>
 
-          <div class="pill-group">
+          <div class="pill-group" id="class-pills">
             <span class="filter-pill class-pill active" data-class="all">All Classes</span>
-            <span class="filter-pill class-pill" data-class="Elixir">🧪 Elixir</span>
-            <span class="filter-pill class-pill" data-class="Wild Mages">🔮 Wild Mages</span>
             <span class="filter-pill class-pill" data-class="Swordsman">⚔️ Swordsman</span>
-            <span class="filter-pill class-pill" data-class="Animal">🐾 Animal</span>
             <span class="filter-pill class-pill" data-class="Monster">👹 Monster</span>
+            <span class="filter-pill class-pill" data-class="Animal">🐾 Animal</span>
             <span class="filter-pill class-pill" data-class="Goblins">⚙️ Goblins</span>
+            <span class="filter-pill class-pill" data-class="Wild Mages">🔮 Wild Mages</span>
+            <span class="filter-pill class-pill" data-class="Elixir">🧪 Elixir</span>
           </div>
 
           <div class="filter-selects">
@@ -161,8 +367,8 @@
           </div>
         </div>
 
-        <div style="display: flex; align-items: center; justify-content: flex-end; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem; font-size: 0.85rem;">
-          <span style="color: var(--text-faint);">💡 Spritesheets are spliced & animated. Click any card to inspect full stats!</span>
+        <div class="compendium-tip-bar">
+          <span>✨ Hover over cards for 3D holographic tilt reflection. Click any card to inspect full statistics &amp; lore.</span>
         </div>
       </div>
 
@@ -171,567 +377,97 @@
     </section>
 
     <!-- ==========================================
-         TAB 2: HEROES & RELICS
+         SECTION 5: ANCIENT RELICS
          ========================================== -->
-    <section id="tab-heroes" class="tab-pane">
+    <section id="relics" class="site-section">
       <div class="section-header">
         <div class="section-title-wrap">
-          <h2><span>🛡️</span> Heroes & Relics Hub</h2>
-          <p>Every hero commands distinct starting stats, passive triggers, summoning routines, and relic loadouts.</p>
+          <span class="section-kicker">MYSTICAL ARTIFACTS</span>
+          <h2><span>🏺</span> Ancient Relics Vault</h2>
+          <p>Discover 9 powerful relics hidden in dungeon vaults that alter the fundamental rules of combat.</p>
         </div>
       </div>
 
-      <div style="display: grid; grid-template-columns: 340px 1fr; gap: 2rem; margin-bottom: 3.5rem;">
-        <!-- Hero Roster Shelf -->
-        <div>
-          <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 1rem;">Select Hero Roster</h3>
-          <div id="heroes-roster-shelf" style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
-        </div>
-
-        <!-- Hero Profile & Upgrade Calculator -->
-        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2rem;">
-          <div style="display: flex; gap: 1.5rem; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.5rem;">
-            <div id="hero-detail-avatar" style="width: 90px; height: 90px; border-radius: var(--radius-md); overflow: hidden; background: #090c12; border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"></div>
-            <div>
-              <span id="hero-detail-title" style="font-size: 0.82rem; text-transform: uppercase; color: var(--primary); font-weight: 700; letter-spacing: 0.1em;">Title</span>
-              <h2 id="hero-detail-name" style="font-size: 2.2rem; color: #fff; margin: 0.2rem 0;">Hero Name</h2>
-              <span id="hero-detail-unlock" style="font-size: 0.85rem; color: #38bdf8;">Unlock Condition</span>
-            </div>
-          </div>
-
-          <!-- Base Stats Grid -->
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
-            <div style="background: var(--bg-deep); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
-              <span style="font-size: 0.75rem; color: var(--text-faint); text-transform: uppercase;">Life Pool</span>
-              <strong id="hero-scaled-hp" style="font-size: 1.3rem; color: #ef4444; display: block; margin-top: 0.25rem;">100 HP</strong>
-            </div>
-            <div style="background: var(--bg-deep); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
-              <span style="font-size: 0.75rem; color: var(--text-faint); text-transform: uppercase;">Hero Strike</span>
-              <strong id="hero-scaled-atk" style="font-size: 1.3rem; color: #fbbf24; display: block; margin-top: 0.25rem;">10 ATK</strong>
-            </div>
-            <div style="background: var(--bg-deep); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
-              <span style="font-size: 0.75rem; color: var(--text-faint); text-transform: uppercase;">Turn Mana</span>
-              <strong id="hero-scaled-mana" style="font-size: 1.3rem; color: #38bdf8; display: block; margin-top: 0.25rem;">15 Mana</strong>
-            </div>
-          </div>
-
-          <!-- Passive Details -->
-          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem;">
-            <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.5rem;">Special Trait & Passives</h4>
-            <p id="hero-detail-passive" style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6;"></p>
-            <div style="margin-top: 0.75rem; font-size: 0.82rem; color: var(--text-muted);">
-              <strong>Class Affinity:</strong> <span id="hero-detail-affinity" style="color: #fbbf24;"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Relic Hub Compendium & Loadout -->
-      <div class="section-header">
-        <div class="section-title-wrap">
-          <h2><span>🏺</span> The Relic Hub (Equip up to 3 Active Relics)</h2>
-          <p>Ancient artifacts discovered in dungeon chambers or unlocked with Relic Shards that apply permanent passives.</p>
-        </div>
-      </div>
-
-      <!-- Active Relic Slots Shelf -->
-      <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 2rem;">
-        <h4 style="font-size: 0.9rem; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.75rem;">Current Active Relic Loadout (3 Max)</h4>
-        <div id="active-relics-slots" style="display: flex; gap: 1rem; flex-wrap: wrap;"></div>
-      </div>
-
-      <div id="relics-grid-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;"></div>
+      <div id="relics-grid-container" class="relics-showcase-grid"></div>
     </section>
 
     <!-- ==========================================
-         TAB 3: GACHA BOOSTER PACKS
+         SECTION 6: THE DUNGEON & BESTIARY
          ========================================== -->
-    <section id="tab-packs" class="tab-pane">
+    <section id="dungeon" class="site-section">
       <div class="section-header">
         <div class="section-title-wrap">
-          <h2><span>📦</span> Booster Packs & Gacha Simulator</h2>
-          <p>Crack open packs with realistic Godot drop rates, physical foil tear animations, and card reveals.</p>
-        </div>
-        <button id="claim-free-gems-btn" class="btn btn-primary">
-          <span>💎 Claim +500 Free Gems</span>
-        </button>
-      </div>
-
-      <!-- Collection Progress -->
-      <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 2.5rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-          <strong style="color: #fff; font-size: 0.95rem;">Persistent Binder Collection</strong>
-          <span id="collection-progress-label" style="color: #38bdf8; font-weight: 700; font-size: 0.88rem;">0 / 62 Unlocked (0%)</span>
-        </div>
-        <div class="health-bar-wrapper" style="height: 10px;">
-          <div id="collection-progress-bar" class="health-bar-fill" style="width: 0%; background: linear-gradient(90deg, #38bdf8, #00e5ff);"></div>
+          <span class="section-kicker">THE EXPEDITION</span>
+          <h2><span>🗺️</span> 3-Act Dungeon &amp; Bestiary</h2>
+          <p>Ascend through 40 challenging procedural floors and face the terrifying guardians of the deep.</p>
         </div>
       </div>
 
-      <!-- Packs Shelf -->
-      <div id="packs-shelf-grid" class="packs-grid"></div>
+
+
+      <!-- Bestiary Grid Container -->
+      <div id="bestiary-grid-container"></div>
+
+      <!-- Mystery Events Preview -->
+      <div class="section-header" style="margin-top: 3.5rem;">
+        <div class="section-title-wrap">
+          <span class="section-kicker">NARRATIVE ENCOUNTERS</span>
+          <h2><span>❓</span> Mystery Dilemmas Catalog</h2>
+          <p>Interactive dilemmas encountered at Mystery nodes across the subterranean path.</p>
+        </div>
+      </div>
+      <div id="mystery-events-carousel" class="mystery-events-grid"></div>
     </section>
 
     <!-- ==========================================
-         TAB 4: DECK BUILDER
+         SECTION 7: GAME INFO & SPECS
          ========================================== -->
-    <!-- ==========================================
-         TAB 4: DECK BUILDER WORKSHOP
-         ========================================== -->
-    <section id="tab-deckbuilder" class="tab-pane">
-      <div class="section-header">
+    <section id="specs" class="site-section">
+      <div class="section-header center">
         <div class="section-title-wrap">
-          <h2><span>🛠️</span> Tactical Deck Builder & Workshop</h2>
-          <p>Assemble and fine-tune your legal 10-100 card expedition deck. Enforces 15 duplicate limits and starter restrictions.</p>
-        </div>
-        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <button id="import-deck-btn" class="btn btn-secondary">📥 Import Deck</button>
-          <button id="export-deck-btn" class="btn btn-secondary">📋 Export Code</button>
-          <button id="test-in-arena-btn" class="btn btn-primary" title="Load active deck into Combat Arena and fight!">⚔️ Test in Arena</button>
+          <span class="section-kicker">DEVELOPMENT &amp; DETAILS</span>
+          <h2><span>🎮</span> Game Information</h2>
+          <p>Technical specifications and release details for Decked Out.</p>
         </div>
       </div>
 
-      <!-- Quick Archetype Presets Bar -->
-      <div class="deck-presets-bar">
-        <span class="presets-label">⚡ Archetype Presets:</span>
-        <div id="deck-presets-container" class="presets-buttons-wrap"></div>
-        <button id="clear-deck-btn" class="btn btn-secondary clear-deck-btn">🗑️ Clear Deck</button>
-      </div>
-
-      <!-- Main Deck Builder Split Workbench -->
-      <div class="deckbuilder-workbench">
-        <!-- LEFT: Card Vault (Browse, Search, Filter & Add Cards) -->
-        <div class="deck-vault-column">
-          <div class="deck-vault-header">
-            <div class="vault-search-row">
-              <div class="search-input-wrap" style="flex: 1;">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="deck-card-search" placeholder="Search cards by name, description, damage, mechanics..." />
-              </div>
-              <span id="deck-vault-count-badge" class="stat-pill" style="white-space: nowrap; font-size: 0.8rem; padding: 0.4rem 0.8rem; background: var(--bg-deep); border-radius: var(--radius-full);">
-                62 Cards
-              </span>
-            </div>
-
-            <!-- Class Filter Pills -->
-            <div class="deck-filter-pills-row">
-              <div id="deck-class-pills" class="pill-group">
-                <span class="filter-pill active" data-class="all">All Classes</span>
-                <span class="filter-pill" data-class="Swordsman">⚔️ Swordsman</span>
-                <span class="filter-pill" data-class="Monster">👹 Monster</span>
-                <span class="filter-pill" data-class="Animal">🐾 Animal</span>
-                <span class="filter-pill" data-class="Goblins">⚙️ Goblins</span>
-                <span class="filter-pill" data-class="Wild Mages">🔮 Wild Mages</span>
-                <span class="filter-pill" data-class="Elixir">🧪 Elixir</span>
-              </div>
-            </div>
-
-            <!-- Rarity Filter Pills & Tip -->
-            <div class="deck-filter-pills-row" style="margin-top: 0.5rem; justify-content: space-between;">
-              <div id="deck-rarity-pills" class="pill-group">
-                <span class="filter-pill active" data-rarity="all">All Rarities</span>
-                <span class="filter-pill" data-rarity="Common">Common</span>
-                <span class="filter-pill" data-rarity="Uncommon">Uncommon</span>
-                <span class="filter-pill" data-rarity="Rare">Rare</span>
-                <span class="filter-pill" data-rarity="Epic">Epic</span>
-                <span class="filter-pill" data-rarity="Legendary">Legendary</span>
-                <span class="filter-pill" data-rarity="Exotic">Exotic</span>
-              </div>
-              <div class="vault-tip">💡 Click card to add (+1)</div>
-            </div>
-          </div>
-
-          <!-- Card Vault Grid -->
-          <div id="deck-vault-grid" class="deck-vault-grid"></div>
+      <div class="specs-grid">
+        <div class="spec-card">
+          <div class="spec-icon">⚙️</div>
+          <h4>Engine &amp; Technology</h4>
+          <p>Built with <strong>Godot Engine 4.7</strong> using the cutting-edge <strong>Forward+</strong> renderer for crisp pixel-art shaders and fluid performance.</p>
         </div>
 
-        <!-- RIGHT: Active Deck Tray, Stats & Analytics -->
-        <div class="deck-tray-column">
-          <!-- Active Deck Summary Box -->
-          <div class="deck-summary-box">
-            <div class="deck-summary-top">
-              <div>
-                <span class="deck-hero-tag" id="deck-assigned-hero">🛡️ Deck Monk Standard</span>
-                <h3 style="font-size: 1.25rem; color: #fff; margin: 0.2rem 0 0;">Active Expedition Deck</h3>
-              </div>
-              <div class="deck-card-counter-wrap">
-                <span id="deck-total-count" class="deck-count-num">16 / 100</span>
-                <span class="deck-count-sub">Cards in Deck</span>
-              </div>
-            </div>
-
-            <!-- Deck Progress Bar -->
-            <div class="deck-progress-track">
-              <div id="deck-count-progress-fill" class="deck-progress-fill" style="width: 16%;"></div>
-            </div>
-
-            <!-- Rules Validation Checklist -->
-            <div id="deck-rules-checklist" class="deck-rules-checklist">
-              <div id="rule-size-item" class="rule-check-item valid">
-                <span class="rule-icon">✅</span>
-                <span class="rule-label">Deck Size: <strong id="rule-size-text">16 Cards (10-100 required)</strong></span>
-              </div>
-              <div id="rule-starter-item" class="rule-check-item valid">
-                <span class="rule-icon">✅</span>
-                <span class="rule-label">Starter Limits: <strong id="rule-starter-text">0 / 1 Exotic or Legendary</strong></span>
-              </div>
-              <div id="rule-copies-item" class="rule-check-item valid">
-                <span class="rule-icon">✅</span>
-                <span class="rule-label">Duplicate Limit: <strong id="rule-copies-text">All cards ≤ 15 copies</strong></span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tactical Analytics & Mana Curve Matrix -->
-          <div class="deck-analytics-box">
-            <div class="analytics-header">
-              <span class="analytics-title">Mana Curve & Combat Power</span>
-              <span id="deck-avg-mana" class="avg-mana-pill">Avg: 1.6 Mana</span>
-            </div>
-
-            <!-- Mana Histogram -->
-            <div id="mana-curve-chart" class="deck-curve-chart"></div>
-
-            <!-- Combat Synergy Breakdown -->
-            <div class="deck-synergy-matrix">
-              <div class="synergy-stat-chip">
-                <span class="chip-label">Physical DMG</span>
-                <strong id="deck-total-phys" class="chip-val phys">0</strong>
-              </div>
-              <div class="synergy-stat-chip">
-                <span class="chip-label">Magic DMG</span>
-                <strong id="deck-total-mag" class="chip-val magic">0</strong>
-              </div>
-              <div class="synergy-stat-chip">
-                <span class="chip-label">Total Armor</span>
-                <strong id="deck-total-armor" class="chip-val armor">0</strong>
-              </div>
-              <div class="synergy-stat-chip">
-                <span class="chip-label">Total Ward</span>
-                <strong id="deck-total-ward" class="chip-val ward">0</strong>
-              </div>
-              <div class="synergy-stat-chip">
-                <span class="chip-label">Total Healing</span>
-                <strong id="deck-total-heal" class="chip-val heal">0</strong>
-              </div>
-            </div>
-
-            <!-- Class Composition Progress Bars -->
-            <div id="deck-class-composition" class="deck-class-comp-wrap"></div>
-          </div>
-
-          <!-- Cards in Deck List -->
-          <div class="deck-list-box">
-            <div class="deck-list-header">
-              <h4 style="font-size: 0.95rem; color: #fff; margin: 0;">Deck Composition (<span id="deck-unique-count">0</span> Unique Cards)</h4>
-              <span style="font-size: 0.72rem; color: var(--text-faint);">Hover row to preview card</span>
-            </div>
-            <div id="deck-cards-list" class="deck-cards-scroll-list"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Floating Card Hover Preview Tooltip -->
-      <div id="deck-card-hover-preview" class="deck-card-preview-popover" style="display: none;"></div>
-    </section>
-
-    <!-- ==========================================
-         TAB 5: COMBAT SANDBOX ARENA
-         ========================================== -->
-    <section id="tab-combat" class="tab-pane">
-      <div class="section-header">
-        <div class="section-title-wrap">
-          <h2><span>⚔️</span> Playable Tactical Combat Arena</h2>
-          <p>Authentic turn-based deck combat with Armor & Ward mitigation, elemental status DoTs, Mana management, and automatic Hero Strikes.</p>
-        </div>
-        <div style="display: flex; gap: 0.75rem;">
-          <button id="combat-restart-btn" class="btn btn-secondary">🔄 Reset Battle</button>
-          <button id="combat-next-foe-btn" class="btn btn-primary">⏭️ Next Foe</button>
-        </div>
-      </div>
-
-      <!-- Matchup Toolbar -->
-      <div class="combat-toolbar">
-        <div class="combat-toolbar-group">
-          <label for="combat-hero-select"><span>🛡️</span> Active Hero:</label>
-          <select id="combat-hero-select" class="custom-select"></select>
-        </div>
-        <div class="combat-toolbar-group">
-          <label for="combat-enemy-select"><span>👹</span> Dungeon Foe:</label>
-          <select id="combat-enemy-select" class="custom-select"></select>
-        </div>
-        <div class="combat-toolbar-stats">
-          <span class="combat-stat-pill">Round <strong id="combat-turn-header-pill">1</strong></span>
-          <span class="combat-stat-pill">🎴 Deck: <strong id="combat-deck-header-pill">15</strong></span>
-          <span class="combat-stat-pill">🗑️ Discard: <strong id="combat-discard-header-pill">0</strong></span>
-        </div>
-      </div>
-
-      <!-- Battlefield Area -->
-      <div class="combat-arena-container">
-        <!-- Floating Result Modal / Banner -->
-        <div id="combat-result-overlay" class="combat-result-overlay" style="display: none;">
-          <div class="combat-result-modal">
-            <div id="combat-result-icon" class="combat-result-icon">🏆</div>
-            <h2 id="combat-result-title">VICTORY!</h2>
-            <p id="combat-result-subtitle">You vanquished Goblin Sentry in the dungeon depths!</p>
-            <div id="combat-result-rewards" class="combat-result-rewards">
-              <div class="reward-pill gold-reward">💰 +25 Gold</div>
-              <div class="reward-pill gem-reward">💎 +5 Gems</div>
-            </div>
-            <div class="combat-result-actions">
-              <button id="combat-overlay-next-btn" class="btn btn-primary">⚔️ Next Opponent</button>
-              <button id="combat-overlay-retry-btn" class="btn btn-secondary">🔄 Rematch</button>
-            </div>
-          </div>
+        <div class="spec-card">
+          <div class="spec-icon">🖥️</div>
+          <h4>Target Platforms</h4>
+          <p>Designed for <strong>PC (Windows / Steam)</strong> with responsive keyboard, mouse, and full gamepad controller support.</p>
         </div>
 
-        <div class="combat-battlefield">
-          <!-- Floating Damage Text Anchors -->
-          <div id="player-floating-anchor" class="combat-floating-anchor"></div>
-          <div id="enemy-floating-anchor" class="combat-floating-anchor"></div>
-
-          <!-- Player Hero Card -->
-          <div id="player-combat-card" class="combat-entity-card player-entity">
-            <div class="entity-card-header">
-              <div class="entity-identity">
-                <span id="player-hero-title" class="entity-role-tag">The Master of Balance</span>
-                <h3 id="player-hero-name" class="entity-name">Deck Monk</h3>
-              </div>
-              <span class="entity-side-badge hero-badge">HERO</span>
-            </div>
-
-            <div class="entity-body">
-              <div class="entity-avatar-frame hero-frame">
-                <img id="player-avatar-img" class="pixel-art" src="assets/heroes/DeckMonk.png" alt="Player Hero" />
-              </div>
-              <div class="entity-details">
-                <!-- Hero Strike Power Indicator -->
-                <div class="hero-strike-indicator">
-                  <span class="strike-icon">⚔️</span>
-                  <span>Auto Hero Strike: <strong id="player-hero-atk">10</strong> DMG</span>
-                  <span class="strike-auto-pill">ON END TURN</span>
-                </div>
-
-                <!-- Health Bar -->
-                <div class="combat-meter-group">
-                  <div class="meter-label-row">
-                    <span class="meter-title">Health</span>
-                    <strong id="player-hp-label" class="hp-text">100 / 100 HP</strong>
-                  </div>
-                  <div class="health-bar-wrapper">
-                    <div id="player-hp-ghost" class="health-bar-ghost" style="width: 100%;"></div>
-                    <div id="player-hp-fill" class="health-bar-fill player-hp" style="width: 100%;"></div>
-                  </div>
-                </div>
-
-                <!-- Mana Bar -->
-                <div class="combat-meter-group">
-                  <div class="meter-label-row">
-                    <span class="meter-title">Turn Mana</span>
-                    <strong id="player-mana-label" class="mana-text">15 / 15 Mana</strong>
-                  </div>
-                  <div class="mana-bar-wrapper">
-                    <div id="player-mana-fill" class="mana-bar-fill" style="width: 100%;"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Active Defenses & Status Badges -->
-            <div id="player-status-tray" class="combat-status-tray">
-              <span id="player-badge-armor" class="status-badge armor-badge">🛡️ Armor: <strong>0</strong></span>
-              <span id="player-badge-ward" class="status-badge ward-badge">🔮 Ward: <strong>0</strong></span>
-              <span id="player-badge-scrap" class="status-badge scrap-badge" style="display: none;">⚙️ Scrap: <strong>0</strong></span>
-              <span id="player-badge-burn" class="status-badge burn-badge" style="display: none;">🔥 Burn: <strong>0</strong></span>
-              <span id="player-badge-bleed" class="status-badge bleed-badge" style="display: none;">🩸 Bleed: <strong>0</strong></span>
-            </div>
-          </div>
-
-          <!-- Center Clash Column -->
-          <div class="combat-clash-column">
-            <div class="combat-turn-pillar">
-              <span class="pillar-label">ROUND</span>
-              <span id="combat-turn-num" class="pillar-number">1</span>
-            </div>
-            <div class="combat-vs-symbol">⚔️</div>
-            <div id="combat-phase-indicator" class="combat-phase-indicator phase-player">
-              Your Turn: Play Cards or End Turn
-            </div>
-          </div>
-
-          <!-- Enemy Entity Card -->
-          <div id="enemy-combat-card" class="combat-entity-card enemy-entity">
-            <div class="entity-card-header">
-              <div class="entity-identity">
-                <span id="enemy-rank-badge" class="entity-role-tag rank-normal">Dungeon Foe</span>
-                <h3 id="enemy-display-name" class="entity-name">Goblin Sentry</h3>
-              </div>
-              <span class="entity-side-badge foe-badge">FOE</span>
-            </div>
-
-            <div class="entity-body">
-              <div class="entity-avatar-frame enemy-frame">
-                <img id="enemy-avatar-img" class="pixel-art" src="assets/enemies/Goblin.png" alt="Dungeon Foe" />
-              </div>
-              <div class="entity-details">
-                <!-- Enemy Intent Preview -->
-                <div id="enemy-intent-preview" class="enemy-intent-indicator">
-                  <span class="intent-icon">⚠️</span>
-                  <span>Intent: <strong id="enemy-intent-val">Strikes for 7 Physical DMG</strong></span>
-                </div>
-
-                <!-- Health Bar -->
-                <div class="combat-meter-group">
-                  <div class="meter-label-row">
-                    <span class="meter-title">Health</span>
-                    <strong id="enemy-hp-label" class="hp-text">45 / 45 HP</strong>
-                  </div>
-                  <div class="health-bar-wrapper">
-                    <div id="enemy-hp-ghost" class="health-bar-ghost" style="width: 100%;"></div>
-                    <div id="enemy-hp-fill" class="health-bar-fill enemy-hp" style="width: 100%;"></div>
-                  </div>
-                </div>
-
-                <!-- Defense Summary -->
-                <div class="meter-label-row" style="margin-top: 0.5rem;">
-                  <span class="meter-title">Passive Mitigation</span>
-                  <span id="enemy-defense-summary" style="font-size: 0.8rem; color: #94a3b8;">Armor: 2 | Ward: 0</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Active Defenses & Status Badges -->
-            <div id="enemy-status-tray" class="combat-status-tray">
-              <span id="enemy-badge-armor" class="status-badge armor-badge">🛡️ Armor: <strong>2</strong></span>
-              <span id="enemy-badge-ward" class="status-badge ward-badge" style="display: none;">🔮 Ward: <strong>0</strong></span>
-              <span id="enemy-badge-burn" class="status-badge burn-badge" style="display: none;">🔥 Burn: <strong>0</strong></span>
-              <span id="enemy-badge-bleed" class="status-badge bleed-badge" style="display: none;">🩸 Bleed: <strong>0</strong></span>
-              <span id="enemy-badge-poison" class="status-badge poison-badge" style="display: none;">☠️ Poison: <strong>0</strong></span>
-              <span id="enemy-badge-stun" class="status-badge stun-badge" style="display: none;">⚡ Stunned</span>
-            </div>
-          </div>
+        <div class="spec-card">
+          <div class="spec-icon">👤</div>
+          <h4>Developer</h4>
+          <p>Created by indie game developer <strong>Emanuele Ellul</strong>, crafting hand-drawn pixel art and deterministic card combat.</p>
         </div>
 
-        <!-- Hand Deck Header & End Turn Bar -->
-        <div class="combat-hand-bar">
-          <div class="combat-hand-meta">
-            <span class="meta-item">🎴 In Hand: <strong id="hand-count-label">5</strong>/5</span>
-            <span class="meta-item">📚 Draw Pile: <strong id="deck-count-label">15</strong></span>
-            <span class="meta-item">🗑️ Discard: <strong id="discard-count-label">0</strong></span>
-            <span class="meta-tip">💡 Click an affordable card to play it</span>
-          </div>
-
-          <div class="combat-actions-wrap">
-            <button id="combat-end-turn-btn" class="btn combat-end-turn-btn">
-              <span class="btn-sword">⚔️</span>
-              <span class="btn-text">End Turn & Hero Strike</span>
-              <span class="btn-arrow">➔</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Hand Shelf -->
-        <div id="combat-hand-cards" class="combat-hand-shelf"></div>
-
-        <!-- Chronicle Combat Log -->
-        <div class="combat-chronicle-wrap">
-          <div class="chronicle-header">
-            <span>📜 Tactical Event Chronicle</span>
-            <span style="font-size: 0.72rem; color: var(--text-faint);">Live combat log</span>
-          </div>
-          <div id="combat-log-box" class="chronicle-log-box"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
-         TAB 6: DUNGEON MAP
-         ========================================== -->
-    <section id="tab-dungeon" class="tab-pane">
-      <div class="section-header">
-        <div class="section-title-wrap">
-          <h2><span>🗺️</span> 3-Act Dungeon Map</h2>
-          <p>Explore procedural floor layouts, node pathways, and authentic dungeon mechanics.</p>
-        </div>
-      </div>
-
-      <!-- Act Navigation Tabs -->
-      <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
-        <button class="filter-pill act-tab-btn active" data-act="1">Act 1: The Descent (12 Floors)</button>
-        <button class="filter-pill act-tab-btn" data-act="2">Act 2: The Core & Trials (10 Floors)</button>
-        <button class="filter-pill act-tab-btn" data-act="3">Act 3: The Primordial Summit (18 Floors)</button>
-      </div>
-
-      <!-- Interactive Map Visualizer -->
-      <div id="dungeon-map-visualizer"></div>
-
-      <!-- The Gambler Minigames -->
-      <div class="section-header">
-        <div class="section-title-wrap">
-          <h2><span>🎲</span> The Gambler's Den (Risk vs. Reward)</h2>
-          <p>Wager Gold for 2.5x Gems or spin the Wheel of Fate. Beware: foolish gambles can cost your hero's life!</p>
-        </div>
-      </div>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 3.5rem;">
-        <!-- 50/50 Coin Flip -->
-        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem;">
-          <h4 style="color: #fff; font-size: 1.15rem; margin-bottom: 0.5rem;">🪙 Wager Gold for Gems (50/50 Coin Flip)</h4>
-          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.25rem;">
-            50% chance to win <strong>2.5x your wager in Gems</strong>! 50% chance to lose your wager.
-          </p>
-          <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
-            <input type="number" id="gambler-wager-amount" value="50" min="10" step="10" class="custom-select" style="flex: 1;" />
-            <button id="gambler-coin-flip-btn" class="btn btn-primary">Flip Coin!</button>
-          </div>
-          <div id="gambler-result-box" style="min-height: 40px;"></div>
-        </div>
-
-        <!-- Wheel of Fate -->
-        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem;">
-          <h4 style="color: #fff; font-size: 1.15rem; margin-bottom: 0.5rem;">🎡 Wheel of Fate Roulette</h4>
-          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.25rem;">
-            Costs 30 Gold per spin. Jackpots award +150 Gems or +75 Gold!
-          </p>
-          <button id="gambler-wheel-spin-btn" class="btn btn-primary" style="width: 100%; justify-content: center;">
-            Spin Wheel (🪙 30 Gold)
+        <div class="spec-card wishlist-card">
+          <div class="spec-icon">⭐</div>
+          <h4>Join The Journey</h4>
+          <p>Track development updates, test public builds, and support the game by adding it to your wishlist.</p>
+          <button class="btn btn-primary btn-wishlist" data-action="wishlist" style="margin-top: 1rem; width: 100%; justify-content: center;">
+            ⭐ Wishlist on Steam
           </button>
         </div>
       </div>
-
-      <!-- 12 Mystery Events Carousel -->
-      <div class="section-header">
-        <div class="section-title-wrap">
-          <h2><span>❓</span> All 12 Mystery Events Catalog</h2>
-          <p>Interactive narrative dilemmas encountered at Mystery nodes across the dungeon.</p>
-        </div>
-      </div>
-      <div id="mystery-events-carousel" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;"></div>
     </section>
 
   </main>
 
-  <!-- Card Detail Modal Dialog -->
+  <!-- Card Detail Modal Dialog (Clean Inspector) -->
   <div id="card-detail-modal" class="modal-overlay">
     <div class="modal-card-dialog">
       <button id="card-modal-close" class="modal-close-btn">&times;</button>
       <div id="card-detail-content" style="display: contents;"></div>
-    </div>
-  </div>
-
-  <!-- Pack Opening Scene Modal -->
-  <div id="pack-opening-modal" class="pack-open-modal">
-    <div class="pack-opening-stage">
-      <h2 id="opened-pack-title" style="font-size: 2rem; color: #fff; margin-bottom: 0.5rem;">Opening Pack...</h2>
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Click cards individually to flip, or reveal all at once!</p>
-
-      <div id="pack-opened-shelf" class="opened-cards-shelf"></div>
-
-      <div style="display: flex; gap: 1rem;">
-        <button id="pack-reveal-all-btn" class="btn btn-secondary">Reveal All Cards</button>
-        <button id="pack-modal-close-btn" class="btn btn-primary">Done / Collect Cards</button>
-      </div>
     </div>
   </div>
 
@@ -746,9 +482,19 @@
         </div>
       </div>
 
+      <div class="footer-links">
+        <a href="#overview">About</a>
+        <a href="#mechanics">Mechanics</a>
+        <a href="#heroes">Heroes</a>
+        <a href="#compendium">Cards</a>
+        <a href="#relics">Relics</a>
+        <a href="#dungeon">Dungeon</a>
+        <a href="#specs">Specs</a>
+      </div>
+
       <div class="footer-credits">
         <p>Decked Out — Built with Godot 4.7 Forward+.</p>
-        <p style="margin-top: 0.25rem;">Ready to deploy on GitHub Pages with zero external dependencies.</p>
+        <p style="margin-top: 0.25rem;">Official Companion Website. All game assets &amp; characters &copy; Emanuele Ellul.</p>
       </div>
     </div>
   </footer>
@@ -757,11 +503,8 @@
   <script src="js/data.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/compendium.js"></script>
-  <script src="js/pack-simulator.js"></script>
-  <script src="js/deck-builder.js"></script>
-  <script src="js/combat-demo.js"></script>
-  <script src="js/dungeon-map.js"></script>
   <script src="js/heroes-relics.js"></script>
+  <script src="js/dungeon-map.js"></script>
   <script src="js/app.js"></script>
 
 </body>

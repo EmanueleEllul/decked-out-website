@@ -1,111 +1,130 @@
-// Decked Out - Interactive Dungeon Map, Encounters & Gambler Minigames
-// Features Act 1-3 branching paths, Mystery Event simulator & Gambler wagers
+// Decked Out - Dungeon, Bestiary & Mystery Events Showcase
 
 class DungeonMapManager {
   constructor() {
     this.acts = window.GAME_ACTS || [];
     this.mysteryEvents = window.MYSTERY_EVENTS || [];
-    this.activeAct = 1;
 
-    try {
-      localStorage.removeItem('decked_god_hp');
-    } catch(e) {}
+    this.commonFoes = [
+      {
+        name: "Goblin Scavenger",
+        title: "Pack Raider",
+        hp: 35,
+        atk: 7,
+        armor: 2,
+        ward: 0,
+        sprite: "assets/enemies/Goblin.png",
+        desc: "Fast, scurrying scavengers that strip scrap from fallen adventurers. Attacks in sudden aggressive bursts."
+      },
+      {
+        name: "Shadow Bandit",
+        title: "Subterranean Outlaw",
+        hp: 55,
+        atk: 10,
+        armor: 4,
+        ward: 2,
+        sprite: "assets/enemies/Bandit.png",
+        desc: "Ruthless brigands lurking in dungeon choke points. Uses Bleed-inducing blades and swift evasion."
+      },
+      {
+        name: "Corrupted Cultist",
+        title: "Occult Ritualist",
+        hp: 48,
+        atk: 12,
+        armor: 0,
+        ward: 8,
+        sprite: "assets/enemies/Cultist.png",
+        desc: "Chants dark prayers in the catacombs. Casts high-damage magical spells that test your Ward mitigation."
+      },
+      {
+        name: "Runic Gnome",
+        title: "Clockwork Saboteur",
+        hp: 40,
+        atk: 9,
+        armor: 3,
+        ward: 5,
+        sprite: "assets/enemies/Gnome.png",
+        desc: "Tinkers with erratic arcane devices that apply Stun and volatile elemental damage."
+      },
+      {
+        name: "Elite Iron Knight",
+        title: "Dungeon Sentinel",
+        hp: 95,
+        atk: 16,
+        armor: 14,
+        ward: 4,
+        sprite: "assets/enemies/EliteKnight.png",
+        desc: "Heavily armored guardian in runic plate. Requires armor-piercing attacks or strong magical spells to vanquish."
+      }
+    ];
 
     this.init();
   }
 
   init() {
-    this.bindEvents();
-    this.renderActMap(this.activeAct);
+    this.renderBestiary();
     this.renderMysteryEvents();
   }
 
-  bindEvents() {
-    // Act selector tabs
-    const actBtns = document.querySelectorAll('.act-tab-btn');
-    actBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        actBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        this.activeAct = parseInt(btn.dataset.act, 10);
-        window.audioMgr.playSFX('buttonClick');
-        this.renderActMap(this.activeAct);
-      });
-    });
-
-    // Gambler Coin Flip
-    const coinFlipBtn = document.getElementById('gambler-coin-flip-btn');
-    if (coinFlipBtn) {
-      coinFlipBtn.addEventListener('click', () => this.playCoinFlip());
-    }
-
-    // Gambler Wheel Spin
-    const wheelSpinBtn = document.getElementById('gambler-wheel-spin-btn');
-    if (wheelSpinBtn) {
-      wheelSpinBtn.addEventListener('click', () => this.spinWheelOfFate());
-    }
-  }
-
-  renderActMap(actNum) {
-    const actData = this.acts.find(a => a.act === actNum) || this.acts[0];
-    const container = document.getElementById('dungeon-map-visualizer');
+  renderBestiary() {
+    const container = document.getElementById('bestiary-grid-container');
     if (!container) return;
 
-    const nodeIcons = [
-      { type: 'Start', icon: '🚩', name: 'Expedition Start' },
-      { type: 'Combat', icon: '⚔️', name: 'Normal Combat (25 Gold, 5 Gems)' },
-      { type: 'Campsite', icon: '🏕️', name: 'Rest / Scavenge Node' },
-      { type: 'Mystery', icon: '❓', name: 'Mystery Event Dilemma' },
-      { type: 'Shop', icon: '🛒', name: 'In-Run Card Shop' },
-      { type: 'Elite', icon: '💀', name: 'Elite Combat Encounter' },
-      { type: 'Trader', icon: '💼', name: 'The Trader (Card Barter)' },
-      { type: 'Chemist', icon: '🧪', name: 'The Chemist (Alchemy)' },
-      { type: 'Gambler', icon: '🎲', name: 'The Gambler (Wagers)' },
-      { type: 'Relic', icon: '🏺', name: 'Relic Chamber' },
-      { type: 'Boss', icon: '👑', name: 'Act Climax Boss' }
-    ];
+    // Collect all bosses from all acts
+    const allBosses = this.acts.flatMap(a =>
+      (a.bossPool || []).map(b => ({ ...b, act: a.act, actName: a.name }))
+    );
 
     let html = `
-      <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
-          <div>
-            <h3 style="color: #fff; font-size: 1.4rem;">Act ${actData.act}: ${actData.name}</h3>
-            <span style="color: var(--text-muted); font-size: 0.85rem;">${actData.floors} Floors • Theme: ${actData.theme}</span>
-          </div>
-          <span class="tag-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">
-            Inter-Act Rule: Discard Shuffles into Deck!
-          </span>
+      <div class="bestiary-category-wrap">
+        <h4 class="bestiary-category-title">👑 Act Climax Bosses</h4>
+        <div class="bestiary-grid">
+          ${allBosses.map(b => `
+            <div class="foe-card boss-card">
+              <div class="foe-card-top">
+                <div class="foe-avatar-box boss-avatar">
+                  <img src="${b.sprite}" alt="${b.name}" class="pixel-art" />
+                </div>
+                <div class="foe-identity">
+                  <span class="foe-rank-tag boss-rank">ACT ${b.act} — ${b.actName}</span>
+                  <h4 class="foe-name">${b.name}</h4>
+                  <div class="foe-stats-mini">
+                    <span class="hp-stat">❤️ ${b.hp} HP</span>
+                    <span class="atk-stat">⚔️ ${b.atk} ATK</span>
+                    ${b.armor > 0 ? `<span class="armor-stat">🛡️ ${b.armor} Armor</span>` : ''}
+                    ${b.ward > 0 ? `<span class="ward-stat">🔮 ${b.ward} Ward</span>` : ''}
+                  </div>
+                </div>
+              </div>
+              <p class="foe-desc">${b.desc}</p>
+            </div>
+          `).join('')}
         </div>
+      </div>
 
-        <div style="display: flex; gap: 0.75rem; overflow-x: auto; padding: 1.5rem 0.5rem; scrollbar-width: thin;">
-    `;
-
-    // Render floor nodes
-    for (let f = 0; f <= actData.floors; f++) {
-      let node = nodeIcons[1]; // default combat
-      if (f === 0) node = nodeIcons[0]; // Start
-      else if (f === actData.floors) node = nodeIcons[10]; // Boss
-      else if (f % 4 === 0) node = nodeIcons[2]; // Campsite
-      else if (f === 3 || f === 7) node = nodeIcons[3]; // Mystery
-      else if (f === 5) node = nodeIcons[4]; // Shop
-      else if (f === 6) node = nodeIcons[5]; // Elite
-      else if (f === 8) node = nodeIcons[8]; // Gambler
-      else if (f === 9) node = nodeIcons[6]; // Trader
-      else if (f === 11) node = nodeIcons[7]; // Chemist
-
-      html += `
-        <div class="map-node-item" title="Floor ${f}: ${node.name}" style="flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: pointer; transition: transform 0.2s ease;">
-          <div style="width: 48px; height: 48px; border-radius: 50%; background: ${f === actData.floors ? 'radial-gradient(circle, #ef4444, #991b1b)' : 'var(--bg-surface-elevated)'}; border: 2px solid ${f === actData.floors ? '#fca5a5' : 'var(--border-strong)'}; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; box-shadow: 0 4px 10px rgba(0,0,0,0.4);">
-            ${node.icon}
-          </div>
-          <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 700;">F${f}</span>
-          <span style="font-size: 0.65rem; color: var(--text-faint); max-width: 60px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${node.type}</span>
-        </div>
-        ${f < actData.floors ? '<div style="align-self: center; color: #334155; font-size: 1.2rem;">➔</div>' : ''}
-      `;
-    }
-
-    html += `
+      <div class="bestiary-category-wrap" style="margin-top: 2.5rem;">
+        <h4 class="bestiary-category-title">👹 Dungeon Encounters</h4>
+        <div class="bestiary-grid">
+          ${this.commonFoes.map(f => `
+            <div class="foe-card">
+              <div class="foe-card-top">
+                <div class="foe-avatar-box">
+                  <img src="${f.sprite}" alt="${f.name}" class="pixel-art" />
+                </div>
+                <div class="foe-identity">
+                  <span class="foe-rank-tag">${f.title}</span>
+                  <h4 class="foe-name">${f.name}</h4>
+                  <div class="foe-stats-mini">
+                    <span class="hp-stat">❤️ ${f.hp} HP</span>
+                    <span class="atk-stat">⚔️ ${f.atk} ATK</span>
+                    ${f.armor > 0 ? `<span class="armor-stat">🛡️ ${f.armor} Armor</span>` : ''}
+                    ${f.ward > 0 ? `<span class="ward-stat">🔮 ${f.ward} Ward</span>` : ''}
+                  </div>
+                </div>
+              </div>
+              <p class="foe-desc">${f.desc}</p>
+            </div>
+          `).join('')}
         </div>
       </div>
     `;
@@ -118,121 +137,22 @@ class DungeonMapManager {
     if (!container) return;
 
     container.innerHTML = this.mysteryEvents.map(evt => `
-      <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column;">
-        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
-          <span style="font-size: 1.6rem;">${evt.icon}</span>
-          <h4 style="color: #fff; font-size: 1.05rem;">${evt.name}</h4>
+      <div class="mystery-event-card">
+        <div class="mystery-event-header">
+          <span class="mystery-event-icon">${evt.icon}</span>
+          <h4 class="mystery-event-title">${evt.name}</h4>
         </div>
-        <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 1rem; font-style: italic; flex: 1;">
-          "${evt.lore}"
-        </p>
-        <div style="display: flex; flex-direction: column; gap: 0.4rem;">
-          ${evt.choices.map((c, i) => `
-            <button class="btn btn-secondary mystery-choice-btn" data-event-id="${evt.id}" data-choice-index="${i}" style="font-size: 0.78rem; padding: 0.45rem 0.75rem; text-align: left; justify-content: flex-start; line-height: 1.3;">
-              <strong>${c.label}</strong>: <span style="color: #94a3b8;">${c.outcome}</span>
-            </button>
+        <p class="mystery-event-lore">"${evt.lore}"</p>
+        <div class="mystery-choices-list">
+          ${evt.choices.map(c => `
+            <div class="mystery-choice-preview">
+              <strong class="choice-label">${c.label}</strong>
+              <span class="choice-outcome">${c.outcome}</span>
+            </div>
           `).join('')}
         </div>
       </div>
     `).join('');
-
-    container.querySelectorAll('.mystery-choice-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const evtId = parseInt(btn.dataset.eventId, 10);
-        const choiceIdx = parseInt(btn.dataset.choiceIndex, 10);
-        const evt = this.mysteryEvents.find(e => e.id === evtId);
-        if (evt && evt.choices[choiceIdx]) {
-          const choice = evt.choices[choiceIdx];
-          window.audioMgr.playSFX('buttonClick');
-          if (choice.effect.gold && window.packSim) {
-            window.packSim.gold = Math.max(0, window.packSim.gold + choice.effect.gold);
-          }
-          if (choice.effect.gems && window.packSim) {
-            window.packSim.gems = Math.max(0, window.packSim.gems + choice.effect.gems);
-            window.packSim.saveState();
-          }
-          if (window.showToast) {
-            window.showToast(`✨ ${choice.label} resolved: ${choice.outcome}`);
-          }
-        }
-      });
-    });
-  }
-
-  playCoinFlip() {
-    const wagerInput = document.getElementById('gambler-wager-amount');
-    const wager = parseInt(wagerInput?.value || '50', 10);
-
-    if (!window.packSim || window.packSim.gold < wager) {
-      if (window.showToast) window.showToast('⚠️ Not enough Gold to place this wager!', 'warning');
-      return;
-    }
-
-    window.packSim.gold -= wager;
-    window.audioMgr.playSFX('buttonClick');
-
-    const win = Math.random() < 0.5;
-    const resultBox = document.getElementById('gambler-result-box');
-
-    if (win) {
-      const winnings = Math.round(wager * 2.5);
-      window.packSim.gems += winnings;
-      window.packSim.saveState();
-      window.audioMgr.playSFX('goldGain');
-      if (resultBox) {
-        resultBox.innerHTML = `
-          <div style="color: #4ade80; font-weight: 700; font-size: 1.1rem;">
-            🪙 HEADS! YOU WIN! Won ${winnings} Gems (2.5x Multiplier)!
-          </div>
-        `;
-      }
-    } else {
-      window.packSim.saveState();
-      window.audioMgr.playSFX('enemyHit');
-      if (resultBox) {
-        resultBox.innerHTML = `
-          <div style="color: #f87171; font-weight: 700; font-size: 1.1rem;">
-            💔 TAILS! Bad Luck! Lost ${wager} Gold wager.
-          </div>
-        `;
-      }
-    }
-  }
-
-  spinWheelOfFate() {
-    if (!window.packSim || window.packSim.gold < 30) {
-      if (window.showToast) window.showToast('⚠️ Wheel spin costs 30 Gold!', 'warning');
-      return;
-    }
-
-    window.packSim.gold -= 30;
-    window.packSim.saveState();
-    window.audioMgr.playSFX('buttonClick');
-
-    const wheelOutcomes = [
-      { label: "💎 Jackpot! +150 Gems", gems: 150 },
-      { label: "💰 Gold Rush! +75 Gold", gold: 75 },
-      { label: "⚡ Alchemical Surge! Card Upgraded", gems: 25 },
-      { label: "❤️ Life Elixir! +25 Health", gold: 15 },
-      { label: "☠️ Bad Luck! Suffer -15 HP damage", hpLoss: 15 },
-      { label: "💸 Pickpocket! Lost 40 Gold", goldLoss: 40 }
-    ];
-
-    const pick = wheelOutcomes[Math.floor(Math.random() * wheelOutcomes.length)];
-    if (pick.gems) window.packSim.gems += pick.gems;
-    if (pick.gold) window.packSim.gold += pick.gold;
-    if (pick.goldLoss) window.packSim.gold = Math.max(0, window.packSim.gold - pick.goldLoss);
-    window.packSim.saveState();
-
-    window.audioMgr.playFanfare('Legendary');
-    const resultBox = document.getElementById('gambler-result-box');
-    if (resultBox) {
-      resultBox.innerHTML = `
-        <div style="color: #fbbf24; font-weight: 700; font-size: 1.1rem;">
-          🎡 WHEEL STOPPED ON: ${pick.label}
-        </div>
-      `;
-    }
   }
 }
 

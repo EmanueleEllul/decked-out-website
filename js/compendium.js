@@ -274,9 +274,16 @@ class CompendiumManager {
           </div>
         </div>
 
+        <div style="background: var(--bg-deep); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 0.85rem 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-size: 0.82rem; color: var(--text-muted);">
+            Mitigation Type: <strong style="color: ${['Fire','Frost','Arcane','Shadow','Holy'].includes(card.damageType) ? 'var(--ward-cyan)' : 'var(--armor-iron)'};">${['Fire','Frost','Arcane','Shadow','Holy'].includes(card.damageType) ? '🔮 Magical (Absorbed by Ward)' : '🛡️ Physical (Absorbed by Armor)'}</strong>
+          </span>
+          <span style="font-size: 0.82rem; color: var(--primary); font-weight: 700;">Series 1 • Core</span>
+        </div>
+
         <div style="display: flex; gap: 1rem;">
-          <button id="modal-add-to-deck-btn" class="btn btn-primary" style="flex: 1;">
-            ➕ Add Card to Deck
+          <button id="modal-close-action-btn" class="btn btn-secondary" style="flex: 1; justify-content: center;">
+            ✕ Close Inspector
           </button>
         </div>
       </div>
@@ -284,13 +291,9 @@ class CompendiumManager {
 
     modal.classList.add('open');
 
-    const addBtn = document.getElementById('modal-add-to-deck-btn');
-    if (addBtn) {
-      addBtn.addEventListener('click', () => {
-        if (window.deckBuilder) {
-          window.deckBuilder.addCard(card.id);
-        }
-      });
+    const closeBtn = document.getElementById('modal-close-action-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => this.closeModal());
     }
   }
 

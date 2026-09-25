@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DECKED OUT - Dungeon & Bestiary | Official Roguelike TCG</title>
+  <meta name="description" content="Explore the 3 acts, climax bosses, and animated dungeon encounters of Decked Out.">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/card-foil.css?v=3">
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Header -->
+  <header class="site-header" id="top">
+    <div class="header-container">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-icon">
+          <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
+        </div>
+        <div class="brand-text">
+          <h1>DECKED OUT</h1>
+          <span>ROGUELIKE TCG</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Overview</a></li>
+          <li><a href="mechanics.html" class="nav-link">Mechanics</a></li>
+          <li><a href="heroes.html" class="nav-link">Heroes</a></li>
+          <li><a href="cards.html" class="nav-link">Cards</a></li>
+          <li><a href="relics.html" class="nav-link">Relics</a></li>
+          <li><a href="dungeon.html" class="nav-link active">Dungeon</a></li>
+          <li><a href="specs.html" class="nav-link">Game Info</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="header-actions">
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn-wishlist" title="Wishlist Decked Out on Steam">
+          <span>⭐</span> Wishlist on Steam
+        </a>
+        <button id="toggle-sfx-btn" class="audio-btn" title="Toggle Sound Effects">🔊</button>
+        <button id="toggle-bgm-btn" class="audio-btn" title="Toggle Ambient Music">🎼</button>
+        <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Website Content -->
+  <main class="main-wrapper">
+
+    <!-- ==========================================
+         PAGE: THE DUNGEON & BESTIARY
+         ========================================== -->
+    <section class="site-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-kicker">THE EXPEDITION</span>
+          <h2><span>🗺️</span> 3-Act Dungeon &amp; Bestiary</h2>
+          <p>Ascend through 40 challenging procedural floors and face the terrifying guardians of the deep.</p>
+        </div>
+      </div>
+
+      <!-- Bestiary Grid Container -->
+      <div id="bestiary-grid-container"></div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="brand-wrapper">
+        <div class="brand-icon">
+          <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
+        </div>
+        <div class="brand-text">
+          <h1>DECKED OUT</h1>
+          <span>ROGUELIKE TCG</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">Overview</a>
+        <a href="mechanics.html">Mechanics</a>
+        <a href="heroes.html">Heroes</a>
+        <a href="cards.html">Cards</a>
+        <a href="relics.html">Relics</a>
+        <a href="dungeon.html">Dungeon</a>
+        <a href="specs.html">Game Info</a>
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Steam</a>
+      </div>
+
+      <div class="footer-credits">
+        <p>Decked Out — Built with Godot 4.7 Forward+.</p>
+        <p style="margin-top: 0.25rem;">Official Companion Website. All game assets &amp; characters &copy; Emanuele Ellul.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js?v=3"></script>
+  <script src="js/audio.js?v=3"></script>
+  <script src="js/dungeon-map.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
+
+</body>
+</html>

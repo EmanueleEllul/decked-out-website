@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DECKED OUT - Official Roguelike Deck-Building RPG Website</title>
+  <title>DECKED OUT - Overview | Official Roguelike TCG</title>
   <meta name="description" content="Official website for Decked Out, a single-player roguelike deckbuilding RPG built in Godot 4.7 Forward+. Explore the 62-card compendium, 7 heroes, 3-act dungeon descent, and tactical combat mechanics.">
   <link rel="icon" type="image/png" href="assets/icon.png">
   
@@ -21,7 +21,7 @@
   <!-- Top Sticky Navigation Header -->
   <header class="site-header" id="top">
     <div class="header-container">
-      <a href="#hero" class="brand-wrapper">
+      <a href="index.html" class="brand-wrapper">
         <div class="brand-icon">
           <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
         </div>
@@ -34,13 +34,13 @@
       <!-- Navigation Links -->
       <nav>
         <ul class="nav-links">
-          <li><a href="#overview" class="nav-link">Overview</a></li>
-          <li><a href="#mechanics" class="nav-link">Mechanics</a></li>
-          <li><a href="#heroes" class="nav-link">Heroes</a></li>
-          <li><a href="#compendium" class="nav-link">Cards</a></li>
-          <li><a href="#relics" class="nav-link">Relics</a></li>
-          <li><a href="#dungeon" class="nav-link">Dungeon</a></li>
-          <li><a href="#specs" class="nav-link">Game Info</a></li>
+          <li><a href="index.html" class="nav-link active">Overview</a></li>
+          <li><a href="mechanics.html" class="nav-link">Mechanics</a></li>
+          <li><a href="heroes.html" class="nav-link">Heroes</a></li>
+          <li><a href="cards.html" class="nav-link">Cards</a></li>
+          <li><a href="relics.html" class="nav-link">Relics</a></li>
+          <li><a href="dungeon.html" class="nav-link">Dungeon</a></li>
+          <li><a href="specs.html" class="nav-link">Game Info</a></li>
         </ul>
       </nav>
 
@@ -72,15 +72,13 @@
           <span>⭐ Wishlist on Steam</span>
           <span>➔</span>
         </a>
-        <a href="#compendium" class="btn btn-secondary">
+        <a href="cards.html" class="btn btn-secondary">
           <span>🃏 Explore 62 Cards</span>
         </a>
-        <a href="#heroes" class="btn btn-secondary">
+        <a href="heroes.html" class="btn btn-secondary">
           <span>🛡️ Meet The Heroes</span>
         </a>
       </div>
-
-
     </div>
   </header>
 
@@ -88,9 +86,9 @@
   <main class="main-wrapper">
 
     <!-- ==========================================
-         SECTION 1: GAME OVERVIEW & PILLARS
+         PAGE: GAME OVERVIEW & PILLARS
          ========================================== -->
-    <section id="overview" class="site-section">
+    <section class="site-section">
       <div class="section-header center">
         <div class="section-title-wrap">
           <span class="section-kicker">THE PREMISE</span>
@@ -116,352 +114,41 @@
 
       <!-- 4 Core Pillars Grid -->
       <div class="pillars-grid">
-        <div class="pillar-card">
+        <a href="mechanics.html" class="pillar-card" style="text-decoration: none; color: inherit;">
           <div class="pillar-icon">⚔️</div>
           <h3 class="pillar-title">Deterministic Combat</h3>
           <p class="pillar-desc">
             No hidden roll RNG. Physical attacks test <strong>Armor</strong>, while magical spells test <strong>Ward</strong>. Plan every move with mathematical clarity: <code>Damage = max(1, Attack - Defense)</code>.
           </p>
-        </div>
+        </a>
 
-        <div class="pillar-card">
+        <a href="heroes.html" class="pillar-card" style="text-decoration: none; color: inherit;">
           <div class="pillar-icon">🧙‍♂️</div>
           <h3 class="pillar-title">7 Asymmetric Champions</h3>
           <p class="pillar-desc">
             From the serene martial arts of the Deck Monk to the frantic mechanical scavenging of the Scrap Goblin, each hero features custom baseline stats, unique passives, and dedicated archetypes.
           </p>
-        </div>
+        </a>
 
-        <div class="pillar-card">
+        <a href="dungeon.html" class="pillar-card" style="text-decoration: none; color: inherit;">
           <div class="pillar-icon">🗺️</div>
           <h3 class="pillar-title">Branching 3-Act Descent</h3>
           <p class="pillar-desc">
-            Navigate 40 floors through Catacombs, Molten Core, and Astral Summits. Decide your route between battles, elite encounters, wandering merchants, alchemists, and narrative mystery dilemmas.
+            Navigate 40 floors through Catacombs, Molten Core, and Astral Summits. Confront deadly dungeon encounters and conquer imposing Act Climax Bosses.
           </p>
-        </div>
+        </a>
 
-        <div class="pillar-card">
+        <a href="relics.html" class="pillar-card" style="text-decoration: none; color: inherit;">
           <div class="pillar-icon">🏺</div>
-          <h3 class="pillar-title">Relics & Status Synergies</h3>
+          <h3 class="pillar-title">Relics &amp; Status Synergies</h3>
           <p class="pillar-desc">
             Stack devastating status ailments including <strong>Burn</strong>, <strong>Bleed</strong>, <strong>Poison</strong>, and <strong>Stun</strong>. Pair elemental combos with 9 ancient relics to shatter enemy resistances.
           </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
-         SECTION 2: GAMEPLAY & COMBAT MECHANICS
-         ========================================== -->
-    <section id="mechanics" class="site-section">
-      <div class="section-header center">
-        <div class="section-title-wrap">
-          <span class="section-kicker">CORE SYSTEMS</span>
-          <h2><span>⚔️</span> Combat & Gameplay Mechanics</h2>
-          <p>Transparent mitigation formulas and deep tactical status combinations.</p>
-        </div>
-      </div>
-
-      <!-- Deterministic Damage Breakdown -->
-      <div class="mechanics-formula-card">
-        <div class="formula-banner">
-          <span class="formula-label">The Mitigation Formula:</span>
-          <code class="formula-code">Final Damage = max(1, Base Damage - Relevant Defense)</code>
-        </div>
-        <p class="formula-explanation">
-          Every strike in Decked Out respects absolute defense thresholds. You will always deal at least 1 chipping damage on a successful hit, rewarding tactical planning over random critical rolls.
-        </p>
-
-        <div class="mitigation-dual-grid">
-          <div class="mitigation-card phys">
-            <div class="mitigation-header">
-              <span class="mitigation-icon">🛡️</span>
-              <div>
-                <h4>Physical Mitigation: Armor</h4>
-                <span class="types-tag">Slash • Blunt • Piercing • Ballistic</span>
-              </div>
-            </div>
-            <p>
-              Armor directly absorbs incoming physical blows. Heavy warriors like the Elite Knight wield thick armor plating that requires armor-shredding attacks or pure magical bypassing.
-            </p>
-          </div>
-
-          <div class="mitigation-card magic">
-            <div class="mitigation-header">
-              <span class="mitigation-icon">🔮</span>
-              <div>
-                <h4>Magical Mitigation: Ward</h4>
-                <span class="types-tag">Fire • Frost • Arcane • Shadow • Holy</span>
-              </div>
-            </div>
-            <p>
-              Ward generates an ethereal magical barrier that deflects arcane spells and elemental incantations. Cultists and ancient liches rely on Ward to shield against destructive magic.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tactical Status Ailments Grid -->
-      <div class="status-ailments-container">
-        <h3 class="subheading-center">Tactical Status Ailments & Resources</h3>
-        <div class="status-grid">
-          <div class="status-card">
-            <div class="status-top">
-              <span class="status-icon">🔥</span>
-              <h4>Burn</h4>
-            </div>
-            <p>Deals searing damage directly to health at the end of each round. Perfect for melting high-armor foes over extended battles.</p>
-          </div>
-
-          <div class="status-card">
-            <div class="status-top">
-              <span class="status-icon">🩸</span>
-              <h4>Bleed</h4>
-            </div>
-            <p>Inflicts punishing internal hemorrhaging. Each time the afflicted enemy attacks, they suffer immediate recoil damage.</p>
-          </div>
-
-          <div class="status-card">
-            <div class="status-top">
-              <span class="status-icon">☠️</span>
-              <h4>Poison</h4>
-            </div>
-            <p>A corrosive venom that pierces straight through defensive barriers, chipping away vitality round after round.</p>
-          </div>
-
-          <div class="status-card">
-            <div class="status-top">
-              <span class="status-icon">⚡</span>
-              <h4>Stun</h4>
-            </div>
-            <p>Overwhelms and disorients the target, completely disabling their upcoming turn intent and giving your hero breathing room.</p>
-          </div>
-
-          <div class="status-card">
-            <div class="status-top">
-              <span class="status-icon">⚙️</span>
-              <h4>Scrap</h4>
-            </div>
-            <p>A unique mechanical resource scavenged by the Scrap Goblin from discarded cards to construct and upgrade devastating contraptions.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
-         SECTION 3: HEROES ROSTER
-         ========================================== -->
-    <section id="heroes" class="site-section">
-      <div class="section-header">
-        <div class="section-title-wrap">
-          <span class="section-kicker">CHAMPIONS OF THE LABYRINTH</span>
-          <h2><span>🛡️</span> Meet The Heroes</h2>
-          <p>Select any champion to inspect their authentic pixel art portrait, baseline stats, signature trait, and playstyle lore.</p>
-        </div>
-      </div>
-
-      <div class="heroes-workbench">
-        <!-- Hero Roster Selector Shelf -->
-        <div class="heroes-roster-column">
-          <h3 class="roster-headline">Choose Champion</h3>
-          <div id="heroes-roster-shelf" class="heroes-roster-list"></div>
-        </div>
-
-        <!-- Hero Profile Card Display -->
-        <div class="hero-detail-column">
-          <div class="hero-detail-card">
-            <div class="hero-detail-top">
-              <div id="hero-detail-avatar" class="hero-avatar-display"></div>
-              <div class="hero-title-meta">
-                <span id="hero-detail-title" class="hero-role-title">Title</span>
-                <h2 id="hero-detail-name" class="hero-character-name">Hero Name</h2>
-                <span id="hero-detail-unlock" class="hero-unlock-badge">Unlock Condition</span>
-              </div>
-            </div>
-
-            <!-- Base Stats Grid -->
-            <div class="hero-stats-matrix">
-              <div class="hero-stat-cell hp">
-                <span class="stat-cell-label">Life Pool</span>
-                <strong id="hero-scaled-hp" class="stat-cell-value">100 HP</strong>
-              </div>
-              <div class="hero-stat-cell atk">
-                <span class="stat-cell-label">Hero Strike</span>
-                <strong id="hero-scaled-atk" class="stat-cell-value">10 ATK</strong>
-              </div>
-              <div class="hero-stat-cell mana">
-                <span class="stat-cell-label">Turn Mana</span>
-                <strong id="hero-scaled-mana" class="stat-cell-value">15 Mana</strong>
-              </div>
-            </div>
-
-            <!-- Passive Trait Box -->
-            <div class="hero-passive-box">
-              <h4 class="box-label">Signature Trait &amp; Passives</h4>
-              <p id="hero-detail-passive" class="passive-desc"></p>
-              <div class="affinity-row">
-                <strong>Primary Class Affinity:</strong> 
-                <span id="hero-detail-affinity" class="affinity-val"></span>
-              </div>
-            </div>
-
-            <!-- Hero Lore Bio -->
-            <div class="hero-bio-box">
-              <h4 class="box-label">Combat Lore &amp; Tactics</h4>
-              <p id="hero-detail-description" class="bio-text"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
-         SECTION 4: CARD COMPENDIUM
-         ========================================== -->
-    <section id="compendium" class="site-section">
-      <div class="section-header">
-        <div class="section-title-wrap">
-          <span class="section-kicker">OFFICIAL CARD DATABASE</span>
-          <h2><span>🃏</span> Series 1 Card Compendium</h2>
-          <p>Browse all 62 authentic cards with multi-frame animated spritesheets and 3D holographic tilt shaders.</p>
-        </div>
-        <div id="card-count-badge" class="card-counter-badge">
-          Showing 62 Cards
-        </div>
-      </div>
-
-      <!-- Controls & Filters Bar -->
-      <div class="compendium-controls">
-        <div class="search-and-filters">
-          <div class="search-input-wrap">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="compendium-search" placeholder="Search card name, description, code, or class..." />
-          </div>
-
-          <div class="pill-group" id="class-pills">
-            <span class="filter-pill class-pill active" data-class="all">All Classes</span>
-            <span class="filter-pill class-pill" data-class="Swordsman">⚔️ Swordsman</span>
-            <span class="filter-pill class-pill" data-class="Monster">👹 Monster</span>
-            <span class="filter-pill class-pill" data-class="Animal">🐾 Animal</span>
-            <span class="filter-pill class-pill" data-class="Goblins">⚙️ Goblins</span>
-            <span class="filter-pill class-pill" data-class="Wild Mages">🔮 Wild Mages</span>
-            <span class="filter-pill class-pill" data-class="Elixir">🧪 Elixir</span>
-          </div>
-
-          <div class="filter-selects">
-            <select id="compendium-rarity-filter" class="custom-select">
-              <option value="all">All Rarities</option>
-              <option value="Common">Common</option>
-              <option value="Uncommon">Uncommon</option>
-              <option value="Rare">Rare</option>
-              <option value="Epic">Epic</option>
-              <option value="Legendary">Legendary</option>
-              <option value="Exotic">Exotic</option>
-            </select>
-
-            <select id="compendium-sort" class="custom-select">
-              <option value="number">Sort by Card #</option>
-              <option value="name">Sort by Name</option>
-              <option value="cost">Sort by Mana Cost</option>
-              <option value="damage">Sort by Damage</option>
-              <option value="rarity">Sort by Rarity</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="compendium-tip-bar">
-          <span>✨ Hover over cards for 3D holographic tilt reflection. Click any card to inspect full statistics &amp; lore.</span>
-        </div>
-      </div>
-
-      <!-- Card Display Grid -->
-      <div id="cards-display-grid" class="cards-grid"></div>
-    </section>
-
-    <!-- ==========================================
-         SECTION 5: ANCIENT RELICS
-         ========================================== -->
-    <section id="relics" class="site-section">
-      <div class="section-header">
-        <div class="section-title-wrap">
-          <span class="section-kicker">MYSTICAL ARTIFACTS</span>
-          <h2><span>🏺</span> Ancient Relics Vault</h2>
-          <p>Discover 9 powerful relics hidden in dungeon vaults that alter the fundamental rules of combat.</p>
-        </div>
-      </div>
-
-      <div id="relics-grid-container" class="relics-showcase-grid"></div>
-    </section>
-
-    <!-- ==========================================
-         SECTION 6: THE DUNGEON & BESTIARY
-         ========================================== -->
-    <section id="dungeon" class="site-section">
-      <div class="section-header">
-        <div class="section-title-wrap">
-          <span class="section-kicker">THE EXPEDITION</span>
-          <h2><span>🗺️</span> 3-Act Dungeon &amp; Bestiary</h2>
-          <p>Ascend through 40 challenging procedural floors and face the terrifying guardians of the deep.</p>
-        </div>
-      </div>
-
-
-
-      <!-- Bestiary Grid Container -->
-      <div id="bestiary-grid-container"></div>
-    </section>
-
-    <!-- ==========================================
-         SECTION 7: GAME INFO & SPECS
-         ========================================== -->
-    <section id="specs" class="site-section">
-      <div class="section-header center">
-        <div class="section-title-wrap">
-          <span class="section-kicker">DEVELOPMENT &amp; DETAILS</span>
-          <h2><span>🎮</span> Game Information</h2>
-          <p>Technical specifications and release details for Decked Out.</p>
-        </div>
-      </div>
-
-      <div class="specs-grid">
-        <div class="spec-card">
-          <div class="spec-icon">⚙️</div>
-          <h4>Engine &amp; Technology</h4>
-          <p>Built with <strong>Godot Engine 4.7</strong> using the cutting-edge <strong>Forward+</strong> renderer for crisp pixel-art shaders and fluid performance.</p>
-        </div>
-
-        <div class="spec-card">
-          <div class="spec-icon">🖥️</div>
-          <h4>Target Platforms</h4>
-          <p>Designed for <strong>PC (Windows / Steam)</strong> with responsive keyboard, mouse, and full gamepad controller support.</p>
-        </div>
-
-        <div class="spec-card">
-          <div class="spec-icon">👤</div>
-          <h4>Developer</h4>
-          <p>Created by indie game developer <strong>Emanuele Ellul</strong>, crafting hand-drawn pixel art and deterministic card combat.</p>
-        </div>
-
-        <div class="spec-card wishlist-card">
-          <div class="spec-icon">⭐</div>
-          <h4>Join The Journey</h4>
-          <p>Track development updates, test public builds, and support the game by adding it to your wishlist.</p>
-          <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-wishlist" style="margin-top: 1rem; width: 100%; justify-content: center;">
-            ⭐ Wishlist on Steam
-          </a>
-        </div>
+        </a>
       </div>
     </section>
 
   </main>
-
-  <!-- Card Detail Modal Dialog (Clean Inspector) -->
-  <div id="card-detail-modal" class="modal-overlay">
-    <div class="modal-card-dialog">
-      <button id="card-modal-close" class="modal-close-btn">&times;</button>
-      <div id="card-detail-content" style="display: contents;"></div>
-    </div>
-  </div>
 
   <!-- Site Footer -->
   <footer class="site-footer">
@@ -477,13 +164,13 @@
       </div>
 
       <div class="footer-links">
-        <a href="#overview">About</a>
-        <a href="#mechanics">Mechanics</a>
-        <a href="#heroes">Heroes</a>
-        <a href="#compendium">Cards</a>
-        <a href="#relics">Relics</a>
-        <a href="#dungeon">Dungeon</a>
-        <a href="#specs">Specs</a>
+        <a href="index.html">Overview</a>
+        <a href="mechanics.html">Mechanics</a>
+        <a href="heroes.html">Heroes</a>
+        <a href="cards.html">Cards</a>
+        <a href="relics.html">Relics</a>
+        <a href="dungeon.html">Dungeon</a>
+        <a href="specs.html">Game Info</a>
         <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Steam</a>
       </div>
 
@@ -495,11 +182,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/data.js?v=3"></script>
   <script src="js/audio.js?v=3"></script>
-  <script src="js/compendium.js?v=3"></script>
-  <script src="js/heroes-relics.js?v=3"></script>
-  <script src="js/dungeon-map.js?v=3"></script>
   <script src="js/app.js?v=3"></script>
 
 </body>

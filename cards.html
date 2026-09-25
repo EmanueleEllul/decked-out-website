@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DECKED OUT - Cards Compendium | Official Roguelike TCG</title>
+  <meta name="description" content="Browse all 62 authentic cards in Decked Out Series 1 with multi-frame animated spritesheets and 3D holographic tilt shaders.">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/card-foil.css?v=3">
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Header -->
+  <header class="site-header" id="top">
+    <div class="header-container">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-icon">
+          <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
+        </div>
+        <div class="brand-text">
+          <h1>DECKED OUT</h1>
+          <span>ROGUELIKE TCG</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Overview</a></li>
+          <li><a href="mechanics.html" class="nav-link">Mechanics</a></li>
+          <li><a href="heroes.html" class="nav-link">Heroes</a></li>
+          <li><a href="cards.html" class="nav-link active">Cards</a></li>
+          <li><a href="relics.html" class="nav-link">Relics</a></li>
+          <li><a href="dungeon.html" class="nav-link">Dungeon</a></li>
+          <li><a href="specs.html" class="nav-link">Game Info</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="header-actions">
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn-wishlist" title="Wishlist Decked Out on Steam">
+          <span>⭐</span> Wishlist on Steam
+        </a>
+        <button id="toggle-sfx-btn" class="audio-btn" title="Toggle Sound Effects">🔊</button>
+        <button id="toggle-bgm-btn" class="audio-btn" title="Toggle Ambient Music">🎼</button>
+        <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Website Content -->
+  <main class="main-wrapper">
+
+    <!-- ==========================================
+         PAGE: CARD COMPENDIUM
+         ========================================== -->
+    <section class="site-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-kicker">OFFICIAL CARD DATABASE</span>
+          <h2><span>🃏</span> Series 1 Card Compendium</h2>
+          <p>Browse all 62 authentic cards with multi-frame animated spritesheets and 3D holographic tilt shaders.</p>
+        </div>
+        <div id="card-count-badge" class="card-counter-badge">
+          Showing 62 Cards
+        </div>
+      </div>
+
+      <!-- Controls & Filters Bar -->
+      <div class="compendium-controls">
+        <div class="search-and-filters">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="compendium-search" placeholder="Search card name, description, code, or class..." />
+          </div>
+
+          <div class="pill-group" id="class-pills">
+            <span class="filter-pill class-pill active" data-class="all">All Classes</span>
+            <span class="filter-pill class-pill" data-class="Swordsman">⚔️ Swordsman</span>
+            <span class="filter-pill class-pill" data-class="Monster">👹 Monster</span>
+            <span class="filter-pill class-pill" data-class="Animal">🐾 Animal</span>
+            <span class="filter-pill class-pill" data-class="Goblins">⚙️ Goblins</span>
+            <span class="filter-pill class-pill" data-class="Wild Mages">🔮 Wild Mages</span>
+            <span class="filter-pill class-pill" data-class="Elixir">🧪 Elixir</span>
+          </div>
+
+          <div class="filter-selects">
+            <select id="compendium-rarity-filter" class="custom-select">
+              <option value="all">All Rarities</option>
+              <option value="Common">Common</option>
+              <option value="Uncommon">Uncommon</option>
+              <option value="Rare">Rare</option>
+              <option value="Epic">Epic</option>
+              <option value="Legendary">Legendary</option>
+              <option value="Exotic">Exotic</option>
+            </select>
+
+            <select id="compendium-sort" class="custom-select">
+              <option value="number">Sort by Card #</option>
+              <option value="name">Sort by Name</option>
+              <option value="cost">Sort by Mana Cost</option>
+              <option value="damage">Sort by Damage</option>
+              <option value="rarity">Sort by Rarity</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="compendium-tip-bar">
+          <span>✨ Hover over cards for 3D holographic tilt reflection. Click any card to inspect full statistics &amp; lore.</span>
+        </div>
+      </div>
+
+      <!-- Card Display Grid -->
+      <div id="cards-display-grid" class="cards-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- Card Detail Modal Dialog (Clean Inspector) -->
+  <div id="card-detail-modal" class="modal-overlay">
+    <div class="modal-card-dialog">
+      <button id="card-modal-close" class="modal-close-btn">&times;</button>
+      <div id="card-detail-content" style="display: contents;"></div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="brand-wrapper">
+        <div class="brand-icon">
+          <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
+        </div>
+        <div class="brand-text">
+          <h1>DECKED OUT</h1>
+          <span>ROGUELIKE TCG</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">Overview</a>
+        <a href="mechanics.html">Mechanics</a>
+        <a href="heroes.html">Heroes</a>
+        <a href="cards.html">Cards</a>
+        <a href="relics.html">Relics</a>
+        <a href="dungeon.html">Dungeon</a>
+        <a href="specs.html">Game Info</a>
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Steam</a>
+      </div>
+
+      <div class="footer-credits">
+        <p>Decked Out — Built with Godot 4.7 Forward+.</p>
+        <p style="margin-top: 0.25rem;">Official Companion Website. All game assets &amp; characters &copy; Emanuele Ellul.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js?v=3"></script>
+  <script src="js/audio.js?v=3"></script>
+  <script src="js/compendium.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
+
+</body>
+</html>

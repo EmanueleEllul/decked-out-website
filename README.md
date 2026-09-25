@@ -58,18 +58,24 @@ Zero build tools required:
 
 ```
 decked-out-website/
-├── index.html              # Single-page promotional website
-├── README.md               # This file
+├── index.html              # Overview & core pillars
+├── mechanics.html          # Combat formulas & status ailments
+├── heroes.html             # 7 Champions & animated character showcase
+├── cards.html              # 62 Cards compendium & modal inspector
+├── relics.html             # 9 Ancient Relics vault
+├── dungeon.html            # 3-Act Dungeon & Bestiary
+├── specs.html              # Technical specifications & developer info
+├── README.md               # Documentation
 ├── css/
-│   ├── style.css           # Dark fantasy responsive layout & all component styles
-│   └── card-foil.css       # Card 3D hover shaders & rarity glow effects
+│   ├── style.css           # Pixel RPG retro UI & responsive layout
+│   └── card-foil.css       # Card hover shaders & rarity foil effects
 ├── js/
-│   ├── data.js             # 62 cards, 7 heroes, 9 relics, acts & mystery events
+│   ├── data.js             # 62 cards, 7 heroes, 9 relics, acts data
 │   ├── audio.js            # Game SFX player & Web Audio ambient synthesizer
 │   ├── compendium.js       # Card grid, filters, search & modal inspector
-│   ├── heroes-relics.js    # Hero profile viewer & relics showcase
-│   ├── dungeon-map.js      # Bestiary and mystery events showcase
-│   └── app.js              # Smooth scroll navigation, scroll-spy & UI interactions
+│   ├── heroes-relics.js    # Animated hero profile viewer & relics showcase
+│   ├── dungeon-map.js      # Bestiary (boss icons & animated encounters)
+│   └── app.js              # Site controls, wishlist navigation & toasts
 └── assets/
     ├── cards/              # Series 1 card sprites (PNG + animated WebP)
     ├── heroes/             # Hero portrait sprites

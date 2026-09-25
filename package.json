@@ -1,0 +1,9 @@
+{
+  "name": "decked-out-website",
+  "version": "1.0.0",
+  "description": "Companion website for Decked Out Roguelike TCG",
+  "scripts": {
+    "sync-lore": "node scripts/sync-lore.js",
+    "watch-lore": "node scripts/watch-lore.js"
+  }
+}

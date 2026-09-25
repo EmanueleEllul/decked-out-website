@@ -63,6 +63,10 @@ class AppController {
 
     this.activeTab = tabName;
     window.location.hash = tabName;
+
+    if (tabName === 'combat' && window.combatDemo) {
+      window.combatDemo.renderCombatState();
+    }
   }
 
   bindAudioControls() {

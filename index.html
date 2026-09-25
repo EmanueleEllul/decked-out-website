@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DECKED OUT - Roguelike Deck-Building RPG & TCG Compendium</title>
-  <meta name="description" content="Draft, Battle, Collect, and Upgrade in Decked Out. A single-player roguelike deck-builder RPG featuring 104 cards, 8 heroes, 3-act procedural dungeons, and persistent CCG booster packs.">
+  <meta name="description" content="Draft, Battle, Collect, and Upgrade in Decked Out. A single-player roguelike deck-builder RPG featuring 62 cards, 7 heroes, 3-act procedural dungeons, and persistent CCG booster packs.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23f59e0b'/><text y='70' x='50' font-size='60' text-anchor='middle' fill='%230f172a'>🃏</text></svg>">
   
   <!-- Fonts -->
@@ -66,12 +66,12 @@
       <h1 class="hero-title">DRAFT. BATTLE. COLLECT. UPGRADE.</h1>
       <p class="hero-subtitle">
         Confront branching 3-act dungeon expeditions, master dual-layered Armor & Ward mitigation, 
-        crack open holographic booster packs into your binder, and bleed the persistent 1,000,000 HP cosmic World Boss.
+        crack open booster packs into your binder, and bleed the persistent 1,000,000 HP cosmic World Boss.
       </p>
 
       <div class="hero-cta-group">
         <button class="btn btn-primary" data-jump-tab="compendium">
-          <span>Explore 104 Cards</span>
+          <span>Explore 62 Cards</span>
           <span>➔</span>
         </button>
         <button class="btn btn-secondary" data-jump-tab="packs">
@@ -87,11 +87,11 @@
       <!-- Quick Stats Counter -->
       <div class="hero-stats-row">
         <div class="stat-box">
-          <span class="num">104</span>
-          <span class="lbl">Total Cards</span>
+          <span class="num">62</span>
+          <span class="lbl">Cards with UI</span>
         </div>
         <div class="stat-box">
-          <span class="num">8</span>
+          <span class="num">7</span>
           <span class="lbl">Unique Heroes</span>
         </div>
         <div class="stat-box">
@@ -116,10 +116,10 @@
       <div class="section-header">
         <div class="section-title-wrap">
           <h2><span>🃏</span> Card Compendium & Binder</h2>
-          <p>Browse all Series 1 (Core & Goblins) and Series 2 (Dragons) cards with holographic shaders and stats.</p>
+          <p>Browse all 62 official cards with complete pixel-art UI, animated spritesheets, and combat stats.</p>
         </div>
         <div id="card-count-badge" style="font-size: 0.85rem; font-weight: 700; color: var(--primary);">
-          Showing 104 Cards
+          Showing 62 Cards
         </div>
       </div>
 
@@ -128,27 +128,20 @@
         <div class="search-and-filters">
           <div class="search-input-wrap">
             <span class="search-icon">🔍</span>
-            <input type="text" id="compendium-search" placeholder="Search card name, effect, code, or archetype..." />
+            <input type="text" id="compendium-search" placeholder="Search card name, effect, code, or class..." />
           </div>
 
           <div class="pill-group">
-            <span class="filter-pill series-pill active" data-series="all">All Series</span>
-            <span class="filter-pill series-pill" data-series="1">Series 1 (Core)</span>
-            <span class="filter-pill series-pill" data-series="2">Series 2 (Dragons)</span>
+            <span class="filter-pill class-pill active" data-class="all">All Classes</span>
+            <span class="filter-pill class-pill" data-class="Elixir">🧪 Elixir</span>
+            <span class="filter-pill class-pill" data-class="Wild Mages">🔮 Wild Mages</span>
+            <span class="filter-pill class-pill" data-class="Swordsman">⚔️ Swordsman</span>
+            <span class="filter-pill class-pill" data-class="Animal">🐾 Animal</span>
+            <span class="filter-pill class-pill" data-class="Monster">👹 Monster</span>
+            <span class="filter-pill class-pill" data-class="Goblins">⚙️ Goblins</span>
           </div>
 
           <div class="filter-selects">
-            <select id="compendium-class-filter" class="custom-select">
-              <option value="all">All Classes</option>
-              <option value="Elixir">Elixir (Support)</option>
-              <option value="Wild Mages">Wild Mages (Magic)</option>
-              <option value="Swordsman">Swordsman (Physical)</option>
-              <option value="Animal">Animal (Pack/Bleed)</option>
-              <option value="Monster">Monster (Splash/Risk)</option>
-              <option value="Goblins">Goblins (Scrap Engine)</option>
-              <option value="Dragon">Dragon (Elemental)</option>
-            </select>
-
             <select id="compendium-rarity-filter" class="custom-select">
               <option value="all">All Rarities</option>
               <option value="Common">Common</option>
@@ -156,7 +149,7 @@
               <option value="Rare">Rare</option>
               <option value="Epic">Epic</option>
               <option value="Legendary">Legendary</option>
-              <option value="Exotic">Exotic (Holographic Foil)</option>
+              <option value="Exotic">Exotic</option>
             </select>
 
             <select id="compendium-sort" class="custom-select">
@@ -175,7 +168,7 @@
             <input type="checkbox" id="upgrade-stats-toggle" style="accent-color: var(--primary);" />
             <span>Show Upgraded Stats (+10% Boost & Goblin Contraptions)</span>
           </label>
-          <span style="color: var(--text-faint);">💡 Hover over any card for 3D tilt & holographic sheen. Click to inspect!</span>
+          <span style="color: var(--text-faint);">💡 Spritesheets are spliced & animated. Click any card to inspect full stats!</span>
         </div>
       </div>
 
@@ -286,7 +279,7 @@
       <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 2.5rem;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
           <strong style="color: #fff; font-size: 0.95rem;">Persistent Binder Collection</strong>
-          <span id="collection-progress-label" style="color: #38bdf8; font-weight: 700; font-size: 0.88rem;">0 / 104 Unlocked (0%)</span>
+          <span id="collection-progress-label" style="color: #38bdf8; font-weight: 700; font-size: 0.88rem;">0 / 62 Unlocked (0%)</span>
         </div>
         <div class="health-bar-wrapper" style="height: 10px;">
           <div id="collection-progress-bar" class="health-bar-fill" style="width: 0%; background: linear-gradient(90deg, #38bdf8, #00e5ff);"></div>

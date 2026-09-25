@@ -5,7 +5,6 @@ class DeckBuilder {
   constructor() {
     this.allCards = window.GAME_CARDS || [];
     this.deck = {}; // { cardId: count }
-    this.elixirs = []; // Max 2 dedicated elixir cardIds
     this.starterPresets = {
       monk: {
         name: "Monk's Balanced Vanguard",
@@ -16,20 +15,20 @@ class DeckBuilder {
           's1-013': 3, // Arrow
           's1-024': 2, // Bastion Lancer
           's1-053': 2, // Pureblade Heir
-          's1-001': 2, // Flask (Elixir)
-          's1-006': 2  // Orange Juice (Elixir)
+          's1-001': 2, // Flask
+          's1-006': 2  // Orange Juice
         }
       },
       goblin: {
         name: "Goblin Scrap Recycler",
         hero: "Scrap Goblin",
         cards: {
-          's1-058': 3, // Tinpicker Scout
-          's1-060': 3, // Junkshield Bruiser
-          's1-061': 2, // Scrap Slinger
-          's1-062': 2, // Back-Alley Salvager
-          's1-063': 2, // Rustbomb Runner
-          's1-068': 1, // Scrap Mortar
+          's1-058': 3, // Tinpicker Scout (Animated)
+          's1-060': 3, // Junkshield Bruiser (Animated)
+          's1-061': 2, // Scrap Slinger (Animated)
+          's1-062': 2, // Back-Alley Salvager (Animated)
+          's1-063': 2, // Rustbomb Runner (Animated)
+          's1-068': 1, // Scrap Mortar (Animated)
           's1-070': 2  // Shrapnel Sort
         }
       },
@@ -39,22 +38,10 @@ class DeckBuilder {
         cards: {
           's1-039': 3, // Cinder Archivist
           's1-072': 2, // Cinder Fox
-          's1-063': 2, // Rustbomb Runner
+          's1-063': 2, // Rustbomb Runner (Animated)
           's1-043': 2, // Rift
           's1-004': 2, // Moonbrew
           's1-096': 1  // Ember Tyrant
-        }
-      },
-      dragons: {
-        name: "Primordial Dragon Bastion",
-        hero: "Dragon",
-        cards: {
-          's2-001': 3, // Cinder Whelp
-          's2-002': 2, // Ignis Drake
-          's2-025': 3, // Pebble Whelp
-          's2-026': 2, // Stone Drake
-          's2-027': 2, // Granite Wyrm
-          's2-008': 1  // Crimson Hellkite (1 Exotic starter limit)
         }
       }
     };
@@ -68,8 +55,13 @@ class DeckBuilder {
       const saved = localStorage.getItem('decked_active_deck');
       if (saved) {
         this.deck = JSON.parse(saved);
+        // Clean out any invalid/missing card ids
+        Object.keys(this.deck).forEach(id => {
+          if (!this.allCards.find(c => c.id === id)) {
+            delete this.deck[id];
+          }
+        });
       } else {
-        // Default to Monk preset
         this.deck = { ...this.starterPresets.monk.cards };
       }
     } catch(e) {
@@ -144,19 +136,16 @@ class DeckBuilder {
     const currentCount = this.deck[cardId] || 0;
     const totalCards = this.getTotalCardCount();
 
-    // 1. Deck limit: 100 max
     if (totalCards >= 100) {
       if (window.showToast) window.showToast('⚠️ Maximum deck size of 100 cards reached!', 'warning');
       return;
     }
 
-    // 2. Duplicate limit: 15 copies
     if (currentCount >= 15) {
       if (window.showToast) window.showToast(`⚠️ Max 15 copies allowed for ${card.name}!`, 'warning');
       return;
     }
 
-    // 3. Starter restriction: Max 1 Exotic OR 1 Legendary
     if (card.rarity === 'Exotic' || card.rarity === 'Legendary') {
       const existingHighRarity = Object.keys(this.deck).some(id => {
         const c = this.allCards.find(x => x.id === id);
@@ -196,7 +185,6 @@ class DeckBuilder {
       countEl.style.color = (total >= 10 && total <= 100) ? '#4ade80' : '#f87171';
     }
 
-    // Validation Status
     const statusEl = document.getElementById('deck-validity-status');
     if (statusEl) {
       if (total < 10) {
@@ -208,20 +196,12 @@ class DeckBuilder {
       }
     }
 
-    // Mana Curve Calculation
-    const curve = [0, 0, 0, 0, 0, 0]; // 0, 1, 2, 3, 4, 5+
-    let totalDmg = 0;
-    let totalArmor = 0;
-    let totalWard = 0;
-
+    const curve = [0, 0, 0, 0, 0, 0];
     Object.entries(this.deck).forEach(([cardId, count]) => {
       const card = this.allCards.find(c => c.id === cardId);
       if (card) {
         const costSlot = Math.min(card.cost, 5);
         curve[costSlot] += count;
-        totalDmg += (card.damage || 0) * count;
-        totalArmor += (card.armor || 0) * count;
-        totalWard += (card.ward || 0) * count;
       }
     });
 
@@ -290,7 +270,6 @@ class DeckBuilder {
     const dataStr = JSON.stringify(this.deck);
     const code = btoa(dataStr);
     
-    // Also build human-readable list
     let readable = `=== DECKED OUT STARTER DECK ===\nTotal Cards: ${this.getTotalCardCount()}\n\n`;
     Object.entries(this.deck).forEach(([id, count]) => {
       const c = this.allCards.find(x => x.id === id);
@@ -300,7 +279,7 @@ class DeckBuilder {
 
     navigator.clipboard.writeText(readable).then(() => {
       window.audioMgr.playSFX('buttonClick');
-      if (window.showToast) window.showToast('📋 Deck code & decklist copied to clipboard!');
+      if (window.showToast) window.showToast('📋 Deck code copied to clipboard!');
     }).catch(() => {
       prompt('Copy Deck Code:', code);
     });

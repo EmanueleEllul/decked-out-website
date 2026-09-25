@@ -1,17 +1,15 @@
 // Decked Out - Interactive Card Compendium & Binder Explorer
-// Renders all 104 cards with 3D tilt, holographic foil shaders, search & filters
+// Butter-smooth, zero-lag performance with animated spritesheet cards
 
 class CompendiumManager {
   constructor() {
     this.cards = window.GAME_CARDS || [];
     this.filteredCards = [...this.cards];
     this.searchQuery = '';
-    this.selectedSeries = 'all';
     this.selectedClass = 'all';
     this.selectedRarity = 'all';
     this.selectedSort = 'number';
     this.isUpgraded = false;
-    this.viewMode = 'grid'; // 'grid' | 'binder'
     this.currentModalCard = null;
 
     this.init();
@@ -31,25 +29,17 @@ class CompendiumManager {
       });
     }
 
-    const seriesPills = document.querySelectorAll('.series-pill');
-    seriesPills.forEach(pill => {
+    // Class Filter Pills
+    const classPills = document.querySelectorAll('.class-pill');
+    classPills.forEach(pill => {
       pill.addEventListener('click', () => {
-        seriesPills.forEach(p => p.classList.remove('active'));
+        classPills.forEach(p => p.classList.remove('active'));
         pill.classList.add('active');
-        this.selectedSeries = pill.dataset.series;
+        this.selectedClass = pill.dataset.class;
         window.audioMgr.playSFX('buttonClick');
         this.applyFilters();
       });
     });
-
-    const classSelect = document.getElementById('compendium-class-filter');
-    if (classSelect) {
-      classSelect.addEventListener('change', (e) => {
-        this.selectedClass = e.target.value;
-        window.audioMgr.playSFX('buttonClick');
-        this.applyFilters();
-      });
-    }
 
     const raritySelect = document.getElementById('compendium-rarity-filter');
     if (raritySelect) {
@@ -96,10 +86,6 @@ class CompendiumManager {
     const rarityWeights = { 'Common': 0, 'Uncommon': 1, 'Rare': 2, 'Epic': 3, 'Legendary': 4, 'Exotic': 5 };
 
     this.filteredCards = this.cards.filter(card => {
-      // Series filter
-      if (this.selectedSeries !== 'all' && card.series !== parseInt(this.selectedSeries)) {
-        return false;
-      }
       // Class filter
       if (this.selectedClass !== 'all' && card.class !== this.selectedClass) {
         return false;
@@ -110,7 +96,7 @@ class CompendiumManager {
       }
       // Search query
       if (this.searchQuery) {
-        const text = `${card.name} ${card.code} ${card.class} ${card.dragonSubclass || ''} ${card.description} ${card.damageType}`.toLowerCase();
+        const text = `${card.name} ${card.code} ${card.class} ${card.description} ${card.damageType}`.toLowerCase();
         if (!text.includes(this.searchQuery)) {
           return false;
         }
@@ -121,7 +107,6 @@ class CompendiumManager {
     // Sort
     this.filteredCards.sort((a, b) => {
       if (this.selectedSort === 'number') {
-        if (a.series !== b.series) return a.series - b.series;
         return a.number - b.number;
       }
       if (this.selectedSort === 'name') {
@@ -159,7 +144,7 @@ class CompendiumManager {
         <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--text-faint);">
           <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
           <h3>No Cards Found</h3>
-          <p>Try clearing your search or adjusting your rarity and class filters.</p>
+          <p>Try clearing your search query or adjusting filters.</p>
         </div>
       `;
       return;
@@ -167,10 +152,9 @@ class CompendiumManager {
 
     container.innerHTML = this.filteredCards.map(card => this.generateCardHTML(card)).join('');
 
-    // Attach 3D tilt interaction to rendered cards
+    // Attach click listeners without any expensive mousemove calculations!
     const cardEls = container.querySelectorAll('.game-card');
     cardEls.forEach(el => {
-      this.attachTiltEffect(el);
       el.addEventListener('click', () => {
         const cardId = el.dataset.cardId;
         const card = this.cards.find(c => c.id === cardId);
@@ -182,7 +166,7 @@ class CompendiumManager {
     });
   }
 
-  generateCardHTML(card, interactive = true) {
+  generateCardHTML(card) {
     const mult = this.isUpgraded ? 1.1 : 1.0;
     const dmg = card.damage > 0 ? Math.round(card.damage * mult) : 0;
     const armor = card.armor > 0 ? Math.round(card.armor * mult) : 0;
@@ -195,17 +179,13 @@ class CompendiumManager {
       'Swordsman': '⚔️',
       'Animal': '🐾',
       'Monster': '👹',
-      'Goblins': '⚙️',
-      'Dragon': '🐉'
+      'Goblins': '⚙️'
     };
 
-    let imageHTML = '';
-    if (card.image) {
-      imageHTML = `<img src="${card.image}" alt="${card.name}" loading="lazy" />`;
-    } else if (card.class === 'Dragon') {
-      imageHTML = this.generateDragonSVG(card.dragonSubclass);
-    } else {
-      imageHTML = this.generateClassEmblem(card.class);
+    let imageSrc = card.image || card.staticImage;
+    // If upgraded toggle is on and Goblin card has alternate image
+    if (this.isUpgraded && card.altImage) {
+      imageSrc = card.altImage;
     }
 
     let statsRowHTML = '';
@@ -230,6 +210,7 @@ class CompendiumManager {
 
     // Status Tags
     const tags = [];
+    if (card.isAnimated) tags.push(`<span class="tag-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">🎬 Animated</span>`);
     if (card.burn > 0) tags.push(`<span class="tag-badge tag-burn">🔥 Burn ${card.burn}</span>`);
     if (card.bleed > 0) tags.push(`<span class="tag-badge tag-bleed">🩸 Bleed ${card.bleed}</span>`);
     if (card.poison > 0) tags.push(`<span class="tag-badge tag-poison">☠️ Poison ${card.poison}</span>`);
@@ -240,14 +221,13 @@ class CompendiumManager {
     return `
       <div class="card-3d-wrapper">
         <div class="game-card rarity-${card.rarity.toLowerCase()}" data-card-id="${card.id}">
-          <div class="card-glare"></div>
           <div class="card-top-bar">
             <div class="card-cost-gem">${card.cost}</div>
             <div class="card-name-title" title="${card.name}">${card.name}</div>
             <div class="card-class-icon" title="${card.class}">${classIcons[card.class] || '🃏'}</div>
           </div>
           <div class="card-image-box">
-            ${imageHTML}
+            <img src="${imageSrc}" alt="${card.name}" loading="lazy" />
           </div>
           ${statsRowHTML}
           <div class="card-desc-box">
@@ -261,64 +241,6 @@ class CompendiumManager {
         </div>
       </div>
     `;
-  }
-
-  generateDragonSVG(subclass = 'Fire') {
-    const themeColors = {
-      'Fire': { fill: '#ef4444', glow: '#f97316', icon: '🔥' },
-      'Ice': { fill: '#38bdf8', glow: '#06b6d4', icon: '❄️' },
-      'Poison': { fill: '#22c55e', glow: '#84cc16', icon: '☠️' },
-      'Earth': { fill: '#d97706', glow: '#78350f', icon: '🪨' }
-    };
-    const t = themeColors[subclass] || themeColors['Fire'];
-
-    return `
-      <div class="dragon-art-placeholder" style="background: radial-gradient(circle, ${t.glow}22 0%, #090c12 80%);">
-        <svg viewBox="0 0 100 100" fill="none" stroke="${t.fill}" stroke-width="2.5">
-          <path d="M50 15 C30 15, 20 35, 20 50 C20 70, 40 85, 50 88 C60 85, 80 70, 80 50 C80 35, 70 15, 50 15 Z" fill="${t.fill}15" />
-          <path d="M35 40 L50 25 L65 40" stroke-linecap="round" />
-          <circle cx="42" cy="48" r="3" fill="${t.fill}" />
-          <circle cx="58" cy="48" r="3" fill="${t.fill}" />
-          <path d="M45 65 Q50 72 55 65" stroke-linecap="round" />
-          <path d="M25 30 L15 18 M75 30 L85 18" stroke-linecap="round" />
-        </svg>
-        <span style="font-size: 0.72rem; text-transform: uppercase; font-weight: 700; color: ${t.fill}; letter-spacing: 0.1em;">
-          ${subclass} Dragon
-        </span>
-      </div>
-    `;
-  }
-
-  generateClassEmblem(cardClass) {
-    return `
-      <div class="dragon-art-placeholder" style="background: #090c12;">
-        <div style="font-size: 2.5rem; opacity: 0.7;">✨</div>
-        <span style="font-size: 0.72rem; text-transform: uppercase; font-weight: 700; color: var(--primary); letter-spacing: 0.1em;">
-          ${cardClass}
-        </span>
-      </div>
-    `;
-  }
-
-  attachTiltEffect(cardEl) {
-    cardEl.addEventListener('mousemove', (e) => {
-      const rect = cardEl.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * -12;
-      const rotateY = ((x - centerX) / centerX) * 12;
-
-      cardEl.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.04, 1.04, 1.04)`;
-      cardEl.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
-      cardEl.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
-    });
-
-    cardEl.addEventListener('mouseleave', () => {
-      cardEl.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-    });
   }
 
   openModal(card) {
@@ -335,7 +257,7 @@ class CompendiumManager {
 
     container.innerHTML = `
       <div style="display: flex; justify-content: center; align-items: center;">
-        ${this.generateCardHTML(card, false)}
+        ${this.generateCardHTML(card)}
       </div>
       <div>
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
@@ -347,9 +269,9 @@ class CompendiumManager {
         <h2 style="font-size: 2rem; color: #fff; margin-bottom: 0.5rem;">${card.name}</h2>
         <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
           <span class="tag-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">Class: ${card.class}</span>
-          ${card.dragonSubclass && card.dragonSubclass !== 'None' ? `<span class="tag-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Subclass: ${card.dragonSubclass}</span>` : ''}
           <span class="tag-badge" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc;">Cost: ${card.cost} Mana</span>
           ${card.damageType !== 'None' ? `<span class="tag-badge" style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe;">Type: ${card.damageType}</span>` : ''}
+          ${card.isAnimated ? `<span class="tag-badge" style="background: rgba(56, 189, 248, 0.3); color: #38bdf8;">🎬 Spliced Animated Spritesheet</span>` : ''}
         </div>
 
         <div style="background: var(--bg-deep); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
@@ -378,10 +300,6 @@ class CompendiumManager {
 
     modal.classList.add('open');
 
-    // Attach tilt to preview inside modal
-    const previewCard = container.querySelector('.game-card');
-    if (previewCard) this.attachTiltEffect(previewCard);
-
     const addBtn = document.getElementById('modal-add-to-deck-btn');
     if (addBtn) {
       addBtn.addEventListener('click', () => {
@@ -399,7 +317,6 @@ class CompendiumManager {
   }
 }
 
-// Global initialization
 window.addEventListener('DOMContentLoaded', () => {
   window.compendium = new CompendiumManager();
 });

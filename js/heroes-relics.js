@@ -1,13 +1,13 @@
 // Decked Out - Heroes & Relics Hub Manager
-// Features all 8 Heroes, Upgrade calculators (+3% per level), and 3-Relic Active Loadout Builder
+// Features 7 Core Heroes, Upgrade calculators (+3% per level), and 3-Relic Active Loadout Builder
 
 class HeroesRelicsManager {
   constructor() {
-    this.heroes = window.GAME_HEROES || [];
+    this.heroes = (window.GAME_HEROES || []).filter(h => h.name !== 'Dragon');
     this.relics = window.GAME_RELICS || [];
     this.selectedHeroIndex = 0;
     this.heroUpgradeLevel = 0;
-    this.equippedRelics = []; // Max 3 relic names
+    this.equippedRelics = [];
 
     this.init();
   }
@@ -35,9 +35,9 @@ class HeroesRelicsManager {
     if (!listContainer) return;
 
     listContainer.innerHTML = this.heroes.map((h, idx) => `
-      <div class="hero-roster-card ${idx === this.selectedHeroIndex ? 'active' : ''}" data-hero-idx="${idx}" style="background: var(--bg-surface); border: 2px solid ${idx === this.selectedHeroIndex ? 'var(--primary)' : 'var(--border-subtle)'}; border-radius: var(--radius-md); padding: 1rem; display: flex; align-items: center; gap: 1rem; cursor: pointer; transition: all 0.2s ease;">
-        <div style="width: 50px; height: 50px; border-radius: var(--radius-sm); overflow: hidden; background: #000; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-          ${h.sprite ? `<img src="${h.sprite}" alt="${h.name}" style="width: 100%; height: 100%; object-fit: contain;" />` : `<span style="font-size: 1.5rem;">${h.name === 'Dragon' ? '🐉' : '⚙️'}</span>`}
+      <div class="hero-roster-card ${idx === this.selectedHeroIndex ? 'active' : ''}" data-hero-idx="${idx}" style="background: var(--bg-surface); border: 2px solid ${idx === this.selectedHeroIndex ? 'var(--primary)' : 'var(--border-subtle)'}; border-radius: var(--radius-md); padding: 0.85rem 1rem; display: flex; align-items: center; gap: 1rem; cursor: pointer; transition: all 0.2s ease;">
+        <div style="width: 48px; height: 48px; border-radius: var(--radius-sm); overflow: hidden; background: #000; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-subtle);">
+          ${h.sprite ? `<img src="${h.sprite}" alt="${h.name}" style="width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated;" />` : `<span style="font-size: 1.5rem;">🛡️</span>`}
         </div>
         <div>
           <strong style="color: #fff; font-size: 0.95rem; display: block;">${h.name}</strong>
@@ -88,9 +88,9 @@ class HeroesRelicsManager {
 
     if (avatarEl) {
       if (h.sprite) {
-        avatarEl.innerHTML = `<img src="${h.sprite}" alt="${h.name}" style="width: 100%; height: 100%; object-fit: contain;" />`;
+        avatarEl.innerHTML = `<img src="${h.sprite}" alt="${h.name}" style="width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated;" />`;
       } else {
-        avatarEl.innerHTML = `<span style="font-size: 4rem;">${h.name === 'Dragon' ? '🐉' : '⚙️'}</span>`;
+        avatarEl.innerHTML = `<span style="font-size: 3rem;">🛡️</span>`;
       }
     }
   }

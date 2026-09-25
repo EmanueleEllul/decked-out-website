@@ -901,8 +901,8 @@ p, span, a, li, td, th, input, select, button {
 }
 
 .hero-avatar-display {
-  width: 96px;
-  height: 96px;
+  width: 128px;
+  height: 128px;
   background: #000;
   border: 3px solid var(--primary);
   box-shadow: 4px 4px 0 var(--primary-dark);
@@ -911,6 +911,20 @@ p, span, a, li, td, th, input, select, button {
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
+  position: relative;
+}
+
+/* Pixel-scan overlay on detail avatar — matches card image box vibe */
+.hero-avatar-display::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    transparent, transparent 3px,
+    rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
 }
 
 .hero-avatar-display img {
@@ -918,7 +932,58 @@ p, span, a, li, td, th, input, select, button {
   height: 100%;
   object-fit: contain;
   image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  /* Scale up the tiny 24px sprite crisply */
+  transform: scale(1);
+  transition: transform 0.15s ease;
 }
+
+/* Roster thumbnail avatar */
+.hero-roster-avatar {
+  width: 44px;
+  height: 44px;
+  background: #000;
+  border: 2px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.hero-roster-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  transition: transform 0.12s ease;
+}
+
+/* Hover bounce on roster thumbnails */
+.hero-roster-card:hover .hero-roster-avatar img {
+  transform: scale(1.1) translateY(-1px);
+}
+
+/* Active hero — gold border on roster avatar */
+.hero-roster-card.active .hero-roster-avatar {
+  border-color: var(--primary);
+  box-shadow: 1px 1px 0 var(--primary-dark);
+}
+
+/* Detail portrait always plays animation — subtle bob */
+@keyframes heroIdleBob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-3px); }
+}
+
+.hero-portrait-detail {
+  animation: heroIdleBob 1.6s ease-in-out infinite;
+}
+
 
 .hero-title-meta { flex: 1; }
 

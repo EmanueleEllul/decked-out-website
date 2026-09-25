@@ -10,6 +10,16 @@ class HeroesRelicsManager {
     this.init();
   }
 
+  /**
+   * Derive the animated GIF path from a sprite path.
+   * e.g. "assets/heroes/DeckMonk.png" → "assets/heroes/anim/DeckMonk.gif"
+   */
+  animPath(sprite) {
+    if (!sprite) return null;
+    const filename = sprite.split('/').pop().replace(/\.[^.]+$/, '');
+    return `assets/heroes/anim/${filename}.gif`;
+  }
+
   init() {
     this.renderHeroes();
     this.renderRelics();
@@ -19,18 +29,39 @@ class HeroesRelicsManager {
     const listContainer = document.getElementById('heroes-roster-shelf');
     if (!listContainer) return;
 
-    listContainer.innerHTML = this.heroes.map((h, idx) => `
-      <div class="hero-roster-card ${idx === this.selectedHeroIndex ? 'active' : ''}" data-hero-idx="${idx}">
-        <div class="hero-roster-avatar">
-          ${h.sprite ? `<img src="${h.sprite}" alt="${h.name}" class="pixel-art" />` : `<span class="hero-fallback-icon">🛡️</span>`}
+    listContainer.innerHTML = this.heroes.map((h, idx) => {
+      const anim = this.animPath(h.sprite);
+      return `
+        <div class="hero-roster-card ${idx === this.selectedHeroIndex ? 'active' : ''}" data-hero-idx="${idx}">
+          <div class="hero-roster-avatar hero-anim-wrap">
+            ${h.sprite
+              ? `<img
+                   src="${h.sprite}"
+                   data-static="${h.sprite}"
+                   data-anim="${anim}"
+                   alt="${h.name}"
+                   class="pixel-art hero-portrait"
+                 />`
+              : `<span class="hero-fallback-icon">🛡️</span>`}
+          </div>
+          <div class="hero-roster-info">
+            <strong class="hero-roster-name">${h.name}</strong>
+            <span class="hero-roster-title">${h.title}</span>
+          </div>
+          <span class="hero-roster-arrow">➔</span>
         </div>
-        <div class="hero-roster-info">
-          <strong class="hero-roster-name">${h.name}</strong>
-          <span class="hero-roster-title">${h.title}</span>
-        </div>
-        <span class="hero-roster-arrow">➔</span>
-      </div>
-    `).join('');
+      `;
+    }).join('');
+
+    // Hover: swap static → animated on the roster thumbnails
+    listContainer.querySelectorAll('.hero-portrait').forEach(img => {
+      img.addEventListener('mouseenter', () => {
+        if (img.dataset.anim) img.src = img.dataset.anim;
+      });
+      img.addEventListener('mouseleave', () => {
+        if (img.dataset.static) img.src = img.dataset.static;
+      });
+    });
 
     listContainer.querySelectorAll('.hero-roster-card').forEach(el => {
       el.addEventListener('click', () => {
@@ -48,30 +79,41 @@ class HeroesRelicsManager {
     const h = this.heroes[this.selectedHeroIndex];
     if (!h) return;
 
-    const nameEl = document.getElementById('hero-detail-name');
-    const titleEl = document.getElementById('hero-detail-title');
-    const avatarEl = document.getElementById('hero-detail-avatar');
-    const unlockEl = document.getElementById('hero-detail-unlock');
+    const nameEl    = document.getElementById('hero-detail-name');
+    const titleEl   = document.getElementById('hero-detail-title');
+    const avatarEl  = document.getElementById('hero-detail-avatar');
+    const unlockEl  = document.getElementById('hero-detail-unlock');
     const passiveEl = document.getElementById('hero-detail-passive');
-    const hpEl = document.getElementById('hero-scaled-hp');
-    const atkEl = document.getElementById('hero-scaled-atk');
-    const manaEl = document.getElementById('hero-scaled-mana');
-    const affinityEl = document.getElementById('hero-detail-affinity');
-    const descEl = document.getElementById('hero-detail-description');
+    const hpEl      = document.getElementById('hero-scaled-hp');
+    const atkEl     = document.getElementById('hero-scaled-atk');
+    const manaEl    = document.getElementById('hero-scaled-mana');
+    const affinityEl= document.getElementById('hero-detail-affinity');
+    const descEl    = document.getElementById('hero-detail-description');
 
-    if (nameEl) nameEl.textContent = h.name;
-    if (titleEl) titleEl.textContent = h.title;
-    if (unlockEl) unlockEl.textContent = `Unlock: ${h.unlock}`;
-    if (passiveEl) passiveEl.textContent = h.passive;
+    if (nameEl)     nameEl.textContent  = h.name;
+    if (titleEl)    titleEl.textContent = h.title;
+    if (unlockEl)   unlockEl.textContent = `Unlock: ${h.unlock}`;
+    if (passiveEl)  passiveEl.textContent = h.passive;
     if (affinityEl) affinityEl.textContent = h.affinity;
-    if (hpEl) hpEl.textContent = `${h.hp} HP`;
-    if (atkEl) atkEl.textContent = `${h.damage} ATK`;
-    if (manaEl) manaEl.textContent = `${h.mana} Mana`;
-    if (descEl) descEl.textContent = h.description || `${h.name} is a versatile champion in the subterranean depths.`;
+    if (hpEl)       hpEl.textContent   = `${h.hp} HP`;
+    if (atkEl)      atkEl.textContent  = `${h.damage} ATK`;
+    if (manaEl)     manaEl.textContent = `${h.mana} Mana`;
+    if (descEl)     descEl.textContent = h.description || `${h.name} is a versatile champion of the subterranean depths.`;
 
     if (avatarEl) {
       if (h.sprite) {
-        avatarEl.innerHTML = `<img src="${h.sprite}" alt="${h.name}" class="pixel-art" />`;
+        const anim = this.animPath(h.sprite);
+        // Detail card always plays the animated version
+        avatarEl.innerHTML = `
+          <img
+            src="${anim}"
+            data-static="${h.sprite}"
+            data-anim="${anim}"
+            alt="${h.name}"
+            class="pixel-art hero-portrait hero-portrait-detail"
+            onerror="this.src='${h.sprite}'"
+          />
+        `;
       } else {
         avatarEl.innerHTML = `<span style="font-size: 3rem;">🛡️</span>`;
       }

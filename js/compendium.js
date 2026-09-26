@@ -300,7 +300,7 @@ class CompendiumManager {
           <span style="font-size: 0.82rem; color: var(--text-muted);">
             Mitigation Type: <strong style="color: ${['Fire','Frost','Arcane','Shadow','Holy'].includes(card.damageType) ? 'var(--ward-cyan)' : 'var(--armor-iron)'};">${['Fire','Frost','Arcane','Shadow','Holy'].includes(card.damageType) ? '🔮 Magical (Absorbed by Ward)' : '🛡️ Physical (Absorbed by Armor)'}</strong>
           </span>
-          <span style="font-size: 0.82rem; color: var(--primary); font-weight: 700;">Series 1 • Core</span>
+          <span style="font-size: 0.82rem; color: var(--primary); font-weight: 700;">Series 1</span>
         </div>
 
         <div style="display: flex; gap: 1rem;">

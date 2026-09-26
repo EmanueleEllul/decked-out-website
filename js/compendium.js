@@ -280,23 +280,23 @@ class CompendiumManager {
           ${card.isAnimated ? `<span class="tag-badge" style="background: rgba(56, 189, 248, 0.3); color: #38bdf8;">🎬 Spliced Animated Spritesheet</span>` : ''}
         </div>
 
-        <div style="background: var(--bg-deep); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
-          <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.5rem;">Combat Properties</h4>
+        <div style="background: var(--bg-deep); border: 2px solid var(--border-strong); border-radius: 0; padding: 1.25rem; margin-bottom: 1.5rem; box-shadow: 3px 3px 0 #000;">
+          <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.5rem; font-family: var(--font-pixel); font-size: 0.65rem;">Combat Properties</h4>
           <p style="font-size: 1rem; color: #e2e8f0; line-height: 1.6;">${card.description}</p>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+          <div style="background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: 0; border: 2px solid var(--border-strong); box-shadow: 2px 2px 0 #000;">
             <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Damage Output</span>
             <strong style="font-size: 1.2rem; color: #f87171;">${dmg > 0 ? `${dmg} (${card.damageType})` : '—'}</strong>
           </div>
-          <div style="background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+          <div style="background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: 0; border: 2px solid var(--border-strong); box-shadow: 2px 2px 0 #000;">
             <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Defensive Guard</span>
             <strong style="font-size: 1.2rem; color: #38bdf8;">${armor > 0 ? `+${armor} Armor ` : ''}${ward > 0 ? `+${ward} Ward ` : ''}${armor === 0 && ward === 0 ? '—' : ''}</strong>
           </div>
         </div>
 
-        <div style="background: var(--bg-deep); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 0.85rem 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+        <div style="background: var(--bg-deep); border: 2px solid var(--border-strong); border-radius: 0; padding: 0.85rem 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; box-shadow: 3px 3px 0 #000;">
           <span style="font-size: 0.82rem; color: var(--text-muted);">
             Mitigation Type: <strong style="color: ${['Fire','Frost','Arcane','Shadow','Holy'].includes(card.damageType) ? 'var(--ward-cyan)' : 'var(--armor-iron)'};">${['Fire','Frost','Arcane','Shadow','Holy'].includes(card.damageType) ? '🔮 Magical (Absorbed by Ward)' : '🛡️ Physical (Absorbed by Armor)'}</strong>
           </span>

@@ -180,7 +180,7 @@ class AppController {
 
     const toast = document.createElement('div');
     toast.className = `toast-pill ${type}`;
-    toast.style.cssText = 'background: rgba(15, 23, 42, 0.95); border: 1px solid var(--border-glow, #f59e0b); color: #fff; padding: 10px 18px; border-radius: 9999px; font-size: 0.88rem; font-weight: 600; box-shadow: 0 10px 25px rgba(0,0,0,0.5); backdrop-filter: blur(8px); animation: toastFadeIn 0.3s ease; pointer-events: auto;';
+    toast.style.cssText = 'background: #0d121c; border: 2px solid var(--primary, #f59e0b); color: #fff; padding: 8px 14px; border-radius: 0; font-family: var(--font-pixel, monospace); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.04em; box-shadow: inset 1px 1px 0 rgba(255,255,255,0.1), 4px 4px 0 #000; animation: toastFadeIn 0.2s ease; pointer-events: auto;';
     toast.textContent = message;
 
     container.appendChild(toast);

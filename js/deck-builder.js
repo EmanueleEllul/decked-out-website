@@ -524,9 +524,9 @@ class DeckBuilder {
         const heightPct = Math.round((c / maxCurve) * 100);
         return `
           <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100px;">
-            <span style="font-size: 0.72rem; color: #94a3b8; font-weight: 700; margin-bottom: 0.25rem;">${c}</span>
-            <div style="width: 100%; max-width: 26px; background: linear-gradient(to top, #0284c7, #38bdf8); height: ${heightPct}%; border-radius: 4px 4px 0 0; min-height: 4px; box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);"></div>
-            <span style="font-size: 0.75rem; color: #cbd5e1; font-weight: 800; margin-top: 0.35rem;">${cost === 5 ? '5+' : cost}</span>
+            <span style="font-size: 0.65rem; color: #94a3b8; font-family: var(--font-pixel); font-weight: 700; margin-bottom: 0.25rem;">${c}</span>
+            <div style="width: 100%; max-width: 24px; background: linear-gradient(to top, #0284c7, #38bdf8); height: ${heightPct}%; border-radius: 0; min-height: 4px; border: 1px solid #000; box-shadow: inset 1px 1px 0 rgba(255,255,255,0.3), 1px 1px 0 #000;"></div>
+            <span style="font-size: 0.65rem; color: #cbd5e1; font-family: var(--font-pixel); font-weight: 700; margin-top: 0.35rem;">${cost === 5 ? '5+' : cost}</span>
           </div>
         `;
       }).join('');

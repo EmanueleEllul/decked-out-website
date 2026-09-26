@@ -95,3 +95,4 @@ decked-out-website/
 - **Game Engine**: Godot Engine 4.7 (Forward+ renderer)
 - **Frontend**: Semantic HTML5, CSS Variables, 3D CSS Transforms, Web Audio API, Vanilla ES6 JavaScript
 - **Developer**: Emanuele Ellul
+- **Art**: Burstyn Santillo & Ayden Cachia

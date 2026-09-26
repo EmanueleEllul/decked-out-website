@@ -31,7 +31,14 @@ Live and ready to deploy on **GitHub Pages** with zero build steps or external d
 - **Common Foe Roster**: 5 dungeon enemy types with full combat profiles.
 - **12 Mystery Events**: All narrative dilemmas with their 3-choice outcomes displayed.
 
-### 5. 📖 Game Overview & Specs
+### 5. 📍 Where to Follow & Where's Next
+- **Official Discord Community**: Direct discussions with developer Emanuele Ellul, deck-crafting channels, Series 2 sneak peeks, and playtest keys (`https://discord.gg/aCPVFSYCFf`).
+- **Convention & Appearance Log**:
+  - **Gamescom 2026** (Cologne, Germany): Completed international showcase with over 500+ dungeon runs.
+  - **Playcon 2026** (19th – 22nd November 2026, Malta): Live developer presentation and hands-on playable PC stations.
+- **Filterable Event Archive**: Toggle between Upcoming conventions, Past completed appearances, and All events.
+
+### 6. 📖 Game Overview & Specs
 - Game engine, platform targets, developer, and wishlist/community links.
 
 ---
@@ -67,6 +74,7 @@ decked-out-website/
 ├── relics.html             # 9 Ancient Relics vault
 ├── dungeon.html            # 3-Act Dungeon & Bestiary
 ├── lore.html               # Lore Codex & 6 Volumes of Spire Chronicles
+├── events.html             # Where to Follow, Discord & Where's Next (Gamescom/Playcon)
 ├── specs.html              # Technical specifications & developer info
 ├── README.md               # Documentation
 ├── css/

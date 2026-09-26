@@ -31,24 +31,71 @@
         </div>
       </a>
 
-      <!-- Navigation Links -->
+      <!-- Navigation Links with Sections -->
       <nav>
         <ul class="nav-links">
           <li><a href="index.html" class="nav-link">Overview</a></li>
-          <li><a href="mechanics.html" class="nav-link">Mechanics</a></li>
-          <li><a href="heroes.html" class="nav-link">Heroes</a></li>
-          <li><a href="cards.html" class="nav-link">Cards</a></li>
-          <li><a href="deck-builder.html" class="nav-link">Deck Builder</a></li>
-          <li><a href="combat.html" class="nav-link">Battle Test</a></li>
-          <li><a href="relics.html" class="nav-link">Relics</a></li>
-          <li><a href="dungeon.html" class="nav-link">Dungeon</a></li>
-          <li><a href="lore.html" class="nav-link">Lore</a></li>
+
+          <!-- Compendium Section -->
+          <li class="nav-dropdown">
+            <a href="cards.html" class="nav-link nav-dropdown-toggle" id="nav-compendium-toggle">
+              <span>Compendium</span> <span class="nav-dropdown-arrow">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="cards.html" class="dropdown-item">
+                <span class="dropdown-icon">🃏</span>
+                <span class="dropdown-title">Cards</span>
+              </a>
+              <a href="heroes.html" class="dropdown-item">
+                <span class="dropdown-icon">🧙‍♂️</span>
+                <span class="dropdown-title">Heroes</span>
+              </a>
+              <a href="relics.html" class="dropdown-item">
+                <span class="dropdown-icon">🏺</span>
+                <span class="dropdown-title">Relics</span>
+              </a>
+              <a href="mechanics.html" class="dropdown-item">
+                <span class="dropdown-icon">⚔️</span>
+                <span class="dropdown-title">Mechanics</span>
+              </a>
+              <a href="dungeon.html" class="dropdown-item">
+                <span class="dropdown-icon">🗺️</span>
+                <span class="dropdown-title">Dungeon</span>
+              </a>
+              <a href="lore.html" class="dropdown-item">
+                <span class="dropdown-icon">📖</span>
+                <span class="dropdown-title">Lore</span>
+              </a>
+            </div>
+          </li>
+
+          <!-- Play Section -->
+          <li class="nav-dropdown">
+            <a href="deck-builder.html" class="nav-link nav-dropdown-toggle" id="nav-play-toggle">
+              <span>Play</span> <span class="nav-dropdown-arrow">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="deck-builder.html" class="dropdown-item">
+                <span class="dropdown-icon">🔨</span>
+                <span class="dropdown-title">Deck Builder</span>
+              </a>
+              <a href="combat.html" class="dropdown-item">
+                <span class="dropdown-icon">⚔️</span>
+                <span class="dropdown-title">Battle Test</span>
+              </a>
+            </div>
+          </li>
+
+          <li><a href="events.html" class="nav-link">Where's Next</a></li>
           <li><a href="specs.html" class="nav-link active">Game Info</a></li>
         </ul>
       </nav>
 
       <!-- Action Controls -->
       <div class="header-actions">
+        <a href="https://discord.gg/aCPVFSYCFf" target="_blank" rel="noopener noreferrer" class="btn-discord" title="Join Official Decked Out Discord">
+          <span>💬</span> Discord
+        </a>
         <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn-wishlist" title="Wishlist Decked Out on Steam">
           <span>⭐</span> Wishlist on Steam
         </a>
@@ -98,10 +145,15 @@
         <div class="spec-card wishlist-card">
           <div class="spec-icon">⭐</div>
           <h4>Join The Journey</h4>
-          <p>Track development updates, test public builds, and support the game by adding it to your wishlist.</p>
-          <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-wishlist" style="margin-top: 1rem; width: 100%; justify-content: center;">
-            ⭐ Wishlist on Steam
-          </a>
+          <p>Track development updates, test public builds, and support the game on Steam &amp; Discord.</p>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; width: 100%;">
+            <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-wishlist" style="width: 100%; justify-content: center;">
+              ⭐ Wishlist on Steam
+            </a>
+            <a href="https://discord.gg/aCPVFSYCFf" target="_blank" rel="noopener noreferrer" class="btn-discord" style="width: 100%; justify-content: center; box-sizing: border-box;">
+              💬 Join Discord Community
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -124,15 +176,17 @@
 
       <div class="footer-links">
         <a href="index.html">Overview</a>
-        <a href="mechanics.html">Mechanics</a>
-        <a href="heroes.html">Heroes</a>
         <a href="cards.html">Cards</a>
-        <a href="deck-builder.html">Deck Builder</a>
-        <a href="combat.html">Battle Test</a>
+        <a href="heroes.html">Heroes</a>
         <a href="relics.html">Relics</a>
+        <a href="mechanics.html">Mechanics</a>
         <a href="dungeon.html">Dungeon</a>
         <a href="lore.html">Lore</a>
-        <a href="specs.html">Game Info</a>
+        <a href="deck-builder.html">Deck Builder</a>
+        <a href="combat.html">Battle Test</a>
+        <a href="events.html">Where's Next</a>
+        <a href="specs.html" style="color: var(--primary);">Game Info</a>
+        <a href="https://discord.gg/aCPVFSYCFf" target="_blank" rel="noopener noreferrer" style="color: #7983f5;">Discord</a>
         <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Steam</a>
       </div>
 

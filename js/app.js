@@ -22,33 +22,17 @@ class AppController {
   }
 
   ensureNavLinks() {
-    // Ensure Lore tab is rendered even if the host page was served from an older browser cache
-    const navLinks = document.querySelector('.nav-links');
-    if (navLinks && !navLinks.querySelector('a[href="lore.html"]')) {
-      const dungeonLi = Array.from(navLinks.querySelectorAll('li')).find(li => li.querySelector('a[href="dungeon.html"]'));
-      const specsLi = Array.from(navLinks.querySelectorAll('li')).find(li => li.querySelector('a[href="specs.html"]'));
-      const loreLi = document.createElement('li');
-      const isLore = window.location.pathname.endsWith('lore.html');
-      loreLi.innerHTML = `<a href="lore.html" class="nav-link${isLore ? ' active' : ''}">Lore</a>`;
-      if (specsLi) {
-        navLinks.insertBefore(loreLi, specsLi);
-      } else if (dungeonLi && dungeonLi.nextSibling) {
-        navLinks.insertBefore(loreLi, dungeonLi.nextSibling);
-      } else {
-        navLinks.appendChild(loreLi);
-      }
-    }
-
+    // Legacy cache check: if page doesn't have events link in footer, add it
     const footerLinks = document.querySelector('.footer-links');
-    if (footerLinks && !footerLinks.querySelector('a[href="lore.html"]')) {
+    if (footerLinks && !footerLinks.querySelector('a[href="events.html"]')) {
       const specsA = footerLinks.querySelector('a[href="specs.html"]');
-      const loreA = document.createElement('a');
-      loreA.href = 'lore.html';
-      loreA.textContent = 'Lore';
+      const eventsA = document.createElement('a');
+      eventsA.href = 'events.html';
+      eventsA.textContent = "Where's Next";
       if (specsA) {
-        footerLinks.insertBefore(loreA, specsA);
+        footerLinks.insertBefore(eventsA, specsA);
       } else {
-        footerLinks.appendChild(loreA);
+        footerLinks.appendChild(eventsA);
       }
     }
   }
@@ -101,6 +85,16 @@ class AppController {
         });
       }
     }
+
+    // Close mobile menu when clicking any dropdown item or direct nav-link
+    document.querySelectorAll('.dropdown-item, .nav-link:not(.nav-dropdown-toggle)').forEach(item => {
+      item.addEventListener('click', () => {
+        const navMenu = document.querySelector('.nav-links');
+        if (navMenu && navMenu.classList.contains('mobile-open')) {
+          navMenu.classList.remove('mobile-open');
+        }
+      });
+    });
   }
 
   bindScrollSpy() {
@@ -357,14 +351,40 @@ class AppController {
     let pageName = targetUrl.pathname.split('/').pop() || 'index.html';
     if (!pageName || pageName === '/') pageName = 'index.html';
 
-    document.querySelectorAll('.nav-links .nav-link').forEach(link => {
+    // Clear all active classes
+    document.querySelectorAll('.nav-links .nav-link, .nav-dropdown-menu .dropdown-item').forEach(link => {
+      link.classList.remove('active');
+    });
+    document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+      dropdown.classList.remove('active');
+    });
+
+    // Check dropdown items first
+    document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+      let hasActiveChild = false;
+      dropdown.querySelectorAll('.dropdown-item').forEach(item => {
+        const itemHref = item.getAttribute('href');
+        if (!itemHref) return;
+        const itemPage = itemHref.split('#')[0].split('/').pop() || 'index.html';
+        if (itemPage === pageName) {
+          item.classList.add('active');
+          hasActiveChild = true;
+        }
+      });
+      if (hasActiveChild) {
+        dropdown.classList.add('active');
+        const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+        if (toggle) toggle.classList.add('active');
+      }
+    });
+
+    // Check top-level nav links
+    document.querySelectorAll('.nav-links > li > .nav-link:not(.nav-dropdown-toggle)').forEach(link => {
       const linkHref = link.getAttribute('href');
       if (!linkHref) return;
       const linkPage = linkHref.split('#')[0].split('/').pop() || 'index.html';
       if (linkPage === pageName) {
         link.classList.add('active');
-      } else {
-        link.classList.remove('active');
       }
     });
   }
@@ -448,6 +468,52 @@ class AppController {
       if (window.initLoreApp) {
         window.initLoreApp();
       }
+    } else if (cleanPage === 'events.html') {
+      this.initEventsPage();
+    }
+  }
+
+  initEventsPage() {
+    const filterButtons = document.querySelectorAll('.event-filter-btn');
+    const eventCards = document.querySelectorAll('.event-entry-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter || 'all';
+        eventCards.forEach(card => {
+          if (filter === 'all') {
+            card.style.display = 'block';
+          } else if (card.classList.contains(`${filter}-event`)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    const copyBtn = document.getElementById('copy-discord-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
+        const inviteUrl = 'https://discord.gg/aCPVFSYCFf';
+        try {
+          await navigator.clipboard.writeText(inviteUrl);
+          this.showToast('Discord invite link copied to clipboard!');
+        } catch (err) {
+          const tempInput = document.createElement('input');
+          tempInput.value = inviteUrl;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+          this.showToast('Discord invite link copied to clipboard!');
+        }
+      });
     }
   }
 

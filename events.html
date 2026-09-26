@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DECKED OUT - Where to Follow & Where's Next | Official Roguelike TCG</title>
+  <meta name="description" content="Where to follow Decked Out development and where the game is being showcased next. Join our Discord community, follow Gamescom 2026 logs, and see the upcoming Playcon presentation.">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css?v=8">
+  <link rel="stylesheet" href="css/card-foil.css?v=3">
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Header -->
+  <header class="site-header" id="top">
+    <div class="header-container">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-icon">
+          <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
+        </div>
+        <div class="brand-text">
+          <h1>DECKED OUT</h1>
+          <span>ROGUELIKE TCG</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links with Sections -->
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Overview</a></li>
+
+          <!-- Compendium Section -->
+          <li class="nav-dropdown">
+            <a href="cards.html" class="nav-link nav-dropdown-toggle" id="nav-compendium-toggle">
+              <span>Compendium</span> <span class="nav-dropdown-arrow">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="cards.html" class="dropdown-item">
+                <span class="dropdown-icon">🃏</span>
+                <span class="dropdown-title">Cards</span>
+              </a>
+              <a href="heroes.html" class="dropdown-item">
+                <span class="dropdown-icon">🧙‍♂️</span>
+                <span class="dropdown-title">Heroes</span>
+              </a>
+              <a href="relics.html" class="dropdown-item">
+                <span class="dropdown-icon">🏺</span>
+                <span class="dropdown-title">Relics</span>
+              </a>
+              <a href="mechanics.html" class="dropdown-item">
+                <span class="dropdown-icon">⚔️</span>
+                <span class="dropdown-title">Mechanics</span>
+              </a>
+              <a href="dungeon.html" class="dropdown-item">
+                <span class="dropdown-icon">🗺️</span>
+                <span class="dropdown-title">Dungeon</span>
+              </a>
+              <a href="lore.html" class="dropdown-item">
+                <span class="dropdown-icon">📖</span>
+                <span class="dropdown-title">Lore</span>
+              </a>
+            </div>
+          </li>
+
+          <!-- Play Section -->
+          <li class="nav-dropdown">
+            <a href="deck-builder.html" class="nav-link nav-dropdown-toggle" id="nav-play-toggle">
+              <span>Play</span> <span class="nav-dropdown-arrow">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="deck-builder.html" class="dropdown-item">
+                <span class="dropdown-icon">🔨</span>
+                <span class="dropdown-title">Deck Builder</span>
+              </a>
+              <a href="combat.html" class="dropdown-item">
+                <span class="dropdown-icon">⚔️</span>
+                <span class="dropdown-title">Battle Test</span>
+              </a>
+            </div>
+          </li>
+
+          <li><a href="events.html" class="nav-link active">Where's Next</a></li>
+          <li><a href="specs.html" class="nav-link">Game Info</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="header-actions">
+        <a href="https://discord.gg/aCPVFSYCFf" target="_blank" rel="noopener noreferrer" class="btn-discord" title="Join Official Decked Out Discord">
+          <span>💬</span> Discord
+        </a>
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn-wishlist" title="Wishlist Decked Out on Steam">
+          <span>⭐</span> Wishlist on Steam
+        </a>
+        <button id="toggle-sfx-btn" class="audio-btn" title="Toggle Sound Effects">🔊</button>
+        <button id="toggle-bgm-btn" class="audio-btn" title="Toggle Background Music">🎼</button>
+        <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="page-content">
+  <!-- Hero Section -->
+  <header class="hero-section" id="events-hero">
+    <div class="hero-bg-glow"></div>
+    <div class="hero-content">
+      <div class="section-kicker" style="color: var(--primary-light); margin-bottom: 0.75rem; letter-spacing: 0.15em;">
+        COMMUNITY &amp; EVENT ROADMAP
+      </div>
+      <h1 class="hero-title">WHERE TO FOLLOW &amp;<br>WHERE'S NEXT</h1>
+      <p class="hero-subtitle">
+        Join our growing adventurer guild on Discord, track where Decked Out is being showcased live around the globe, and catch upcoming convention presentations and demo booths.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="https://discord.gg/aCPVFSYCFf" target="_blank" rel="noopener noreferrer" class="btn-discord-hero">
+          <span>💬 Join Official Discord</span> <span>➔</span>
+        </a>
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-wishlist">
+          <span>⭐ Wishlist on Steam</span>
+        </a>
+        <a href="#event-log" class="btn btn-secondary">
+          <span>📍 Convention Log</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-wrapper">
+
+    <!-- ==========================================
+         SECTION 1: WHERE TO FOLLOW (COMMUNITY)
+         ========================================== -->
+    <section class="site-section" id="community-hub">
+      <div class="section-header center">
+        <div class="section-title-wrap">
+          <span class="section-kicker">WHERE TO FOLLOW</span>
+          <h2><span>🌐</span> Official Channels &amp; Community</h2>
+          <p>Connect directly with the developer, participate in playtests, and help balance the meta.</p>
+        </div>
+      </div>
+
+      <div class="community-section-grid">
+
+        <!-- Discord Guild Card (Primary Featured) -->
+        <div class="community-card community-card-discord">
+          <div class="community-header">
+            <div class="community-icon-badge">💬</div>
+            <div class="community-title-wrap">
+              <h3>Decked Out Discord Server</h3>
+              <span class="community-status-pill discord-pill">● Official Developer Discord</span>
+            </div>
+          </div>
+
+          <p class="community-desc">
+            The beating heart of the Decked Out community! Join fellow deckbuilders, share theorycrafting strategies, test unreleased balance changes, and chat directly with developer <strong>Emanuele Ellul</strong>.
+          </p>
+
+          <ul class="community-perks">
+            <li class="community-perk-item">
+              <span class="perk-bullet">▶</span>
+              <span><strong>Direct Access to Creator:</strong> Suggest card ideas, debate boss mechanics, and provide playtest feedback.</span>
+            </li>
+            <li class="community-perk-item">
+              <span class="perk-bullet">▶</span>
+              <span><strong>Exclusive Sneak Peeks:</strong> Be the first to preview Series 2 card drafts, new hero sprite animations, and relic designs.</span>
+            </li>
+            <li class="community-perk-item">
+              <span class="perk-bullet">▶</span>
+              <span><strong>Deck Sharing &amp; Strategy:</strong> Post your deck codes exported from our online Deck Builder and discover lethal synergies.</span>
+            </li>
+            <li class="community-perk-item">
+              <span class="perk-bullet">▶</span>
+              <span><strong>Beta Keys &amp; Tournaments:</strong> Priority access to closed test branches, demo tournaments, and convention giveaways.</span>
+            </li>
+          </ul>
+
+          <div class="community-actions-row">
+            <a href="https://discord.gg/aCPVFSYCFf" target="_blank" rel="noopener noreferrer" class="btn-discord-hero" style="font-size: 0.5rem; padding: 0.75rem 1.25rem;">
+              <span>💬 Join Server (discord.gg/aCPVFSYCFf)</span>
+            </a>
+            <button id="copy-discord-btn" class="btn-copy-invite" title="Copy Discord Invite Link">
+              <span>📋</span> Copy Invite Link
+            </button>
+          </div>
+        </div>
+
+        <!-- Steam & Development Cards Stack -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+          <!-- Steam Hub Card -->
+          <div class="community-card">
+            <div class="community-header">
+              <div class="community-icon-badge" style="color: var(--primary);">⭐</div>
+              <div class="community-title-wrap">
+                <h3>Steam Community Hub</h3>
+                <span class="community-status-pill">● Store &amp; Discussions</span>
+              </div>
+            </div>
+
+            <p class="community-desc">
+              Wishlisting Decked Out on Steam is the single most impactful way to support independent game development and ensure you are notified the minute early access launches.
+            </p>
+
+            <ul class="community-perks">
+              <li class="community-perk-item">
+                <span class="perk-bullet">▶</span>
+                <span>Read detailed dev logs and engine milestones.</span>
+              </li>
+              <li class="community-perk-item">
+                <span class="perk-bullet">▶</span>
+                <span>Track patch notes, bug fixes, and community announcements.</span>
+              </li>
+            </ul>
+
+            <div class="community-actions-row">
+              <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-wishlist" style="width: 100%; justify-content: center;">
+                <span>⭐ Wishlist on Steam</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Development & Tech Specs -->
+          <div class="community-card" style="padding: 1.25rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+              <div>
+                <h4 style="font-family: var(--font-pixel); font-size: 0.6rem; color: #fff; margin: 0 0 0.35rem 0;">Technical Specifications</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">Built with Godot 4.7 Forward+ for PC.</p>
+              </div>
+              <a href="specs.html" class="btn btn-secondary" style="font-size: 0.48rem; padding: 0.5rem 0.85rem; flex-shrink: 0;">
+                <span>Game Info ➔</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: WHERE'S NEXT & EVENT LOG
+         ========================================== -->
+    <section class="site-section" id="event-log">
+      <div class="section-header center">
+        <div class="section-title-wrap">
+          <span class="section-kicker">CONVENTION ROADMAP</span>
+          <h2><span>📍</span> Where Decked Out Was &amp; Where It's Going</h2>
+          <p>A permanent record of conventions attended, plus upcoming presentations where you can play the game in person.</p>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="event-filter-bar">
+        <span style="font-family: var(--font-pixel); font-size: 0.46rem; color: var(--text-muted); margin-right: 0.5rem;">FILTER:</span>
+        <button class="event-filter-btn active" data-filter="all">All Events (2)</button>
+        <button class="event-filter-btn" data-filter="upcoming">🟢 Upcoming (1)</button>
+        <button class="event-filter-btn" data-filter="past">🏁 Past Events Log (1)</button>
+      </div>
+
+      <!-- Events List -->
+      <div class="event-cards-grid">
+
+        <!-- 1. UPCOMING: PLAYCON 2026 -->
+        <div class="event-entry-card upcoming-event">
+          <div class="event-header-row">
+            <div class="event-badge-group">
+              <span class="event-badge-upcoming">🟢 UPCOMING SHOWCASE</span>
+              <span class="event-date-pill">📅 19th – 22nd November 2026</span>
+            </div>
+            <div class="event-location-text">
+              <span class="flag">🇲🇹</span> <strong>MFCC, Ta' Qali, Malta</strong>
+            </div>
+          </div>
+
+          <h3 class="event-title-h3">
+            <span>🎮</span> Playcon 2026 — Live Game Presentation &amp; Playable Booth
+          </h3>
+
+          <div class="event-body-text">
+            <p>
+              I will present <strong>Decked Out</strong> at <strong>Playcon</strong> from the <strong>19th till the 22nd of November 2026</strong>!
+              Playcon is Malta's flagship gaming, game development, and esports festival. Visitors and gamers can experience hands-on gameplay with our latest PC build, test custom hero archetypes, explore the 3-act dungeon descent, and engage in exclusive live boss challenges.
+            </p>
+          </div>
+
+          <div class="event-features-grid">
+            <div class="event-feature-box">
+              <h4><span>🎤</span> Live Stage Presentation</h4>
+              <p>Emanuele Ellul will present the game live, discussing Godot 4.7 architecture, deterministic mitigation math, and card synergetics.</p>
+            </div>
+            <div class="event-feature-box">
+              <h4><span>🕹️</span> Hands-on Playable Demo</h4>
+              <p>Multiple tournament-grade stations featuring all 7 asymmetric heroes and the full 62-card Series 1 compendium.</p>
+            </div>
+            <div class="event-feature-box">
+              <h4><span>🏆</span> Dungeon Climax Challenge</h4>
+              <p>Special convention bounties for players who successfully defeat the Act 1 and Act 2 Climax Bosses during public play.</p>
+            </div>
+            <div class="event-feature-box">
+              <h4><span>🎁</span> Swag &amp; Community Meetup</h4>
+              <p>Exclusive pixel art stickers, physical card collectibles, and direct developer Q&amp;A sessions.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. PAST EVENT LOG: GAMESCOM 2026 -->
+        <div class="event-entry-card past-event">
+          <div class="event-header-row">
+            <div class="event-badge-group">
+              <span class="event-badge-past">🏁 PAST EVENT • COMPLETED</span>
+              <span class="event-date-pill">📅 August 2026</span>
+            </div>
+            <div class="event-location-text">
+              <span class="flag">🇩🇪</span> <strong>Koelnmesse, Cologne, Germany</strong>
+            </div>
+          </div>
+
+          <h3 class="event-title-h3">
+            <span>🏛️</span> Gamescom 2026 — International Public Showcase
+          </h3>
+
+          <div class="event-body-text">
+            <p>
+              <strong>Decked Out was at Gamescom 2026!</strong> At the world's largest gaming event in Cologne, Germany, hundreds of adventurers took on the treacherous Primordial Labyrinth. Players tested our dual-mitigation damage calculation (<em>Armor absorbing physical strikes, Ward repelling arcane spells</em>) and drafted devastating elemental combos against relentless enemies.
+            </p>
+            <p style="margin-top: 0.75rem;">
+              The invaluable feedback collected from both roguelike veterans and newcomers directly informed our recent balance patches—including fine-tuning Burn tick damage, expanding the Scrap Goblin's salvage engine, and sharpening the Act 1 floor progression.
+            </p>
+          </div>
+
+          <div class="event-features-grid">
+            <div class="event-feature-box">
+              <h4><span>🌍</span> 500+ Dungeon Runs</h4>
+              <p>Hundreds of players battled through the Catacombs, triggering over 20,000 card plays throughout the convention.</p>
+            </div>
+            <div class="event-feature-box">
+              <h4><span>🃏</span> 62-Card Debut</h4>
+              <p>The first international public unveiling of all 62 cards, 9 relics, and full combat audio effects.</p>
+            </div>
+            <div class="event-feature-box">
+              <h4><span>📈</span> Community Feedback</h4>
+              <p>Direct player impressions gathered on turn pacing and relic scaling helped shape subsequent game updates.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Keep Past Events / Convention Inquiry Note -->
+      <div class="lore-spotlight-card" style="margin-top: 2rem;">
+        <div class="lore-text-wrap" style="text-align: center;">
+          <h3 class="lore-title" style="font-size: 0.75rem;">Host Decked Out at Your Event?</h3>
+          <p class="lore-body" style="max-width: 700px; margin: 0 auto 1.25rem auto;">
+            Are you organizing an indie gaming festival, university expo, or esports tournament? We are always looking for exciting opportunities to showcase Decked Out to passionate players.
+          </p>
+          <a href="https://discord.gg/aCPVFSYCFf" target="_blank" rel="noopener noreferrer" class="btn-discord-hero" style="display: inline-flex; font-size: 0.5rem; padding: 0.7rem 1.2rem;">
+            <span>💬 Inquire on Discord</span> <span>➔</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="brand-wrapper">
+        <div class="brand-icon">
+          <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
+        </div>
+        <div class="brand-text">
+          <h1>DECKED OUT</h1>
+          <span>ROGUELIKE TCG</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">Overview</a>
+        <a href="cards.html">Cards</a>
+        <a href="heroes.html">Heroes</a>
+        <a href="relics.html">Relics</a>
+        <a href="mechanics.html">Mechanics</a>
+        <a href="dungeon.html">Dungeon</a>
+        <a href="lore.html">Lore</a>
+        <a href="deck-builder.html">Deck Builder</a>
+        <a href="combat.html">Battle Test</a>
+        <a href="events.html" style="color: var(--primary);">Where's Next</a>
+        <a href="specs.html">Game Info</a>
+        <a href="https://discord.gg/aCPVFSYCFf" target="_blank" rel="noopener noreferrer" style="color: #7983f5;">Discord</a>
+        <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Steam</a>
+      </div>
+
+      <div class="footer-credits">
+        <p>Decked Out — Built with Godot 4.7 Forward+.</p>
+        <p style="margin-top: 0.25rem;">Official Companion Website. All game assets &amp; characters &copy; Emanuele Ellul.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/audio.js?v=9"></script>
+  <script src="js/app.js?v=9"></script>
+
+</body>
+</html>

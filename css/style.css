@@ -81,7 +81,7 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' shape-rendering='crispEdges'%3E%3Cpath fill='%23000' d='M0 0h2v19h3v-3h3v-2h2v-2h3v-2h-3V8h-2V6H6V4H4V2H2V0z'/%3E%3Cpath fill='%23fff' d='M2 2h2v2h2v2h2v2h2v2h2v2h2v2h-3v2h-2v-2H7v-2H5v-2H3V2z'/%3E%3Cpath fill='%23f59e0b' d='M2 2h2v2H2z'/%3E%3C/svg%3E") 0 0, auto;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' shape-rendering='crispEdges'%3E%3Cpath fill='%23000000' d='M0 0h1v1h-1zM0 1h2v1h-2zM0 2h1v1h-1zM2 2h1v1h-1zM0 3h1v1h-1zM3 3h1v1h-1zM0 4h1v1h-1zM4 4h1v1h-1zM0 5h1v1h-1zM5 5h1v1h-1zM0 6h1v1h-1zM6 6h1v1h-1zM0 7h1v1h-1zM7 7h1v1h-1zM0 8h1v1h-1zM8 8h1v1h-1zM0 9h1v1h-1zM9 9h1v1h-1zM0 10h1v1h-1zM10 10h1v1h-1zM0 11h1v1h-1zM11 11h1v1h-1zM0 12h1v1h-1zM5 12h2v1h-2zM9 12h3v1h-3zM0 13h1v1h-1zM4 13h1v1h-1zM7 13h1v1h-1zM9 13h1v1h-1zM0 14h1v1h-1zM3 14h1v1h-1zM7 14h1v1h-1zM10 14h1v1h-1zM0 15h1v1h-1zM2 15h1v1h-1zM8 15h1v1h-1zM11 15h1v1h-1zM0 16h2v1h-2zM8 16h1v1h-1zM11 16h1v1h-1zM0 17h1v1h-1zM9 17h1v1h-1zM12 17h1v1h-1zM10 18h1v1h-1zM12 18h1v1h-1zM10 19h3v1h-3z'/%3E%3Cpath fill='%23ffffff' d='M1 2h1v1h-1zM1 3h2v1h-2zM1 4h1v1h-1zM1 5h1v1h-1zM1 6h1v1h-1zM1 7h1v1h-1zM1 8h1v1h-1zM1 9h1v1h-1zM1 10h1v1h-1zM1 11h1v1h-1zM1 12h1v1h-1zM1 13h1v1h-1zM1 14h1v1h-1z'/%3E%3Cpath fill='%23f59e0b' d='M3 5h2v1h-2zM3 6h3v1h-3zM3 7h4v1h-4zM3 8h5v1h-5zM3 9h6v1h-6zM3 10h7v1h-7zM3 11h4v1h-4zM3 12h2v1h-2zM2 13h2v1h-2zM2 14h1v1h-1zM1 15h1v1h-1z'/%3E%3Cpath fill='%23fde047' d='M2 4h2v1h-2zM2 5h1v1h-1zM2 6h1v1h-1zM2 7h1v1h-1zM2 8h1v1h-1zM2 9h1v1h-1zM2 10h1v1h-1zM2 11h1v1h-1zM2 12h1v1h-1z'/%3E%3Cpath fill='%23b45309' d='M7 11h4v1h-4zM7 12h2v1h-2zM8 13h1v1h-1zM8 14h2v1h-2zM9 15h2v1h-2zM9 16h2v1h-2zM10 17h2v1h-2zM11 18h1v1h-1z'/%3E%3C/svg%3E") 0 0, auto;
 }
 
 body {
@@ -91,7 +91,7 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' shape-rendering='crispEdges'%3E%3Cpath fill='%23000' d='M0 0h2v19h3v-3h3v-2h2v-2h3v-2h-3V8h-2V6H6V4H4V2H2V0z'/%3E%3Cpath fill='%23fff' d='M2 2h2v2h2v2h2v2h2v2h2v2h2v2h-3v2h-2v-2H7v-2H5v-2H3V2z'/%3E%3Cpath fill='%23f59e0b' d='M2 2h2v2H2z'/%3E%3C/svg%3E") 0 0, auto;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' shape-rendering='crispEdges'%3E%3Cpath fill='%23000000' d='M0 0h1v1h-1zM0 1h2v1h-2zM0 2h1v1h-1zM2 2h1v1h-1zM0 3h1v1h-1zM3 3h1v1h-1zM0 4h1v1h-1zM4 4h1v1h-1zM0 5h1v1h-1zM5 5h1v1h-1zM0 6h1v1h-1zM6 6h1v1h-1zM0 7h1v1h-1zM7 7h1v1h-1zM0 8h1v1h-1zM8 8h1v1h-1zM0 9h1v1h-1zM9 9h1v1h-1zM0 10h1v1h-1zM10 10h1v1h-1zM0 11h1v1h-1zM11 11h1v1h-1zM0 12h1v1h-1zM5 12h2v1h-2zM9 12h3v1h-3zM0 13h1v1h-1zM4 13h1v1h-1zM7 13h1v1h-1zM9 13h1v1h-1zM0 14h1v1h-1zM3 14h1v1h-1zM7 14h1v1h-1zM10 14h1v1h-1zM0 15h1v1h-1zM2 15h1v1h-1zM8 15h1v1h-1zM11 15h1v1h-1zM0 16h2v1h-2zM8 16h1v1h-1zM11 16h1v1h-1zM0 17h1v1h-1zM9 17h1v1h-1zM12 17h1v1h-1zM10 18h1v1h-1zM12 18h1v1h-1zM10 19h3v1h-3z'/%3E%3Cpath fill='%23ffffff' d='M1 2h1v1h-1zM1 3h2v1h-2zM1 4h1v1h-1zM1 5h1v1h-1zM1 6h1v1h-1zM1 7h1v1h-1zM1 8h1v1h-1zM1 9h1v1h-1zM1 10h1v1h-1zM1 11h1v1h-1zM1 12h1v1h-1zM1 13h1v1h-1zM1 14h1v1h-1z'/%3E%3Cpath fill='%23f59e0b' d='M3 5h2v1h-2zM3 6h3v1h-3zM3 7h4v1h-4zM3 8h5v1h-5zM3 9h6v1h-6zM3 10h7v1h-7zM3 11h4v1h-4zM3 12h2v1h-2zM2 13h2v1h-2zM2 14h1v1h-1zM1 15h1v1h-1z'/%3E%3Cpath fill='%23fde047' d='M2 4h2v1h-2zM2 5h1v1h-1zM2 6h1v1h-1zM2 7h1v1h-1zM2 8h1v1h-1zM2 9h1v1h-1zM2 10h1v1h-1zM2 11h1v1h-1zM2 12h1v1h-1z'/%3E%3Cpath fill='%23b45309' d='M7 11h4v1h-4zM7 12h2v1h-2zM8 13h1v1h-1zM8 14h2v1h-2zM9 15h2v1h-2zM9 16h2v1h-2zM10 17h2v1h-2zM11 18h1v1h-1z'/%3E%3C/svg%3E") 0 0, auto;
   /* Subtle pixel grid background */
   background-image:
     linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
@@ -99,13 +99,32 @@ body {
   background-size: 32px 32px;
 }
 
-/* 16-Bit Pixel Pointer for clickable elements */
+/* 16-Bit Armored Pointing Gauntlet for interactive & clickable elements */
 a, button, select, input, [role="button"], 
 .game-card, .act-tab-btn, .hero-roster-card, .preset-pill-btn, 
-.filter-pill, .relic-showcase-card, .foe-card, .mystery-event-card, 
-.vault-card-item, .combat-card-playable, .deck-qty-btn, .custom-select,
-.class-pill, .btn, .btn-wishlist, .audio-btn {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' shape-rendering='crispEdges'%3E%3Cpath fill='%23000' d='M4 0h5v12h2v-2h2v-2h2v2h2v2h2v8h-2v2h-2v2H7v-2H5v-2H3V8h1V0z'/%3E%3Cpath fill='%23f59e0b' d='M5 1h3v11h2v-1h2v-1h2v1h2v1h1v7h-1v1h-2v2H8v-1H6v-2H4V9h1V1z'/%3E%3Cpath fill='%23fef08a' d='M5 1h1v10h1v-9h1V1zm3 12h2v-1h2v1h1v4h-1v1H8v-4z'/%3E%3Cpath fill='%23b45309' d='M7 18h4v1H7zm5-4h2v3h-2z'/%3E%3C/svg%3E") 6 0, pointer !important;
+.filter-pill, .relic-showcase-card, .mystery-event-card, 
+.vault-card-item, .deck-qty-btn, .custom-select,
+.class-pill, .btn, .btn-wishlist, .audio-btn,
+.nav-link, .tab-btn, .filter-chip, summary, label,
+[style*="cursor: pointer"], [style*="cursor:pointer"] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' shape-rendering='crispEdges'%3E%3Cpath fill='%23000000' d='M1 0h1v1h-1zM0 1h1v1h-1zM2 1h1v1h-1zM0 2h1v1h-1zM3 2h1v1h-1zM1 3h1v1h-1zM5 3h1v1h-1zM2 4h1v1h-1zM6 4h2v1h-2zM3 5h1v1h-1zM8 5h1v1h-1zM4 6h1v1h-1zM10 6h2v1h-2zM3 7h2v1h-2zM12 7h1v1h-1zM2 8h1v1h-1zM13 8h1v1h-1zM1 9h1v1h-1zM13 9h1v1h-1zM1 10h1v1h-1zM13 10h1v1h-1zM2 11h1v1h-1zM14 11h1v1h-1zM3 12h1v1h-1zM14 12h1v1h-1zM4 13h1v1h-1zM7 13h2v1h-2zM13 13h1v1h-1zM4 14h1v1h-1zM12 14h1v1h-1zM4 15h1v1h-1zM12 15h1v1h-1zM5 16h1v1h-1zM12 16h1v1h-1zM6 17h6v1h-6z'/%3E%3Cpath fill='%23ffffff' d='M1 1h1v1h-1zM2 2h1v1h-1zM11 7h1v1h-1zM4 8h1v1h-1z'/%3E%3Cpath fill='%23fef08a' d='M4 3h1v1h-1zM5 4h1v1h-1zM6 5h2v1h-2zM8 6h2v1h-2zM10 7h1v1h-1zM3 8h1v1h-1zM12 8h1v1h-1zM2 9h1v1h-1zM2 10h1v1h-1zM5 14h2v1h-2zM8 14h2v1h-2zM5 15h1v1h-1z'/%3E%3Cpath fill='%23f59e0b' d='M1 2h1v1h-1zM2 3h2v1h-2zM3 4h2v1h-2zM4 5h2v1h-2zM5 6h3v1h-3zM5 7h5v1h-5zM5 8h7v1h-7zM3 9h10v1h-10zM3 10h9v1h-9zM4 11h8v1h-8zM5 12h2v1h-2zM9 12h2v1h-2zM7 14h1v1h-1zM10 14h1v1h-1zM6 15h1v1h-1zM10 15h1v1h-1zM7 16h4v1h-4z'/%3E%3Cpath fill='%2392400e' d='M12 10h1v1h-1zM3 11h1v1h-1zM12 11h2v1h-2zM4 12h1v1h-1zM7 12h2v1h-2zM11 12h3v1h-3zM5 13h2v1h-2zM9 13h4v1h-4zM11 14h1v1h-1zM6 16h1v1h-1zM11 16h1v1h-1z'/%3E%3Cpath fill='%23ef4444' d='M8 15h1v1h-1zM11 15h1v1h-1z'/%3E%3Cpath fill='%2338bdf8' d='M7 15h1v1h-1zM9 15h1v1h-1z'/%3E%3C/svg%3E") 1 0, pointer !important;
+}
+
+/* 16-Bit Legendary RPG Sword for combat targets, arena battlefield, and action strikes */
+.combat-battlefield, 
+.combat-card-playable, 
+.combat-card-playable.can-afford,
+.combat-end-turn-btn, 
+.foe-card, 
+.enemy-entity,
+.enemy-avatar-frame,
+.combat-target,
+.dungeon-node {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' shape-rendering='crispEdges'%3E%3Cpath fill='%23000000' d='M0 0h1v1h-1zM0 1h2v1h-2zM0 2h1v1h-1zM2 2h1v1h-1zM0 3h1v1h-1zM3 3h1v1h-1zM1 4h1v1h-1zM5 4h1v1h-1zM2 5h1v1h-1zM6 5h1v1h-1zM3 6h1v1h-1zM7 6h1v1h-1zM4 7h1v1h-1zM8 7h1v1h-1zM5 8h1v1h-1zM9 8h1v1h-1zM3 9h3v1h-3zM9 9h3v1h-3zM2 10h1v1h-1zM6 10h1v1h-1zM10 10h1v1h-1zM13 10h1v1h-1zM3 11h1v1h-1zM7 11h1v1h-1zM9 11h1v1h-1zM13 11h1v1h-1zM4 12h3v1h-3zM8 12h1v1h-1zM10 12h3v1h-3zM7 13h1v1h-1zM9 13h1v1h-1zM6 14h1v1h-1zM8 14h1v1h-1zM10 14h1v1h-1zM7 15h1v1h-1zM9 15h1v1h-1zM6 16h1v1h-1zM10 16h1v1h-1zM6 17h1v1h-1zM10 17h1v1h-1zM7 18h3v1h-3z'/%3E%3Cpath fill='%23ffffff' d='M1 2h1v1h-1zM2 3h1v1h-1zM4 4h1v1h-1zM5 5h1v1h-1zM6 6h1v1h-1zM7 7h1v1h-1zM8 8h1v1h-1zM8 9h1v1h-1zM9 10h1v1h-1z'/%3E%3Cpath fill='%23cbd5e1' d='M1 3h1v1h-1zM2 4h1v1h-1zM3 5h1v1h-1zM4 6h1v1h-1zM5 7h1v1h-1zM6 8h1v1h-1zM6 9h1v1h-1zM7 10h1v1h-1zM8 11h1v1h-1z'/%3E%3Cpath fill='%2364748b' d='M3 4h1v1h-1zM4 5h1v1h-1zM5 6h1v1h-1zM6 7h1v1h-1zM7 8h1v1h-1zM7 9h1v1h-1zM8 10h1v1h-1z'/%3E%3Cpath fill='%23fbbf24' d='M4 10h1v1h-1zM12 10h1v1h-1zM5 11h2v1h-2zM10 11h2v1h-2zM7 17h1v1h-1z'/%3E%3Cpath fill='%23fef08a' d='M3 10h1v1h-1zM5 10h1v1h-1zM11 10h1v1h-1zM12 11h1v1h-1zM7 16h1v1h-1zM9 16h1v1h-1z'/%3E%3Cpath fill='%2392400e' d='M4 11h1v1h-1zM9 17h1v1h-1z'/%3E%3Cpath fill='%23dc2626' d='M7 12h1v1h-1zM9 12h1v1h-1zM8 13h1v1h-1zM7 14h1v1h-1zM9 14h1v1h-1zM8 15h1v1h-1zM8 17h1v1h-1z'/%3E%3Cpath fill='%23f87171' d='M8 16h1v1h-1z'/%3E%3C/svg%3E") 0 0, crosshair !important;
+}
+
+.combat-card-playable.cannot-afford {
+  cursor: not-allowed !important;
 }
 
 /* Chunky 16-Bit Retro Scrollbar */

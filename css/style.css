@@ -81,8 +81,6 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
-  /* Classic clean pixel-art arrow cursor */
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Cpath fill='%23000' d='M0 0h1v11h-1zM1 1h1v1h-1zM2 2h1v1h-1zM3 3h1v1h-1zM4 4h1v1h-1zM5 5h1v1h-1zM6 6h1v1h-1zM1 0h8v1h-8zM9 1h1v3h-1zM8 4h1v1h-1zM7 5h1v2h-1zM4 8h3v1h-3zM5 9h1v1h-1zM5 10h2v1h-2zM6 11h2v1h-2zM7 12h1v1h-1z'/%3E%3Cpath fill='%23fff' d='M1 1h1v9h-1zM2 2h1v1h-1zM3 3h1v1h-1zM4 4h1v1h-1zM5 5h1v1h-1zM6 6h1v1h-1zM2 1h7v1h-7zM8 2h1v2h-1zM7 4h1v1h-1zM6 5h1v1h-1zM4 7h2v1h-2zM5 8h1v2h-1zM6 9h1v2h-1z'/%3E%3C/svg%3E") 0 0, auto;
 }
 
 body {
@@ -92,7 +90,6 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Cpath fill='%23000' d='M0 0h1v11h-1zM1 1h1v1h-1zM2 2h1v1h-1zM3 3h1v1h-1zM4 4h1v1h-1zM5 5h1v1h-1zM6 6h1v1h-1zM1 0h8v1h-8zM9 1h1v3h-1zM8 4h1v1h-1zM7 5h1v2h-1zM4 8h3v1h-3zM5 9h1v1h-1zM5 10h2v1h-2zM6 11h2v1h-2zM7 12h1v1h-1z'/%3E%3Cpath fill='%23fff' d='M1 1h1v9h-1zM2 2h1v1h-1zM3 3h1v1h-1zM4 4h1v1h-1zM5 5h1v1h-1zM6 6h1v1h-1zM2 1h7v1h-7zM8 2h1v2h-1zM7 4h1v1h-1zM6 5h1v1h-1zM4 7h2v1h-2zM5 8h1v2h-1zM6 9h1v2h-1z'/%3E%3C/svg%3E") 0 0, auto;
   /* Subtle pixel grid background */
   background-image:
     linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
@@ -100,13 +97,7 @@ body {
   background-size: 32px 32px;
 }
 
-/* ── PIXEL ART CURSORS ──────────────────────────────────────────────────────
-   Default   : classic white pixel-art arrow (hotspot 0,0)
-   Pointer   : same arrow but amber-tinted + shifted 1px → looks "pressed"
-   Combat    : legendary pixel sword (hotspot 8,0)
-   ──────────────────────────────────────────────────────────────────────── */
-
-/* Amber "pressed" arrow — pointer / clickable elements */
+/* Pointer cursor for all clickable/interactive elements */
 a, button, select, input, [role="button"], 
 .game-card, .act-tab-btn, .hero-roster-card, .preset-pill-btn, 
 .filter-pill, .relic-showcase-card, .mystery-event-card, 
@@ -114,11 +105,10 @@ a, button, select, input, [role="button"],
 .class-pill, .btn, .btn-wishlist, .audio-btn,
 .nav-link, .tab-btn, .filter-chip, summary, label,
 [style*="cursor: pointer"], [style*="cursor:pointer"] {
-  /* Arrow shifted 1px right+down with amber fill = "pressed" feel */
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Cpath fill='%23000' d='M1 1h1v11h-1zM2 2h1v1h-1zM3 3h1v1h-1zM4 4h1v1h-1zM5 5h1v1h-1zM6 6h1v1h-1zM7 7h1v1h-1zM2 1h8v1h-8zM10 2h1v3h-1zM9 5h1v1h-1zM8 6h1v2h-1zM5 9h3v1h-3zM6 10h1v1h-1zM6 11h2v1h-2zM7 12h2v1h-2zM8 13h1v1h-1z'/%3E%3Cpath fill='%23f59e0b' d='M2 2h1v9h-1zM3 3h1v1h-1zM4 4h1v1h-1zM5 5h1v1h-1zM6 6h1v1h-1zM7 7h1v1h-1zM3 2h7v1h-7zM9 3h1v2h-1zM8 5h1v1h-1zM7 6h1v1h-1zM5 8h2v1h-2zM6 9h1v2h-1zM7 10h1v2h-1z'/%3E%3C/svg%3E") 0 0, pointer !important;
+  cursor: pointer !important;
 }
 
-/* Legendary Pixel-Art Sword — combat / action elements */
+/* Pixel-Art Sword cursor — combat / action elements */
 .combat-battlefield, 
 .combat-card-playable, 
 .combat-card-playable.can-afford,

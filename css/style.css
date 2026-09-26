@@ -81,7 +81,8 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
-  cursor: url("../assets/cursor-arrow.png") 0 0, url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAbUlEQVR4nKWSgQrAIAhEvWP//8uOWg1p07KEqE7vWZGIiMpBsM16BFDVbQj7YhdCu9mBcBSyEP6JGQi9xCqEUXIFwlmHGeTyEgA+rCKHJwDwGlvnKpshLgCPsRYOkPkbGHM6IpP2a5w0KITwL9ywVzAL9kAs4gAAAABJRU5ErkJggg==") 0 0, auto;
+  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAbUlEQVR4nKWSgQrAIAhEvWP//8uOWg1p07KEqE7vWZGIiMpBsM16BFDVbQj7YhdCu9mBcBSyEP6JGQi9xCqEUXIFwlmHGeTyEgA+rCKHJwDwGlvnKpshLgCPsRYOkPkbGHM6IpP2a5w0KITwL9ywVzAL9kAs4gAAAABJRU5ErkJggg==") 0 0, auto;
+  cursor: url("../assets/cursor-arrow.png") 0 0, auto;
 }
 
 body {
@@ -91,7 +92,8 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
-  cursor: url("../assets/cursor-arrow.png") 0 0, url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAbUlEQVR4nKWSgQrAIAhEvWP//8uOWg1p07KEqE7vWZGIiMpBsM16BFDVbQj7YhdCu9mBcBSyEP6JGQi9xCqEUXIFwlmHGeTyEgA+rCKHJwDwGlvnKpshLgCPsRYOkPkbGHM6IpP2a5w0KITwL9ywVzAL9kAs4gAAAABJRU5ErkJggg==") 0 0, auto;
+  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAbUlEQVR4nKWSgQrAIAhEvWP//8uOWg1p07KEqE7vWZGIiMpBsM16BFDVbQj7YhdCu9mBcBSyEP6JGQi9xCqEUXIFwlmHGeTyEgA+rCKHJwDwGlvnKpshLgCPsRYOkPkbGHM6IpP2a5w0KITwL9ywVzAL9kAs4gAAAABJRU5ErkJggg==") 0 0, auto;
+  cursor: url("../assets/cursor-arrow.png") 0 0, auto;
   /* Subtle pixel grid background */
   background-image:
     linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
@@ -107,7 +109,8 @@ a, button, select, input, [role="button"],
 .class-pill, .btn, .btn-wishlist, .audio-btn,
 .nav-link, .tab-btn, .filter-chip, summary, label,
 [style*="cursor: pointer"], [style*="cursor:pointer"] {
-  cursor: url("../assets/cursor-pointer.png") 6 0, url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAiUlEQVR4nO2U0QqAIAxFd0f//8s3CgUplps6COpA+RDtuF1RxIblmUKt4iSPl8xKLMEy9DMCjmbhEnAi8C36A4sJwLksF0Rlrwl5mDqiNrzuXCOgGaU086ynxsVTBreQI4W9GaDuOgNNq3wRpHWhKVUNwVAX6FwZ1w5CEjjuI+uj96zCvZsfMdgBZe0nMZT+3o4AAAAASUVORK5CYII=") 6 0, pointer !important;
+  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAiUlEQVR4nO2U0QqAIAxFd0f//8s3CgUplps6COpA+RDtuF1RxIblmUKt4iSPl8xKLMEy9DMCjmbhEnAi8C36A4sJwLksF0Rlrwl5mDqiNrzuXCOgGaU086ynxsVTBreQI4W9GaDuOgNNq3wRpHWhKVUNwVAX6FwZ1w5CEjjuI+uj96zCvZsfMdgBZe0nMZT+3o4AAAAASUVORK5CYII=") 6 0, pointer !important;
+  cursor: url("../assets/cursor-pointer.png") 6 0, pointer !important;
 }
 
 /* Tactile pressed feedback when clicking down */
@@ -117,7 +120,8 @@ a:active, button:active, select:active, input:active, [role="button"]:active,
 .vault-card-item:active, .deck-qty-btn:active, .custom-select:active,
 .class-pill:active, .btn:active, .btn-wishlist:active, .audio-btn:active,
 .nav-link:active, .tab-btn:active, .filter-chip:active, summary:active, label:active {
-  cursor: url("../assets/cursor-pressed.png") 7 1, url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAg0lEQVR4nO2U4QqAMAiE76T3f2WjaDFGWyqOgvpg27879WTAw+hxwshIXFW3qxilG6QgnzLQSBZmAw0GvngrOtcLAMn9QbaBx+xVIYeoR1SHN5yrBzajRDXPsjUmehlchuwRtmbAUnU2MkW1YzClC0lXvDEIdcHBl9FTs64R3dX8oGEFR3EnJ1mLDqsAAAAASUVORK5CYII=") 7 1, pointer !important;
+  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAg0lEQVR4nO2U4QqAMAiE76T3f2WjaDFGWyqOgvpg27879WTAw+hxwshIXFW3qxilG6QgnzLQSBZmAw0GvngrOtcLAMn9QbaBx+xVIYeoR1SHN5yrBzajRDXPsjUmehlchuwRtmbAUnU2MkW1YzClC0lXvDEIdcHBl9FTs64R3dX8oGEFR3EnJ1mLDqsAAAAASUVORK5CYII=") 7 1, pointer !important;
+  cursor: url("../assets/cursor-pressed.png") 7 1, pointer !important;
 }
 
 /* Pixel-Art Sword cursor — combat / action elements */

@@ -58,12 +58,14 @@
   white-space: nowrap !important;
   flex-shrink: 0 !important;
   position: relative !important;
-  cursor: url("../assets/cursor-pointer.png") 6 0, url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAiUlEQVR4nO2U0QqAIAxFd0f//8s3CgUplps6COpA+RDtuF1RxIblmUKt4iSPl8xKLMEy9DMCjmbhEnAi8C36A4sJwLksF0Rlrwl5mDqiNrzuXCOgGaU086ynxsVTBreQI4W9GaDuOgNNq3wRpHWhKVUNwVAX6FwZ1w5CEjjuI+uj96zCvZsfMdgBZe0nMZT+3o4AAAAASUVORK5CYII=") 6 0, pointer !important;
+  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAiUlEQVR4nO2U0QqAIAxFd0f//8s3CgUplps6COpA+RDtuF1RxIblmUKt4iSPl8xKLMEy9DMCjmbhEnAi8C36A4sJwLksF0Rlrwl5mDqiNrzuXCOgGaU086ynxsVTBreQI4W9GaDuOgNNq3wRpHWhKVUNwVAX6FwZ1w5CEjjuI+uj96zCvZsfMdgBZe0nMZT+3o4AAAAASUVORK5CYII=") 6 0, pointer !important;
+  cursor: url("../assets/cursor-pointer.png") 6 0, pointer !important;
   background: transparent !important;
 }
 
 .nav-link:active {
-  cursor: url("../assets/cursor-pressed.png") 7 1, url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAg0lEQVR4nO2U4QqAMAiE76T3f2WjaDFGWyqOgvpg27879WTAw+hxwshIXFW3qxilG6QgnzLQSBZmAw0GvngrOtcLAMn9QbaBx+xVIYeoR1SHN5yrBzajRDXPsjUmehlchuwRtmbAUnU2MkW1YzClC0lXvDEIdcHBl9FTs64R3dX8oGEFR3EnJ1mLDqsAAAAASUVORK5CYII=") 7 1, pointer !important;
+  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAg0lEQVR4nO2U4QqAMAiE76T3f2WjaDFGWyqOgvpg27879WTAw+hxwshIXFW3qxilG6QgnzLQSBZmAw0GvngrOtcLAMn9QbaBx+xVIYeoR1SHN5yrBzajRDXPsjUmehlchuwRtmbAUnU2MkW1YzClC0lXvDEIdcHBl9FTs64R3dX8oGEFR3EnJ1mLDqsAAAAASUVORK5CYII=") 7 1, pointer !important;
+  cursor: url("../assets/cursor-pressed.png") 7 1, pointer !important;
 }
 
 .nav-links > li:last-child > .nav-link {
@@ -308,7 +310,8 @@
   padding: 0.55rem 0.8rem !important;
   border: 2px solid #000 !important;
   box-shadow: inset 2px 2px 0 #7983f5, inset -2px -2px 0 #3c45a5, 2px 2px 0 #000 !important;
-  cursor: url("../assets/cursor-pointer.png") 6 0, url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAiUlEQVR4nO2U0QqAIAxFd0f//8s3CgUplps6COpA+RDtuF1RxIblmUKt4iSPl8xKLMEy9DMCjmbhEnAi8C36A4sJwLksF0Rlrwl5mDqiNrzuXCOgGaU086ynxsVTBreQI4W9GaDuOgNNq3wRpHWhKVUNwVAX6FwZ1w5CEjjuI+uj96zCvZsfMdgBZe0nMZT+3o4AAAAASUVORK5CYII=") 6 0, pointer !important;
+  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAiUlEQVR4nO2U0QqAIAxFd0f//8s3CgUplps6COpA+RDtuF1RxIblmUKt4iSPl8xKLMEy9DMCjmbhEnAi8C36A4sJwLksF0Rlrwl5mDqiNrzuXCOgGaU086ynxsVTBreQI4W9GaDuOgNNq3wRpHWhKVUNwVAX6FwZ1w5CEjjuI+uj96zCvZsfMdgBZe0nMZT+3o4AAAAASUVORK5CYII=") 6 0, pointer !important;
+  cursor: url("../assets/cursor-pointer.png") 6 0, pointer !important;
   display: inline-flex !important;
   align-items: center !important;
   gap: 0.4rem !important;

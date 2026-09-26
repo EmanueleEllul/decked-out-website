@@ -1767,6 +1767,138 @@ p, span, a, li, td, th, input, select, button {
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
 }
 
+/* Procedural Dungeon Map & Floor Timeline */
+.dungeon-controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.dungeon-seed-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #06090e;
+  border: 2px solid var(--border-strong);
+  padding: 0.45rem 0.85rem;
+  box-shadow: 2px 2px 0 #000;
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  color: #fbbf24;
+}
+
+.dungeon-seed-badge strong {
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.dungeon-timeline-wrap {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 1rem 0.5rem 1.25rem 0.5rem;
+  scrollbar-width: thin;
+}
+
+.map-node-item {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.12s ease;
+}
+
+.map-node-item:hover {
+  transform: translateY(-4px);
+}
+
+.map-node-box {
+  width: 46px;
+  height: 46px;
+  border: 2px solid var(--border-strong);
+  background: #090c14;
+  box-shadow: 2px 2px 0 #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  position: relative;
+  transition: all 0.12s ease;
+}
+
+.map-node-item:hover .map-node-box {
+  border-color: var(--primary);
+  box-shadow: 3px 3px 0 #000;
+}
+
+.map-node-item.selected .map-node-box {
+  border-color: #fbbf24;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.6), inset 0 0 8px rgba(245, 158, 11, 0.3), 3px 3px 0 #000;
+  transform: scale(1.08);
+}
+
+.map-node-item.node-boss .map-node-box {
+  border-color: var(--hp-red);
+  background: #250808;
+}
+
+.map-node-item.node-boss.selected .map-node-box {
+  border-color: #f87171;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.7), inset 0 0 8px rgba(239, 68, 68, 0.4), 3px 3px 0 #000;
+}
+
+.map-node-floor-label {
+  font-family: var(--font-pixel);
+  font-size: 0.48rem;
+  color: var(--primary);
+}
+
+.map-node-type-label {
+  font-size: 0.65rem;
+  color: var(--text-faint);
+  max-width: 60px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.map-node-arrow {
+  align-self: center;
+  color: var(--border-strong);
+  font-size: 0.85rem;
+  margin: 0 0.1rem 1rem 0.1rem;
+}
+
+.dungeon-floor-inspector {
+  background: #080b12;
+  border: 2px solid var(--border-strong);
+  box-shadow: 3px 3px 0 #000;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  animation: fadeIn 0.2s ease;
+}
+
+@media (max-width: 800px) {
+  .dungeon-floor-inspector {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+
 /* Bestiary */
 .bestiary-category-wrap {
   margin-bottom: 2rem;

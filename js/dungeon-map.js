@@ -1,11 +1,14 @@
 // Decked Out - Dungeon, Bestiary & Mystery Events Showcase
-// Displays 3-Act progression roadmap, Act climax bosses, dungeon encounters, and subterranean mystery events
+// Displays 3-Act progression roadmap, procedural random dungeon generator,
+// Act climax bosses, dungeon encounters, and subterranean mystery events
 
 class DungeonMapManager {
   constructor() {
     this.acts = (typeof window !== 'undefined' && window.GAME_ACTS) ? window.GAME_ACTS : (typeof GAME_ACTS !== 'undefined' ? GAME_ACTS : []);
     this.mysteryEvents = (typeof window !== 'undefined' && window.MYSTERY_EVENTS) ? window.MYSTERY_EVENTS : (typeof MYSTERY_EVENTS !== 'undefined' ? MYSTERY_EVENTS : []);
     this.selectedActIndex = 0;
+    this.selectedFloorIndex = 0;
+    this.actDungeons = {};
 
     this.commonFoes = [
       {
@@ -65,13 +68,61 @@ class DungeonMapManager {
       }
     ];
 
+    // Act-specific foe pools for dynamic procedural encounters
+    this.actEncounters = {
+      0: {
+        normal: [
+          { name: "Goblin Scavenger", hp: 35, atk: 7, armor: 2, ward: 0, icon: "⚙️", sprite: "assets/enemies/anim/Goblin.gif", desc: "Fast, scurrying scavenger stripping scrap from fallen crawlers." },
+          { name: "Shadow Bandit", hp: 55, atk: 10, armor: 4, ward: 2, icon: "🗡️", sprite: "assets/enemies/anim/Bandit.gif", desc: "Ruthless catacomb brigand inflicting Bleed with concealed daggers." },
+          { name: "Corrupted Cultist", hp: 48, atk: 12, armor: 0, ward: 8, icon: "🔮", sprite: "assets/enemies/anim/Cultist.gif", desc: "Occult chanter unleashing ethereal spellfire." },
+          { name: "Runic Gnome", hp: 40, atk: 9, armor: 3, ward: 5, icon: "⚡", sprite: "assets/enemies/anim/Gnome.gif", desc: "Erratic tinkerer deploying shock mines and volatile gears." }
+        ],
+        elite: [
+          { name: "Elite Iron Knight", hp: 95, atk: 16, armor: 14, ward: 4, icon: "🛡️", sprite: "assets/enemies/anim/EliteKnight.gif", desc: "Towering runic sentinel with impenetrable plate and sweeping greatsword." },
+          { name: "Crypt Boneguard", hp: 105, atk: 15, armor: 16, ward: 2, icon: "💀", desc: "Ancient petrified warrior defending forgotten catacomb vaults." }
+        ]
+      },
+      1: {
+        normal: [
+          { name: "Magma Crawler", hp: 65, atk: 13, armor: 6, ward: 4, icon: "🔥", desc: "Molten chitinous fiend crawling from geothermal core fissures." },
+          { name: "Cinder Shaman", hp: 60, atk: 16, armor: 2, ward: 10, icon: "🔮", desc: "Zealot channeling the living flame of the deep forge." },
+          { name: "Forged Automaton", hp: 75, atk: 14, armor: 12, ward: 0, icon: "⚙️", desc: "Dormant foundry sentry reactivated by high-pressure steam." },
+          { name: "Flame Imp", hp: 45, atk: 17, armor: 0, ward: 6, icon: "⚡", desc: "Agile, cackling fire sprite that hurls explosive magma embers." }
+        ],
+        elite: [
+          { name: "Magma Core Colossus", hp: 150, atk: 22, armor: 22, ward: 8, icon: "🌋", desc: "Monolithic volcanic guardian fused from boiling basalt and obsidian." },
+          { name: "Pyroclast Drake", hp: 135, atk: 24, armor: 14, ward: 14, icon: "🐉", desc: "Winged fire drake defending the molten blast gates." }
+        ]
+      },
+      2: {
+        normal: [
+          { name: "Celestial Templar", hp: 95, atk: 20, armor: 14, ward: 16, icon: "✨", desc: "Holy sentinel of the summit wreathed in radiant auroras." },
+          { name: "Astral Void Weaver", hp: 85, atk: 24, armor: 4, ward: 22, icon: "🌌", desc: "Cosmic spellcaster bending starlight into spatial distortions." },
+          { name: "Skyrealm Gargoyle", hp: 110, atk: 19, armor: 18, ward: 8, icon: "🗿", desc: "Petrified aerie guardian diving with supersonic kinetic force." },
+          { name: "Primordial Beast", hp: 120, atk: 22, armor: 12, ward: 6, icon: "🐺", desc: "Mythic apex predator stalking the frozen celestial crags." }
+        ],
+        elite: [
+          { name: "Archon of the Summit", hp: 190, atk: 27, armor: 24, ward: 20, icon: "👑", desc: "High ethereal judge presiding over the gates to the Primordial Throne." },
+          { name: "Star-Eater Behemoth", hp: 220, atk: 25, armor: 28, ward: 12, icon: "🪐", desc: "Cataclysmic astral entity that counters with cosmic pulses." }
+        ]
+      }
+    };
+
     this.init();
   }
 
   init() {
-    this.renderActs();
-    this.renderBestiary();
-    this.renderMysteryEvents();
+    this.ensureActs(() => {
+      // Pre-generate procedural dungeons for each Act
+      this.acts.forEach((_, idx) => {
+        if (!this.actDungeons[idx]) {
+          this.generateRandomDungeon(idx);
+        }
+      });
+      this.renderActs();
+      this.renderBestiary();
+      this.renderMysteryEvents();
+    });
   }
 
   ensureActs(callback, maxRetries = 25) {
@@ -114,6 +165,248 @@ class DungeonMapManager {
     }
   }
 
+  generateRandomDungeon(actIndex) {
+    const act = this.acts[actIndex] || this.acts[0];
+    if (!act) return;
+
+    const totalFloors = act.floors;
+    const seed = Math.random().toString(36).substring(2, 8).toUpperCase();
+    const encounterPools = this.actEncounters[actIndex] || this.actEncounters[0];
+
+    // Determine node types with balanced roguelike constraints
+    const intermediateCount = totalFloors - 3; // Floors 2 to totalFloors - 2
+    const floorTypes = new Array(totalFloors + 1);
+    floorTypes[0] = 'Start';
+    floorTypes[1] = 'Combat';
+    floorTypes[totalFloors] = 'Boss';
+    floorTypes[totalFloors - 1] = Math.random() < 0.65 ? 'Campsite' : 'Combat';
+
+    let attempts = 0;
+    let valid = false;
+    while (!valid && attempts < 100) {
+      attempts++;
+      const pool = [];
+      const eliteCount = Math.max(1, Math.round(totalFloors * 0.15));
+      const shopCount = Math.max(1, Math.round(totalFloors * 0.12));
+      const campCount = Math.max(1, Math.round(totalFloors * 0.12));
+      const mysteryCount = Math.max(2, Math.round(totalFloors * 0.22));
+
+      for (let i = 0; i < eliteCount; i++) pool.push('Elite');
+      for (let i = 0; i < shopCount; i++) pool.push('Shop');
+      for (let i = 0; i < campCount; i++) pool.push('Campsite');
+      for (let i = 0; i < mysteryCount; i++) pool.push('Mystery');
+      while (pool.length < intermediateCount) pool.push('Combat');
+      while (pool.length > intermediateCount) pool.pop();
+
+      // Fisher-Yates shuffle
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+
+      for (let i = 0; i < intermediateCount; i++) {
+        floorTypes[i + 2] = pool[i];
+      }
+
+      // Validate adjacency rules (no consecutive Campsite, Shop, or Elite; no Floor 2 Elite)
+      valid = true;
+      if (floorTypes[2] === 'Elite') valid = false;
+      for (let f = 1; f < totalFloors; f++) {
+        if (floorTypes[f] === 'Campsite' && floorTypes[f + 1] === 'Campsite') valid = false;
+        if (floorTypes[f] === 'Shop' && floorTypes[f + 1] === 'Shop') valid = false;
+        if (floorTypes[f] === 'Elite' && floorTypes[f + 1] === 'Elite') valid = false;
+      }
+    }
+
+    // Pick Act boss from bossPool
+    const bossList = act.bossPool && act.bossPool.length > 0 ? act.bossPool : [{ name: "Act Guardian", hp: 200, atk: 15, armor: 10, ward: 10, desc: "A terrible guardian.", icon: "👑" }];
+    const chosenBoss = bossList[Math.floor(Math.random() * bossList.length)];
+
+    // Build floor objects
+    const floors = [];
+    for (let f = 0; f <= totalFloors; f++) {
+      const type = floorTypes[f];
+      let node = {
+        floor: f,
+        type: type,
+        icon: '⚔️',
+        title: '',
+        subtitle: '',
+        threat: 'NORMAL',
+        threatColor: '#f59e0b',
+        foe: null,
+        mystery: null,
+        desc: '',
+        rewards: []
+      };
+
+      if (type === 'Start') {
+        node.icon = '🏕️';
+        node.title = 'Expedition Outpost';
+        node.subtitle = 'Expedition Starting Camp';
+        node.threat = 'SAFE HAVEN';
+        node.threatColor = 'var(--ward-cyan)';
+        node.desc = 'The staging ground at the dungeon entrance. Review your 10-card starter deck, activate hero passives, and equip initial relics before descending.';
+        node.rewards = ['Starting Deck: 10 Cards', 'Expedition Vigor: 100 HP', 'Initial Purse: 50 Gold'];
+      } else if (type === 'Combat') {
+        const foe = encounterPools.normal[Math.floor(Math.random() * encounterPools.normal.length)];
+        node.icon = '⚔️';
+        node.title = `${foe.name} Skirmish`;
+        node.subtitle = 'Subterranean Battle';
+        node.threat = 'HOSTILE FOE';
+        node.threatColor = '#fbbf24';
+        node.foe = foe;
+        node.desc = `${foe.desc} Defeat this foe to clear the hallway and loot battlefield spoils.`;
+        node.rewards = [`+${20 + Math.floor(Math.random() * 20) + (actIndex * 15)} Gold`, '1 Card Draft (Common / Uncommon)', '10% Relic Shard Drop'];
+      } else if (type === 'Campsite') {
+        node.icon = '🏕️';
+        node.title = 'Expedition Campsite';
+        node.subtitle = 'Rest Sanctuary & Runic Forge';
+        node.threat = 'SANCTUARY';
+        node.threatColor = '#34d399';
+        node.desc = 'Rest beside the soothing campfire to heal your party or use the traveler anvil to forge an upgrade onto any card in your deck.';
+        node.rewards = ['Rest: Restore 30% Max HP', 'Forge: Upgrade 1 Card in Deck', 'Campfire Lore: +5 Max Ward'];
+      } else if (type === 'Mystery') {
+        const evt = this.mysteryEvents && this.mysteryEvents.length > 0
+          ? this.mysteryEvents[Math.floor(Math.random() * this.mysteryEvents.length)]
+          : { name: 'Mysterious Runic Shrine', icon: '🔮', lore: 'An ancient relic hums in the gloom.', choices: [] };
+        node.icon = evt.icon || '🔮';
+        node.title = evt.name;
+        node.subtitle = 'Ancient Arcane Event';
+        node.threat = 'MYSTERY';
+        node.threatColor = '#a855f7';
+        node.mystery = evt;
+        node.desc = evt.lore || 'An unpredictable encounter lurking in the shadows. Weigh risk versus reward.';
+        node.rewards = ['Choice-Driven Outcome', 'Chance for Relic Shards & Gems', 'Buffs or High-Stakes Wagers'];
+      } else if (type === 'Shop') {
+        node.icon = '🛒';
+        node.title = 'Goblin Scrap Merchant';
+        node.subtitle = 'Contraband Market';
+        node.threat = 'MERCHANT';
+        node.threatColor = '#38bdf8';
+        node.desc = 'A reinforced iron merchant wagon laden with Booster Packs, single cards, health draughts, and antique relics. Bargain with your collected Gold!';
+        node.rewards = ['Booster Packs (Series 1)', '3 Discounted Singles', '1 Rare Relic for Sale', 'Card Purge Service (50 Gold)'];
+      } else if (type === 'Elite') {
+        const eliteFoe = encounterPools.elite[Math.floor(Math.random() * encounterPools.elite.length)];
+        node.icon = '💀';
+        node.title = `${eliteFoe.name} [ELITE]`;
+        node.subtitle = 'High Threat Encounter';
+        node.threat = 'ELITE THREAT';
+        node.threatColor = '#f87171';
+        node.foe = eliteFoe;
+        node.desc = `${eliteFoe.desc} Highly perilous combat! Vanquishing this elite guarantees a rare relic shard.`;
+        node.rewards = [`+${60 + Math.floor(Math.random() * 30) + (actIndex * 25)} Gold`, '1 Guaranteed Relic Shard', 'High-Tier Card Draft (Rare / Legendary)'];
+      } else if (type === 'Boss') {
+        node.icon = chosenBoss.icon || '👑';
+        node.title = chosenBoss.name;
+        node.subtitle = `Act ${act.act} Climax Boss`;
+        node.threat = 'ACT CLIMAX BOSS';
+        node.threatColor = 'var(--hp-red)';
+        node.foe = chosenBoss;
+        node.desc = chosenBoss.desc || `The fearsome apex ruler of Act ${act.act}. Defeat this titan to conquer the act and claim legendary spoils.`;
+        node.rewards = [`Act ${act.act} Victory Trophy`, '1 Guaranteed Exotic Card Draft', '1 Rare Relic Reward', `+${120 + actIndex * 40} Gold`];
+      }
+
+      floors.push(node);
+    }
+
+    this.actDungeons[actIndex] = {
+      seed: seed,
+      floors: floors
+    };
+
+    // Reset floor selection to start
+    this.selectedFloorIndex = 0;
+    return this.actDungeons[actIndex];
+  }
+
+  getInspectorHTML(node) {
+    if (!node) return '';
+
+    const avatarHTML = node.foe && node.foe.sprite
+      ? `<img src="${node.foe.sprite}" alt="${node.title}" class="pixel-art" onerror="this.outerHTML='<span class=\\'foe-icon-glyph\\'>${node.icon}</span>'" />`
+      : `<span class="foe-icon-glyph ${node.type === 'Boss' ? 'boss-glyph' : ''}">${node.icon}</span>`;
+
+    let choicesHTML = '';
+    if (node.mystery && node.mystery.choices && node.mystery.choices.length > 0) {
+      choicesHTML = `
+        <div style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.35rem;">
+          <span style="font-family: var(--font-pixel); font-size: 0.42rem; color: #a855f7; display: block; margin-bottom: 0.2rem;">AVAILABLE RUNIC CHOICES:</span>
+          ${node.mystery.choices.map(c => `
+            <div style="background: #000; border: 1px solid var(--border-subtle); padding: 0.35rem 0.65rem; font-size: 0.75rem;">
+              <span style="font-family: var(--font-pixel); font-size: 0.4rem; color: var(--primary);">▶ ${c.label}</span>
+              <span style="color: #cbd5e1; display: block; margin-top: 0.15rem; font-size: 0.72rem;">${c.outcome}</span>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    return `
+      <div class="dungeon-floor-inspector">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+          <div class="foe-avatar-box ${node.type === 'Boss' ? 'boss-avatar' : ''}" style="width: 72px; height: 72px;">
+            ${avatarHTML}
+          </div>
+          <span style="font-family: var(--font-pixel); font-size: 0.46rem; color: #fff; background: #000; border: 1px solid var(--border-strong); padding: 0.2rem 0.5rem;">
+            FLOOR ${node.floor}
+          </span>
+        </div>
+
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
+            <span class="foe-rank-tag" style="color: ${node.threatColor}; border: 1px solid ${node.threatColor}; padding: 0.2rem 0.5rem; font-size: 0.42rem; background: rgba(0,0,0,0.5);">
+              ${node.threat}
+            </span>
+            <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-faint);">${node.subtitle}</span>
+          </div>
+
+          <h3 style="font-family: var(--font-pixel); font-size: 0.75rem; color: #fff; margin-bottom: 0.45rem; line-height: 1.6;">
+            ${node.title}
+          </h3>
+
+          <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 0.6rem; max-width: 650px;">
+            ${node.desc}
+          </p>
+
+          ${node.foe ? `
+            <div class="foe-stats-mini">
+              <span class="hp-stat">❤️ ${node.foe.hp} HP</span>
+              <span class="atk-stat">⚔️ ${node.foe.atk} ATK</span>
+              ${node.foe.armor > 0 ? `<span class="armor-stat">🛡️ ${node.foe.armor} Armor</span>` : ''}
+              ${node.foe.ward > 0 ? `<span class="ward-stat">🔮 ${node.foe.ward} Ward</span>` : ''}
+            </div>
+          ` : ''}
+
+          ${choicesHTML}
+        </div>
+
+        <div style="background: #000; border: 2px solid var(--border-strong); padding: 0.85rem 1.1rem; min-width: 220px; box-shadow: 2px 2px 0 #000;">
+          <span style="font-family: var(--font-pixel); font-size: 0.42rem; color: #fbbf24; display: block; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
+            🎁 FLOOR REWARDS
+          </span>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.4rem;">
+            ${node.rewards.map(r => `
+              <li style="font-family: var(--font-mono); font-size: 0.76rem; color: #e2e8f0; display: flex; align-items: center; gap: 0.4rem;">
+                <span style="color: var(--primary);">✦</span> ${r}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      </div>
+    `;
+  }
+
+  updateInspector(floorIndex) {
+    const dungeon = this.actDungeons[this.selectedActIndex];
+    if (!dungeon || !dungeon.floors[floorIndex]) return;
+
+    const mount = document.getElementById('dungeon-floor-inspector-mount');
+    if (mount) {
+      mount.innerHTML = this.getInspectorHTML(dungeon.floors[floorIndex]);
+    }
+  }
+
   renderActs() {
     const container = document.getElementById('acts-showcase-container');
     if (!container) return;
@@ -122,42 +415,47 @@ class DungeonMapManager {
       const currentAct = this.acts[this.selectedActIndex] || this.acts[0];
       if (!currentAct) return;
 
-      const nodeIcons = [
-        { type: 'Start', icon: '🏕️', name: 'Expedition Outpost' },
-        { type: 'Combat', icon: '⚔️', name: 'Subterranean Skirmish' },
-        { type: 'Campsite', icon: '🏕️', name: 'Rest Sanctuary (Heal / Forge)' },
-        { type: 'Mystery', icon: '🔮', name: 'Runic Mystery Encounter' },
-        { type: 'Shop', icon: '🛒', name: 'Goblin Scrap Merchant' },
-        { type: 'Elite', icon: '💀', name: 'Elite Guardian Encounter' },
-        { type: 'Boss', icon: '👑', name: 'Act Climax Boss' }
-      ];
+      if (!this.actDungeons[this.selectedActIndex]) {
+        this.generateRandomDungeon(this.selectedActIndex);
+      }
+      const dungeon = this.actDungeons[this.selectedActIndex];
 
-      let nodesHTML = '';
-      for (let f = 0; f <= currentAct.floors; f++) {
-        let node = nodeIcons[1];
-        if (f === 0) node = nodeIcons[0];
-        else if (f === currentAct.floors) node = nodeIcons[6];
-        else if (f % 4 === 0) node = nodeIcons[2];
-        else if (f === 3 || f === 7) node = nodeIcons[3];
-        else if (f === 5) node = nodeIcons[4];
-        else if (f === 6 || f === 9) node = nodeIcons[5];
-
-        nodesHTML += `
-          <div class="map-node-item" title="Floor ${f}: ${node.name}" style="flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 0.35rem;">
-            <div style="width: 44px; height: 44px; border: 2px solid ${f === currentAct.floors ? 'var(--hp-red)' : 'var(--border-strong)'}; background: ${f === currentAct.floors ? '#2a0808' : '#000'}; box-shadow: 2px 2px 0 #000; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+      // Build timeline nodes HTML
+      let timelineHTML = '';
+      dungeon.floors.forEach((node, f) => {
+        const isBoss = node.type === 'Boss';
+        const isSelected = f === this.selectedFloorIndex;
+        timelineHTML += `
+          <div class="map-node-item ${isBoss ? 'node-boss' : ''} ${isSelected ? 'selected' : ''}" data-floor-idx="${f}" title="Floor ${f}: ${node.title}">
+            <div class="map-node-box">
               ${node.icon}
             </div>
-            <span style="font-family: var(--font-pixel); font-size: 0.42rem; color: var(--primary);">F${f}</span>
-            <span style="font-size: 0.65rem; color: var(--text-faint); max-width: 55px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${node.type}</span>
+            <span class="map-node-floor-label">F${f}</span>
+            <span class="map-node-type-label">${node.type}</span>
           </div>
-          ${f < currentAct.floors ? '<div style="align-self: center; color: var(--border-strong); font-size: 0.9rem; margin: 0 0.15rem 1rem 0.15rem;">➔</div>' : ''}
+          ${f < dungeon.floors.length - 1 ? '<div class="map-node-arrow">➔</div>' : ''}
         `;
-      }
+      });
+
+      const selectedNode = dungeon.floors[this.selectedFloorIndex] || dungeon.floors[0];
 
       container.innerHTML = `
         <div class="bestiary-category-wrap">
-          <h4 class="bestiary-category-title">🗺️ Act Progression Roadmap</h4>
-          
+          <div class="dungeon-controls-bar">
+            <h4 class="bestiary-category-title" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;">
+              🗺️ Act Progression Roadmap
+            </h4>
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+              <div class="dungeon-seed-badge" title="Procedural Seed for this Dungeon Layout">
+                <span>SEED:</span>
+                <strong>#${dungeon.seed}</strong>
+              </div>
+              <button id="generate-dungeon-btn" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.52rem; padding: 0.55rem 1rem; cursor: pointer;">
+                <span>🎲</span> Generate Random Dungeon
+              </button>
+            </div>
+          </div>
+
           <div class="act-tab-group">
             ${this.acts.map((a, idx) => `
               <button class="act-tab-btn ${idx === this.selectedActIndex ? 'active' : ''}" data-act-idx="${idx}">
@@ -181,20 +479,56 @@ class DungeonMapManager {
             </div>
 
             <div style="margin-top: 1.5rem;">
-              <span style="font-family: var(--font-pixel); font-size: 0.45rem; color: var(--text-faint); display: block; margin-bottom: 0.75rem;">FLOOR-BY-FLOOR ASCENT SEQUENCE:</span>
-              <div style="display: flex; gap: 0.4rem; overflow-x: auto; padding: 0.75rem 0.5rem 1rem 0.5rem; scrollbar-width: thin;">
-                ${nodesHTML}
+              <span style="font-family: var(--font-pixel); font-size: 0.45rem; color: var(--text-faint); display: block; margin-bottom: 0.75rem;">
+                FLOOR-BY-FLOOR ASCENT SEQUENCE (CLICK A FLOOR TO INSPECT):
+              </span>
+              <div class="dungeon-timeline-wrap">
+                ${timelineHTML}
               </div>
+            </div>
+
+            <div id="dungeon-floor-inspector-mount">
+              ${this.getInspectorHTML(selectedNode)}
             </div>
           </div>
         </div>
       `;
 
+      // Event listener: Generate Random Dungeon Button
+      const genBtn = container.querySelector('#generate-dungeon-btn');
+      if (genBtn) {
+        genBtn.addEventListener('click', () => {
+          if (window.audioMgr) window.audioMgr.playSFX('cardPlay');
+          const freshDungeon = this.generateRandomDungeon(this.selectedActIndex);
+          if (typeof window.showToast === 'function') {
+            window.showToast(`Act ${currentAct.act} Dungeon procedurally generated! Seed: #${freshDungeon.seed}`);
+          }
+          this.renderActs();
+        });
+      }
+
+      // Event listeners: Act Switcher Tabs
       container.querySelectorAll('.act-tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           this.selectedActIndex = parseInt(btn.dataset.actIdx, 10);
+          this.selectedFloorIndex = 0;
           if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
           this.renderActs();
+        });
+      });
+
+      // Event listeners: Floor Node Click Selection
+      const nodeItems = container.querySelectorAll('.map-node-item');
+      nodeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const fIdx = parseInt(item.dataset.floorIdx, 10);
+          this.selectedFloorIndex = fIdx;
+          nodeItems.forEach(it => {
+            const itIdx = parseInt(it.dataset.floorIdx, 10);
+            it.classList.toggle('selected', itIdx === fIdx);
+          });
+          if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
+          this.updateInspector(fIdx);
         });
       });
     });

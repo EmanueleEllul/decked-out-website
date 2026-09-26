@@ -13,9 +13,32 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css?v=7">
-  <link rel="stylesheet" href="css/card-foil.css?v=3">
-  <link rel="stylesheet" href="css/deck-builder.css?v=3">
+  <link rel="stylesheet" href="css/style.css?v=26">
+  <link rel="stylesheet" href="css/nav.css?v=25">
+  <link rel="stylesheet" href="css/card-foil.css?v=25">
+  <link rel="stylesheet" href="css/deck-builder.css?v=25">
+
+  <!-- Critical Navigation Styles (Cache-Proof) -->
+  <style id="critical-nav-css">
+    .site-header { position: sticky; top: 0; z-index: 1000; background: rgba(8, 11, 16, 0.96); border-bottom: 3px solid #f59e0b; }
+    .header-container { max-width: 1400px; margin: 0 auto; padding: 0.65rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .nav-links { display: flex; list-style: none; margin: 0; padding: 0; border: 2px solid #2e4060; background: #080b10; flex-wrap: nowrap; }
+    .nav-links > li { display: flex; flex-shrink: 0; position: relative; margin: 0; padding: 0; }
+    .nav-link { display: flex; align-items: center; justify-content: center; padding: 0.55rem 0.85rem; font-family: 'Press Start 2P', monospace; font-size: 0.5rem; color: #8899aa; text-decoration: none; border-right: 2px solid #2e4060; white-space: nowrap; background: transparent; }
+    .nav-links > li:last-child > .nav-link { border-right: none; }
+    .nav-link.active { background: #f59e0b; color: #000; }
+    .nav-arrow { display: inline-block; width: 0; height: 0; border-left: 3.5px solid transparent; border-right: 3.5px solid transparent; border-top: 4.5px solid currentColor; margin-left: 0.45rem; vertical-align: middle; transition: transform 0.15s ease; pointer-events: none; }
+    .nav-dropdown:hover .nav-arrow { transform: rotate(180deg); }
+    @media (min-width: 1025px) {
+      .nav-dropdown-menu { display: none !important; position: absolute !important; top: 100% !important; left: -2px !important; min-width: 200px !important; background: #0b0f17 !important; border: 2px solid #2e4060 !important; border-top: 2px solid #f59e0b !important; box-shadow: 0 12px 28px rgba(0,0,0,0.85) !important; z-index: 9999 !important; flex-direction: column !important; padding: 0.25rem 0 !important; margin: 0 !important; }
+      .nav-dropdown-menu::before { content: ''; position: absolute; top: -8px; left: 0; right: 0; height: 8px; }
+      .nav-dropdown:hover > .nav-dropdown-menu, .nav-dropdown:focus-within > .nav-dropdown-menu, .nav-dropdown.open > .nav-dropdown-menu { display: flex !important; }
+      .dropdown-item { display: flex !important; align-items: center !important; gap: 0.55rem !important; padding: 0.55rem 0.85rem !important; font-family: 'Press Start 2P', monospace !important; font-size: 0.46rem !important; color: #8899aa !important; text-decoration: none !important; border-bottom: 1px solid #1e2d45 !important; background: transparent !important; white-space: nowrap !important; }
+      .dropdown-item:hover { background: #18213a !important; color: #f59e0b !important; padding-left: 1.05rem !important; }
+      .dropdown-item.active { background: #f59e0b !important; color: #000 !important; }
+    }
+    .btn-discord { background: #5865f2 !important; color: #fff !important; font-family: 'Press Start 2P', monospace !important; font-size: 0.48rem !important; padding: 0.55rem 0.8rem !important; border: 2px solid #000 !important; box-shadow: inset 2px 2px 0 #7983f5, inset -2px -2px 0 #3c45a5, 2px 2px 0 #000 !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; text-decoration: none !important; white-space: nowrap !important; }
+  </style>
 </head>
 <body>
 
@@ -40,7 +63,7 @@
           <!-- Compendium Section -->
           <li class="nav-dropdown">
             <a href="cards.html" class="nav-link nav-dropdown-toggle" id="nav-compendium-toggle">
-              <span>Compendium</span> <span class="nav-dropdown-arrow">▾</span>
+              <span>Compendium</span> <span class="nav-arrow"></span>
             </a>
             <div class="nav-dropdown-menu">
               <a href="cards.html" class="dropdown-item">
@@ -73,7 +96,7 @@
           <!-- Play Section -->
           <li class="nav-dropdown active">
             <a href="deck-builder.html" class="nav-link nav-dropdown-toggle active" id="nav-play-toggle">
-              <span>Play</span> <span class="nav-dropdown-arrow">▾</span>
+              <span>Play</span> <span class="nav-arrow"></span>
             </a>
             <div class="nav-dropdown-menu">
               <a href="deck-builder.html" class="dropdown-item active">

@@ -19,17 +19,17 @@ All history in **Aethelgard** is measured in relation to the catastrophic moment
 For five hundred years prior to the cataclysm, the continent of **Aethelgard** was divided among five grand civilizations, each presiding over a unique geographical and cultural domain:
 
 ```
-                      [ NORTH: Kar-Drakis ]
-                     (Volcanic Crags & Peaks)
-                                |
+                         [ NORTH: Kar-Drakis ]
+                       (Volcanic Crags & Peaks)
+                                   |
 [ WEST: The Iron Realm ] --- [ HEARTLAND ] --- [ EAST: Sol-Mora ]
    (Valora & High Forts)   (Valley of Anchor)  (Spires of Arcane)
-                                |
-                   [ SOUTH-WEST: Great Roots ] 
-                      (Primeval Beast Canopy)
-                                |
-                  [ SOUTH: The Alabaster Coast ]
-                     (Maritime Guilds & Ports)
+                                   |
+                      [ SOUTH-WEST: Great Roots ]
+                        (Primeval Beast Canopy)
+                                   |
+                    [ SOUTH: The Alabaster Coast ]
+                       (Maritime Guilds & Ports)
 ```
 
 ### 1. The Kingdom of Valora — *The Iron Realm (West)*

@@ -23,7 +23,7 @@ For five hundred years prior to the cataclysm, the continent of **Aethelgard** w
                        (Volcanic Crags & Peaks)
                                    |
 [ WEST: The Iron Realm ] --- [ HEARTLAND ] --- [ EAST: Sol-Mora ]
-   (Valora & High Forts)   (Valley of Anchor)  (Spires of Arcane)
+  (Valora & High Forts)   (Valley of Anchor)   (Spires of Arcane)
                                    |
                       [ SOUTH-WEST: Great Roots ]
                         (Primeval Beast Canopy)

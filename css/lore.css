@@ -1521,11 +1521,13 @@
 }
 
 .ascii-map-art {
+  display: inline-block;
+  text-align: left;
   font-family: var(--font-mono);
   font-size: clamp(0.6rem, 1.1vw, 0.82rem);
   color: #38bdf8;
   line-height: 1.4;
-  margin: 0;
+  margin: 0 auto;
   overflow-x: auto;
   white-space: pre;
 }

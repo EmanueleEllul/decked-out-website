@@ -116,7 +116,7 @@ function parseMarkdown(md) {
         codeBlockLines = [];
       } else {
         inCodeBlock = false;
-        out.push(`<div class="ascii-map-container"><pre class="ascii-map-art">${codeBlockLines.join('\n')}</pre></div>`);
+        out.push(`<div class="ascii-map-container"><pre class="ascii-map-art" style="display: inline-block; text-align: left;">${codeBlockLines.join('\n')}</pre></div>`);
         codeBlockLines = [];
       }
       continue;

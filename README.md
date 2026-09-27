@@ -43,24 +43,6 @@ Live and ready to deploy on **GitHub Pages** with zero build steps or external d
 
 ---
 
-## 🚀 Deploy to GitHub Pages
-
-Zero build tools required:
-
-1. **Push to GitHub**:
-   ```bash
-   git add .
-   git commit -m "Deploy Decked Out website"
-   git push origin main
-   ```
-2. **Enable GitHub Pages**:
-   - Repository → **Settings** → **Pages**
-   - Source: `Deploy from a branch` → Branch: `main` / `/(root)`
-   - Click **Save**
-3. **Live at**: `https://emanueleellul.github.io/decked-out-website/`
-
----
-
 ## 📁 Repository Structure
 
 ```

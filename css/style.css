@@ -54,16 +54,16 @@
   --shadow-px-blue: 4px 4px 0 rgba(14, 165, 233, 0.4);
 
   /* ── FLUID SCALE — pixel fonts & spacing auto-scale with viewport ── */
-  --px-hero:   clamp(1.05rem, 2.6vw, 1.65rem);
-  --px-brand:  clamp(0.65rem, 1.2vw, 0.85rem);
-  --px-h2:     clamp(0.85rem, 1.8vw, 1.25rem);
-  --px-h3:     clamp(0.72rem, 1.3vw, 0.95rem);
-  --px-label:  clamp(0.60rem, 0.9vw, 0.75rem);
-  --px-badge:  clamp(0.55rem, 0.8vw, 0.68rem);
-  --px-micro:  clamp(0.52rem, 0.75vw, 0.62rem);
-  --px-btn:    clamp(0.65rem, 0.9vw, 0.78rem);
-  --px-nav:    clamp(0.65rem, 0.85vw, 0.76rem);
-  --px-stat:   clamp(0.68rem, 1.1vw, 0.88rem);
+  --px-hero:   clamp(1.8rem, 4.2vw, 3.2rem);
+  --px-brand:  clamp(0.95rem, 1.6vw, 1.25rem);
+  --px-h2:     clamp(1.35rem, 2.6vw, 1.95rem);
+  --px-h3:     clamp(1.05rem, 2vw, 1.5rem);
+  --px-label:  clamp(0.92rem, 1.4vw, 1.2rem);
+  --px-badge:  clamp(0.82rem, 1.15vw, 1.05rem);
+  --px-micro:  clamp(0.75rem, 1vw, 0.92rem);
+  --px-btn:    clamp(0.82rem, 1.15vw, 1.08rem);
+  --px-nav:    clamp(0.82rem, 1.1vw, 0.98rem);
+  --px-stat:   clamp(0.95rem, 1.4vw, 1.28rem);
 
   /* Fluid spacing */
   --space-section: clamp(2.5rem, 6vw, 5rem);
@@ -657,7 +657,7 @@ p, span, a, li, td, th, input, select, button {
 .hero-content {
   position: relative;
   z-index: 3;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -666,9 +666,9 @@ p, span, a, li, td, th, input, select, button {
   background: #000;
   border: 2px solid var(--mana-glow);
   color: var(--mana-glow);
-  padding: 0.4rem 0.85rem;
+  padding: 0.45rem 0.95rem;
   font-family: var(--font-pixel);
-  font-size: 0.63rem;
+  font-size: 0.72rem;
   letter-spacing: 0.1em;
   margin-bottom: 2rem;
   box-shadow: 2px 2px 0 rgba(0, 212, 255, 0.3);
@@ -677,33 +677,39 @@ p, span, a, li, td, th, input, select, button {
 
 .hero-title {
   font-family: var(--font-pixel);
-  font-size: 1.8rem;
-  line-height: 1.5;
+  font-size: var(--px-hero);
+  line-height: 1.35;
   margin-bottom: 2rem;
   color: var(--primary);
   text-shadow:
     3px 3px 0 var(--primary-dark),
     6px 6px 0 rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.03em;
 }
 
 @media (max-width: 768px) {
-  .hero-title { font-size: 1rem; }
+  .hero-title { font-size: clamp(1.25rem, 5vw, 1.8rem); }
 }
 
 .hero-subtitle {
   font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--text-muted);
-  max-width: 700px;
-  margin: 0 auto 3rem;
-  line-height: 1.8;
+  font-size: clamp(1.02rem, 1.4vw, 1.32rem);
+  color: #cbd5e1;
+  max-width: 820px;
+  margin: 0 auto 2.75rem;
+  line-height: 1.75;
 }
 
 .hero-cta-group {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.15rem;
   flex-wrap: wrap;
+}
+
+.hero-cta-group .btn {
+  font-size: clamp(0.82rem, 1.1vw, 1rem);
+  padding: 0.85rem 1.65rem;
 }
 
 /* ========================================================
@@ -713,9 +719,9 @@ p, span, a, li, td, th, input, select, button {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   font-family: var(--font-pixel);
-  font-size: 0.66rem;
+  font-size: 0.82rem;
   font-weight: 400;
   letter-spacing: 0.04em;
   cursor: pointer;
@@ -876,15 +882,16 @@ p, span, a, li, td, th, input, select, button {
 
 .section-title-wrap p {
   color: var(--text-muted);
-  font-size: 0.69rem;
+  font-size: clamp(0.85rem, 1.2vw, 1.12rem);
   margin-top: 0.75rem;
   font-family: var(--font-body);
+  line-height: 1.6;
 }
 
 .subheading-center {
   text-align: center;
   font-family: var(--font-pixel);
-  font-size: 0.57rem;
+  font-size: 0.75rem;
   color: #fff;
   margin-bottom: 1.5rem;
   text-shadow: 2px 2px 0 #000;
@@ -915,22 +922,22 @@ p, span, a, li, td, th, input, select, button {
   position: absolute;
   top: -1px;
   left: -1px;
-  font-size: 0.61rem;
+  font-size: 0.75rem;
   color: var(--primary);
   line-height: 1;
 }
 
 .lore-title {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: clamp(1.1rem, 2vw, 1.55rem);
   color: var(--primary);
   margin-bottom: 1.25rem;
   text-shadow: 2px 2px 0 var(--primary-dark);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .lore-body {
-  font-size: 0.73rem;
+  font-size: clamp(0.86rem, 1.2vw, 1.12rem);
   color: #cbd5e1;
   line-height: 1.8;
   margin-bottom: 1.75rem;
@@ -946,9 +953,9 @@ p, span, a, li, td, th, input, select, button {
   background: #000;
   border: 2px solid var(--border-strong);
   box-shadow: 2px 2px 0 #000;
-  padding: 0.35rem 0.75rem;
+  padding: 0.45rem 0.85rem;
   font-family: var(--font-pixel);
-  font-size: 0.63rem;
+  font-size: clamp(0.78rem, 1vw, 0.95rem);
   color: var(--text-main);
   letter-spacing: 0.05em;
 }
@@ -974,7 +981,7 @@ p, span, a, li, td, th, input, select, button {
 }
 
 .pillar-icon {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 1rem;
   line-height: 1;
   image-rendering: auto;
@@ -982,17 +989,17 @@ p, span, a, li, td, th, input, select, button {
 
 .pillar-title {
   font-family: var(--font-pixel);
-  font-size: 0.71rem;
+  font-size: clamp(0.95rem, 1.4vw, 1.28rem);
   color: var(--primary);
   margin-bottom: 0.75rem;
-  line-height: 1.6;
+  line-height: 1.5;
   text-shadow: 1px 1px 0 var(--primary-dark);
 }
 
 .pillar-desc {
-  font-size: 0.67rem;
+  font-size: clamp(0.82rem, 1.1vw, 1.02rem);
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 .pillar-desc strong { color: #fff; }
@@ -2514,18 +2521,18 @@ p, span, a, li, td, th, input, select, button {
 
 /* Brand */
 .brand-text h1                { font-size: var(--px-brand); }
-.brand-text span { font-size: clamp(0.52rem, 0.8vw, 0.65rem); }
+.brand-text span { font-size: clamp(0.68rem, 0.95vw, 0.82rem); }
 
 /* Nav */
-.nav-link                     { font-size: var(--px-nav); padding: 0.5rem clamp(0.28rem, 0.55vw, 0.65rem); white-space: nowrap; }
-.btn-wishlist                 { font-size: var(--px-btn); padding: 0.55rem clamp(0.5rem, 1vw, 1rem); white-space: nowrap; }
+.nav-link                     { font-size: var(--px-nav); padding: 0.55rem clamp(0.5rem, 0.85vw, 0.95rem); white-space: nowrap; }
+.btn-wishlist                 { font-size: var(--px-btn); padding: 0.65rem clamp(0.75rem, 1.2vw, 1.25rem); white-space: nowrap; }
 
 /* Hero */
 .hero-title                   { font-size: var(--px-hero); }
-.hero-pill                    { font-size: var(--px-micro); }
+.hero-pill                    { font-size: var(--px-badge); }
 
 /* Section headers */
-.section-kicker               { font-size: var(--px-micro); }
+.section-kicker               { font-size: var(--px-badge); }
 .section-title-wrap h2        { font-size: var(--px-h2); }
 
 /* Site sections — use fluid spacing */
@@ -2533,9 +2540,9 @@ p, span, a, li, td, th, input, select, button {
 .main-wrapper                 { padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 1.5rem); }
 
 /* Panels & cards */
-.lore-title                   { font-size: clamp(0.55rem, 1.6vw, 0.85rem); }
+.lore-title                   { font-size: clamp(1.1rem, 2vw, 1.55rem); }
 .lore-spotlight-card          { padding: var(--space-panel); }
-.pillar-title                 { font-size: var(--px-label); }
+.pillar-title                 { font-size: var(--px-h3); }
 .pillar-card                  { padding: var(--space-panel); }
 
 /* Hero roster */

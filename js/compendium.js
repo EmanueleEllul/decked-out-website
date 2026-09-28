@@ -145,6 +145,10 @@ class CompendiumManager {
     if (countEl) {
       countEl.textContent = `Showing ${this.filteredCards.length} of ${this.cards.length} Cards`;
     }
+    const totalEl = document.getElementById('compendium-total-count');
+    if (totalEl) {
+      totalEl.textContent = this.cards.length;
+    }
   }
 
   renderCards() {

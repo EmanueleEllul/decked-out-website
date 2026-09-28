@@ -15,6 +15,7 @@ class AppController {
     this.bindWishlistButtons();
     this.setupToasts();
     this.initPjax();
+    this.updateNavbarActive(window.location.href);
 
     // Initialize controller for the active page on first load / direct access
     const pageName = window.location.pathname.split('/').pop() || 'index.html';
@@ -429,11 +430,15 @@ class AppController {
   }
 
   async initPageControllers(pageName) {
-    if (!pageName || pageName === '/' || pageName === 'index.html') {
+    const cleanPage = (pageName || 'index.html').split('?')[0].split('#')[0];
+
+    if (!cleanPage || cleanPage === 'index.html') {
+      if (!window.GAME_CARDS || !window.GAME_HEROES || !window.GAME_RELICS || !window.GAME_ACTS) {
+        await this.loadScript('js/data.js?v=35');
+      }
+      this.initHomePage();
       return;
     }
-
-    const cleanPage = pageName.split('?')[0].split('#')[0];
 
     if (cleanPage === 'cards.html') {
       if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=9');
@@ -553,6 +558,47 @@ class AppController {
           this.showToast('Discord invite link copied to clipboard!');
         }
       });
+    }
+  }
+
+  initHomePage() {
+    this.updateDynamicStats();
+  }
+
+  updateDynamicStats() {
+    const cardsCount = (window.GAME_CARDS && window.GAME_CARDS.length) ? window.GAME_CARDS.length : 62;
+    const heroesCount = (window.GAME_HEROES && window.GAME_HEROES.length) ? window.GAME_HEROES.length : 7;
+    const relicsCount = (window.GAME_RELICS && window.GAME_RELICS.length) ? window.GAME_RELICS.length : 9;
+    const actsCount = (window.GAME_ACTS && window.GAME_ACTS.length) ? window.GAME_ACTS.length : 3;
+
+    // Hero CTA button: Explore X Cards
+    const heroCardCount = document.getElementById('hero-card-count');
+    if (heroCardCount) {
+      heroCardCount.textContent = cardsCount;
+    }
+
+    // Hero Subtitle: lead X unique heroes to victory
+    const heroCountSubtitle = document.getElementById('hero-count-subtitle');
+    if (heroCountSubtitle) {
+      heroCountSubtitle.textContent = heroesCount;
+    }
+
+    // Hero Pillar: X Asymmetric Champions
+    const heroPillarCount = document.getElementById('hero-pillar-count');
+    if (heroPillarCount) {
+      heroPillarCount.textContent = heroesCount;
+    }
+
+    // Act Pillar: Branching X-Act Descent
+    const actPillarCount = document.getElementById('act-pillar-count');
+    if (actPillarCount) {
+      actPillarCount.textContent = actsCount;
+    }
+
+    // Relic Pillar: Pair elemental combos with X ancient relics
+    const relicPillarCount = document.getElementById('relic-pillar-count');
+    if (relicPillarCount) {
+      relicPillarCount.textContent = relicsCount;
     }
   }
 

@@ -37,7 +37,8 @@
   --rarity-exotic: #00e5ff;
 
   /* Fonts */
-  --font-pixel: 'Press Start 2P', monospace;
+  --font-pixel: 'Tiny5', monospace;
+  --font-heading: 'Tiny5', monospace;
   --font-body: 'Inter', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -168,7 +169,7 @@ h1, h2, h3, h4 {
   font-family: var(--font-pixel);
   letter-spacing: 0.02em;
   line-height: 1.4;
-  font-weight: 400; /* Press Start 2P only has one weight */
+  font-weight: 400; /* Tiny5 font */
   image-rendering: auto; /* text doesn't need pixelated */
 }
 

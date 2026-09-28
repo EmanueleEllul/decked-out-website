@@ -48,8 +48,8 @@
   align-items: center !important;
   justify-content: center !important;
   padding: 0.55rem 0.85rem !important;
-  font-family: 'Press Start 2P', monospace !important;
-  font-size: 0.5rem !important;
+  font-family: var(--font-pixel, 'Tiny5', monospace) !important;
+  font-size: 0.72rem !important;
   color: var(--text-muted, #8899aa) !important;
   text-decoration: none !important;
   border-right: 2px solid var(--border-strong, #2e4060) !important;
@@ -160,8 +160,8 @@
     align-items: center !important;
     gap: 0.55rem !important;
     padding: 0.55rem 0.85rem !important;
-    font-family: 'Press Start 2P', monospace !important;
-    font-size: 0.46rem !important;
+    font-family: var(--font-pixel, 'Tiny5', monospace) !important;
+    font-size: 0.68rem !important;
     color: var(--text-muted, #8899aa) !important;
     text-decoration: none !important;
     border-bottom: 1px solid var(--border-subtle, #1e2d45) !important;
@@ -208,15 +208,15 @@
   }
   .nav-link {
     padding: 0.5rem 0.65rem !important;
-    font-size: 0.46rem !important;
+    font-size: 0.65rem !important;
   }
   .btn-wishlist {
     padding: 0.5rem 0.7rem !important;
-    font-size: 0.44rem !important;
+    font-size: 0.62rem !important;
   }
   .btn-discord {
     padding: 0.5rem 0.65rem !important;
-    font-size: 0.44rem !important;
+    font-size: 0.62rem !important;
   }
 }
 
@@ -288,13 +288,13 @@
     align-items: center !important;
     gap: 0.5rem !important;
     padding: 0.75rem 1.25rem 0.75rem 1.6rem !important;
-    font-size: 0.56rem !important;
+    font-size: 0.75rem !important;
     border-bottom: 1px solid var(--border-subtle, #1e2d45) !important;
     width: 100% !important;
     box-sizing: border-box !important;
     color: var(--text-muted, #8899aa) !important;
     text-decoration: none !important;
-    font-family: 'Press Start 2P', monospace !important;
+    font-family: var(--font-pixel, 'Tiny5', monospace) !important;
   }
 }
 
@@ -302,8 +302,8 @@
 .btn-discord {
   background: #5865f2 !important;
   color: #fff !important;
-  font-family: 'Press Start 2P', monospace !important;
-  font-size: 0.48rem !important;
+  font-family: var(--font-pixel, 'Tiny5', monospace) !important;
+  font-size: 0.7rem !important;
   font-weight: 400 !important;
   padding: 0.55rem 0.8rem !important;
   border: 2px solid #000 !important;

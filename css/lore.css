@@ -123,6 +123,13 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
 }
 
+@media (max-width: 640px) {
+  .lore-tabs-nav {
+    top: 48px;
+    padding: 0.5rem 0.6rem;
+  }
+}
+
 .lore-tabs-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -132,6 +139,7 @@
   overflow-x: auto;
   padding-bottom: 4px;
   scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
 }
 
 .lore-tab-btn {
@@ -1510,6 +1518,9 @@
   padding: 1.5rem;
   margin: 2rem 0;
   text-align: center;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .ascii-map-header {
@@ -1524,7 +1535,7 @@
   display: inline-block;
   text-align: left;
   font-family: var(--font-mono);
-  font-size: clamp(0.6rem, 1.1vw, 0.82rem);
+  font-size: clamp(0.48rem, 1.8vw, 0.82rem);
   color: #38bdf8;
   line-height: 1.4;
   margin: 0 auto;
@@ -1534,7 +1545,7 @@
 
 .empires-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 1.5rem;
   margin-top: 1.5rem;
 }

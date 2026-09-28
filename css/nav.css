@@ -245,6 +245,7 @@
 
   .nav-links.mobile-open {
     display: flex !important;
+    animation: mobileNavSlideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   .nav-links > li {
@@ -255,10 +256,13 @@
   .nav-link {
     border-right: none !important;
     border-bottom: 1px solid var(--border-subtle, #1e2d45) !important;
-    padding: 0.85rem 1.25rem !important;
-    font-size: 0.72rem !important;
+    padding: 0.9rem 1.25rem !important;
+    min-height: 44px !important;
+    box-sizing: border-box !important;
+    font-size: 0.78rem !important;
     width: 100% !important;
     justify-content: flex-start !important;
+    touch-action: manipulation !important;
   }
 
   .nav-dropdown > .nav-link {
@@ -286,15 +290,33 @@
   .dropdown-item {
     display: flex !important;
     align-items: center !important;
-    gap: 0.5rem !important;
-    padding: 0.75rem 1.25rem 0.75rem 1.6rem !important;
-    font-size: 0.57rem !important;
+    gap: 0.6rem !important;
+    padding: 0.8rem 1.25rem 0.8rem 1.6rem !important;
+    min-height: 44px !important;
+    font-size: 0.72rem !important;
     border-bottom: 1px solid var(--border-subtle, #1e2d45) !important;
     width: 100% !important;
     box-sizing: border-box !important;
     color: var(--text-muted, #8899aa) !important;
     text-decoration: none !important;
     font-family: var(--font-pixel, 'Tiny5', monospace) !important;
+    touch-action: manipulation !important;
+  }
+
+  .dropdown-item:active {
+    background: var(--bg-surface-elevated, #18213a) !important;
+    color: var(--primary, #f59e0b) !important;
+  }
+}
+
+@keyframes mobileNavSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -308,9 +330,10 @@
   padding: 0.55rem 0.8rem !important;
   border: 2px solid #000 !important;
   box-shadow: inset 2px 2px 0 #7983f5, inset -2px -2px 0 #3c45a5, 2px 2px 0 #000 !important;
-  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAiUlEQVR4nO2U0QqAIAxFd0f//8s3CgUplps6COpA+RDtuF1RxIblmUKt4iSPl8xKLMEy9DMCjmbhEnAi8C36A4sJwLksF0Rlrwl5mDqiNrzuXCOgGaU086ynxsVTBreQI4W9GaDuOgNNq3wRpHWhKVUNwVAX6FwZ1w5CEjjuI+uj96zCvZsfMdgBZe0nMZT+3o4AAAAASUVORK5CYII=") 6 0, pointer !important;
+  cursor: pointer !important;
   display: inline-flex !important;
   align-items: center !important;
+  justify-content: center !important;
   gap: 0.4rem !important;
   text-decoration: none !important;
   text-transform: uppercase !important;
@@ -320,6 +343,7 @@
   white-space: nowrap !important;
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.6) !important;
   flex-shrink: 0 !important;
+  touch-action: manipulation !important;
 }
 
 .btn-discord:hover {
@@ -332,4 +356,125 @@
 .btn-discord:active {
   transform: translate(2px, 2px) !important;
   box-shadow: inset 2px 2px 0 #2e357f, inset -1px -1px 0 #7983f5, 1px 1px 0 #000 !important;
+}
+
+/* =========================================================
+   PHONE OPTIMIZATIONS (max-width: 640px and max-width: 480px)
+   Prevents header overflow, improves touch sizing, safe insets
+   ========================================================= */
+@media (max-width: 640px) {
+  .site-header {
+    padding-left: max(0.5rem, env(safe-area-inset-left)) !important;
+    padding-right: max(0.5rem, env(safe-area-inset-right)) !important;
+  }
+
+  .header-container {
+    padding: 0.4rem 0.25rem !important;
+    gap: 0.4rem !important;
+  }
+
+  .brand-wrapper {
+    gap: 0.45rem !important;
+  }
+
+  .brand-logo-img {
+    width: 28px !important;
+    height: 28px !important;
+    max-width: 28px !important;
+    max-height: 28px !important;
+  }
+
+  .brand-text h1 {
+    font-size: clamp(0.82rem, 3.8vw, 0.95rem) !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  .brand-text span {
+    display: none !important;
+  }
+
+  .header-actions {
+    gap: 0.35rem !important;
+  }
+
+  .audio-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 0.95rem !important;
+    flex-shrink: 0 !important;
+    touch-action: manipulation !important;
+  }
+
+  .mobile-toggle-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 36px !important;
+    font-size: 1.15rem !important;
+    flex-shrink: 0 !important;
+    background: var(--bg-surface, #111827) !important;
+    border: 2px solid var(--border-strong, #2e4060) !important;
+    color: #fff !important;
+    box-shadow: 2px 2px 0 #000 !important;
+    touch-action: manipulation !important;
+  }
+
+  .mobile-toggle-btn:active {
+    transform: translate(1px, 1px) !important;
+    box-shadow: 1px 1px 0 #000 !important;
+  }
+}
+
+/* Phone Portrait Screen Tightening (max-width: 520px) */
+@media (max-width: 520px) {
+  body .header-actions .btn-discord,
+  .site-header .btn-discord,
+  .btn-discord {
+    font-size: 0 !important;
+    padding: 0 !important;
+    width: 36px !important;
+    height: 36px !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    min-width: 36px !important;
+  }
+
+  body .header-actions .btn-discord span,
+  .btn-discord span {
+    font-size: 1.05rem !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+  }
+
+  body .header-actions .btn-wishlist,
+  .site-header .btn-wishlist,
+  .btn-wishlist {
+    font-size: 0 !important;
+    padding: 0 !important;
+    width: 36px !important;
+    height: 36px !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    min-width: 36px !important;
+  }
+
+  body .header-actions .btn-wishlist span,
+  .btn-wishlist span {
+    font-size: 1.05rem !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    display: inline-block !important;
+  }
+
+  body .header-actions .btn-wishlist::before,
+  .btn-wishlist::before {
+    display: none !important;
+  }
+}
+
+/* Background scroll lock when mobile navigation is open */
+body.nav-locked {
+  overflow: hidden !important;
+  touch-action: none !important;
 }

@@ -360,3 +360,40 @@
   0% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
   100% { transform: translate3d(var(--dx), var(--dy), 0) scale(0); opacity: 0; }
 }
+
+/* =========================================================
+   MOBILE PHONE PACK OPENING ADAPTATION
+   ========================================================= */
+@media (max-width: 600px) {
+  .pack-open-modal {
+    padding: 1.25rem 0.5rem !important;
+  }
+  .opened-cards-shelf {
+    gap: 0.6rem !important;
+    padding: 0.5rem 0.25rem !important;
+    max-height: 70vh !important;
+  }
+  .pack-flip-card {
+    width: clamp(140px, 44vw, 175px) !important;
+    height: clamp(215px, 67vw, 270px) !important;
+  }
+  .card-back-pattern .gem {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 1.2rem !important;
+  }
+  .card-back-pattern span {
+    font-size: 0.62rem !important;
+  }
+  .pack-face-front .game-card .card-image-box {
+    height: clamp(80px, 25vw, 110px) !important;
+  }
+  .pack-face-front .game-card .card-name-title {
+    font-size: 0.65rem !important;
+  }
+  .pack-face-front .game-card .card-desc-box {
+    font-size: 0.62rem !important;
+    padding: 0.25rem !important;
+    min-height: 32px !important;
+  }
+}

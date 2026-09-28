@@ -5996,3 +5996,353 @@ p, span, a, li, td, th, input, select, button {
   line-height: 1.45;
   margin: 0;
 }
+
+/* ================================================================
+   COMPREHENSIVE MOBILE PHONE OPTIMIZATION SUITE
+   Tailored for smartphones (320px - 768px viewports)
+   ================================================================ */
+
+/* Global Toast Container on Mobile & Desktop */
+.toast-container-global {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  /* Prevent iOS Safari from automatically zooming in when focusing inputs */
+  input[type="text"],
+  input[type="search"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Eliminate 300ms tap delay and touch flickering on mobile browsers */
+  button, a, input, select, .game-card, .filter-pill, .hero-roster-card, .preset-pill-btn, .map-node-item, .act-tab-btn {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Safe Area Insets for modern notched phones (iPhone Dynamic Island, cutout screens) */
+  .main-wrapper {
+    padding-left: max(0.85rem, env(safe-area-inset-left)) !important;
+    padding-right: max(0.85rem, env(safe-area-inset-right)) !important;
+  }
+
+  .site-footer {
+    padding-bottom: max(1.75rem, env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Centered mobile toast alerts */
+  .toast-container-global {
+    bottom: 16px !important;
+    left: 16px !important;
+    right: 16px !important;
+    align-items: center !important;
+  }
+  .toast-container-global .toast-pill {
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* Hero Section Typography and Spacing */
+  .hero-section {
+    padding: 2.75rem 1rem 2rem !important;
+  }
+  .hero-title {
+    font-size: clamp(1.15rem, 5.5vw, 1.6rem) !important;
+    line-height: 1.25 !important;
+  }
+  .hero-subtitle {
+    font-size: 0.72rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .hero-cta-group {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 0.6rem !important;
+  }
+  .hero-cta-group .btn {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Compendium Controls & Filters */
+  .compendium-controls {
+    padding: 0.85rem !important;
+  }
+  .compendium-filter-pills,
+  .pill-group {
+    display: flex !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 0.4rem !important;
+    gap: 0.4rem !important;
+    scrollbar-width: none !important;
+  }
+  .compendium-filter-pills::-webkit-scrollbar,
+  .pill-group::-webkit-scrollbar {
+    display: none !important;
+  }
+  .compendium-filter-pills .class-pill,
+  .pill-group .filter-pill {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    min-height: 38px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 0.35rem 0.75rem !important;
+    font-size: 0.64rem !important;
+  }
+  .filter-selects {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+  }
+  .filter-selects .custom-select {
+    width: 100% !important;
+    min-height: 42px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Cards Grid - 2 columns on phones */
+  .cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.55rem !important;
+  }
+
+  /* Game Card Phone Optimization */
+  .game-card .card-image-box {
+    height: clamp(95px, 28vw, 130px) !important;
+  }
+  .game-card .card-header {
+    padding: 0.35rem 0.45rem !important;
+  }
+  .game-card .card-name-title {
+    font-size: clamp(0.66rem, 2.3vw, 0.80rem) !important;
+  }
+  .game-card .card-cost-gem {
+    font-size: 0.68rem !important;
+    width: 22px !important;
+    height: 22px !important;
+  }
+  .game-card .stat-pill {
+    font-size: 0.58rem !important;
+    padding: 0.15rem 0.35rem !important;
+  }
+  .game-card .card-desc-box {
+    font-size: 0.66rem !important;
+    line-height: 1.35 !important;
+    padding: 0.35rem 0.4rem !important;
+    min-height: 38px !important;
+  }
+  .game-card .card-footer-bar {
+    font-size: 0.58rem !important;
+    padding: 0.25rem 0.4rem !important;
+  }
+
+  /* Card Detail Modal */
+  .modal-card-dialog {
+    grid-template-columns: 1fr !important;
+    width: 95% !important;
+    max-width: 480px !important;
+    padding: 1.25rem 1rem !important;
+    margin: 1rem auto !important;
+    max-height: 88vh !important;
+    gap: 1rem !important;
+  }
+  .modal-close-btn {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 1.1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    top: 0.45rem !important;
+    right: 0.45rem !important;
+  }
+  .card-detail-modal .game-card {
+    margin: 0 auto !important;
+    max-width: 230px !important;
+  }
+
+  /* Heroes Workbench - Mobile Horizontal Shelf */
+  .heroes-workbench {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  .heroes-roster-column {
+    gap: 0.4rem !important;
+  }
+  .heroes-roster-list {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 0.5rem !important;
+    padding: 0.2rem 0.2rem 0.6rem 0.2rem !important;
+    scrollbar-width: thin !important;
+  }
+  .hero-roster-card {
+    flex: 0 0 155px !important;
+    scroll-snap-align: start !important;
+    padding: 0.55rem 0.65rem !important;
+    box-sizing: border-box !important;
+  }
+  .hero-roster-avatar {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .hero-roster-arrow {
+    display: none !important;
+  }
+  .hero-roster-name {
+    font-size: 0.68rem !important;
+  }
+  .hero-roster-title {
+    font-size: 0.60rem !important;
+  }
+  .hero-stats-matrix {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.4rem !important;
+  }
+
+  /* Zero Horizontal Overflow on Feature Grids */
+  .mitigation-dual-grid,
+  .bestiary-grid,
+  .relics-showcase-grid,
+  .pillars-grid,
+  .specs-grid,
+  .mystery-events-grid,
+  .status-grid,
+  .community-section-grid,
+  .empires-grid,
+  .event-features-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Mechanics Formula Banner */
+  .formula-banner {
+    flex-direction: column !important;
+    gap: 0.6rem !important;
+    text-align: center !important;
+    padding: 0.85rem !important;
+  }
+  .formula-code {
+    word-break: break-word !important;
+    font-size: clamp(0.72rem, 3.4vw, 0.95rem) !important;
+    padding: 0.4rem 0.6rem !important;
+    max-width: 100% !important;
+  }
+
+  /* Dungeon Ascent & Controls */
+  .act-tab-group {
+    flex-direction: column !important;
+  }
+  .act-tab-btn {
+    border-right: none !important;
+    border-bottom: 2px solid var(--border-strong) !important;
+    min-height: 44px !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .act-tab-btn:last-child {
+    border-bottom: none !important;
+  }
+  .dungeon-controls-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.75rem !important;
+  }
+  .dungeon-controls-bar .btn,
+  .dungeon-controls-bar .dungeon-seed-badge {
+    width: 100% !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+  .dungeon-floor-inspector {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    padding: 1rem !important;
+    text-align: center !important;
+  }
+
+  /* ASCII Maps */
+  .ascii-map-container {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 0.85rem !important;
+  }
+  .ascii-map-art {
+    font-size: clamp(0.40rem, 1.8vw, 0.70rem) !important;
+  }
+
+  /* Footer */
+  .footer-inner {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 1.5rem !important;
+  }
+  .footer-links {
+    justify-content: center !important;
+    gap: 0.6rem 0.85rem !important;
+  }
+  .footer-credits {
+    text-align: center !important;
+  }
+}
+
+/* ================================================================
+   VERY SMALL PHONE SCREENS (max-width: 480px)
+   ================================================================ */
+@media (max-width: 480px) {
+  .site-header {
+    padding: 0.35rem 0.45rem !important;
+  }
+  .header-container {
+    gap: 0.3rem !important;
+  }
+  .brand-text h1 {
+    font-size: 0.84rem !important;
+  }
+  .brand-text span {
+    display: none !important;
+  }
+  .header-actions {
+    gap: 0.25rem !important;
+  }
+  .filter-selects {
+    grid-template-columns: 1fr !important;
+  }
+  .event-header-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+  }
+}
+
+/* Ultra-compact Phones (max-width: 340px) */
+@media (max-width: 340px) {
+  .cards-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-stats-matrix {
+    grid-template-columns: 1fr !important;
+  }
+}

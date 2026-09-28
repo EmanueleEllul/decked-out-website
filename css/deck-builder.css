@@ -795,16 +795,31 @@
   .deck-card-preview-popover {
     display: none !important; /* Mobile uses card clicks directly rather than hover popover */
   }
+  .deck-tray-column {
+    position: static !important;
+  }
 }
 
 @media (max-width: 480px) {
   .deck-vault-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 0.45rem;
+    max-height: 420px;
   }
   .vault-card-title {
-    max-width: 80px;
-    font-size: 0.72rem;
+    max-width: 78px;
+    font-size: 0.68rem;
+  }
+  .vault-card-item {
+    font-size: 0.58rem;
+  }
+  .vault-card-art-box {
+    height: 75px;
+  }
+  .vault-card-desc-preview {
+    font-size: 0.65rem;
+    min-height: 32px;
+    padding: 0.25rem 0.35rem;
   }
   .deck-summary-top {
     flex-direction: column;
@@ -813,5 +828,16 @@
   }
   .deck-card-counter-wrap {
     text-align: left;
+  }
+  .deck-qty-btn {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 1.1rem !important;
+    touch-action: manipulation;
+  }
+  .deck-card-row {
+    padding: 0.5rem 0.5rem;
+    min-height: 44px;
+    box-sizing: border-box;
   }
 }

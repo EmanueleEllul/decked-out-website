@@ -47,9 +47,9 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 0.55rem 0.85rem !important;
+  padding: 0.45rem 0.75rem !important;
   font-family: var(--font-pixel, 'Tiny5', monospace) !important;
-  font-size: 0.88rem !important;
+  font-size: 0.68rem !important;
   color: var(--text-muted, #8899aa) !important;
   text-decoration: none !important;
   border-right: 2px solid var(--border-strong, #2e4060) !important;
@@ -85,7 +85,7 @@
 
 .nav-link.active::before {
   content: '▶';
-  font-size: 0.79rem;
+  font-size: 0.60rem;
   color: #000;
   margin-right: 0.25rem;
 }
@@ -159,9 +159,9 @@
     display: flex !important;
     align-items: center !important;
     gap: 0.55rem !important;
-    padding: 0.55rem 0.85rem !important;
+    padding: 0.45rem 0.75rem !important;
     font-family: var(--font-pixel, 'Tiny5', monospace) !important;
-    font-size: 0.82rem !important;
+    font-size: 0.65rem !important;
     color: var(--text-muted, #8899aa) !important;
     text-decoration: none !important;
     border-bottom: 1px solid var(--border-subtle, #1e2d45) !important;
@@ -194,7 +194,7 @@
 
   .dropdown-item.active::before {
     content: '▶' !important;
-    font-size: 0.77rem !important;
+    font-size: 0.58rem !important;
     color: #000 !important;
     margin-right: 0.15rem !important;
   }
@@ -208,15 +208,15 @@
   }
   .nav-link {
     padding: 0.5rem 0.65rem !important;
-    font-size: 0.96rem !important;
+    font-size: 0.73rem !important;
   }
   .btn-wishlist {
-    padding: 0.5rem 0.7rem !important;
-    font-size: 0.94rem !important;
+    padding: 0.45rem 0.75rem !important;
+    font-size: 0.65rem !important;
   }
   .btn-discord {
-    padding: 0.5rem 0.65rem !important;
-    font-size: 0.82rem !important;
+    padding: 0.45rem 0.7rem !important;
+    font-size: 0.65rem !important;
   }
 }
 
@@ -256,7 +256,7 @@
     border-right: none !important;
     border-bottom: 1px solid var(--border-subtle, #1e2d45) !important;
     padding: 0.85rem 1.25rem !important;
-    font-size: 0.94rem !important;
+    font-size: 0.72rem !important;
     width: 100% !important;
     justify-content: flex-start !important;
   }
@@ -288,7 +288,7 @@
     align-items: center !important;
     gap: 0.5rem !important;
     padding: 0.75rem 1.25rem 0.75rem 1.6rem !important;
-    font-size: 0.75rem !important;
+    font-size: 0.57rem !important;
     border-bottom: 1px solid var(--border-subtle, #1e2d45) !important;
     width: 100% !important;
     box-sizing: border-box !important;

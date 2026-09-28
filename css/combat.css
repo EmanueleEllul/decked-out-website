@@ -37,7 +37,7 @@
   border-radius: 0;
   padding: 0.35rem 0.75rem;
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--text-muted);
   box-shadow: inset 1px 1px 0 #000, 2px 2px 0 #000;
 }
@@ -181,7 +181,7 @@
   padding: 0.2rem 0.55rem;
   border-radius: 0;
   font-family: var(--font-pixel);
-  font-size: 0.58rem;
+  font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   box-shadow: 1px 1px 0 #000;
@@ -260,7 +260,7 @@
 }
 
 .strike-auto-pill {
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   font-family: var(--font-pixel);
   font-weight: 700;
   background: #f59e0b;
@@ -410,7 +410,7 @@
   padding: 0.25rem 0.55rem;
   border-radius: 0;
   font-family: var(--font-pixel);
-  font-size: 0.58rem;
+  font-size: 0.92rem;
   font-weight: 700;
   box-shadow: 1px 1px 0 #000;
 }
@@ -489,7 +489,7 @@
 
 .pillar-label {
   font-family: var(--font-pixel);
-  font-size: 0.58rem;
+  font-size: 0.92rem;
   color: var(--text-faint);
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -517,7 +517,7 @@
 
 .combat-phase-indicator {
   font-family: var(--font-pixel);
-  font-size: 0.62rem;
+  font-size: 0.94rem;
   font-weight: 700;
   border-radius: 0;
   padding: 0.35rem 0.8rem;
@@ -685,7 +685,7 @@
   border: 2px solid #ef4444;
   border-radius: 0;
   font-family: var(--font-pixel);
-  font-size: 0.58rem;
+  font-size: 0.92rem;
   font-weight: 700;
   padding: 0.25rem 0.5rem;
   white-space: nowrap;
@@ -931,7 +931,7 @@
     padding: 0.3rem 0.5rem;
   }
   .strike-auto-pill {
-    font-size: 0.55rem;
+    font-size: 0.90rem;
   }
   .combat-meter-group .meter-label-row {
     font-size: 0.75rem;
@@ -941,7 +941,7 @@
     gap: 0.35rem;
   }
   .status-badge {
-    font-size: 0.68rem;
+    font-size: 0.98rem;
     padding: 0.2rem 0.45rem;
   }
   .combat-hand-bar {
@@ -989,7 +989,7 @@
   }
   .combat-card-playable .card-desc-box {
     min-height: 42px;
-    font-size: 0.66rem;
+    font-size: 0.97rem;
     padding: 0.35rem;
   }
   .combat-result-modal {

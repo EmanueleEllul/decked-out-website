@@ -45,7 +45,7 @@
   border: 1px solid var(--primary);
   color: var(--primary);
   font-family: var(--font-pixel);
-  font-size: clamp(0.42rem, 0.9vw, 0.6rem);
+  font-size: clamp(0.8rem, 1.1vw, 1rem);
   padding: 0.45rem 1rem;
   margin-bottom: 1.25rem;
   letter-spacing: 0.08em;
@@ -142,7 +142,7 @@
   border: 1px solid var(--border-strong);
   color: var(--text-muted);
   font-family: var(--font-pixel);
-  font-size: clamp(0.38rem, 0.65vw, 0.48rem);
+  font-size: clamp(0.85rem, 1.15vw, 1.05rem);
   padding: 0.55rem 0.85rem;
   cursor: pointer;
   white-space: nowrap;
@@ -324,7 +324,7 @@
 
 .law-badge {
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   color: var(--primary);
   background: rgba(245, 158, 11, 0.12);
   padding: 0.2rem 0.5rem;
@@ -396,7 +396,7 @@
 
 .tier-rank-pill {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   letter-spacing: 0.1em;
   font-weight: 700;
   text-transform: uppercase;
@@ -428,7 +428,7 @@
 
 .tier-title-label {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: #fff;
   margin-top: 0.25rem;
 }
@@ -467,7 +467,7 @@
 .hotspot-chip strong {
   display: block;
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: var(--primary);
   margin-bottom: 0.35rem;
 }
@@ -526,14 +526,14 @@
 
 .interactive-pack-item h4 {
   font-family: var(--font-pixel);
-  font-size: 0.68rem;
+  font-size: 0.98rem;
   color: #fff;
   margin-bottom: 0.4rem;
 }
 
 .pack-seal-tag {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--mana-glow);
   letter-spacing: 0.05em;
   display: block;
@@ -542,7 +542,7 @@
 
 .pack-inspect-pill {
   font-family: var(--font-pixel);
-  font-size: 0.42rem;
+  font-size: 0.82rem;
   color: var(--primary);
   background: rgba(245, 158, 11, 0.15);
   border: 1px solid var(--primary);
@@ -643,7 +643,7 @@
 
 .foil-frame-label {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   letter-spacing: 0.05em;
 }
 
@@ -710,7 +710,7 @@
 
 .order-tag {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.98rem;
   color: var(--mana-glow);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -807,7 +807,7 @@
 .roster-btn-meta strong {
   display: block;
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: #fff;
   transition: color 0.15s;
 }
@@ -818,7 +818,7 @@
 
 .roster-btn-meta span {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--text-muted);
 }
 
@@ -904,7 +904,7 @@
 
 .dossier-stat-box .d-label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--text-muted);
   display: block;
   margin-bottom: 0.2rem;
@@ -1015,7 +1015,7 @@
 
 .widget-title {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: var(--primary);
   margin-bottom: 0.75rem;
   display: block;
@@ -1051,7 +1051,7 @@
   background: var(--primary);
   color: #000;
   font-family: var(--font-pixel);
-  font-size: 0.48rem;
+  font-size: 0.85rem;
   font-weight: 700;
   padding: 0.5rem 0.85rem;
   border: 2px solid var(--primary-dark);
@@ -1096,7 +1096,7 @@
 
 .trader-output {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--mana-glow);
 }
 
@@ -1157,7 +1157,7 @@
 
 .god-name-tag {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: #fff;
 }
 
@@ -1197,7 +1197,7 @@
   background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
   color: #fff;
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   padding: 0.75rem 1.4rem;
   border: 2px solid #f87171;
   box-shadow: 4px 4px 0 #7f1d1d, 0 0 15px rgba(239, 68, 68, 0.4);
@@ -1467,7 +1467,7 @@
 .lore-index-table th {
   background: #080b10;
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: var(--primary);
   padding: 1rem 1.25rem;
   border-bottom: 2px solid var(--border-strong);
@@ -1490,7 +1490,7 @@
   border: 1px solid var(--primary-dark);
   color: #000;
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   padding: 0.45rem 0.85rem;
   cursor: pointer;
   box-shadow: 2px 2px 0 #000;
@@ -1514,7 +1514,7 @@
 
 .ascii-map-header {
   font-family: var(--font-pixel);
-  font-size: 0.6rem;
+  font-size: 0.93rem;
   color: var(--primary);
   letter-spacing: 0.1em;
   margin-bottom: 1rem;
@@ -1555,7 +1555,7 @@
 .empire-region {
   display: inline-block;
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   color: var(--primary);
   background: rgba(245, 158, 11, 0.1);
   padding: 0.2rem 0.5rem;
@@ -1771,7 +1771,7 @@
   border: 1px solid var(--border-strong);
   color: var(--text-muted);
   font-family: var(--font-pixel);
-  font-size: 0.48rem;
+  font-size: 0.85rem;
   padding: 0.6rem 1rem;
   cursor: pointer;
   transition: all 0.15s;
@@ -1818,7 +1818,7 @@
 
 .map-badge {
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   padding: 0.2rem 0.5rem;
   display: inline-block;
   margin-bottom: 0.35rem;
@@ -1876,7 +1876,7 @@
   background: rgba(0, 0, 0, 0.75);
   color: var(--primary);
   font-family: var(--font-pixel);
-  font-size: 0.42rem;
+  font-size: 0.82rem;
   padding: 0.35rem 0.65rem;
   border: 1px solid var(--primary);
   pointer-events: none;
@@ -1924,7 +1924,7 @@
   color: #000;
   border: 1px solid var(--primary-dark);
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   padding: 0.4rem 0.8rem;
   cursor: pointer;
 }
@@ -1971,7 +1971,7 @@
 
 .theater-num {
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.87rem;
   color: var(--primary);
   background: rgba(245, 158, 11, 0.12);
   border: 1px solid var(--primary);
@@ -2007,7 +2007,7 @@
 .phase-tag {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   letter-spacing: 0.05em;
   padding: 0.15rem 0.45rem;
   margin-bottom: 0.65rem;
@@ -2064,7 +2064,7 @@
 .campaigns-table th {
   background: #080b10;
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: var(--primary);
   padding: 1rem;
   border-bottom: 2px solid var(--border-strong);
@@ -2276,7 +2276,7 @@
   border: 1px solid var(--border-strong);
   color: var(--text-muted);
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   padding: 0.55rem 0.85rem;
   cursor: pointer;
   transition: all 0.15s;
@@ -2349,7 +2349,7 @@
 
 .dossier-rank {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--primary);
   letter-spacing: 0.1em;
   display: block;
@@ -2439,7 +2439,7 @@
 
 .denizen-habitat {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.98rem;
   color: var(--primary);
 }
 
@@ -2462,7 +2462,7 @@
 
 .denizen-lore-text h5 {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--primary);
   margin: 1rem 0 0.5rem;
 }
@@ -2489,7 +2489,7 @@
 
 .station-kicker {
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   color: var(--primary);
   letter-spacing: 0.08em;
   display: block;
@@ -2519,7 +2519,7 @@
 
 .pixel-stat-pill {
   font-family: var(--font-pixel);
-  font-size: 0.6rem;
+  font-size: 0.93rem;
   color: var(--primary);
   background: rgba(245, 158, 11, 0.15);
   border: 1px solid var(--primary);
@@ -2529,7 +2529,7 @@
 
 .station-note {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: #64748b;
   display: block;
 }
@@ -2566,7 +2566,7 @@
   color: #000;
   border: 1px solid var(--primary-dark);
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   padding: 0.55rem;
   cursor: pointer;
   box-shadow: 2px 2px 0 #000;
@@ -2678,7 +2678,7 @@
 
 .god-strike-kicker {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: #f87171;
   letter-spacing: 0.1em;
   display: block;
@@ -2719,7 +2719,7 @@
 
 .hp-boss-title {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: #fff;
 }
 
@@ -2769,7 +2769,7 @@
   color: #fff;
   border: 2px solid #f87171;
   font-family: var(--font-pixel);
-  font-size: 0.6rem;
+  font-size: 0.93rem;
   padding: 0.85rem 1.5rem;
   cursor: pointer;
   box-shadow: 4px 4px 0 #7f1d1d, 0 0 20px rgba(239, 68, 68, 0.4);
@@ -2868,7 +2868,7 @@
   border: 1px solid var(--primary-dark);
   color: #000 !important;
   font-family: var(--font-pixel);
-  font-size: 0.48rem;
+  font-size: 0.85rem;
   padding: 0.5rem 0.85rem;
   cursor: pointer;
   box-shadow: 2px 2px 0 #000;

@@ -39,8 +39,8 @@
   /* Fonts */
   --font-pixel: 'Tiny5', monospace;
   --font-heading: 'Tiny5', monospace;
-  --font-body: 'Inter', -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Tiny5', monospace;
+  --font-mono: 'Tiny5', monospace;
 
   /* PIXEL: No rounded corners */
   --radius-sm: 0px;
@@ -54,16 +54,16 @@
   --shadow-px-blue: 4px 4px 0 rgba(14, 165, 233, 0.4);
 
   /* ── FLUID SCALE — pixel fonts & spacing auto-scale with viewport ── */
-  --px-hero:   clamp(0.65rem, 3.5vw, 1.8rem);
-  --px-brand:  clamp(0.52rem, 1.8vw, 0.85rem);
-  --px-h2:     clamp(0.55rem, 1.8vw, 1rem);
-  --px-h3:     clamp(0.45rem, 1.4vw, 0.75rem);
-  --px-label:  clamp(0.4rem,  1vw,   0.6rem);
-  --px-badge:  clamp(0.36rem, 0.9vw, 0.55rem);
-  --px-micro:  clamp(0.32rem, 0.8vw, 0.45rem);
-  --px-btn:    clamp(0.4rem,  1vw,   0.55rem);
-  --px-nav:    clamp(0.34rem, 0.75vw, 0.48rem);
-  --px-stat:   clamp(0.45rem, 1.2vw, 0.7rem);
+  --px-hero:   clamp(1.4rem, 4vw, 2.5rem);
+  --px-brand:  clamp(0.95rem, 2vw, 1.35rem);
+  --px-h2:     clamp(1.1rem, 2.2vw, 1.6rem);
+  --px-h3:     clamp(0.95rem, 1.8vw, 1.3rem);
+  --px-label:  clamp(0.85rem, 1.2vw, 1.05rem);
+  --px-badge:  clamp(0.78rem, 1.1vw, 0.95rem);
+  --px-micro:  clamp(0.72rem, 1vw, 0.88rem);
+  --px-btn:    clamp(0.85rem, 1.3vw, 1.1rem);
+  --px-nav:    clamp(0.85rem, 1.2vw, 1.05rem);
+  --px-stat:   clamp(0.9rem, 1.5vw, 1.2rem);
 
   /* Fluid spacing */
   --space-section: clamp(2.5rem, 6vw, 5rem);
@@ -72,6 +72,7 @@
 }
 
 *, *::before, *::after {
+  font-family: var(--font-body);
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -80,6 +81,7 @@
 }
 
 html {
+  font-size: 18px;
   scroll-behavior: smooth;
   color-scheme: dark;
   cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAjElEQVR4nOWVwQrDMAxDZdP//+U3tiaQpe3COus0QwixQS9SDpEkZKxsO1YAYIPkdMYGYHfhdYAhqrzoYwNQHFWeNSujysUcG6Aqqvw0rIhqFVEvbAB+jGq7GkTEgSXp0PzKwVO0Cw83j2HpNqAJv4QmCHeE3wCDeHll22fxMhexmNPfwukS97+t/64HbAI0FtEn9u0AAAAASUVORK5CYII=") 0 0, auto;
@@ -255,7 +257,7 @@ p, span, a, li, td, th, input, select, button {
 
 .brand-text span {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.93rem;
   letter-spacing: 0.15em;
   color: var(--mana-glow);
   text-transform: uppercase;
@@ -285,7 +287,7 @@ p, span, a, li, td, th, input, select, button {
   justify-content: center;
   padding: 0.55rem 0.95rem;
   font-family: var(--font-pixel);
-  font-size: 0.52rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
   text-decoration: none;
   border-right: 2px solid var(--border-strong);
@@ -317,7 +319,7 @@ p, span, a, li, td, th, input, select, button {
 
 .nav-link.active::before {
   content: '▶';
-  font-size: 0.38rem;
+  font-size: 0.79rem;
   color: #000;
   margin-right: 0.25rem;
   animation: pixelCursorBlink 1.2s infinite;
@@ -345,7 +347,7 @@ p, span, a, li, td, th, input, select, button {
 
 .nav-dropdown-arrow {
   display: inline-block;
-  font-size: 0.42rem;
+  font-size: 0.82rem;
   margin-left: 0.35rem;
   transition: transform 0.15s ease;
   pointer-events: none;
@@ -399,7 +401,7 @@ p, span, a, li, td, th, input, select, button {
   gap: 0.6rem;
   padding: 0.6rem 0.85rem;
   font-family: var(--font-pixel);
-  font-size: 0.46rem;
+  font-size: 0.84rem;
   color: var(--text-muted);
   text-decoration: none;
   border-bottom: 1px solid var(--border-subtle);
@@ -445,7 +447,7 @@ p, span, a, li, td, th, input, select, button {
 
 .dropdown-item.active::before {
   content: '▶';
-  font-size: 0.35rem;
+  font-size: 0.77rem;
   color: #000;
   margin-right: 0.15rem;
   animation: pixelCursorBlink 1.2s infinite;
@@ -468,7 +470,7 @@ p, span, a, li, td, th, input, select, button {
   background: var(--primary);
   color: #000;
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.87rem;
   font-weight: 400;
   padding: 0.6rem 1rem;
   border: 2px solid #000;
@@ -511,7 +513,7 @@ p, span, a, li, td, th, input, select, button {
   background: #5865f2;
   color: #fff;
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.87rem;
   font-weight: 400;
   padding: 0.6rem 0.9rem;
   border: 2px solid #000;
@@ -667,7 +669,7 @@ p, span, a, li, td, th, input, select, button {
   color: var(--mana-glow);
   padding: 0.4rem 0.85rem;
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   letter-spacing: 0.1em;
   margin-bottom: 2rem;
   box-shadow: 2px 2px 0 rgba(0, 212, 255, 0.3);
@@ -714,7 +716,7 @@ p, span, a, li, td, th, input, select, button {
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.87rem;
   font-weight: 400;
   letter-spacing: 0.04em;
   cursor: pointer;
@@ -840,7 +842,7 @@ p, span, a, li, td, th, input, select, button {
 
 .section-kicker {
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.87rem;
   color: var(--mana-glow);
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -947,7 +949,7 @@ p, span, a, li, td, th, input, select, button {
   box-shadow: 2px 2px 0 #000;
   padding: 0.35rem 0.75rem;
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   color: var(--text-main);
   letter-spacing: 0.05em;
 }
@@ -981,7 +983,7 @@ p, span, a, li, td, th, input, select, button {
 
 .pillar-title {
   font-family: var(--font-pixel);
-  font-size: 0.6rem;
+  font-size: 0.93rem;
   color: var(--primary);
   margin-bottom: 0.75rem;
   line-height: 1.6;
@@ -1022,7 +1024,7 @@ p, span, a, li, td, th, input, select, button {
 
 .formula-label {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: var(--primary);
   letter-spacing: 0.05em;
 }
@@ -1082,7 +1084,7 @@ p, span, a, li, td, th, input, select, button {
 
 .mitigation-header h4 {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: #fff;
   line-height: 1.6;
 }
@@ -1140,7 +1142,7 @@ p, span, a, li, td, th, input, select, button {
 
 .status-top h4 {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: #fff;
   line-height: 1.5;
 }
@@ -1168,7 +1170,7 @@ p, span, a, li, td, th, input, select, button {
 
 .roster-headline {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: var(--text-muted);
   letter-spacing: 0.1em;
   margin-bottom: 0.25rem;
@@ -1233,7 +1235,7 @@ p, span, a, li, td, th, input, select, button {
 .hero-roster-name {
   color: #fff;
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.87rem;
   display: block;
   line-height: 1.8;
 }
@@ -1325,7 +1327,7 @@ p, span, a, li, td, th, input, select, button {
 
 .hero-role-title {
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.87rem;
   text-transform: uppercase;
   color: var(--primary);
   letter-spacing: 0.12em;
@@ -1368,7 +1370,7 @@ p, span, a, li, td, th, input, select, button {
 
 .stat-cell-label {
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   color: var(--text-faint);
   text-transform: uppercase;
   display: block;
@@ -1389,7 +1391,7 @@ p, span, a, li, td, th, input, select, button {
 
 .box-label {
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   text-transform: uppercase;
   color: var(--text-faint);
   margin-bottom: 0.6rem;
@@ -1448,7 +1450,7 @@ p, span, a, li, td, th, input, select, button {
    ======================================================== */
 .card-counter-badge {
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.87rem;
   color: var(--primary);
   background: #000;
   border: 2px solid var(--primary);
@@ -1525,7 +1527,7 @@ p, span, a, li, td, th, input, select, button {
   color: var(--text-muted);
   padding: 0.35rem 0.75rem;
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   cursor: pointer;
   transition: all 0.08s;
   user-select: none;
@@ -1617,7 +1619,7 @@ p, span, a, li, td, th, input, select, button {
   color: var(--mana-glow);
   font-family: var(--font-pixel);
   font-weight: 400;
-  font-size: 0.5rem;
+  font-size: 0.87rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1627,7 +1629,7 @@ p, span, a, li, td, th, input, select, button {
 .card-name-title {
   flex: 1;
   font-family: var(--font-pixel);
-  font-size: 0.42rem;
+  font-size: 0.82rem;
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
@@ -1653,7 +1655,7 @@ p, span, a, li, td, th, input, select, button {
 
 .stat-pill {
   font-family: var(--font-pixel);
-  font-size: 0.42rem;
+  font-size: 0.82rem;
   font-weight: 400;
   padding: 0.2rem 0.4rem;
   line-height: 1.5;
@@ -1692,7 +1694,7 @@ p, span, a, li, td, th, input, select, button {
 
 .tag-badge {
   font-family: var(--font-pixel);
-  font-size: 0.38rem;
+  font-size: 0.79rem;
   font-weight: 400;
   padding: 0.2rem 0.4rem;
   line-height: 1.5;
@@ -1714,13 +1716,13 @@ p, span, a, li, td, th, input, select, button {
   background: #060810;
   border-top: 2px solid rgba(255,255,255,0.08);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--text-faint);
 }
 
 .rarity-text {
   font-family: var(--font-pixel);
-  font-size: 0.38rem;
+  font-size: 0.79rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -1778,7 +1780,7 @@ p, span, a, li, td, th, input, select, button {
     inset -1px -1px 0 #92400e,
     2px 2px 0 #000;
   font-family: var(--font-pixel);
-  font-size: 0.6rem;
+  font-size: 0.93rem;
   color: #000;
   cursor: pointer;
   line-height: 1;
@@ -1861,7 +1863,7 @@ p, span, a, li, td, th, input, select, button {
 
 .relic-name {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: #fff;
   line-height: 1.6;
   text-shadow: 1px 1px 0 #000;
@@ -1895,7 +1897,7 @@ p, span, a, li, td, th, input, select, button {
 
 .relic-cost-pill {
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   color: var(--primary);
   background: rgba(245, 158, 11, 0.1);
   border: 1px solid var(--primary);
@@ -1905,7 +1907,7 @@ p, span, a, li, td, th, input, select, button {
 
 .relic-tier-pill {
   font-family: var(--font-pixel);
-  font-size: 0.4rem;
+  font-size: 0.80rem;
   color: var(--text-faint);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1930,7 +1932,7 @@ p, span, a, li, td, th, input, select, button {
   color: var(--text-muted);
   padding: 0.65rem 1rem;
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   cursor: pointer;
   transition: all 0.08s;
   flex: 1;
@@ -1972,7 +1974,7 @@ p, span, a, li, td, th, input, select, button {
   padding: 0.45rem 0.85rem;
   box-shadow: 2px 2px 0 #000;
   font-family: var(--font-pixel);
-  font-size: 0.52rem;
+  font-size: 0.88rem;
   color: #fbbf24;
 }
 
@@ -2043,12 +2045,12 @@ p, span, a, li, td, th, input, select, button {
 
 .map-node-floor-label {
   font-family: var(--font-pixel);
-  font-size: 0.48rem;
+  font-size: 0.85rem;
   color: var(--primary);
 }
 
 .map-node-type-label {
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--text-faint);
   max-width: 60px;
   text-align: center;
@@ -2092,7 +2094,7 @@ p, span, a, li, td, th, input, select, button {
 
 .bestiary-category-title {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: #fff;
   margin-bottom: 1.25rem;
   text-shadow: 2px 2px 0 #000;
@@ -2178,7 +2180,7 @@ p, span, a, li, td, th, input, select, button {
 
 .foe-rank-tag {
   font-family: var(--font-pixel);
-  font-size: 0.4rem;
+  font-size: 0.80rem;
   color: var(--text-faint);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -2190,7 +2192,7 @@ p, span, a, li, td, th, input, select, button {
 
 .foe-name {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: #fff;
   line-height: 1.6;
 }
@@ -2199,7 +2201,7 @@ p, span, a, li, td, th, input, select, button {
   display: flex;
   gap: 0.5rem;
   font-family: var(--font-pixel);
-  font-size: 0.42rem;
+  font-size: 0.82rem;
   margin-top: 0.4rem;
   flex-wrap: wrap;
 }
@@ -2254,7 +2256,7 @@ p, span, a, li, td, th, input, select, button {
 
 .mystery-event-title {
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.87rem;
   color: #fff;
   line-height: 1.6;
 }
@@ -2284,7 +2286,7 @@ p, span, a, li, td, th, input, select, button {
 
 .choice-label {
   font-family: var(--font-pixel);
-  font-size: 0.42rem;
+  font-size: 0.82rem;
   color: var(--primary);
   display: block;
   margin-bottom: 0.2rem;
@@ -2327,7 +2329,7 @@ p, span, a, li, td, th, input, select, button {
 
 .spec-card h4 {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: #fff;
   margin-bottom: 0.75rem;
   text-shadow: 1px 1px 0 #000;
@@ -2375,7 +2377,7 @@ p, span, a, li, td, th, input, select, button {
   color: var(--text-muted);
   text-decoration: none;
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   padding: 0.5rem 0.85rem;
   border-right: 2px solid var(--border-strong);
   transition: background 0.1s, color 0.1s;
@@ -2389,7 +2391,7 @@ p, span, a, li, td, th, input, select, button {
 .footer-credits {
   text-align: right;
   font-family: var(--font-pixel);
-  font-size: 0.42rem;
+  font-size: 0.82rem;
   color: var(--text-faint);
   line-height: 2;
   letter-spacing: 0.04em;
@@ -2431,7 +2433,7 @@ p, span, a, li, td, th, input, select, button {
     border-right: none;
     border-bottom: 1px solid var(--border-subtle);
     padding: 0.85rem 1.25rem;
-    font-size: 0.62rem;
+    font-size: 0.94rem;
     letter-spacing: 0.05em;
     width: 100%;
     white-space: nowrap;
@@ -2465,7 +2467,7 @@ p, span, a, li, td, th, input, select, button {
 
   .dropdown-item {
     padding: 0.75rem 1.25rem 0.75rem 1.6rem;
-    font-size: 0.56rem;
+    font-size: 0.90rem;
     border-bottom: 1px solid var(--border-subtle);
     width: 100%;
     box-sizing: border-box;
@@ -2483,18 +2485,18 @@ p, span, a, li, td, th, input, select, button {
 
 @media (min-width: 1025px) and (max-width: 1320px) {
   .site-header .nav-link {
-    font-size: 0.46rem !important;
+    font-size: 0.84rem !important;
     padding: 0.5rem 0.75rem !important;
   }
   .btn-wishlist, .btn-discord {
-    font-size: 0.45rem !important;
+    font-size: 0.83rem !important;
     padding: 0.5rem 0.75rem !important;
   }
 }
 
 @media (max-width: 768px) {
   .hero-title { font-size: 0.85rem; }
-  .hero-pill { font-size: 0.38rem; }
+  .hero-pill { font-size: 0.79rem; }
 
   .footer-inner { flex-direction: column; text-align: center; }
   .footer-credits { text-align: center; }
@@ -2513,7 +2515,7 @@ p, span, a, li, td, th, input, select, button {
 
 /* Brand */
 .brand-text h1                { font-size: var(--px-brand); }
-.brand-text span              { font-size: clamp(0.42rem, 1vw, 0.6rem); }
+.brand-text span { font-size: clamp(0.78rem, 1.1vw, 0.95rem); }
 
 /* Nav */
 .nav-link                     { font-size: var(--px-nav); padding: 0.5rem clamp(0.28rem, 0.55vw, 0.65rem); white-space: nowrap; }
@@ -2632,7 +2634,7 @@ p, span, a, li, td, th, input, select, button {
     gap: 0.4rem;
   }
   .brand-text h1 {
-    font-size: 0.65rem;
+    font-size: 0.96rem;
   }
   .brand-text span {
     display: none;
@@ -2646,7 +2648,7 @@ p, span, a, li, td, th, input, select, button {
   }
   .btn-wishlist::before {
     content: "⭐ Wishlist";
-    font-size: 0.55rem;
+    font-size: 0.90rem;
     font-family: var(--font-pixel);
     font-weight: 700;
   }
@@ -2745,7 +2747,7 @@ p, span, a, li, td, th, input, select, button {
   border: 1px solid var(--primary);
   color: var(--primary);
   font-family: var(--font-pixel);
-  font-size: clamp(0.42rem, 0.9vw, 0.6rem);
+  font-size: clamp(0.8rem, 1.1vw, 1rem);
   padding: 0.45rem 1rem;
   margin-bottom: 1.25rem;
   letter-spacing: 0.08em;
@@ -2843,7 +2845,7 @@ p, span, a, li, td, th, input, select, button {
   border: 1px solid var(--border-strong);
   color: var(--text-muted);
   font-family: var(--font-pixel);
-  font-size: clamp(0.38rem, 0.65vw, 0.48rem);
+  font-size: clamp(0.85rem, 1.15vw, 1.05rem);
   padding: 0.55rem 0.85rem;
   cursor: pointer;
   white-space: nowrap;
@@ -3025,7 +3027,7 @@ p, span, a, li, td, th, input, select, button {
 
 .law-badge {
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   color: var(--primary);
   background: rgba(245, 158, 11, 0.12);
   padding: 0.2rem 0.5rem;
@@ -3097,7 +3099,7 @@ p, span, a, li, td, th, input, select, button {
 
 .tier-rank-pill {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   letter-spacing: 0.1em;
   font-weight: 700;
   text-transform: uppercase;
@@ -3130,7 +3132,7 @@ p, span, a, li, td, th, input, select, button {
 
 .tier-title-label {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: #fff;
   margin-top: 0.25rem;
 }
@@ -3169,7 +3171,7 @@ p, span, a, li, td, th, input, select, button {
 .hotspot-chip strong {
   display: block;
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: var(--primary);
   margin-bottom: 0.35rem;
 }
@@ -3228,14 +3230,14 @@ p, span, a, li, td, th, input, select, button {
 
 .interactive-pack-item h4 {
   font-family: var(--font-pixel);
-  font-size: 0.68rem;
+  font-size: 0.98rem;
   color: #fff;
   margin-bottom: 0.4rem;
 }
 
 .pack-seal-tag {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--mana-glow);
   letter-spacing: 0.05em;
   display: block;
@@ -3244,7 +3246,7 @@ p, span, a, li, td, th, input, select, button {
 
 .pack-inspect-pill {
   font-family: var(--font-pixel);
-  font-size: 0.42rem;
+  font-size: 0.82rem;
   color: var(--primary);
   background: rgba(245, 158, 11, 0.15);
   border: 1px solid var(--primary);
@@ -3345,7 +3347,7 @@ p, span, a, li, td, th, input, select, button {
 
 .foil-frame-label {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   letter-spacing: 0.05em;
 }
 
@@ -3412,7 +3414,7 @@ p, span, a, li, td, th, input, select, button {
 
 .order-tag {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.98rem;
   color: var(--mana-glow);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3509,7 +3511,7 @@ p, span, a, li, td, th, input, select, button {
 .roster-btn-meta strong {
   display: block;
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: #fff;
   transition: color 0.15s;
 }
@@ -3520,7 +3522,7 @@ p, span, a, li, td, th, input, select, button {
 
 .roster-btn-meta span {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--text-muted);
 }
 
@@ -3606,7 +3608,7 @@ p, span, a, li, td, th, input, select, button {
 
 .dossier-stat-box .d-label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--text-muted);
   display: block;
   margin-bottom: 0.2rem;
@@ -3717,7 +3719,7 @@ p, span, a, li, td, th, input, select, button {
 
 .widget-title {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: var(--primary);
   margin-bottom: 0.75rem;
   display: block;
@@ -3753,7 +3755,7 @@ p, span, a, li, td, th, input, select, button {
   background: var(--primary);
   color: #000;
   font-family: var(--font-pixel);
-  font-size: 0.48rem;
+  font-size: 0.85rem;
   font-weight: 700;
   padding: 0.5rem 0.85rem;
   border: 2px solid var(--primary-dark);
@@ -3798,7 +3800,7 @@ p, span, a, li, td, th, input, select, button {
 
 .trader-output {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--mana-glow);
 }
 
@@ -3859,7 +3861,7 @@ p, span, a, li, td, th, input, select, button {
 
 .god-name-tag {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: #fff;
 }
 
@@ -3899,7 +3901,7 @@ p, span, a, li, td, th, input, select, button {
   background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
   color: #fff;
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   padding: 0.75rem 1.4rem;
   border: 2px solid #f87171;
   box-shadow: 4px 4px 0 #7f1d1d, 0 0 15px rgba(239, 68, 68, 0.4);
@@ -4170,7 +4172,7 @@ p, span, a, li, td, th, input, select, button {
 .lore-index-table th {
   background: #080b10;
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: var(--primary);
   padding: 1rem 1.25rem;
   border-bottom: 2px solid var(--border-strong);
@@ -4193,7 +4195,7 @@ p, span, a, li, td, th, input, select, button {
   border: 1px solid var(--primary-dark);
   color: #000;
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   padding: 0.45rem 0.85rem;
   cursor: pointer;
   box-shadow: 2px 2px 0 #000;
@@ -4217,7 +4219,7 @@ p, span, a, li, td, th, input, select, button {
 
 .ascii-map-header {
   font-family: var(--font-pixel);
-  font-size: 0.6rem;
+  font-size: 0.93rem;
   color: var(--primary);
   letter-spacing: 0.1em;
   margin-bottom: 1rem;
@@ -4258,7 +4260,7 @@ p, span, a, li, td, th, input, select, button {
 .empire-region {
   display: inline-block;
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   color: var(--primary);
   background: rgba(245, 158, 11, 0.1);
   padding: 0.2rem 0.5rem;
@@ -4474,7 +4476,7 @@ p, span, a, li, td, th, input, select, button {
   border: 1px solid var(--border-strong);
   color: var(--text-muted);
   font-family: var(--font-pixel);
-  font-size: 0.48rem;
+  font-size: 0.85rem;
   padding: 0.6rem 1rem;
   cursor: pointer;
   transition: all 0.15s;
@@ -4521,7 +4523,7 @@ p, span, a, li, td, th, input, select, button {
 
 .map-badge {
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   padding: 0.2rem 0.5rem;
   display: inline-block;
   margin-bottom: 0.35rem;
@@ -4579,7 +4581,7 @@ p, span, a, li, td, th, input, select, button {
   background: rgba(0, 0, 0, 0.75);
   color: var(--primary);
   font-family: var(--font-pixel);
-  font-size: 0.42rem;
+  font-size: 0.82rem;
   padding: 0.35rem 0.65rem;
   border: 1px solid var(--primary);
   pointer-events: none;
@@ -4627,7 +4629,7 @@ p, span, a, li, td, th, input, select, button {
   color: #000;
   border: 1px solid var(--primary-dark);
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   padding: 0.4rem 0.8rem;
   cursor: pointer;
 }
@@ -4674,7 +4676,7 @@ p, span, a, li, td, th, input, select, button {
 
 .theater-num {
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.87rem;
   color: var(--primary);
   background: rgba(245, 158, 11, 0.12);
   border: 1px solid var(--primary);
@@ -4710,7 +4712,7 @@ p, span, a, li, td, th, input, select, button {
 .phase-tag {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   letter-spacing: 0.05em;
   padding: 0.15rem 0.45rem;
   margin-bottom: 0.65rem;
@@ -4767,7 +4769,7 @@ p, span, a, li, td, th, input, select, button {
 .campaigns-table th {
   background: #080b10;
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: var(--primary);
   padding: 1rem;
   border-bottom: 2px solid var(--border-strong);
@@ -4979,7 +4981,7 @@ p, span, a, li, td, th, input, select, button {
   border: 1px solid var(--border-strong);
   color: var(--text-muted);
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   padding: 0.55rem 0.85rem;
   cursor: pointer;
   transition: all 0.15s;
@@ -5052,7 +5054,7 @@ p, span, a, li, td, th, input, select, button {
 
 .dossier-rank {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--primary);
   letter-spacing: 0.1em;
   display: block;
@@ -5142,7 +5144,7 @@ p, span, a, li, td, th, input, select, button {
 
 .denizen-habitat {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.98rem;
   color: var(--primary);
 }
 
@@ -5165,7 +5167,7 @@ p, span, a, li, td, th, input, select, button {
 
 .denizen-lore-text h5 {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: var(--primary);
   margin: 1rem 0 0.5rem;
 }
@@ -5192,7 +5194,7 @@ p, span, a, li, td, th, input, select, button {
 
 .station-kicker {
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   color: var(--primary);
   letter-spacing: 0.08em;
   display: block;
@@ -5222,7 +5224,7 @@ p, span, a, li, td, th, input, select, button {
 
 .pixel-stat-pill {
   font-family: var(--font-pixel);
-  font-size: 0.6rem;
+  font-size: 0.93rem;
   color: var(--primary);
   background: rgba(245, 158, 11, 0.15);
   border: 1px solid var(--primary);
@@ -5232,7 +5234,7 @@ p, span, a, li, td, th, input, select, button {
 
 .station-note {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: #64748b;
   display: block;
 }
@@ -5269,7 +5271,7 @@ p, span, a, li, td, th, input, select, button {
   color: #000;
   border: 1px solid var(--primary-dark);
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.83rem;
   padding: 0.55rem;
   cursor: pointer;
   box-shadow: 2px 2px 0 #000;
@@ -5381,7 +5383,7 @@ p, span, a, li, td, th, input, select, button {
 
 .god-strike-kicker {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.90rem;
   color: #f87171;
   letter-spacing: 0.1em;
   display: block;
@@ -5422,7 +5424,7 @@ p, span, a, li, td, th, input, select, button {
 
 .hp-boss-title {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   color: #fff;
 }
 
@@ -5472,7 +5474,7 @@ p, span, a, li, td, th, input, select, button {
   color: #fff;
   border: 2px solid #f87171;
   font-family: var(--font-pixel);
-  font-size: 0.6rem;
+  font-size: 0.93rem;
   padding: 0.85rem 1.5rem;
   cursor: pointer;
   box-shadow: 4px 4px 0 #7f1d1d, 0 0 20px rgba(239, 68, 68, 0.4);
@@ -5571,7 +5573,7 @@ p, span, a, li, td, th, input, select, button {
   border: 1px solid var(--primary-dark);
   color: #000 !important;
   font-family: var(--font-pixel);
-  font-size: 0.48rem;
+  font-size: 0.85rem;
   padding: 0.5rem 0.85rem;
   cursor: pointer;
   box-shadow: 2px 2px 0 #000;
@@ -5691,7 +5693,7 @@ p, span, a, li, td, th, input, select, button {
   align-items: center;
   gap: 0.35rem;
   font-family: var(--font-pixel);
-  font-size: 0.42rem;
+  font-size: 0.82rem;
   padding: 0.25rem 0.5rem;
   background: rgba(34, 197, 94, 0.15);
   color: #4ade80;
@@ -5732,7 +5734,7 @@ p, span, a, li, td, th, input, select, button {
 
 .perk-bullet {
   color: var(--primary);
-  font-size: 0.65rem;
+  font-size: 0.96rem;
   margin-top: 0.15rem;
   flex-shrink: 0;
 }
@@ -5748,7 +5750,7 @@ p, span, a, li, td, th, input, select, button {
   background: #5865f2;
   color: #fff;
   font-family: var(--font-pixel);
-  font-size: 0.52rem;
+  font-size: 0.88rem;
   padding: 0.8rem 1.4rem;
   border: 2px solid #000;
   box-shadow: 
@@ -5780,7 +5782,7 @@ p, span, a, li, td, th, input, select, button {
   background: var(--bg-surface-elevated);
   color: var(--text-muted);
   font-family: var(--font-pixel);
-  font-size: 0.46rem;
+  font-size: 0.84rem;
   padding: 0.8rem 1.1rem;
   border: 2px solid var(--border-strong);
   box-shadow: 3px 3px 0 #000;
@@ -5813,7 +5815,7 @@ p, span, a, li, td, th, input, select, button {
   border: 2px solid var(--border-strong);
   color: var(--text-muted);
   font-family: var(--font-pixel);
-  font-size: 0.48rem;
+  font-size: 0.85rem;
   padding: 0.6rem 1rem;
   cursor: pointer;
   box-shadow: 2px 2px 0 #000;
@@ -5887,7 +5889,7 @@ p, span, a, li, td, th, input, select, button {
 
 .event-badge-upcoming {
   font-family: var(--font-pixel);
-  font-size: 0.44rem;
+  font-size: 0.83rem;
   padding: 0.35rem 0.65rem;
   background: #f59e0b;
   color: #000;
@@ -5901,7 +5903,7 @@ p, span, a, li, td, th, input, select, button {
 
 .event-badge-past {
   font-family: var(--font-pixel);
-  font-size: 0.44rem;
+  font-size: 0.83rem;
   padding: 0.35rem 0.65rem;
   background: #3b82f6;
   color: #fff;
@@ -5981,7 +5983,7 @@ p, span, a, li, td, th, input, select, button {
 
 .event-feature-box h4 {
   font-family: var(--font-pixel);
-  font-size: 0.48rem;
+  font-size: 0.85rem;
   color: var(--primary);
   margin: 0;
   display: flex;

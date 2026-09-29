@@ -646,25 +646,22 @@ class CombatDemo {
   handleVictory() {
     this.battleEnded = true;
     this.isResolvingTurn = false;
-    this.combatLog.push(`🏆 VICTORY! Vanquished ${this.currentEnemy.name}! Gained +25 Gold & +5 Gems.`);
+    this.combatLog.push(`🏆 VICTORY! Vanquished ${this.currentEnemy.name}! Gained +75 💎 Gems.`);
 
     if (window.audioMgr) {
       window.audioMgr.playSFX('goldGain');
       window.audioMgr.playFanfare('Legendary');
     }
 
-    // Award Rewards to Pack Binder/Gacha state
+    // Award Rewards to Pack Binder/Gacha state — gems only, no gold
     if (window.packSim) {
-      window.packSim.gold = (window.packSim.gold || 0) + 25;
-      window.packSim.gems = (window.packSim.gems || 0) + 5;
+      window.packSim.gems = (window.packSim.gems || 0) + 75;
       window.packSim.saveState();
       window.packSim.updateCurrencyDisplays();
     } else {
       try {
         const curGems = parseInt(localStorage.getItem('decked_gems') || '2500', 10);
-        const curGold = parseInt(localStorage.getItem('decked_gold') || '500', 10);
-        localStorage.setItem('decked_gems', curGems + 5);
-        localStorage.setItem('decked_gold', curGold + 25);
+        localStorage.setItem('decked_gems', curGems + 75);
       } catch (e) {}
     }
 

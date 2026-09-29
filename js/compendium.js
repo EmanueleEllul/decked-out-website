@@ -335,7 +335,7 @@ if (typeof window !== 'undefined') {
 }
 
 function initCompendium() {
-  if (document.getElementById('cards-display-grid')) {
+  if (document.getElementById('cards-display-grid') && !window.compendium) {
     window.compendium = new CompendiumManager();
   }
 }

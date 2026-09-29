@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/style.css?v=37">
   <link rel="stylesheet" href="css/nav.css?v=36">
   <link rel="stylesheet" href="css/card-foil.css?v=36">
-  <link rel="stylesheet" href="css/combat.css?v=43">
+  <link rel="stylesheet" href="css/combat.css?v=44">
 
   <!-- Critical Navigation Styles (Cache-Proof) -->
   <style id="critical-nav-css">
@@ -44,6 +44,56 @@
       .btn-wishlist { font-size: 0 !important; width: 36px !important; height: 36px !important; padding: 0 !important; justify-content: center !important; min-width: 36px !important; }
       .btn-wishlist span { font-size: 1.05rem !important; margin: 0 !important; line-height: 1 !important; display: inline-block !important; }
       .btn-wishlist::before { display: none !important; }
+    }
+  </style>
+  <style id="combat-critical-btn-css">
+    #combat-end-turn-btn,
+    .combat-end-turn-btn {
+      background: #f59e0b !important;
+      border: 2px solid #000 !important;
+      color: #000 !important;
+      box-shadow: inset 2px 2px 0 #fef08a, inset -2px -2px 0 #92400e, 3px 3px 0 #000 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.6rem !important;
+      padding: 0.65rem 1.4rem !important;
+      font-family: 'Tiny5', monospace !important;
+      font-size: 0.75rem !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.06em !important;
+      cursor: pointer !important;
+    }
+    #combat-end-turn-btn *,
+    .combat-end-turn-btn * {
+      color: #000 !important;
+      font-weight: 800 !important;
+      text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4) !important;
+    }
+    #combat-end-turn-btn:hover:not(:disabled),
+    .combat-end-turn-btn:hover:not(:disabled) {
+      background: #fde047 !important;
+      color: #000 !important;
+      box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #78350f, 4px 4px 0 #000 !important;
+      transform: translate(-1px, -1px) !important;
+    }
+    #combat-end-turn-btn:active:not(:disabled),
+    .combat-end-turn-btn:active:not(:disabled) {
+      transform: translate(2px, 2px) !important;
+      box-shadow: inset 2px 2px 0 #78350f, inset -2px -2px 0 #fde047, 1px 1px 0 #000 !important;
+    }
+    #combat-end-turn-btn:disabled,
+    .combat-end-turn-btn:disabled {
+      opacity: 0.65 !important;
+      background: #334155 !important;
+      color: #94a3b8 !important;
+      cursor: not-allowed !important;
+      box-shadow: 2px 2px 0 #000 !important;
+    }
+    #combat-end-turn-btn:disabled *,
+    .combat-end-turn-btn:disabled * {
+      color: #94a3b8 !important;
+      text-shadow: none !important;
     }
   </style>
 </head>
@@ -338,10 +388,10 @@
           </div>
 
           <div class="combat-actions-wrap">
-            <button id="combat-end-turn-btn" class="btn combat-end-turn-btn">
-              <span class="btn-sword">⚔️</span>
-              <span class="btn-text">End Turn &amp; Hero Strike</span>
-              <span class="btn-arrow">➔</span>
+            <button id="combat-end-turn-btn" class="btn combat-end-turn-btn" style="background: #f59e0b !important; color: #000 !important; border: 2px solid #000 !important; box-shadow: inset 2px 2px 0 #fef08a, inset -2px -2px 0 #92400e, 3px 3px 0 #000 !important;">
+              <span class="btn-sword" style="color: #000 !important;">⚔️</span>
+              <span class="btn-text" style="color: #000 !important; font-weight: 800; text-shadow: 1px 1px 0 rgba(255,255,255,0.4) !important;">End Turn &amp; Hero Strike</span>
+              <span class="btn-arrow" style="color: #000 !important;">➔</span>
             </button>
           </div>
         </div>
@@ -400,11 +450,11 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/data.js?v=43"></script>
-  <script src="js/audio.js?v=43"></script>
-  <script src="js/compendium.js?v=43"></script>
-  <script src="js/combat-demo.js?v=43"></script>
-  <script src="js/app.js?v=43"></script>
+  <script src="js/data.js?v=44"></script>
+  <script src="js/audio.js?v=44"></script>
+  <script src="js/compendium.js?v=44"></script>
+  <script src="js/combat-demo.js?v=44"></script>
+  <script src="js/app.js?v=44"></script>
 
 </body>
 </html>

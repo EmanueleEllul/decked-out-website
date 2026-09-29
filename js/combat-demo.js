@@ -420,7 +420,9 @@ class CombatDemo {
     const endTurnBtn = document.getElementById('combat-end-turn-btn');
     if (endTurnBtn) {
       endTurnBtn.disabled = true;
-      endTurnBtn.innerHTML = `<span>⏳ Resolving Turn...</span>`;
+      endTurnBtn.style.setProperty('background', '#334155', 'important');
+      endTurnBtn.style.setProperty('color', '#94a3b8', 'important');
+      endTurnBtn.innerHTML = `<span style="color: #94a3b8 !important;">⏳ Resolving Turn...</span>`;
     }
 
     if (window.audioMgr) window.audioMgr.playSFX('turnEnd');
@@ -629,10 +631,12 @@ class CombatDemo {
     this.isResolvingTurn = false;
     if (endTurnBtn) {
       endTurnBtn.disabled = false;
+      endTurnBtn.style.setProperty('background', '#f59e0b', 'important');
+      endTurnBtn.style.setProperty('color', '#000', 'important');
       endTurnBtn.innerHTML = `
-        <span class="btn-sword">⚔️</span>
-        <span class="btn-text">End Turn & Hero Strike</span>
-        <span class="btn-arrow">➔</span>
+        <span class="btn-sword" style="color: #000 !important;">⚔️</span>
+        <span class="btn-text" style="color: #000 !important; font-weight: 800; text-shadow: 1px 1px 0 rgba(255,255,255,0.4) !important;">End Turn & Hero Strike</span>
+        <span class="btn-arrow" style="color: #000 !important;">➔</span>
       `;
     }
 

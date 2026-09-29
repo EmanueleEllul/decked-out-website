@@ -1173,6 +1173,7 @@ p, span, a, li, td, th, input, select, button {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  min-width: 0; /* Grid child must be allowed to shrink below content width */
 }
 
 .roster-headline {
@@ -6194,8 +6195,6 @@ p, span, a, li, td, th, input, select, button {
   }
   .heroes-roster-column {
     gap: 0.4rem !important;
-    /* Prevent the horizontal scroll shelf from overflowing the page */
-    overflow: hidden !important;
   }
   .heroes-roster-list {
     display: flex !important;

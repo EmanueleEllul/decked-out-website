@@ -528,12 +528,12 @@ class AppController {
     } else if (cleanPage === 'events.html') {
       this.initEventsPage();
     } else if (cleanPage === 'packs.html') {
-      if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=52', () => !!window.GAME_CARDS);
+      if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=53', () => !!window.GAME_CARDS);
       if (!window.CompendiumManager && typeof CompendiumManager === 'undefined') {
-        await this.loadScript('js/compendium.js?v=52', () => !!window.CompendiumManager);
+        await this.loadScript('js/compendium.js?v=53', () => !!window.CompendiumManager);
       }
       if (!window.PackSimulator && typeof PackSimulator === 'undefined') {
-        await this.loadScript('js/pack-simulator.js?v=52', () => !!window.PackSimulator);
+        await this.loadScript('js/pack-simulator.js?v=53', () => !!window.PackSimulator);
       }
       if (!window.packSimulator) {
         const PackClass = window.PackSimulator || (typeof PackSimulator !== 'undefined' ? PackSimulator : null);

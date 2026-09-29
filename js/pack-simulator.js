@@ -780,15 +780,25 @@ class PackSimulator {
     if (spotlightMode) spotlightMode.style.display = 'flex';
     if (summaryMode) summaryMode.style.display = 'none';
 
+    const totalCount = this.currentOpenedCards.length;
     const totalEl = document.getElementById('spotlight-total-count');
-    if (totalEl) totalEl.textContent = this.currentOpenedCards.length;
+    if (totalEl) totalEl.textContent = totalCount;
 
-    // Render progress pips
+    // Render progress indicator (pips for standard packs <=10 cards; sleek progress bar for big bundles)
     const pipsContainer = document.getElementById('spotlight-progress-pips');
     if (pipsContainer) {
-      pipsContainer.innerHTML = this.currentOpenedCards.map((_, i) => `
-        <div class="spotlight-pip ${i === 0 ? 'active' : ''}" data-pip="${i}"></div>
-      `).join('');
+      if (totalCount <= 10) {
+        pipsContainer.innerHTML = this.currentOpenedCards.map((_, i) => `
+          <div class="spotlight-pip ${i === 0 ? 'active' : ''}" data-pip="${i}"></div>
+        `).join('');
+      } else {
+        const initialPct = Math.round((1 / totalCount) * 100);
+        pipsContainer.innerHTML = `
+          <div class="spotlight-bar-track">
+            <div id="spotlight-bar-fill" class="spotlight-bar-fill" style="width: ${initialPct}%;"></div>
+          </div>
+        `;
+      }
     }
 
     // Clear tray
@@ -806,18 +816,27 @@ class PackSimulator {
 
     this.isCurrentCardFlipped = false;
     const card = this.currentOpenedCards[this.currentCardIndex];
+    const totalCount = this.currentOpenedCards.length;
 
     // Update Counter
     const currIdxEl = document.getElementById('spotlight-current-idx');
     if (currIdxEl) currIdxEl.textContent = this.currentCardIndex + 1;
 
-    // Update Pips
-    const pips = document.querySelectorAll('.spotlight-pip');
-    pips.forEach((pip, i) => {
-      pip.classList.remove('completed', 'active');
-      if (i < this.currentCardIndex) pip.classList.add('completed');
-      else if (i === this.currentCardIndex) pip.classList.add('active');
-    });
+    // Update Progress Indicator
+    if (totalCount <= 10) {
+      const pips = document.querySelectorAll('.spotlight-pip');
+      pips.forEach((pip, i) => {
+        pip.classList.remove('completed', 'active');
+        if (i < this.currentCardIndex) pip.classList.add('completed');
+        else if (i === this.currentCardIndex) pip.classList.add('active');
+      });
+    } else {
+      const barFill = document.getElementById('spotlight-bar-fill');
+      if (barFill) {
+        const pct = Math.min(100, Math.round(((this.currentCardIndex + 1) / totalCount) * 100));
+        barFill.style.width = `${pct}%`;
+      }
+    }
 
     // Update Action Button
     const actionLabel = document.getElementById('spotlight-action-label');

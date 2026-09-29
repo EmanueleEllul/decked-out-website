@@ -366,6 +366,8 @@ class AppController {
       window.deckBuilder = null;
       window.combatDemo = null;
       window.dungeonMap = null;
+      window.packSimulator = null;
+      window.packSim = null;
 
       // Initialize page-specific controllers
       await this.initPageControllers(pageName);
@@ -525,6 +527,21 @@ class AppController {
       }
     } else if (cleanPage === 'events.html') {
       this.initEventsPage();
+    } else if (cleanPage === 'packs.html') {
+      if (!window.GAME_CARDS) await this.loadScript('js/data.js?v=50', () => !!window.GAME_CARDS);
+      if (!window.CompendiumManager && typeof CompendiumManager === 'undefined') {
+        await this.loadScript('js/compendium.js?v=50', () => !!window.CompendiumManager);
+      }
+      if (!window.PackSimulator && typeof PackSimulator === 'undefined') {
+        await this.loadScript('js/pack-simulator.js?v=50', () => !!window.PackSimulator);
+      }
+      if (!window.packSimulator) {
+        const PackClass = window.PackSimulator || (typeof PackSimulator !== 'undefined' ? PackSimulator : null);
+        if (PackClass) {
+          window.packSimulator = new PackClass();
+          window.packSim = window.packSimulator;
+        }
+      }
     }
   }
 

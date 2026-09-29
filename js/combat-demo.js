@@ -659,6 +659,13 @@ class CombatDemo {
       window.packSim.gems = (window.packSim.gems || 0) + 5;
       window.packSim.saveState();
       window.packSim.updateCurrencyDisplays();
+    } else {
+      try {
+        const curGems = parseInt(localStorage.getItem('decked_gems') || '2500', 10);
+        const curGold = parseInt(localStorage.getItem('decked_gold') || '500', 10);
+        localStorage.setItem('decked_gems', curGems + 5);
+        localStorage.setItem('decked_gold', curGold + 25);
+      } catch (e) {}
     }
 
     // Display Result Overlay

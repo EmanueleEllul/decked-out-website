@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DECKED OUT - Game Info & Specs | Official Roguelike TCG</title>
-  <meta name="description" content="Technical specifications, engine details, target platforms, and development info for Decked Out.">
+  <title>DECKED OUT - Pack Opening &amp; Booster Gacha Simulator</title>
+  <meta name="description" content="Crack open authentic Godot booster packs, discover rare holographic foils, expand your 62-card collection binder, and hear celebratory fanfares.">
   <link rel="icon" type="image/png" href="assets/icon.png">
   
   <!-- Google Fonts -->
@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/style.css?v=50">
   <link rel="stylesheet" href="css/nav.css?v=50">
   <link rel="stylesheet" href="css/card-foil.css?v=50">
+  <link rel="stylesheet" href="css/packs.css?v=50">
 
   <!-- Critical Navigation Styles (Cache-Proof) -->
   <style id="critical-nav-css">
@@ -43,58 +44,6 @@
       .btn-wishlist { font-size: 0 !important; width: 36px !important; height: 36px !important; padding: 0 !important; justify-content: center !important; min-width: 36px !important; }
       .btn-wishlist span { font-size: 1.05rem !important; margin: 0 !important; line-height: 1 !important; display: inline-block !important; }
       .btn-wishlist::before { display: none !important; }
-    }
-  </style>
-
-  <!-- Critical Footer Styles (Cache-Proof) -->
-  <style id="critical-footer-css">
-    .site-footer { background: #06090e !important; border-top: 3px solid #f59e0b !important; padding: 3rem 1.5rem 2rem !important; position: relative !important; }
-    .footer-inner { max-width: 1400px !important; margin: 0 auto !important; display: flex !important; flex-direction: column !important; gap: 2rem !important; }
-    .footer-grid { display: grid !important; grid-template-columns: 1.6fr 1fr 1fr 1fr !important; gap: 2rem !important; }
-    .footer-col-brand { display: flex !important; flex-direction: column !important; gap: 0.85rem !important; }
-    .footer-brand { display: inline-flex !important; align-items: center !important; gap: 0.75rem !important; text-decoration: none !important; width: fit-content !important; }
-    .footer-brand .brand-logo-img { width: 32px !important; height: 32px !important; image-rendering: pixelated !important; flex-shrink: 0 !important; }
-    .footer-brand .brand-text h2 { font-family: 'Tiny5', monospace !important; font-size: 1.2rem !important; color: #fff !important; margin: 0 !important; line-height: 1.1 !important; letter-spacing: 0.04em !important; }
-    .footer-brand .brand-text span { font-family: 'Tiny5', monospace !important; font-size: 0.65rem !important; color: #f59e0b !important; letter-spacing: 0.15em !important; display: block !important; }
-    .footer-tagline { font-family: 'Tiny5', monospace !important; font-size: 0.75rem !important; color: #8899aa !important; line-height: 1.6 !important; margin: 0 !important; max-width: 400px !important; }
-    .footer-community-box { display: flex !important; flex-direction: column !important; gap: 0.5rem !important; margin-top: 0.25rem !important; }
-    .footer-community-title { font-family: 'Tiny5', monospace !important; font-size: 0.75rem !important; color: #f59e0b !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; }
-    .footer-action-buttons { display: flex !important; flex-wrap: wrap !important; gap: 0.65rem !important; }
-    .footer-btn { display: inline-flex !important; align-items: center !important; gap: 0.45rem !important; font-family: 'Tiny5', monospace !important; font-size: 0.78rem !important; padding: 0.55rem 0.95rem !important; text-decoration: none !important; border: 2px solid #000 !important; letter-spacing: 0.05em !important; white-space: nowrap !important; cursor: pointer !important; }
-    .footer-btn-discord { background: #5865f2 !important; color: #fff !important; box-shadow: inset 2px 2px 0 #7983f5, inset -2px -2px 0 #3c45a5, 2px 2px 0 #000 !important; }
-    .footer-btn-discord:hover { background: #6a76f7 !important; color: #fff !important; transform: translate(-1px, -1px) !important; box-shadow: inset 2px 2px 0 #959ef9, inset -2px -2px 0 #323a8c, 3px 3px 0 #000 !important; }
-    .footer-btn-discord:active { transform: translate(2px, 2px) !important; box-shadow: inset 2px 2px 0 #282f6e, inset -1px -1px 0 #7983f5, 1px 1px 0 #000 !important; }
-    .footer-btn-steam { background: #f59e0b !important; color: #000 !important; box-shadow: inset 2px 2px 0 #fef08a, inset -2px -2px 0 #92400e, 2px 2px 0 #000 !important; }
-    .footer-btn-steam:hover { background: #fcd34d !important; color: #000 !important; transform: translate(-1px, -1px) !important; box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #b45309, 3px 3px 0 #000 !important; }
-    .footer-btn-steam:active { transform: translate(2px, 2px) !important; box-shadow: inset 2px 2px 0 #92400e, inset -1px -1px 0 #fef08a, 1px 1px 0 #000 !important; }
-    .footer-col { display: flex !important; flex-direction: column !important; }
-    .footer-col-title { font-family: 'Tiny5', monospace !important; font-size: 0.82rem !important; color: #f59e0b !important; letter-spacing: 0.08em !important; margin: 0 0 0.85rem 0 !important; padding-bottom: 0.4rem !important; border-bottom: 2px solid #1a2538 !important; display: flex !important; align-items: center !important; gap: 0.45rem !important; text-shadow: 1px 1px 0 rgba(0,0,0,0.8) !important; }
-    .footer-nav-list { list-style: none !important; margin: 0 !important; padding: 0 !important; display: flex !important; flex-direction: column !important; gap: 0.5rem !important; }
-    .footer-nav-list li { list-style: none !important; margin: 0 !important; padding: 0 !important; }
-    .footer-nav-link { font-family: 'Tiny5', monospace !important; font-size: 0.74rem !important; color: #8899aa !important; text-decoration: none !important; letter-spacing: 0.04em !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; padding: 0.15rem 0 !important; transition: color 0.1s ease, transform 0.1s ease !important; width: fit-content !important; cursor: pointer !important; }
-    .footer-nav-link::before { content: '▪' !important; font-size: 0.6rem !important; color: #3b5072 !important; transition: color 0.1s ease !important; }
-    .footer-nav-link:hover { color: #fcd34d !important; transform: translateX(3px) !important; }
-    .footer-nav-link:hover::before { color: #f59e0b !important; }
-    .footer-nav-link.active { color: #f59e0b !important; font-weight: 700 !important; }
-    .footer-nav-link.active::before { content: '▶' !important; color: #f59e0b !important; font-size: 0.55rem !important; }
-    .footer-bottom-bar { border-top: 1px solid #1a2538 !important; padding-top: 1.25rem !important; display: flex !important; justify-content: space-between !important; align-items: center !important; flex-wrap: wrap !important; gap: 1rem !important; }
-    .footer-credits { font-family: 'Tiny5', monospace !important; font-size: 0.68rem !important; color: #64748b !important; line-height: 1.7 !important; letter-spacing: 0.03em !important; text-align: left !important; }
-    .footer-credits p { margin: 0 !important; }
-    .footer-credits strong { color: #cbd5e1 !important; }
-    .footer-back-to-top { display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; font-family: 'Tiny5', monospace !important; font-size: 0.70rem !important; color: #8899aa !important; text-decoration: none !important; border: 2px solid #2e4060 !important; background: #080b10 !important; padding: 0.45rem 0.85rem !important; letter-spacing: 0.05em !important; transition: background 0.1s, color 0.1s, border-color 0.1s !important; cursor: pointer !important; }
-    .footer-back-to-top:hover { background: #111827 !important; color: #f59e0b !important; border-color: #f59e0b !important; transform: translateY(-2px) !important; }
-    @media (max-width: 1024px) {
-      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 1.75rem !important; }
-      .footer-col-brand { grid-column: 1 / -1 !important; }
-    }
-    @media (max-width: 600px) {
-      .site-footer { padding: 2.25rem 1rem 1.5rem !important; }
-      .footer-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
-      .footer-bottom-bar { flex-direction: column !important; text-align: center !important; gap: 1rem !important; }
-      .footer-credits { text-align: center !important; }
-      .footer-back-to-top { width: 100% !important; justify-content: center !important; box-sizing: border-box !important; }
-      .footer-action-buttons { flex-direction: column !important; }
-      .footer-btn { width: 100% !important; justify-content: center !important; box-sizing: border-box !important; }
     }
   </style>
 </head>
@@ -152,8 +101,8 @@
           </li>
 
           <!-- Play Section -->
-          <li class="nav-dropdown">
-            <a href="deck-builder.html" class="nav-link nav-dropdown-toggle" id="nav-play-toggle">
+          <li class="nav-dropdown active">
+            <a href="deck-builder.html" class="nav-link nav-dropdown-toggle active" id="nav-play-toggle">
               <span>Play</span> <span class="nav-arrow"></span>
             </a>
             <div class="nav-dropdown-menu">
@@ -165,7 +114,7 @@
                 <span class="dropdown-icon">⚔️</span>
                 <span class="dropdown-title">Battle Test</span>
               </a>
-              <a href="packs.html" class="dropdown-item">
+              <a href="packs.html" class="dropdown-item active">
                 <span class="dropdown-icon">📦</span>
                 <span class="dropdown-title">Pack Opening</span>
               </a>
@@ -173,7 +122,7 @@
           </li>
 
           <li><a href="events.html" class="nav-link">Where's Next</a></li>
-          <li><a href="specs.html" class="nav-link active">Game Info</a></li>
+          <li><a href="specs.html" class="nav-link">Game Info</a></li>
         </ul>
       </nav>
 
@@ -197,62 +146,221 @@
   <main class="main-wrapper">
 
     <!-- ==========================================
-         PAGE: GAME INFO & SPECS
+         PAGE: BOOSTER PACKS & GACHA SIMULATOR
          ========================================== -->
     <section class="site-section">
-      <div class="section-header center">
+      <div class="section-header">
         <div class="section-title-wrap">
-          <span class="section-kicker">DEVELOPMENT &amp; DETAILS</span>
-          <h2><span>🎮</span> Game Information</h2>
-          <p>Technical specifications and release details for Decked Out.</p>
+          <span class="section-kicker">TCG CARD OPENING &amp; BINDER</span>
+          <h2><span>📦</span> Booster Pack Opening</h2>
+          <p>Crack authentic booster packs with tactile foil tearing, 3D hardware-accelerated flips, rarity energy auras, and celebratory fanfares.</p>
         </div>
       </div>
 
-      <div class="specs-grid">
+      <!-- Currency & Supply Drop Bar -->
+      <div class="packs-control-bar">
+        <div class="packs-currencies">
+          <div class="pack-currency-pill gems" title="Your Gacha Gems">
+            <span>💎</span>
+            <span class="count user-gems-count">2,500</span>
+            <span style="color: var(--text-muted); font-size: 0.7rem;">GEMS</span>
+          </div>
 
-        <div class="spec-card">
-          <div class="spec-icon">🖥️</div>
-          <h4>Target Platforms</h4>
-          <p>Designed for <strong>PC (Windows / Steam)</strong> with responsive keyboard, mouse, and full gamepad controller support.</p>
-        </div>
+          <div class="pack-currency-pill gold" title="Scrap Gold from Duplicates &amp; Combat">
+            <span>🪙</span>
+            <span class="count user-gold-count">500</span>
+            <span style="color: var(--text-muted); font-size: 0.7rem;">GOLD</span>
+          </div>
 
-        <div class="spec-card">
-          <div class="spec-icon">👤</div>
-          <h4>Developer</h4>
-          <p>Created by indie game developer <strong>Emanuele Ellul</strong>, crafting deterministic roguelike systems and card combat.</p>
-        </div>
-
-        <div class="spec-card">
-          <div class="spec-icon">🎨</div>
-          <h4>Art</h4>
-          <p>Original pixel art, character sprites, and card illustrations created by <strong>Burstyn Santillo</strong> and <strong>Ayden Cachia</strong>.</p>
-        </div>
-
-        <div class="spec-card wishlist-card">
-          <div class="spec-icon">⭐</div>
-          <h4>Join The Journey</h4>
-          <p>Track development updates, test public builds, and support the game on Steam &amp; Discord.</p>
-          <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; width: 100%;">
-            <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-wishlist" style="width: 100%; justify-content: center;">
-              ⭐ Wishlist on Steam
-            </a>
-            <a href="https://discord.gg/aCPVFSYCFf" target="_blank" rel="noopener noreferrer" class="btn-discord" style="width: 100%; justify-content: center; box-sizing: border-box;">
-              💬 Join Discord Community
-            </a>
+          <div class="pack-currency-pill opened" title="Total Packs Opened Across Runs">
+            <span>📦</span>
+            <span class="count user-packs-opened-count">0</span>
+            <span style="color: var(--text-muted); font-size: 0.7rem;">OPENED</span>
           </div>
         </div>
+
+        <div class="packs-top-actions">
+          <button id="claim-supply-drop-btn" class="btn-supply-drop" title="Claim 500 Free Gems for Pack Opening">
+            <span>🎁 Claim Supply Drop (+500 💎)</span>
+          </button>
+        </div>
       </div>
+
+      <!-- Section Navigation Switcher -->
+      <div class="packs-tab-switcher">
+        <button id="tab-btn-shop" class="pack-nav-tab active">
+          <span>📦</span> Booster Packs Shop
+        </button>
+        <button id="tab-btn-binder" class="pack-nav-tab">
+          <span>📖</span> My Collection Binder (<span id="tab-binder-count">0/62</span>)
+        </button>
+      </div>
+
+      <!-- Persistent Binder Progress Card -->
+      <div class="binder-tracker-card">
+        <div class="binder-tracker-header">
+          <div class="binder-tracker-title">
+            <span>🗂️</span> Persistent Series 1 Binder Collection
+          </div>
+          <div id="binder-progress-stat" class="binder-tracker-stat">0 / 62 Unlocked (0%)</div>
+        </div>
+
+        <div class="binder-progress-bar-wrap">
+          <div id="binder-progress-fill" class="binder-progress-bar-fill"></div>
+        </div>
+
+        <div class="binder-rarity-breakdown">
+          <div class="rarity-pill-count common"><span class="dot"></span> Common: <strong id="count-rarity-common">0/24</strong></div>
+          <div class="rarity-pill-count uncommon"><span class="dot"></span> Uncommon: <strong id="count-rarity-uncommon">0/18</strong></div>
+          <div class="rarity-pill-count rare"><span class="dot"></span> Rare: <strong id="count-rarity-rare">0/12</strong></div>
+          <div class="rarity-pill-count epic"><span class="dot"></span> Epic: <strong id="count-rarity-epic">0/5</strong></div>
+          <div class="rarity-pill-count legendary"><span class="dot"></span> Legendary: <strong id="count-rarity-legendary">0/2</strong></div>
+          <div class="rarity-pill-count exotic"><span class="dot"></span> Exotic: <strong id="count-rarity-exotic">0/1</strong></div>
+        </div>
+      </div>
+
+      <!-- SECTION 1: PACKS SHOP -->
+      <div id="packs-shop-section">
+        <div id="packs-shelf-grid" class="packs-shelf-grid">
+          <!-- Dynamically populated by PackSimulator -->
+        </div>
+      </div>
+
+      <!-- SECTION 2: BINDER ALBUM VIEW -->
+      <div id="binder-album-section" class="binder-view-container" style="display: none;">
+        <div class="binder-filter-bar">
+          <div class="binder-filter-group">
+            <button class="binder-filter-pill binder-filter-ownership active" data-filter="all">All Cards</button>
+            <button class="binder-filter-pill binder-filter-ownership" data-filter="owned">Unlocked Only</button>
+            <button class="binder-filter-pill binder-filter-ownership" data-filter="missing">Missing Only</button>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <select id="binder-rarity-select" class="form-select" style="font-family: var(--font-pixel); font-size: 0.72rem; padding: 0.35rem 0.6rem; background: #080b10; color: #fff; border: 1px solid var(--border-strong);">
+              <option value="all">All Rarities</option>
+              <option value="Common">Common</option>
+              <option value="Uncommon">Uncommon</option>
+              <option value="Rare">Rare</option>
+              <option value="Epic">Epic</option>
+              <option value="Legendary">Legendary</option>
+              <option value="Exotic">Exotic</option>
+            </select>
+
+            <select id="binder-class-select" class="form-select" style="font-family: var(--font-pixel); font-size: 0.72rem; padding: 0.35rem 0.6rem; background: #080b10; color: #fff; border: 1px solid var(--border-strong);">
+              <option value="all">All Archetypes</option>
+              <option value="Swordsman">Swordsman</option>
+              <option value="Wild Mages">Wild Mages</option>
+              <option value="Goblins">Goblins</option>
+              <option value="Animal">Animal (Beastmaster)</option>
+              <option value="Monster">Monster (Undead)</option>
+              <option value="Elixir">Elixir</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="binder-grid-container" class="binder-grid">
+          <!-- Dynamically populated by PackSimulator -->
+        </div>
+      </div>
+
     </section>
 
   </main>
+
+  <!-- ==========================================
+       TACTILE PACK OPENING THEATRE MODAL
+       ========================================== -->
+  <div id="pack-theatre-modal" class="pack-theatre-modal">
+    <div class="pack-theatre-header">
+      <div class="pack-theatre-title">
+        <span>📦</span> <span id="theatre-pack-title">Booster Pack</span>
+      </div>
+      <button id="theatre-close-btn" class="theatre-close-btn" title="Close Stage">&times;</button>
+    </div>
+
+    <!-- Phase 1: Centerpiece Pack & Tactile Tear Strip -->
+    <div id="theatre-rip-arena" class="pack-rip-arena">
+      <div class="pack-spotlight-glow"></div>
+
+      <div class="theatre-pack-container">
+        <div id="theatre-pack-body" class="theatre-pack-body foil-common">
+          <!-- Tactile Tear Zipper Strip -->
+          <div id="theatre-tear-strip" class="theatre-tear-strip" title="Click or pull to rip foil">
+            <span style="font-family: var(--font-pixel); font-size: 0.8rem; color: #f59e0b;">✂️</span>
+            <div class="tear-pull-tab">⚡</div>
+          </div>
+
+          <div class="pack-art-content">
+            <span class="pack-logo-kicker">DECKED OUT • TCG</span>
+            <img id="theatre-pack-mascot" src="assets/heroes/anim/Goblin.gif" alt="Pack Mascot" class="pack-sprite-icon" style="width: 80px; height: 80px;">
+            <div id="theatre-pack-name" class="pack-name-headline" style="font-size: 1.25rem;">Common Pack</div>
+            <div class="pack-cards-sub" style="font-size: 0.85rem;">SERIES 1 EXPEDITION</div>
+          </div>
+
+          <div class="pack-crimp bottom"></div>
+          <div class="foil-shimmer"></div>
+        </div>
+      </div>
+
+      <button id="btn-rip-foil" class="btn-rip-foil-action">
+        <span>⚡ RIP FOIL TO OPEN</span>
+      </button>
+    </div>
+
+    <!-- Phase 2: Opened Cards Stage & 3D Hardware-Accelerated Reveals -->
+    <div id="theatre-reveal-stage" class="cards-reveal-stage">
+      <div class="cards-stage-toolbar">
+        <div id="cards-stage-summary-text" class="cards-stage-summary-text">
+          Click cards individually to reveal, or trigger a cascade flip!
+        </div>
+        <div class="cards-stage-buttons">
+          <button id="theatre-reveal-all-btn" class="btn-reveal-all">
+            <span>⚡ Reveal All Cards</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3D Flip Card Shelf -->
+      <div id="theatre-opened-grid" class="pack-opened-grid"></div>
+
+      <!-- Action buttons after reveal -->
+      <div class="theatre-bottom-controls">
+        <button id="theatre-open-another-btn" class="btn-theatre-action primary">
+          <span>Open Another Pack</span>
+        </button>
+        <button id="theatre-view-binder-btn" class="btn-theatre-action secondary">
+          <span>📖 View in Binder</span>
+        </button>
+        <button id="theatre-done-btn" class="btn-theatre-action secondary">
+          <span>✓ Done / Collect Cards</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Odds Modal -->
+  <div id="pack-odds-modal" class="odds-modal">
+    <div class="odds-modal-card">
+      <div id="odds-modal-content"></div>
+      <button id="odds-modal-close" style="display: none;"></button>
+    </div>
+  </div>
+
+  <!-- Card Detail Inspector Modal -->
+  <div id="card-detail-modal" class="modal-overlay">
+    <div class="modal-card-dialog">
+      <button id="card-modal-close" class="modal-close-btn" title="Close details">&times;</button>
+      <div id="card-detail-content" style="display: contents;"></div>
+    </div>
+  </div>
   </div>
 
   <!-- Site Footer -->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-grid">
-        <!-- Brand & Community Column -->
-        <div class="footer-col footer-col-brand">
+        <!-- Column 1: Brand & Bio -->
+        <div class="footer-col-brand">
           <a href="index.html" class="footer-brand">
             <div class="brand-icon">
               <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
@@ -263,51 +371,51 @@
             </div>
           </a>
           <p class="footer-tagline">
-            Tactical roguelike deckbuilding RPG built with Godot 4.7 Forward+. Craft card synergies, explore the 3-act spire, and battle generational foes.
+            A deep deterministic turn-based roguelike deckbuilding RPG engineered in Godot 4.7 Forward+.
           </p>
           <div class="footer-community-box">
-            <span class="footer-community-title">Official Community</span>
+            <span class="footer-community-title">COMMUNITY &amp; WISHLIST</span>
             <div class="footer-action-buttons">
-              <a href="https://discord.gg/aCPVFSYCFf" target="_blank" rel="noopener noreferrer" class="footer-btn footer-btn-discord" title="Join Official Decked Out Discord">
-                <span>💬</span> Discord Server
+              <a href="https://discord.gg/aCPVFSYCFf" target="_blank" rel="noopener noreferrer" class="footer-btn footer-btn-discord">
+                <span>💬</span> Discord
               </a>
-              <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="footer-btn footer-btn-steam" title="Wishlist Decked Out on Steam">
+              <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="footer-btn footer-btn-steam">
                 <span>⭐</span> Wishlist on Steam
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Column 1: Compendium -->
+        <!-- Column 2: Compendium & Guides -->
         <div class="footer-col">
-          <h3 class="footer-col-title">🃏 Compendium</h3>
+          <h3 class="footer-col-title">📖 Compendium</h3>
           <ul class="footer-nav-list">
-            <li><a href="cards.html" class="footer-nav-link">Cards Vault</a></li>
-            <li><a href="heroes.html" class="footer-nav-link">Hero Roster</a></li>
-            <li><a href="relics.html" class="footer-nav-link">Relics &amp; Artifacts</a></li>
+            <li><a href="cards.html" class="footer-nav-link">Cards Database</a></li>
+            <li><a href="heroes.html" class="footer-nav-link">Heroes &amp; Relics</a></li>
+            <li><a href="relics.html" class="footer-nav-link">Relic Vault</a></li>
             <li><a href="mechanics.html" class="footer-nav-link">Combat Mechanics</a></li>
             <li><a href="dungeon.html" class="footer-nav-link">Dungeon Spire</a></li>
             <li><a href="lore.html" class="footer-nav-link">Lore Codex</a></li>
           </ul>
         </div>
 
-        <!-- Column 2: Play & Tools -->
+        <!-- Column 3: Play & Tools -->
         <div class="footer-col">
           <h3 class="footer-col-title">⚔️ Play &amp; Tools</h3>
           <ul class="footer-nav-list">
             <li><a href="index.html" class="footer-nav-link">Game Overview</a></li>
             <li><a href="deck-builder.html" class="footer-nav-link">Deck Builder</a></li>
             <li><a href="combat.html" class="footer-nav-link">Battle Test Arena</a></li>
-            <li><a href="packs.html" class="footer-nav-link">Pack Opening</a></li>
+            <li><a href="packs.html" class="footer-nav-link active">Pack Opening</a></li>
           </ul>
         </div>
 
-        <!-- Column 3: Updates & Specs -->
+        <!-- Column 4: Updates & Specs -->
         <div class="footer-col">
           <h3 class="footer-col-title">📍 Updates &amp; Info</h3>
           <ul class="footer-nav-list">
             <li><a href="events.html" class="footer-nav-link">Where's Next (Events)</a></li>
-            <li><a href="specs.html" class="footer-nav-link active">Engine &amp; Tech Specs</a></li>
+            <li><a href="specs.html" class="footer-nav-link">Engine &amp; Tech Specs</a></li>
           </ul>
         </div>
       </div>
@@ -326,7 +434,10 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="js/data.js?v=50"></script>
   <script src="js/audio.js?v=50"></script>
+  <script src="js/compendium.js?v=50"></script>
+  <script src="js/pack-simulator.js?v=50"></script>
   <script src="js/app.js?v=50"></script>
 
 </body>

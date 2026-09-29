@@ -2531,6 +2531,24 @@ const GAME_PACKS = [
       "Exotic": 2.0
     },
     "guarantee": "Includes 1 Guaranteed Exotic & 1 Guaranteed Legendary"
+  },
+  {
+    "id": "hero-draft",
+    "name": "Hero Archetype Draft",
+    "cost": 450,
+    "currency": "Gems",
+    "cardCount": 7,
+    "badge": "Class Targeted",
+    "description": "Draft cards tuned for high archetype synergy. Features elevated rare pulls for your favorite combat styles.",
+    "rates": {
+      "Common": 28.0,
+      "Uncommon": 42.0,
+      "Rare": 20.0,
+      "Epic": 7.0,
+      "Legendary": 2.5,
+      "Exotic": 0.5
+    },
+    "guarantee": "High Synergy Card Pool"
   }
 ];
 

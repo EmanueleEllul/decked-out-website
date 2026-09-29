@@ -78,17 +78,6 @@ class PackSimulator {
         description: "Massive 38-card box bundle combining 3 Common Packs + 2 Rare Packs + 1 Exotic Pack with substantial Gem savings!",
         rates: { "Common": 40.0, "Uncommon": 25.0, "Rare": 20.0, "Epic": 8.0, "Legendary": 5.0, "Exotic": 2.0 },
         guarantee: "Includes 1 Guaranteed Exotic & 1 Guaranteed Legendary"
-      },
-      {
-        id: "hero-draft",
-        name: "Hero Archetype Draft",
-        cost: 450,
-        currency: "Gems",
-        cardCount: 7,
-        badge: "Class Targeted",
-        description: "Draft cards tuned for high archetype synergy. Features elevated rare pulls for your favorite combat styles.",
-        rates: { "Common": 28.0, "Uncommon": 42.0, "Rare": 20.0, "Epic": 7.0, "Legendary": 2.5, "Exotic": 0.5 },
-        guarantee: "High Synergy Card Pool"
       }
     ];
   }
@@ -520,21 +509,19 @@ class PackSimulator {
       'common': 'assets/heroes/anim/Goblin.gif',
       'rare': 'assets/heroes/anim/DeckMonk.gif',
       'exotic': 'assets/heroes/anim/Demonling.gif',
-      'bundle': 'assets/heroes/anim/GorillaGabe.gif',
-      'hero-draft': 'assets/heroes/anim/Hunter the Hedgehog.gif'
+      'bundle': 'assets/heroes/anim/GorillaGabe.gif'
     };
 
     const foilClasses = {
       'common': 'foil-common',
       'rare': 'foil-rare',
       'exotic': 'foil-exotic',
-      'bundle': 'foil-bundle',
-      'hero-draft': 'foil-hero'
+      'bundle': 'foil-bundle'
     };
 
     container.innerHTML = this.packs.map(pack => {
       const isFeatured = pack.id === 'exotic' || pack.id === 'bundle';
-      const badgeClass = pack.id === 'exotic' ? 'exotic' : (pack.id === 'bundle' ? 'bundle' : (pack.id === 'hero-draft' ? 'draft' : ''));
+      const badgeClass = pack.id === 'exotic' ? 'exotic' : (pack.id === 'bundle' ? 'bundle' : '');
       const mascot = packMascots[pack.id] || 'assets/heroes/anim/DeckMonk.gif';
       const foilClass = foilClasses[pack.id] || 'foil-common';
 
@@ -1295,14 +1282,6 @@ class PackSimulator {
       for (let i = 2; i < pack.cardCount; i++) {
         const r = rollRarity(pack.rates);
         cards.push(getRandomByRarity(r));
-      }
-    } else if (pack.id === 'hero-draft') {
-      // Pick random class for targeted synergy
-      const classes = ['Swordsman', 'Wild Mages', 'Goblins', 'Animal', 'Monster', 'Elixir'];
-      const targetClass = classes[Math.floor(Math.random() * classes.length)];
-      for (let i = 0; i < pack.cardCount; i++) {
-        const r = rollRarity(pack.rates);
-        cards.push(getRandomByRarity(r, i < 5 ? targetClass : null));
       }
     } else {
       // Standard Common & Rare packs

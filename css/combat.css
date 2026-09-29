@@ -579,9 +579,9 @@
 }
 
 .combat-end-turn-btn {
-  background: var(--gold-primary);
-  border: 2px solid #000;
-  color: #1a0f00;
+  background: #f59e0b !important;
+  border: 2px solid #000 !important;
+  color: #000 !important;
   font-family: var(--font-pixel);
   font-weight: 700;
   font-size: 0.72rem;
@@ -597,8 +597,17 @@
   letter-spacing: 0.06em;
 }
 
+.combat-end-turn-btn span,
+.combat-end-turn-btn .btn-text,
+.combat-end-turn-btn .btn-sword,
+.combat-end-turn-btn .btn-arrow {
+  color: #000 !important;
+  font-weight: 700;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
+}
+
 .combat-end-turn-btn:hover:not(:disabled) {
-  background: #fde047;
+  background: #fde047 !important;
   box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #78350f, 4px 4px 0 #000;
   transform: translate(-1px, -1px);
 }
@@ -609,11 +618,19 @@
 }
 
 .combat-end-turn-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.65;
+  background: #334155 !important;
+  color: #94a3b8 !important;
   cursor: not-allowed;
   transform: none;
   box-shadow: 2px 2px 0 #000;
   filter: grayscale(0.8);
+}
+
+.combat-end-turn-btn:disabled span,
+.combat-end-turn-btn:disabled .btn-text {
+  color: #94a3b8 !important;
+  text-shadow: none;
 }
 
 /* Combat Hand Shelf */

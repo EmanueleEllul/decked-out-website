@@ -798,6 +798,31 @@
   .deck-tray-column {
     position: static !important;
   }
+  /* Contain deck vault column within page width */
+  .deck-vault-column {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  /* Filter pill rows: horizontal scroll within their row, no page overflow */
+  .deck-filter-pills-row {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.25rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .deck-filter-pills-row::-webkit-scrollbar {
+    display: none;
+  }
+  .deck-filter-pills-row .filter-pill {
+    flex-shrink: 0;
+  }
+  /* Deckbuilder workbench must not cause page overflow */
+  .deckbuilder-workbench {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -840,4 +865,56 @@
     min-height: 44px;
     box-sizing: border-box;
   }
+
+  /* Section header buttons — wrap vertically on small screens */
+  .section-header {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .section-header > div[style*="display: flex"] {
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+  .section-header .btn {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    justify-content: center !important;
+    font-size: 0.65rem !important;
+    padding: 0.5rem 0.6rem !important;
+  }
+
+  /* Deck filter pill rows — prevent horizontal overflow leaking */
+  .deck-filter-pills-row {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding-bottom: 0.2rem !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .deck-filter-pills-row::-webkit-scrollbar {
+    display: none !important;
+  }
+  .deck-filter-pills-row .vault-tip {
+    flex-shrink: 0 !important;
+  }
+
+  /* Vault column must not overflow */
+  .deck-vault-column {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  /* Analytics chips — 3 per row on small phones */
+  .deck-synergy-matrix {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.3rem !important;
+  }
+  .synergy-stat-chip .chip-label {
+    font-size: 0.58rem !important;
+  }
+
+
 }

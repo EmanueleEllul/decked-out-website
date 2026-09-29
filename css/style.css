@@ -83,6 +83,7 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
+  overflow-x: hidden;
   cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAjElEQVR4nOWVwQrDMAxDZdP//+U3tiaQpe3COus0QwixQS9SDpEkZKxsO1YAYIPkdMYGYHfhdYAhqrzoYwNQHFWeNSujysUcG6Aqqvw0rIhqFVEvbAB+jGq7GkTEgSXp0PzKwVO0Cw83j2HpNqAJv4QmCHeE3wCDeHll22fxMhexmNPfwukS97+t/64HbAI0FtEn9u0AAAAASUVORK5CYII=") 0 0, auto;
 }
 
@@ -6193,6 +6194,8 @@ p, span, a, li, td, th, input, select, button {
   }
   .heroes-roster-column {
     gap: 0.4rem !important;
+    /* Prevent the horizontal scroll shelf from overflowing the page */
+    overflow: hidden !important;
   }
   .heroes-roster-list {
     display: flex !important;
@@ -6204,6 +6207,9 @@ p, span, a, li, td, th, input, select, button {
     gap: 0.5rem !important;
     padding: 0.2rem 0.2rem 0.6rem 0.2rem !important;
     scrollbar-width: thin !important;
+    /* Contain within page width */
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
   .hero-roster-card {
     flex: 0 0 155px !important;
@@ -6227,6 +6233,23 @@ p, span, a, li, td, th, input, select, button {
   .hero-stats-matrix {
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 0.4rem !important;
+  }
+  /* Hero detail card — remove overflow-causing outline on mobile */
+  .hero-detail-card {
+    outline: none !important;
+    box-shadow: 4px 4px 0 #000 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .hero-detail-top {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+  }
+  .hero-avatar-display {
+    width: 96px !important;
+    height: 96px !important;
+    box-shadow: 3px 3px 0 #000 !important;
   }
 
   /* Zero Horizontal Overflow on Feature Grids */

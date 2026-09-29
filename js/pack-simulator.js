@@ -103,7 +103,12 @@ class PackSimulator {
       const savedOpened = localStorage.getItem('decked_packs_opened');
       if (savedOpened !== null) this.packsOpened = parseInt(savedOpened, 10);
       const savedSupply = localStorage.getItem('decked_last_supply_drop');
-      if (savedSupply !== null) this.lastSupplyDrop = parseInt(savedSupply, 10);
+      if (savedSupply !== null) {
+        const parsed = parseInt(savedSupply, 10);
+        if (!isNaN(parsed) && parsed > 0) {
+          this.lastSupplyDrop = parsed;
+        }
+      }
 
       const savedCol = localStorage.getItem('decked_collection');
       if (savedCol) {
@@ -128,8 +133,8 @@ class PackSimulator {
         localStorage.setItem('decked_gold', this.gold);
         localStorage.setItem('decked_packs_opened', this.packsOpened);
         localStorage.setItem('decked_collection', JSON.stringify(this.collection));
-        if (this.lastSupplyDrop) {
-          localStorage.setItem('decked_last_supply_drop', this.lastSupplyDrop);
+        if (this.lastSupplyDrop && this.lastSupplyDrop > 0) {
+          localStorage.setItem('decked_last_supply_drop', this.lastSupplyDrop.toString());
         }
       }
     } catch (e) {}
@@ -139,13 +144,18 @@ class PackSimulator {
   }
 
   init() {
+    // Immediately display currencies, bind actions, and enforce cooldown without waiting for card data
+    this.updateCurrencyDisplays();
+    this.bindEvents();
+    this.updateSupplyDropUi();
+    this.initSupplyDropTicker();
+
     this.ensureCards(() => {
       this.renderPackShelf();
       this.renderBinderGrid();
-      this.bindEvents();
       this.updateCurrencyDisplays();
       this.updateBinderProgress();
-      this.initSupplyDropTicker();
+      this.updateSupplyDropUi();
     });
   }
 
@@ -170,11 +180,18 @@ class PackSimulator {
     const supplyBtn = document.getElementById('claim-supply-drop-btn');
     if (!supplyBtn) return;
 
+    let savedTime = 0;
+    try {
+      const stored = localStorage.getItem('decked_last_supply_drop');
+      if (stored) savedTime = parseInt(stored, 10);
+    } catch (e) {}
+
+    const lastDrop = Math.max(this.lastSupplyDrop || 0, isNaN(savedTime) ? 0 : savedTime);
     const COOLDOWN_MS = 24 * 60 * 60 * 1000; // 24 hours
     const now = Date.now();
-    const elapsed = now - (this.lastSupplyDrop || 0);
+    const elapsed = now - lastDrop;
 
-    if (this.lastSupplyDrop && elapsed < COOLDOWN_MS) {
+    if (lastDrop > 0 && elapsed < COOLDOWN_MS) {
       const remainingMs = COOLDOWN_MS - elapsed;
       const hours = Math.floor(remainingMs / (1000 * 60 * 60));
       const minutes = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60));
@@ -196,21 +213,39 @@ class PackSimulator {
   claimSupplyDrop() {
     const COOLDOWN_MS = 24 * 60 * 60 * 1000;
     const now = Date.now();
-    const elapsed = now - (this.lastSupplyDrop || 0);
 
-    if (this.lastSupplyDrop && elapsed < COOLDOWN_MS) {
+    // Check directly against localStorage to guard across tabs or refreshes
+    let savedTime = 0;
+    try {
+      const stored = localStorage.getItem('decked_last_supply_drop');
+      if (stored) savedTime = parseInt(stored, 10);
+    } catch (e) {}
+
+    const lastDrop = Math.max(this.lastSupplyDrop || 0, isNaN(savedTime) ? 0 : savedTime);
+    const elapsed = now - lastDrop;
+
+    if (lastDrop > 0 && elapsed < COOLDOWN_MS) {
       const remainingMs = COOLDOWN_MS - elapsed;
       const hours = Math.floor(remainingMs / (1000 * 60 * 60));
       const minutes = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((remainingMs % (1000 * 60)) / 1000);
       if (window.showToast) {
-        window.showToast(`⏳ Daily Drop already claimed! Next drop ready in ${hours}h ${minutes}m.`, 'warning');
+        window.showToast(`⏳ Daily Drop already claimed! Next drop ready in ${hours}h ${minutes}m ${seconds}s.`, 'warning');
       }
       if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
+      this.lastSupplyDrop = lastDrop;
+      this.updateSupplyDropUi();
       return;
     }
 
+    // Award +500 gems and enforce cooldown atomically
     this.lastSupplyDrop = now;
     this.gems += 500;
+    try {
+      localStorage.setItem('decked_last_supply_drop', now.toString());
+      localStorage.setItem('decked_gems', this.gems.toString());
+    } catch (e) {}
+
     this.saveState();
     this.bumpCurrency('gems');
     this.updateSupplyDropUi();
@@ -228,11 +263,14 @@ class PackSimulator {
   }
 
   bindEvents() {
+    if (this.eventsBound) return;
+    this.eventsBound = true;
+
     // Free Gems / Supply Drop Button
     const supplyBtn = document.getElementById('claim-supply-drop-btn');
-    if (supplyBtn && (!supplyBtn.dataset || !supplyBtn.dataset.bound)) {
-      if (supplyBtn.dataset) supplyBtn.dataset.bound = 'true';
-      supplyBtn.addEventListener('click', () => {
+    if (supplyBtn) {
+      supplyBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         this.claimSupplyDrop();
       });
     }

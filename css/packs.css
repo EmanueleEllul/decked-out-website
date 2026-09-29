@@ -107,7 +107,7 @@
   box-shadow: 2px 2px 0 #000 !important;
   cursor: not-allowed !important;
   transform: none !important;
-  pointer-events: auto;
+  pointer-events: none !important;
 }
 
 /* --- Section Navigation Switcher (Shop vs Binder) --- */

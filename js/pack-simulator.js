@@ -90,6 +90,7 @@ class PackSimulator {
 
   loadState() {
     try {
+      if (typeof localStorage === 'undefined') return;
       const savedGems = localStorage.getItem('decked_gems');
       if (savedGems !== null) this.gems = parseInt(savedGems, 10);
       const savedGold = localStorage.getItem('decked_gold');
@@ -115,10 +116,12 @@ class PackSimulator {
 
   saveState() {
     try {
-      localStorage.setItem('decked_gems', this.gems);
-      localStorage.setItem('decked_gold', this.gold);
-      localStorage.setItem('decked_packs_opened', this.packsOpened);
-      localStorage.setItem('decked_collection', JSON.stringify(this.collection));
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('decked_gems', this.gems);
+        localStorage.setItem('decked_gold', this.gold);
+        localStorage.setItem('decked_packs_opened', this.packsOpened);
+        localStorage.setItem('decked_collection', JSON.stringify(this.collection));
+      }
     } catch (e) {}
 
     this.updateCurrencyDisplays();
@@ -155,8 +158,8 @@ class PackSimulator {
   bindEvents() {
     // Free Gems / Supply Drop Button
     const supplyBtn = document.getElementById('claim-supply-drop-btn');
-    if (supplyBtn && !supplyBtn.dataset.bound) {
-      supplyBtn.dataset.bound = 'true';
+    if (supplyBtn && (!supplyBtn.dataset || !supplyBtn.dataset.bound)) {
+      if (supplyBtn.dataset) supplyBtn.dataset.bound = 'true';
       supplyBtn.addEventListener('click', () => {
         this.gems += 500;
         this.saveState();
@@ -360,6 +363,10 @@ class PackSimulator {
   renderPackShelf() {
     const container = document.getElementById('packs-shelf-grid');
     if (!container) return;
+
+    if (!this.packs || this.packs.length === 0) {
+      this.initDefaultPacks();
+    }
 
     const packMascots = {
       'common': 'assets/heroes/anim/Goblin.gif',
@@ -628,7 +635,7 @@ class PackSimulator {
     shelf.innerHTML = this.currentOpenedCards.map((card, idx) => {
       const isNew = this.collection[card.id] === 1;
       const auraClass = auraClasses[card.rarity] || 'aura-common';
-      const cardHTML = CompendiumManager.generateCardHTML ? CompendiumManager.generateCardHTML(card) : `<div class="game-card"><h3>${card.name}</h3></div>`;
+      const cardHTML = this.generateCardHTML(card);
 
       return `
         <div class="pack-flip-card" data-index="${idx}">
@@ -770,11 +777,37 @@ class PackSimulator {
     if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
     content.innerHTML = `
       <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
-        ${CompendiumManager.generateCardHTML(card)}
+        ${this.generateCardHTML(card)}
       </div>
     `;
     modal.classList.add('active');
     modal.classList.add('open');
+  }
+
+  generateCardHTML(card) {
+    if (!card) return '';
+    if (typeof window !== 'undefined' && window.CompendiumManager && typeof window.CompendiumManager.generateCardHTML === 'function') {
+      return window.CompendiumManager.generateCardHTML(card);
+    }
+    if (typeof CompendiumManager !== 'undefined' && typeof CompendiumManager.generateCardHTML === 'function') {
+      return CompendiumManager.generateCardHTML(card);
+    }
+    if (typeof window !== 'undefined' && typeof window.generateCardHTML === 'function') {
+      return window.generateCardHTML(card);
+    }
+    return `
+      <div class="game-card rarity-${(card.rarity || 'common').toLowerCase()}">
+        <div class="card-top-bar">
+          <div class="card-cost-gem">${card.cost || 0}</div>
+          <div class="card-name-title">${card.name || 'Card'}</div>
+        </div>
+        <div class="card-image-box">
+          <img src="${card.image || card.staticImage || ''}" alt="${card.name || ''}" loading="lazy" />
+        </div>
+        <div class="card-desc-box"><p>${card.description || ''}</p></div>
+        <div class="card-footer-bar"><span>${card.code || ''}</span><span>${card.rarity || ''}</span></div>
+      </div>
+    `;
   }
 
   // Hardware-accelerated Celebratory Sparks
@@ -953,7 +986,7 @@ class PackSimulator {
         return `
           <div class="binder-card-slot" data-card-id="${card.id}" title="Click to view card details">
             <span class="binder-owned-qty">x${ownedCount}</span>
-            ${CompendiumManager.generateCardHTML ? CompendiumManager.generateCardHTML(card) : `<div>${card.name}</div>`}
+            ${this.generateCardHTML(card)}
           </div>
         `;
       } else {
@@ -964,7 +997,7 @@ class PackSimulator {
               <span class="binder-lock-code">${card.code}</span>
               <span style="font-family: var(--font-pixel); font-size: 0.6rem; color: #64748b; margin-top: 0.25rem;">${card.rarity}</span>
             </div>
-            ${CompendiumManager.generateCardHTML ? CompendiumManager.generateCardHTML(card) : `<div>${card.name}</div>`}
+            ${this.generateCardHTML(card)}
           </div>
         `;
       }
@@ -981,8 +1014,21 @@ class PackSimulator {
   }
 }
 
-// Global initialization
-window.addEventListener('DOMContentLoaded', () => {
-  window.packSimulator = new PackSimulator();
-  window.packSim = window.packSimulator; // backward-compatibility alias with combat-demo.js rewards
-});
+if (typeof window !== 'undefined') {
+  window.PackSimulator = PackSimulator;
+}
+
+function initPackSimulator() {
+  if (document.getElementById('packs-shelf-grid') && (!window.packSimulator || !document.getElementById('packs-shelf-grid').children.length)) {
+    window.packSimulator = new PackSimulator();
+    window.packSim = window.packSimulator;
+  }
+}
+
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPackSimulator);
+  } else {
+    initPackSimulator();
+  }
+}

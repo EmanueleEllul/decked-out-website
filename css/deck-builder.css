@@ -677,28 +677,7 @@
   animation: fadeIn 0.12s ease;
 }
 
-/* Footer */
-.site-footer {
-  border-top: 1px solid var(--border-subtle);
-  background: rgba(10, 12, 16, 0.95);
-  padding: 3rem 1.5rem 2rem;
-  margin-top: 4rem;
-}
 
-.footer-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.footer-credits p {
-  color: var(--text-faint);
-  font-size: 0.67rem;
-}
 
 /* Toast Notification */
 .toast-container {

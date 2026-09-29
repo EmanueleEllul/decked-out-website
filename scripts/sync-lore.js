@@ -624,33 +624,76 @@ function generateLoreHtml(volumes) {
     <!-- Site Footer -->
     <footer class="site-footer">
       <div class="footer-inner">
-        <div class="brand-wrapper">
-          <div class="brand-icon">
-            <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
+        <div class="footer-grid">
+          <!-- Brand & Community Column -->
+          <div class="footer-col footer-col-brand">
+            <a href="index.html" class="footer-brand">
+              <div class="brand-icon">
+                <img src="assets/icon.png" alt="Decked Out Logo" class="brand-logo-img pixel-art" width="32" height="32" style="width: 32px; height: 32px; max-width: 32px; max-height: 32px; display: block;" />
+              </div>
+              <div class="brand-text">
+                <h2>DECKED OUT</h2>
+                <span>ROGUELIKE TCG</span>
+              </div>
+            </a>
+            <p class="footer-tagline">
+              Tactical roguelike deckbuilding RPG built with Godot 4.7 Forward+. Craft card synergies, explore the 3-act spire, and battle generational foes.
+            </p>
+            <div class="footer-community-box">
+              <span class="footer-community-title">Official Community</span>
+              <div class="footer-action-buttons">
+                <a href="https://discord.gg/aCPVFSYCFf" target="_blank" rel="noopener noreferrer" class="footer-btn footer-btn-discord" title="Join Official Decked Out Discord">
+                  <span>💬</span> Discord Server
+                </a>
+                <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" class="footer-btn footer-btn-steam" title="Wishlist Decked Out on Steam">
+                  <span>⭐</span> Wishlist on Steam
+                </a>
+              </div>
+            </div>
           </div>
-          <div class="brand-text">
-            <h1>DECKED OUT</h1>
-            <span>ROGUELIKE TCG</span>
+
+          <!-- Column 1: Compendium -->
+          <div class="footer-col">
+            <h3 class="footer-col-title">🃏 Compendium</h3>
+            <ul class="footer-nav-list">
+              <li><a href="cards.html" class="footer-nav-link">Cards Vault</a></li>
+              <li><a href="heroes.html" class="footer-nav-link">Hero Roster</a></li>
+              <li><a href="relics.html" class="footer-nav-link">Relics &amp; Artifacts</a></li>
+              <li><a href="mechanics.html" class="footer-nav-link">Combat Mechanics</a></li>
+              <li><a href="dungeon.html" class="footer-nav-link">Dungeon Spire</a></li>
+              <li><a href="lore.html" class="footer-nav-link active">Lore Codex</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 2: Play & Tools -->
+          <div class="footer-col">
+            <h3 class="footer-col-title">⚔️ Play &amp; Tools</h3>
+            <ul class="footer-nav-list">
+              <li><a href="index.html" class="footer-nav-link">Game Overview</a></li>
+              <li><a href="deck-builder.html" class="footer-nav-link">Deck Builder</a></li>
+              <li><a href="combat.html" class="footer-nav-link">Battle Test Arena</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Updates & Specs -->
+          <div class="footer-col">
+            <h3 class="footer-col-title">📍 Updates &amp; Info</h3>
+            <ul class="footer-nav-list">
+              <li><a href="events.html" class="footer-nav-link">Where's Next (Events)</a></li>
+              <li><a href="specs.html" class="footer-nav-link">Engine &amp; Tech Specs</a></li>
+            </ul>
           </div>
         </div>
 
-        <div class="footer-links">
-          <a href="index.html">Overview</a>
-          <a href="mechanics.html">Mechanics</a>
-          <a href="heroes.html">Heroes</a>
-          <a href="cards.html">Cards</a>
-          <a href="deck-builder.html">Deck Builder</a>
-          <a href="combat.html">Battle Test</a>
-          <a href="relics.html">Relics</a>
-          <a href="dungeon.html">Dungeon</a>
-          <a href="lore.html" class="active">Lore</a>
-          <a href="specs.html">Game Info</a>
-          <a href="https://store.steampowered.com/app/4298040/Decked_Out/" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Steam</a>
-        </div>
-
-        <div class="footer-credits">
-          <p>Decked Out — Built with Godot 4.7 Forward+.</p>
-          <p style="margin-top: 0.25rem;">Official Companion Website. All game assets &amp; characters &copy; Emanuele Ellul.</p>
+        <!-- Bottom Bar -->
+        <div class="footer-bottom-bar">
+          <div class="footer-credits">
+            <p>Decked Out — Built with <strong>Godot 4.7 Forward+</strong>. Official Companion Hub.</p>
+            <p style="margin-top: 0.25rem;">All game assets, card art &amp; soundtrack &copy; <strong>Emanuele Ellul</strong>.</p>
+          </div>
+          <a href="#top" class="footer-back-to-top" title="Back to top">
+            <span>▲ BACK TO TOP</span>
+          </a>
         </div>
       </div>
     </footer>

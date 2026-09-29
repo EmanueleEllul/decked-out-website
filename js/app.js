@@ -23,19 +23,7 @@ class AppController {
   }
 
   ensureNavLinks() {
-    // Legacy cache check: if page doesn't have events link in footer, add it
-    const footerLinks = document.querySelector('.footer-links');
-    if (footerLinks && !footerLinks.querySelector('a[href="events.html"]')) {
-      const specsA = footerLinks.querySelector('a[href="specs.html"]');
-      const eventsA = document.createElement('a');
-      eventsA.href = 'events.html';
-      eventsA.textContent = "Where's Next";
-      if (specsA) {
-        footerLinks.insertBefore(eventsA, specsA);
-      } else {
-        footerLinks.appendChild(eventsA);
-      }
-    }
+    // Modern footer already provides complete categorized navigation
   }
 
   bindNavigation() {
@@ -334,8 +322,8 @@ class AppController {
       if (newNav && curNav && newNav.innerHTML !== curNav.innerHTML) {
         curNav.innerHTML = newNav.innerHTML;
       }
-      const newFooter = doc.querySelector('.footer-links');
-      const curFooter = document.querySelector('.footer-links');
+      const newFooter = doc.querySelector('.site-footer');
+      const curFooter = document.querySelector('.site-footer');
       if (newFooter && curFooter && newFooter.innerHTML !== curFooter.innerHTML) {
         curFooter.innerHTML = newFooter.innerHTML;
       }
@@ -432,6 +420,18 @@ class AppController {
       const linkPage = linkHref.split('#')[0].split('/').pop() || 'index.html';
       if (linkPage === pageName) {
         link.classList.add('active');
+      }
+    });
+
+    // Update footer navigation links
+    document.querySelectorAll('.footer-nav-link').forEach(link => {
+      const linkHref = link.getAttribute('href');
+      if (!linkHref) return;
+      const linkPage = linkHref.split('#')[0].split('/').pop() || 'index.html';
+      if (linkPage === pageName) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
       }
     });
   }

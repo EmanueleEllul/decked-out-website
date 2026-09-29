@@ -767,6 +767,337 @@
   display: flex;
 }
 
+/* ===================================================================
+   PHASE 2A: 1-BY-1 SPOTLIGHT REVEAL
+   =================================================================== */
+.theatre-spotlight-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  animation: fadeInStage 0.25s ease-out;
+}
+
+@keyframes fadeInStage {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.theatre-summary-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInStage 0.3s ease-out;
+}
+
+/* Spotlight Header */
+.spotlight-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: #080b10;
+  border: 2px solid var(--border-subtle);
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 3px 3px 0 #000;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.spotlight-counter-box {
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.spotlight-counter-label {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.spotlight-counter-val {
+  color: #f59e0b;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.spotlight-counter-divider {
+  color: var(--text-muted);
+}
+
+.spotlight-progress-pips {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spotlight-pip {
+  width: 12px;
+  height: 12px;
+  background: #111827;
+  border: 2px solid #374151;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.spotlight-pip.completed {
+  background: #10b981;
+  border-color: #059669;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+}
+
+.spotlight-pip.active {
+  background: #f59e0b;
+  border-color: #fbbf24;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.9);
+  transform: scale(1.3);
+}
+
+.btn-skip-summary {
+  background: #080b10;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  font-family: var(--font-pixel);
+  font-size: 0.72rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 2px 2px 0 #000;
+}
+
+.btn-skip-summary:hover {
+  color: #fff;
+  border-color: #38bdf8;
+  background: #0f172a;
+  transform: translate(-1px, -1px);
+}
+
+/* 3D Spotlight Arena */
+.spotlight-stage-arena {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0 1.25rem 0;
+  min-height: 420px;
+}
+
+.spotlight-aura-glow {
+  position: absolute;
+  width: 380px;
+  height: 500px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  transition: background 0.5s ease, opacity 0.4s ease;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.2) 0%, transparent 70%);
+  animation: pulseAura 2s infinite alternate;
+}
+
+@keyframes pulseAura {
+  0% { transform: scale(0.94); opacity: 0.6; }
+  100% { transform: scale(1.08); opacity: 0.95; }
+}
+
+.spotlight-card-slot {
+  position: relative;
+  z-index: 5;
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Spotlight Card Sizing & Transitions */
+.pack-flip-card.spotlight-card {
+  width: 260px;
+  height: 395px;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pack-flip-card.spotlight-card:not(.is-flipped):hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+.pack-flip-card.spotlight-card.card-enter {
+  animation: slideCardIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes slideCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Spotlight Action Controls */
+.spotlight-action-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  margin: 0.5rem 0 1.25rem 0;
+}
+
+.btn-spotlight-main {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+  color: #000;
+  font-family: var(--font-pixel);
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.85rem 2.2rem;
+  border: 3px solid #000;
+  box-shadow: 5px 5px 0 #000;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
+}
+
+.btn-spotlight-main:hover {
+  background: linear-gradient(180deg, #fcd34d 0%, #f59e0b 100%);
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 #000;
+}
+
+.btn-spotlight-main:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.key-badge {
+  background: #000;
+  color: #fff;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid #555;
+  border-bottom: 2px solid #222;
+  font-family: monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  box-shadow: 1px 1px 0 rgba(0,0,0,0.6);
+  border-radius: 2px;
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+.spotlight-keyboard-hint {
+  font-family: var(--font-pixel);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.spotlight-keyboard-hint kbd {
+  background: #111827;
+  border: 1px solid #374151;
+  border-bottom: 2px solid #000;
+  padding: 0.15rem 0.4rem;
+  color: #f3f4f6;
+  font-size: 0.7rem;
+  font-family: monospace;
+  font-weight: 700;
+}
+
+/* Spotlight Mini Tray */
+.spotlight-tray-wrap {
+  width: 100%;
+  background: rgba(8, 11, 16, 0.85);
+  border: 1px solid var(--border-subtle);
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.6);
+}
+
+.spotlight-tray-title {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-align: left;
+}
+
+.spotlight-tray-items {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+  min-height: 40px;
+  align-items: center;
+}
+
+.tray-card-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #0d1420;
+  border: 1px solid #1f2937;
+  padding: 0.3rem 0.65rem;
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  color: #fff;
+  white-space: nowrap;
+  animation: popChip 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 2px 2px 0 #000;
+}
+
+@keyframes popChip {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.tray-card-chip.rarity-common { border-left: 3px solid var(--rarity-common); }
+.tray-card-chip.rarity-uncommon { border-left: 3px solid var(--rarity-uncommon); }
+.tray-card-chip.rarity-rare { border-left: 3px solid var(--rarity-rare); }
+.tray-card-chip.rarity-epic { border-left: 3px solid var(--rarity-epic); }
+.tray-card-chip.rarity-legendary { border-left: 3px solid var(--rarity-legendary); }
+.tray-card-chip.rarity-exotic { border-left: 3px solid var(--rarity-exotic); }
+
+.tray-chip-icon {
+  font-size: 0.85rem;
+}
+
+.tray-chip-name {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 600px) {
+  .pack-flip-card.spotlight-card {
+    width: 220px;
+    height: 340px;
+  }
+  .spotlight-stage-arena {
+    min-height: 360px;
+  }
+  .btn-spotlight-main {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
 .cards-stage-toolbar {
   width: 100%;
   display: flex;

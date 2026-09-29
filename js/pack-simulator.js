@@ -23,6 +23,9 @@ class PackSimulator {
     this.binderFilter = 'all'; // 'all' | 'owned' | 'missing'
     this.binderClass = 'all';
     this.binderRarity = 'all';
+    this.currentCardIndex = 0;
+    this.isCurrentCardFlipped = false;
+    this.theatrePhase = 'closed'; // 'closed' | 'rip' | 'single' | 'summary'
     this.lastSupplyDrop = 0;
     this.supplyDropInterval = null;
 
@@ -306,6 +309,18 @@ class PackSimulator {
       ripActionBtn.addEventListener('click', () => this.executeTearSequence());
     }
 
+    // 1-by-1 Spotlight Action (SPACE or click button)
+    const spotlightActionBtn = document.getElementById('spotlight-action-btn');
+    if (spotlightActionBtn) {
+      spotlightActionBtn.addEventListener('click', () => this.handleSpotlightAction());
+    }
+
+    // Skip 1-by-1 directly to summary
+    const skipSummaryBtn = document.getElementById('theatre-skip-summary-btn');
+    if (skipSummaryBtn) {
+      skipSummaryBtn.addEventListener('click', () => this.skipToSummary());
+    }
+
     const revealAllBtn = document.getElementById('theatre-reveal-all-btn');
     if (revealAllBtn) {
       revealAllBtn.addEventListener('click', () => this.revealAllCards());
@@ -362,8 +377,26 @@ class PackSimulator {
       });
     }
 
-    // Keyboard ESC
+    // Keyboard ESC & SPACE Navigation
     document.addEventListener('keydown', (e) => {
+      // 1. SPACEBAR: Open pack, flip card 1-by-1, advance to next card
+      if (e.key === ' ' || e.code === 'Space') {
+        const theatreModal = document.getElementById('pack-theatre-modal');
+        if (theatreModal && theatreModal.classList.contains('active')) {
+          // If typing in input / select, let default behavior happen
+          if (e.target && ['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+
+          // If detail modal or odds modal is open, ignore space
+          if (oddsModal && oddsModal.classList.contains('active')) return;
+          if (cardModal && (cardModal.classList.contains('active') || cardModal.classList.contains('open'))) return;
+
+          e.preventDefault();
+          this.handleSpacebarAction();
+          return;
+        }
+      }
+
+      // 2. ESC: Close modals
       if (e.key === 'Escape') {
         if (oddsModal && oddsModal.classList.contains('active')) {
           oddsModal.classList.remove('active');
@@ -375,6 +408,18 @@ class PackSimulator {
         }
       }
     });
+  }
+
+  handleSpacebarAction() {
+    if (this.theatrePhase === 'rip') {
+      this.executeTearSequence();
+    } else if (this.theatrePhase === 'single') {
+      this.handleSpotlightAction();
+    } else if (this.theatrePhase === 'summary') {
+      // Space on summary screen finishes & collects pulls
+      const doneBtn = document.getElementById('theatre-done-btn');
+      if (doneBtn) doneBtn.click();
+    }
   }
 
   updateCurrencyDisplays() {
@@ -592,6 +637,9 @@ class PackSimulator {
     // Generate pulled cards from clean Series 1 pool
     this.currentOpenedCards = this.rollCardsForPack(pack);
     this.revealedCount = 0;
+    this.currentCardIndex = 0;
+    this.isCurrentCardFlipped = false;
+    this.theatrePhase = 'rip';
 
     // Track duplicate scrap gain
     let scrapGained = 0;
@@ -617,15 +665,15 @@ class PackSimulator {
     const modal = document.getElementById('pack-theatre-modal');
     const ripArena = document.getElementById('theatre-rip-arena');
     const revealStage = document.getElementById('theatre-reveal-stage');
+    const spotlightMode = document.getElementById('theatre-spotlight-mode');
+    const summaryMode = document.getElementById('theatre-summary-mode');
     const theatreTitle = document.getElementById('theatre-pack-title');
     const theatrePackBody = document.getElementById('theatre-pack-body');
-    const summaryText = document.getElementById('cards-stage-summary-text');
     const openAnotherBtn = document.getElementById('theatre-open-another-btn');
 
     if (!modal) return;
 
     if (theatreTitle) theatreTitle.textContent = `${pack.name}`;
-    if (summaryText) summaryText.innerHTML = `Cracking <strong>${pack.name}</strong> • ${pack.cardCount} Cards Loaded`;
     if (openAnotherBtn) openAnotherBtn.innerHTML = `<span>Open Another</span> <span style="background: rgba(0,0,0,0.4); padding: 0.1rem 0.4rem; font-size: 0.72rem;">💎 ${pack.cost}</span>`;
 
     // Apply foil theme to the centerpiece pack
@@ -642,9 +690,11 @@ class PackSimulator {
       if (nameEl) nameEl.textContent = pack.name;
     }
 
-    // Reset view phases: show tear arena, hide card reveal shelf
+    // Reset view phases: show tear arena, hide card reveal stage
     if (ripArena) ripArena.style.display = 'flex';
     if (revealStage) revealStage.classList.remove('active');
+    if (spotlightMode) spotlightMode.style.display = 'flex';
+    if (summaryMode) summaryMode.style.display = 'none';
 
     const tearStrip = document.getElementById('theatre-tear-strip');
     if (tearStrip) tearStrip.style.display = 'flex';
@@ -654,6 +704,7 @@ class PackSimulator {
   }
 
   executeTearSequence() {
+    if (this.theatrePhase !== 'rip') return;
     const theatrePackBody = document.getElementById('theatre-pack-body');
     const tearStrip = document.getElementById('theatre-tear-strip');
     const ripArena = document.getElementById('theatre-rip-arena');
@@ -672,22 +723,86 @@ class PackSimulator {
 
     this.triggerFoilSparks();
 
-    // 3. Transition to Reveal Stage after 350ms
+    // 3. Transition to 1-by-1 Spotlight Reveal Stage after 350ms
     setTimeout(() => {
       if (ripArena) ripArena.style.display = 'none';
       if (revealStage) revealStage.classList.add('active');
-      this.populateRevealShelf();
+      this.theatrePhase = 'single';
+      this.startSpotlightOpening();
     }, 350);
   }
 
-  populateRevealShelf() {
-    const shelf = document.getElementById('theatre-opened-grid');
-    const revealAllBtn = document.getElementById('theatre-reveal-all-btn');
-    if (!shelf) return;
+  startSpotlightOpening() {
+    this.currentCardIndex = 0;
+    this.isCurrentCardFlipped = false;
+    this.theatrePhase = 'single';
 
-    if (revealAllBtn) revealAllBtn.style.display = 'inline-flex';
+    const spotlightMode = document.getElementById('theatre-spotlight-mode');
+    const summaryMode = document.getElementById('theatre-summary-mode');
+    if (spotlightMode) spotlightMode.style.display = 'flex';
+    if (summaryMode) summaryMode.style.display = 'none';
 
-    // Rarity rank for auras
+    const totalEl = document.getElementById('spotlight-total-count');
+    if (totalEl) totalEl.textContent = this.currentOpenedCards.length;
+
+    // Render progress pips
+    const pipsContainer = document.getElementById('spotlight-progress-pips');
+    if (pipsContainer) {
+      pipsContainer.innerHTML = this.currentOpenedCards.map((_, i) => `
+        <div class="spotlight-pip ${i === 0 ? 'active' : ''}" data-pip="${i}"></div>
+      `).join('');
+    }
+
+    // Clear tray
+    const trayItems = document.getElementById('spotlight-tray-items');
+    if (trayItems) trayItems.innerHTML = '';
+
+    this.renderSpotlightCard();
+  }
+
+  renderSpotlightCard() {
+    if (this.currentCardIndex >= this.currentOpenedCards.length) {
+      this.showSummaryStage();
+      return;
+    }
+
+    this.isCurrentCardFlipped = false;
+    const card = this.currentOpenedCards[this.currentCardIndex];
+
+    // Update Counter
+    const currIdxEl = document.getElementById('spotlight-current-idx');
+    if (currIdxEl) currIdxEl.textContent = this.currentCardIndex + 1;
+
+    // Update Pips
+    const pips = document.querySelectorAll('.spotlight-pip');
+    pips.forEach((pip, i) => {
+      pip.classList.remove('completed', 'active');
+      if (i < this.currentCardIndex) pip.classList.add('completed');
+      else if (i === this.currentCardIndex) pip.classList.add('active');
+    });
+
+    // Update Action Button
+    const actionLabel = document.getElementById('spotlight-action-label');
+    if (actionLabel) actionLabel.textContent = 'REVEAL CARD';
+
+    // Rarity aura glow behind the card
+    const auraGlow = document.getElementById('spotlight-aura-glow');
+    if (auraGlow) {
+      const auraGlowColors = {
+        'Common': 'radial-gradient(circle, rgba(148, 163, 184, 0.25) 0%, transparent 70%)',
+        'Uncommon': 'radial-gradient(circle, rgba(34, 197, 94, 0.35) 0%, transparent 70%)',
+        'Rare': 'radial-gradient(circle, rgba(59, 130, 246, 0.45) 0%, transparent 70%)',
+        'Epic': 'radial-gradient(circle, rgba(168, 85, 247, 0.55) 0%, transparent 70%)',
+        'Legendary': 'radial-gradient(circle, rgba(245, 158, 11, 0.65) 0%, transparent 70%)',
+        'Exotic': 'radial-gradient(circle, rgba(0, 229, 255, 0.75) 0%, rgba(236, 72, 153, 0.35) 45%, transparent 70%)'
+      };
+      auraGlow.style.background = auraGlowColors[card.rarity] || auraGlowColors['Common'];
+    }
+
+    // Render single flip card in the spotlight slot
+    const slot = document.getElementById('spotlight-card-slot');
+    if (!slot) return;
+
     const auraClasses = {
       'Common': 'aura-common',
       'Uncommon': 'aura-uncommon',
@@ -697,58 +812,61 @@ class PackSimulator {
       'Exotic': 'aura-exotic'
     };
 
-    shelf.innerHTML = this.currentOpenedCards.map((card, idx) => {
-      const isNew = this.collection[card.id] === 1;
-      const auraClass = auraClasses[card.rarity] || 'aura-common';
-      const cardHTML = this.generateCardHTML(card);
+    const isNew = this.collection[card.id] === 1;
+    const auraClass = auraClasses[card.rarity] || 'aura-common';
+    const cardHTML = this.generateCardHTML(card);
 
-      return `
-        <div class="pack-flip-card" data-index="${idx}">
-          <div class="pack-flip-inner">
-            <!-- Back Face (Suspenseful Mystery Back with Rarity Aura) -->
-            <div class="pack-card-face pack-face-back ${auraClass}">
-              <div class="card-back-core">
-                <div class="card-back-gem">🃏</div>
-                <span class="card-back-title">DECKED OUT</span>
-                <span class="card-back-hint">CLICK TO REVEAL</span>
-              </div>
-            </div>
-
-            <!-- Front Face (Revealed Card) -->
-            <div class="pack-card-face pack-face-front">
-              ${isNew ? '<span class="pack-tag-new">NEW!</span>' : '<span class="pack-tag-dup">DUP</span>'}
-              ${cardHTML}
+    slot.innerHTML = `
+      <div id="active-spotlight-card" class="pack-flip-card spotlight-card card-enter">
+        <div class="pack-flip-inner">
+          <!-- Back Face (Suspenseful Mystery Back with Rarity Aura) -->
+          <div class="pack-card-face pack-face-back ${auraClass}">
+            <div class="card-back-core">
+              <div class="card-back-gem">🃏</div>
+              <span class="card-back-title">DECKED OUT</span>
+              <span class="card-back-hint">PRESS SPACE OR CLICK</span>
             </div>
           </div>
-        </div>
-      `;
-    }).join('');
 
-    // Attach click listeners to flip cards individually
-    shelf.querySelectorAll('.pack-flip-card').forEach(cardEl => {
-      cardEl.addEventListener('click', () => {
-        const idx = parseInt(cardEl.dataset.index, 10);
-        if (cardEl.classList.contains('is-flipped')) {
-          // Card already flipped: open card inspector modal!
-          const card = this.currentOpenedCards[idx];
-          if (card) this.inspectCard(card);
-        } else {
-          this.revealCard(cardEl, idx, false);
-        }
-      });
-    });
+          <!-- Front Face (Revealed Card) -->
+          <div class="pack-card-face pack-face-front">
+            ${isNew ? '<span class="pack-tag-new">NEW!</span>' : '<span class="pack-tag-dup">DUP</span>'}
+            ${cardHTML}
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Click on the card itself triggers flip / advance
+    const activeCard = document.getElementById('active-spotlight-card');
+    if (activeCard) {
+      activeCard.addEventListener('click', () => this.handleSpotlightAction());
+    }
   }
 
-  revealCard(cardEl, index, isBatch = false) {
-    if (cardEl.classList.contains('is-flipped')) return;
+  handleSpotlightAction() {
+    if (!this.isCurrentCardFlipped) {
+      this.revealCurrentCard();
+    } else {
+      this.advanceToNextCard();
+    }
+  }
 
-    cardEl.classList.add('is-flipped');
+  revealCurrentCard() {
+    if (this.isCurrentCardFlipped) return;
+
+    const activeCard = document.getElementById('active-spotlight-card');
+    if (activeCard) {
+      activeCard.classList.add('is-flipped');
+    }
+    this.isCurrentCardFlipped = true;
     this.revealedCount++;
 
-    const card = this.currentOpenedCards[index];
+    const card = this.currentOpenedCards[this.currentCardIndex];
+    if (!card) return;
 
-    // Audio and VFX
-    if (!isBatch && window.audioMgr) {
+    // Audio & Celebratory Fanfares
+    if (window.audioMgr) {
       if (card.rarity === 'Exotic') {
         window.audioMgr.playFanfare('Exotic');
         this.triggerCelebration('Exotic');
@@ -763,54 +881,55 @@ class PackSimulator {
       }
     }
 
-    if (this.revealedCount >= this.currentOpenedCards.length) {
-      this.onAllCardsRevealed();
+    // Update Action Button Text
+    const actionLabel = document.getElementById('spotlight-action-label');
+    if (actionLabel) {
+      if (this.currentCardIndex < this.currentOpenedCards.length - 1) {
+        actionLabel.textContent = 'NEXT CARD ➔';
+      } else {
+        actionLabel.textContent = 'VIEW SUMMARY ➔';
+      }
+    }
+
+    // Add card chip to mini tray
+    const trayItems = document.getElementById('spotlight-tray-items');
+    if (trayItems) {
+      const chip = document.createElement('div');
+      chip.className = `tray-card-chip rarity-${(card.rarity || 'common').toLowerCase()}`;
+      chip.innerHTML = `
+        <span class="tray-chip-icon">🃏</span>
+        <span class="tray-chip-name">${card.name}</span>
+      `;
+      chip.title = `${card.name} (${card.rarity})`;
+      chip.addEventListener('click', () => this.inspectCard(card));
+      trayItems.appendChild(chip);
+      trayItems.scrollLeft = trayItems.scrollWidth;
     }
   }
 
-  revealAllCards() {
-    const unrevealed = document.querySelectorAll('.pack-flip-card:not(.is-flipped)');
-    if (unrevealed.length === 0) return;
-
-    const revealAllBtn = document.getElementById('theatre-reveal-all-btn');
-    if (revealAllBtn) revealAllBtn.style.display = 'none';
-
-    // Find highest rarity in this pack
-    let highestRarity = 'Common';
-    const rarityRank = { 'Common': 1, 'Uncommon': 2, 'Rare': 3, 'Epic': 4, 'Legendary': 5, 'Exotic': 6 };
-
-    this.currentOpenedCards.forEach(c => {
-      if ((rarityRank[c.rarity] || 1) > (rarityRank[highestRarity] || 1)) {
-        highestRarity = c.rarity;
-      }
-    });
-
-    if (window.audioMgr) window.audioMgr.playSFX('cardPlay');
-
-    // Cascade flip each card smoothly with 70ms stagger
-    unrevealed.forEach((cardEl, i) => {
-      setTimeout(() => {
-        const idx = parseInt(cardEl.dataset.index, 10);
-        this.revealCard(cardEl, idx, true);
-
-        // On the final card, play grand fanfare for highest rarity pull
-        if (i === unrevealed.length - 1 && window.audioMgr) {
-          if (highestRarity === 'Exotic' || highestRarity === 'Legendary') {
-            window.audioMgr.playFanfare(highestRarity);
-            this.triggerCelebration(highestRarity);
-          } else if (highestRarity === 'Epic' || highestRarity === 'Rare') {
-            window.audioMgr.playSFX('goldGain');
-            this.triggerCelebration('Rare');
-          }
-          this.onAllCardsRevealed();
-        }
-      }, i * 75);
-    });
+  advanceToNextCard() {
+    if (this.currentCardIndex < this.currentOpenedCards.length - 1) {
+      this.currentCardIndex++;
+      if (window.audioMgr) window.audioMgr.playSFX('cardPlay');
+      this.renderSpotlightCard();
+    } else {
+      this.showSummaryStage();
+    }
   }
 
-  onAllCardsRevealed() {
-    const revealAllBtn = document.getElementById('theatre-reveal-all-btn');
-    if (revealAllBtn) revealAllBtn.style.display = 'none';
+  skipToSummary() {
+    this.showSummaryStage();
+  }
+
+  showSummaryStage() {
+    this.theatrePhase = 'summary';
+
+    const spotlightMode = document.getElementById('theatre-spotlight-mode');
+    const summaryMode = document.getElementById('theatre-summary-mode');
+    if (spotlightMode) spotlightMode.style.display = 'none';
+    if (summaryMode) summaryMode.style.display = 'flex';
+
+    this.populateSummaryGrid();
 
     const summaryText = document.getElementById('cards-stage-summary-text');
     if (summaryText) {
@@ -818,16 +937,52 @@ class PackSimulator {
       this.currentOpenedCards.forEach(c => {
         counts[c.rarity] = (counts[c.rarity] || 0) + 1;
       });
-
       const parts = Object.entries(counts).map(([r, n]) => `${n} ${r}`);
       summaryText.innerHTML = `✨ <strong>Pack Results:</strong> ${parts.join(', ')} • Added to Binder!`;
     }
+
+    if (window.audioMgr) {
+      window.audioMgr.playSFX('goldGain');
+    }
+  }
+
+  populateSummaryGrid() {
+    const shelf = document.getElementById('theatre-opened-grid');
+    if (!shelf) return;
+
+    shelf.innerHTML = this.currentOpenedCards.map((card, idx) => {
+      const isNew = this.collection[card.id] === 1;
+      const cardHTML = this.generateCardHTML(card);
+
+      return `
+        <div class="pack-flip-card is-flipped" data-index="${idx}">
+          <div class="pack-flip-inner">
+            <div class="pack-card-face pack-face-front">
+              ${isNew ? '<span class="pack-tag-new">NEW!</span>' : '<span class="pack-tag-dup">DUP</span>'}
+              ${cardHTML}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Clicking any card in the summary shelf opens the card inspector
+    shelf.querySelectorAll('.pack-flip-card').forEach(cardEl => {
+      cardEl.addEventListener('click', () => {
+        const idx = parseInt(cardEl.dataset.index, 10);
+        const card = this.currentOpenedCards[idx];
+        if (card) this.inspectCard(card);
+      });
+    });
   }
 
   closeTheatre() {
     const modal = document.getElementById('pack-theatre-modal');
     if (modal) modal.classList.remove('active');
+    this.theatrePhase = 'closed';
     this.currentOpenedCards = [];
+    this.currentCardIndex = 0;
+    this.isCurrentCardFlipped = false;
     this.updateBinderProgress();
     if (this.activeTab === 'binder') {
       this.renderBinderGrid();

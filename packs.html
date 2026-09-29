@@ -309,32 +309,86 @@
 
     <!-- Phase 2: Opened Cards Stage & 3D Hardware-Accelerated Reveals -->
     <div id="theatre-reveal-stage" class="cards-reveal-stage">
-      <div class="cards-stage-toolbar">
-        <div id="cards-stage-summary-text" class="cards-stage-summary-text">
-          Click cards individually to reveal, or trigger a cascade flip!
+      
+      <!-- SUB-PHASE A: 1-by-1 Spotlight Reveal Stage -->
+      <div id="theatre-spotlight-mode" class="theatre-spotlight-container">
+        <!-- Top status header -->
+        <div class="spotlight-header-bar">
+          <div class="spotlight-counter-box">
+            <span class="spotlight-counter-label">CARD</span>
+            <span id="spotlight-current-idx" class="spotlight-counter-val">1</span>
+            <span class="spotlight-counter-divider">/</span>
+            <span id="spotlight-total-count" class="spotlight-counter-val">5</span>
+          </div>
+
+          <div id="spotlight-progress-pips" class="spotlight-progress-pips">
+            <!-- Dynamically populated pips -->
+          </div>
+
+          <button id="theatre-skip-summary-btn" class="btn-skip-summary" title="Skip 1-by-1 and reveal all">
+            <span>⚡ Reveal All / Skip</span>
+          </button>
         </div>
-        <div class="cards-stage-buttons">
-          <button id="theatre-reveal-all-btn" class="btn-reveal-all">
-            <span>⚡ Reveal All Cards</span>
+
+        <!-- Dramatic 3D Card Spotlight Arena -->
+        <div class="spotlight-stage-arena">
+          <div id="spotlight-aura-glow" class="spotlight-aura-glow"></div>
+          
+          <div id="spotlight-card-slot" class="spotlight-card-slot">
+            <!-- Dynamically populated current flip card -->
+          </div>
+        </div>
+
+        <!-- Tactile Action & Key Controls -->
+        <div class="spotlight-action-area">
+          <button id="spotlight-action-btn" class="btn-spotlight-main" aria-label="Action Button">
+            <span id="spotlight-action-key" class="key-badge">SPACE</span>
+            <span id="spotlight-action-label">REVEAL CARD</span>
+          </button>
+          <div class="spotlight-keyboard-hint">
+            Press <kbd>SPACE</kbd> or click card to flip &amp; advance
+          </div>
+        </div>
+
+        <!-- Revealed Cards Shelf / Mini Tray -->
+        <div class="spotlight-tray-wrap">
+          <div class="spotlight-tray-title">CARDS IN THIS PACK</div>
+          <div id="spotlight-tray-items" class="spotlight-tray-items">
+            <!-- Mini chips of cards opened so far -->
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-PHASE B: Full Pack Summary Grid (Shown after all cards are viewed or on Skip) -->
+      <div id="theatre-summary-mode" class="theatre-summary-container" style="display: none;">
+        <div class="cards-stage-toolbar">
+          <div id="cards-stage-summary-text" class="cards-stage-summary-text">
+            Click cards individually to inspect, or collect your pulls!
+          </div>
+          <div class="cards-stage-buttons">
+            <button id="theatre-reveal-all-btn" class="btn-reveal-all" style="display: none;">
+              <span>⚡ Reveal All Cards</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3D Flip Card Shelf -->
+        <div id="theatre-opened-grid" class="pack-opened-grid"></div>
+
+        <!-- Action buttons after reveal -->
+        <div class="theatre-bottom-controls">
+          <button id="theatre-open-another-btn" class="btn-theatre-action primary">
+            <span>Open Another Pack</span>
+          </button>
+          <button id="theatre-view-binder-btn" class="btn-theatre-action secondary">
+            <span>📖 View in Binder</span>
+          </button>
+          <button id="theatre-done-btn" class="btn-theatre-action secondary">
+            <span>✓ Done / Collect Cards</span>
           </button>
         </div>
       </div>
 
-      <!-- 3D Flip Card Shelf -->
-      <div id="theatre-opened-grid" class="pack-opened-grid"></div>
-
-      <!-- Action buttons after reveal -->
-      <div class="theatre-bottom-controls">
-        <button id="theatre-open-another-btn" class="btn-theatre-action primary">
-          <span>Open Another Pack</span>
-        </button>
-        <button id="theatre-view-binder-btn" class="btn-theatre-action secondary">
-          <span>📖 View in Binder</span>
-        </button>
-        <button id="theatre-done-btn" class="btn-theatre-action secondary">
-          <span>✓ Done / Collect Cards</span>
-        </button>
-      </div>
     </div>
   </div>
 

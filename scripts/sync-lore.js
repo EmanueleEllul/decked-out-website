@@ -703,7 +703,7 @@ function generateLoreHtml(volumes) {
   <!-- Audio Manager -->
   <script src="js/audio.js?v=6"></script>
   <!-- Core Application Scripts -->
-  <script src="js/app.js?v=7"></script>
+  <script src="js/app.js?v=50"></script>
 
   <!-- Interactive Lore Page Controller -->
   <script>

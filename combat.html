@@ -13,10 +13,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Tiny5&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css?v=38">
-  <link rel="stylesheet" href="css/nav.css?v=36">
-  <link rel="stylesheet" href="css/card-foil.css?v=36">
-  <link rel="stylesheet" href="css/combat.css?v=44">
+  <link rel="stylesheet" href="css/style.css?v=50">
+  <link rel="stylesheet" href="css/nav.css?v=50">
+  <link rel="stylesheet" href="css/card-foil.css?v=50">
+  <link rel="stylesheet" href="css/combat.css?v=50">
 
   <!-- Critical Navigation Styles (Cache-Proof) -->
   <style id="critical-nav-css">
@@ -44,6 +44,58 @@
       .btn-wishlist { font-size: 0 !important; width: 36px !important; height: 36px !important; padding: 0 !important; justify-content: center !important; min-width: 36px !important; }
       .btn-wishlist span { font-size: 1.05rem !important; margin: 0 !important; line-height: 1 !important; display: inline-block !important; }
       .btn-wishlist::before { display: none !important; }
+    }
+  </style>
+
+  <!-- Critical Footer Styles (Cache-Proof) -->
+  <style id="critical-footer-css">
+    .site-footer { background: #06090e !important; border-top: 3px solid #f59e0b !important; padding: 3rem 1.5rem 2rem !important; position: relative !important; }
+    .footer-inner { max-width: 1400px !important; margin: 0 auto !important; display: flex !important; flex-direction: column !important; gap: 2rem !important; }
+    .footer-grid { display: grid !important; grid-template-columns: 1.6fr 1fr 1fr 1fr !important; gap: 2rem !important; }
+    .footer-col-brand { display: flex !important; flex-direction: column !important; gap: 0.85rem !important; }
+    .footer-brand { display: inline-flex !important; align-items: center !important; gap: 0.75rem !important; text-decoration: none !important; width: fit-content !important; }
+    .footer-brand .brand-logo-img { width: 32px !important; height: 32px !important; image-rendering: pixelated !important; flex-shrink: 0 !important; }
+    .footer-brand .brand-text h2 { font-family: 'Tiny5', monospace !important; font-size: 1.2rem !important; color: #fff !important; margin: 0 !important; line-height: 1.1 !important; letter-spacing: 0.04em !important; }
+    .footer-brand .brand-text span { font-family: 'Tiny5', monospace !important; font-size: 0.65rem !important; color: #f59e0b !important; letter-spacing: 0.15em !important; display: block !important; }
+    .footer-tagline { font-family: 'Tiny5', monospace !important; font-size: 0.75rem !important; color: #8899aa !important; line-height: 1.6 !important; margin: 0 !important; max-width: 400px !important; }
+    .footer-community-box { display: flex !important; flex-direction: column !important; gap: 0.5rem !important; margin-top: 0.25rem !important; }
+    .footer-community-title { font-family: 'Tiny5', monospace !important; font-size: 0.75rem !important; color: #f59e0b !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; }
+    .footer-action-buttons { display: flex !important; flex-wrap: wrap !important; gap: 0.65rem !important; }
+    .footer-btn { display: inline-flex !important; align-items: center !important; gap: 0.45rem !important; font-family: 'Tiny5', monospace !important; font-size: 0.78rem !important; padding: 0.55rem 0.95rem !important; text-decoration: none !important; border: 2px solid #000 !important; letter-spacing: 0.05em !important; white-space: nowrap !important; cursor: pointer !important; }
+    .footer-btn-discord { background: #5865f2 !important; color: #fff !important; box-shadow: inset 2px 2px 0 #7983f5, inset -2px -2px 0 #3c45a5, 2px 2px 0 #000 !important; }
+    .footer-btn-discord:hover { background: #6a76f7 !important; color: #fff !important; transform: translate(-1px, -1px) !important; box-shadow: inset 2px 2px 0 #959ef9, inset -2px -2px 0 #323a8c, 3px 3px 0 #000 !important; }
+    .footer-btn-discord:active { transform: translate(2px, 2px) !important; box-shadow: inset 2px 2px 0 #282f6e, inset -1px -1px 0 #7983f5, 1px 1px 0 #000 !important; }
+    .footer-btn-steam { background: #f59e0b !important; color: #000 !important; box-shadow: inset 2px 2px 0 #fef08a, inset -2px -2px 0 #92400e, 2px 2px 0 #000 !important; }
+    .footer-btn-steam:hover { background: #fcd34d !important; color: #000 !important; transform: translate(-1px, -1px) !important; box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #b45309, 3px 3px 0 #000 !important; }
+    .footer-btn-steam:active { transform: translate(2px, 2px) !important; box-shadow: inset 2px 2px 0 #92400e, inset -1px -1px 0 #fef08a, 1px 1px 0 #000 !important; }
+    .footer-col { display: flex !important; flex-direction: column !important; }
+    .footer-col-title { font-family: 'Tiny5', monospace !important; font-size: 0.82rem !important; color: #f59e0b !important; letter-spacing: 0.08em !important; margin: 0 0 0.85rem 0 !important; padding-bottom: 0.4rem !important; border-bottom: 2px solid #1a2538 !important; display: flex !important; align-items: center !important; gap: 0.45rem !important; text-shadow: 1px 1px 0 rgba(0,0,0,0.8) !important; }
+    .footer-nav-list { list-style: none !important; margin: 0 !important; padding: 0 !important; display: flex !important; flex-direction: column !important; gap: 0.5rem !important; }
+    .footer-nav-list li { list-style: none !important; margin: 0 !important; padding: 0 !important; }
+    .footer-nav-link { font-family: 'Tiny5', monospace !important; font-size: 0.74rem !important; color: #8899aa !important; text-decoration: none !important; letter-spacing: 0.04em !important; display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; padding: 0.15rem 0 !important; transition: color 0.1s ease, transform 0.1s ease !important; width: fit-content !important; cursor: pointer !important; }
+    .footer-nav-link::before { content: '▪' !important; font-size: 0.6rem !important; color: #3b5072 !important; transition: color 0.1s ease !important; }
+    .footer-nav-link:hover { color: #fcd34d !important; transform: translateX(3px) !important; }
+    .footer-nav-link:hover::before { color: #f59e0b !important; }
+    .footer-nav-link.active { color: #f59e0b !important; font-weight: 700 !important; }
+    .footer-nav-link.active::before { content: '▶' !important; color: #f59e0b !important; font-size: 0.55rem !important; }
+    .footer-bottom-bar { border-top: 1px solid #1a2538 !important; padding-top: 1.25rem !important; display: flex !important; justify-content: space-between !important; align-items: center !important; flex-wrap: wrap !important; gap: 1rem !important; }
+    .footer-credits { font-family: 'Tiny5', monospace !important; font-size: 0.68rem !important; color: #64748b !important; line-height: 1.7 !important; letter-spacing: 0.03em !important; text-align: left !important; }
+    .footer-credits p { margin: 0 !important; }
+    .footer-credits strong { color: #cbd5e1 !important; }
+    .footer-back-to-top { display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; font-family: 'Tiny5', monospace !important; font-size: 0.70rem !important; color: #8899aa !important; text-decoration: none !important; border: 2px solid #2e4060 !important; background: #080b10 !important; padding: 0.45rem 0.85rem !important; letter-spacing: 0.05em !important; transition: background 0.1s, color 0.1s, border-color 0.1s !important; cursor: pointer !important; }
+    .footer-back-to-top:hover { background: #111827 !important; color: #f59e0b !important; border-color: #f59e0b !important; transform: translateY(-2px) !important; }
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 1.75rem !important; }
+      .footer-col-brand { grid-column: 1 / -1 !important; }
+    }
+    @media (max-width: 600px) {
+      .site-footer { padding: 2.25rem 1rem 1.5rem !important; }
+      .footer-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+      .footer-bottom-bar { flex-direction: column !important; text-align: center !important; gap: 1rem !important; }
+      .footer-credits { text-align: center !important; }
+      .footer-back-to-top { width: 100% !important; justify-content: center !important; box-sizing: border-box !important; }
+      .footer-action-buttons { flex-direction: column !important; }
+      .footer-btn { width: 100% !important; justify-content: center !important; box-sizing: border-box !important; }
     }
   </style>
   <style id="combat-critical-btn-css">
@@ -491,11 +543,11 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/data.js?v=44"></script>
-  <script src="js/audio.js?v=44"></script>
+  <script src="js/data.js?v=50"></script>
+  <script src="js/audio.js?v=50"></script>
   <script src="js/compendium.js?v=44"></script>
   <script src="js/combat-demo.js?v=44"></script>
-  <script src="js/app.js?v=45"></script>
+  <script src="js/app.js?v=50"></script>
 
 </body>
 </html>

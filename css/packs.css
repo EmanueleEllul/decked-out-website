@@ -99,6 +99,17 @@
   box-shadow: 1px 1px 0 #000;
 }
 
+.btn-supply-drop:disabled,
+.btn-supply-drop.on-cooldown {
+  background: #1e293b !important;
+  color: #8899aa !important;
+  border-color: #334155 !important;
+  box-shadow: 2px 2px 0 #000 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  pointer-events: auto;
+}
+
 /* --- Section Navigation Switcher (Shop vs Binder) --- */
 .packs-tab-switcher {
   display: flex;

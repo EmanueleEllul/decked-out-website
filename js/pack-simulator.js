@@ -23,6 +23,8 @@ class PackSimulator {
     this.binderFilter = 'all'; // 'all' | 'owned' | 'missing'
     this.binderClass = 'all';
     this.binderRarity = 'all';
+    this.lastSupplyDrop = 0;
+    this.supplyDropInterval = null;
 
     this.loadState();
     this.init();
@@ -97,6 +99,8 @@ class PackSimulator {
       if (savedGold !== null) this.gold = parseInt(savedGold, 10);
       const savedOpened = localStorage.getItem('decked_packs_opened');
       if (savedOpened !== null) this.packsOpened = parseInt(savedOpened, 10);
+      const savedSupply = localStorage.getItem('decked_last_supply_drop');
+      if (savedSupply !== null) this.lastSupplyDrop = parseInt(savedSupply, 10);
 
       const savedCol = localStorage.getItem('decked_collection');
       if (savedCol) {
@@ -121,6 +125,9 @@ class PackSimulator {
         localStorage.setItem('decked_gold', this.gold);
         localStorage.setItem('decked_packs_opened', this.packsOpened);
         localStorage.setItem('decked_collection', JSON.stringify(this.collection));
+        if (this.lastSupplyDrop) {
+          localStorage.setItem('decked_last_supply_drop', this.lastSupplyDrop);
+        }
       }
     } catch (e) {}
 
@@ -135,6 +142,7 @@ class PackSimulator {
       this.bindEvents();
       this.updateCurrencyDisplays();
       this.updateBinderProgress();
+      this.initSupplyDropTicker();
     });
   }
 
@@ -155,17 +163,74 @@ class PackSimulator {
     }
   }
 
+  updateSupplyDropUi() {
+    const supplyBtn = document.getElementById('claim-supply-drop-btn');
+    if (!supplyBtn) return;
+
+    const COOLDOWN_MS = 24 * 60 * 60 * 1000; // 24 hours
+    const now = Date.now();
+    const elapsed = now - (this.lastSupplyDrop || 0);
+
+    if (this.lastSupplyDrop && elapsed < COOLDOWN_MS) {
+      const remainingMs = COOLDOWN_MS - elapsed;
+      const hours = Math.floor(remainingMs / (1000 * 60 * 60));
+      const minutes = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((remainingMs % (1000 * 60)) / 1000);
+
+      supplyBtn.disabled = true;
+      supplyBtn.classList.add('on-cooldown');
+      const timeStr = `${hours}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
+      supplyBtn.innerHTML = `<span>⏳ Next Drop in ${timeStr}</span>`;
+      supplyBtn.title = `Daily supply drop resets in ${hours} hours and ${minutes} minutes.`;
+    } else {
+      supplyBtn.disabled = false;
+      supplyBtn.classList.remove('on-cooldown');
+      supplyBtn.innerHTML = `<span>🎁 Claim Daily Drop (+500 💎)</span>`;
+      supplyBtn.title = `Claim +500 Free Gems (Available once per day)`;
+    }
+  }
+
+  claimSupplyDrop() {
+    const COOLDOWN_MS = 24 * 60 * 60 * 1000;
+    const now = Date.now();
+    const elapsed = now - (this.lastSupplyDrop || 0);
+
+    if (this.lastSupplyDrop && elapsed < COOLDOWN_MS) {
+      const remainingMs = COOLDOWN_MS - elapsed;
+      const hours = Math.floor(remainingMs / (1000 * 60 * 60));
+      const minutes = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60));
+      if (window.showToast) {
+        window.showToast(`⏳ Daily Drop already claimed! Next drop ready in ${hours}h ${minutes}m.`, 'warning');
+      }
+      if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
+      return;
+    }
+
+    this.lastSupplyDrop = now;
+    this.gems += 500;
+    this.saveState();
+    this.bumpCurrency('gems');
+    this.updateSupplyDropUi();
+
+    if (window.audioMgr) window.audioMgr.playSFX('goldGain');
+    if (window.showToast) window.showToast('🎁 Daily Supply Drop Claimed: +500 Free Gems!');
+  }
+
+  initSupplyDropTicker() {
+    if (this.supplyDropInterval) clearInterval(this.supplyDropInterval);
+    this.updateSupplyDropUi();
+    this.supplyDropInterval = setInterval(() => {
+      this.updateSupplyDropUi();
+    }, 1000);
+  }
+
   bindEvents() {
     // Free Gems / Supply Drop Button
     const supplyBtn = document.getElementById('claim-supply-drop-btn');
     if (supplyBtn && (!supplyBtn.dataset || !supplyBtn.dataset.bound)) {
       if (supplyBtn.dataset) supplyBtn.dataset.bound = 'true';
       supplyBtn.addEventListener('click', () => {
-        this.gems += 500;
-        this.saveState();
-        this.bumpCurrency('gems');
-        if (window.audioMgr) window.audioMgr.playSFX('goldGain');
-        if (window.showToast) window.showToast('💎 Supply Drop Claimed: +500 Free Gems!');
+        this.claimSupplyDrop();
       });
     }
 

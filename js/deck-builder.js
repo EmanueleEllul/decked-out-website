@@ -670,8 +670,13 @@ class DeckBuilder {
       row.addEventListener('mouseenter', (e) => {
         const cardId = row.dataset.cardId;
         const card = this.allCards.find(c => c.id === cardId);
-        if (card && popover && window.compendium) {
-          popover.innerHTML = window.compendium.generateCardHTML(card, false);
+        const cardHTML = typeof window.generateCardHTML === 'function'
+          ? window.generateCardHTML(card)
+          : (typeof CompendiumManager !== 'undefined' && typeof CompendiumManager.generateCardHTML === 'function'
+            ? CompendiumManager.generateCardHTML(card)
+            : (window.compendium ? window.compendium.generateCardHTML(card) : ''));
+        if (card && popover && cardHTML) {
+          popover.innerHTML = cardHTML;
           popover.style.display = 'block';
           this.positionPopover(e, popover);
         }

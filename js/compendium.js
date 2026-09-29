@@ -182,7 +182,8 @@ class CompendiumManager {
     });
   }
 
-  generateCardHTML(card) {
+  static generateCardHTML(card) {
+    if (!card) return '';
     const dmg = card.damage > 0 ? card.damage : 0;
     const armor = card.armor > 0 ? card.armor : 0;
     const ward = card.ward > 0 ? card.ward : 0;
@@ -252,6 +253,10 @@ class CompendiumManager {
         </div>
       </div>
     `;
+  }
+
+  generateCardHTML(card) {
+    return CompendiumManager.generateCardHTML(card);
   }
 
   openModal(card) {
@@ -332,6 +337,7 @@ class CompendiumManager {
 
 if (typeof window !== 'undefined') {
   window.CompendiumManager = CompendiumManager;
+  window.generateCardHTML = CompendiumManager.generateCardHTML;
 }
 
 function initCompendium() {

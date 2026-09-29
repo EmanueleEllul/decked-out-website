@@ -63,16 +63,34 @@ class CombatDemo {
     this.init();
   }
 
+  ensureData(callback, maxRetries = 25) {
+    const hasHeroes = (this.heroes && this.heroes.length > 0) || (typeof window !== 'undefined' && window.GAME_HEROES && window.GAME_HEROES.length > 0);
+    const hasCards = (this.cards && this.cards.length > 0) || (typeof window !== 'undefined' && window.GAME_CARDS && window.GAME_CARDS.length > 0);
+
+    if (hasHeroes && hasCards) {
+      if (!this.heroes || this.heroes.length === 0) {
+        this.heroes = window.GAME_HEROES;
+        if (!this.selectedHero && this.heroes[0]) this.selectedHero = this.heroes[0];
+      }
+      if (!this.cards || this.cards.length === 0) {
+        this.cards = window.GAME_CARDS;
+      }
+      callback();
+      return;
+    }
+
+    if (maxRetries > 0) {
+      setTimeout(() => this.ensureData(callback, maxRetries - 1), 100);
+    } else {
+      callback();
+    }
+  }
+
   init() {
-    if (this.heroes.length === 0 && typeof window !== 'undefined' && window.GAME_HEROES) {
-      this.heroes = window.GAME_HEROES;
-      if (!this.selectedHero && this.heroes[0]) this.selectedHero = this.heroes[0];
-    }
-    if (this.cards.length === 0 && typeof window !== 'undefined' && window.GAME_CARDS) {
-      this.cards = window.GAME_CARDS;
-    }
-    this.bindEvents();
-    this.resetCombat();
+    this.ensureData(() => {
+      this.bindEvents();
+      this.resetCombat();
+    });
   }
 
   bindEvents() {
@@ -256,11 +274,13 @@ class CombatDemo {
     }
 
     // Default: Pick combat cards from the clean 62-card Series 1 pool
-    const pool = this.cards.filter(c => c.damage > 0 || c.armor > 0 || c.ward > 0 || c.healing > 0 || c.cardsToDraw > 0);
-    const validPool = pool.length > 0 ? pool : this.cards;
-    for (let i = 0; i < 20; i++) {
-      const card = validPool[Math.floor(Math.random() * validPool.length)];
-      this.deck.push(card);
+    const pool = this.cards.filter(c => c && (c.damage > 0 || c.armor > 0 || c.ward > 0 || c.healing > 0 || c.cardsToDraw > 0));
+    const validPool = pool.length > 0 ? pool : (this.cards.filter(Boolean).length > 0 ? this.cards.filter(Boolean) : []);
+    if (validPool.length > 0) {
+      for (let i = 0; i < 20; i++) {
+        const card = validPool[Math.floor(Math.random() * validPool.length)];
+        this.deck.push({ ...card });
+      }
     }
   }
 
@@ -739,6 +759,76 @@ class CombatDemo {
     }
   }
 
+  generateCardHTML(card) {
+    if (!card) return '';
+    if (typeof window !== 'undefined' && typeof window.generateCardHTML === 'function') {
+      return window.generateCardHTML(card);
+    }
+    if (typeof CompendiumManager !== 'undefined' && typeof CompendiumManager.generateCardHTML === 'function') {
+      return CompendiumManager.generateCardHTML(card);
+    }
+    if (typeof window !== 'undefined' && window.compendium && typeof window.compendium.generateCardHTML === 'function') {
+      return window.compendium.generateCardHTML(card);
+    }
+
+    const dmg = card.damage > 0 ? card.damage : 0;
+    const armor = card.armor > 0 ? card.armor : 0;
+    const ward = card.ward > 0 ? card.ward : 0;
+    const heal = card.healing > 0 ? card.healing : 0;
+    const classIcons = {
+      'Elixir': '🧪',
+      'Wild Mages': '🔮',
+      'Swordsman': '⚔️',
+      'Animal': '🐾',
+      'Monster': '👹',
+      'Goblins': '⚙️'
+    };
+    const imageSrc = card.image || card.staticImage || '';
+    const stats = [];
+    if (dmg > 0) {
+      const isMag = card.damageType === 'Magic';
+      stats.push(`<span class="stat-pill ${isMag ? 'magic' : 'dmg'}">${isMag ? '✨' : '⚔️'} ${dmg}${card.isSplash ? ' (AoE)' : ''}</span>`);
+    }
+    if (armor > 0) stats.push(`<span class="stat-pill armor">🛡️ ${armor}</span>`);
+    if (ward > 0) stats.push(`<span class="stat-pill ward">🔮 ${ward}</span>`);
+    if (heal > 0) stats.push(`<span class="stat-pill heal">❤️ ${heal}</span>`);
+
+    const statsRowHTML = stats.length > 0 ? `<div class="card-stats-row">${stats.join('')}</div>` : '';
+    const tags = [];
+    if (card.isAnimated) tags.push(`<span class="tag-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">🎬 Animated</span>`);
+    if (card.burn > 0) tags.push(`<span class="tag-badge tag-burn">🔥 Burn ${card.burn}</span>`);
+    if (card.bleed > 0) tags.push(`<span class="tag-badge tag-bleed">🩸 Bleed ${card.bleed}</span>`);
+    if (card.poison > 0) tags.push(`<span class="tag-badge tag-poison">☠️ Poison ${card.poison}</span>`);
+    if (card.stunChance > 0) tags.push(`<span class="tag-badge tag-stun">⚡ Stun ${card.stunChance}%</span>`);
+    if (card.isSplash) tags.push(`<span class="tag-badge tag-splash">💥 Splash</span>`);
+    if (card.scrapGain > 0 || card.spendAllScrap) tags.push(`<span class="tag-badge tag-scrap">⚙️ Scrap</span>`);
+
+    const rarityClass = (card.rarity || 'common').toLowerCase();
+    return `
+      <div class="card-3d-wrapper">
+        <div class="game-card rarity-${rarityClass}" data-card-id="${card.id || ''}">
+          <div class="card-top-bar">
+            <div class="card-cost-gem">${card.cost || 0}</div>
+            <div class="card-name-title" title="${card.name || ''}">${card.name || ''}</div>
+            <div class="card-class-icon" title="${card.class || ''}">${classIcons[card.class] || '🃏'}</div>
+          </div>
+          <div class="card-image-box">
+            <img src="${imageSrc}" alt="${card.name || ''}" loading="lazy" />
+          </div>
+          ${statsRowHTML}
+          <div class="card-desc-box">
+            <p>${card.description || ''}</p>
+            ${tags.length > 0 ? `<div class="card-tags">${tags.join('')}</div>` : ''}
+          </div>
+          <div class="card-footer-bar">
+            <span>${card.code || ''}</span>
+            <span class="rarity-text" style="color: var(--rarity-${rarityClass})">${card.rarity || 'Common'}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
   shakeManaBar() {
     const manaFill = document.getElementById('player-mana-fill');
     if (manaFill) {
@@ -889,8 +979,9 @@ class CombatDemo {
     const handContainer = document.getElementById('combat-hand-cards');
     if (handContainer) {
       handContainer.innerHTML = this.hand.map((card, idx) => {
+        if (!card) return '';
         const canAfford = this.player.mana >= card.cost;
-        const cardHTML = window.compendium ? window.compendium.generateCardHTML(card, false) : `<div>${card.name}</div>`;
+        const cardHTML = this.generateCardHTML(card);
         return `
           <div class="combat-card-playable ${canAfford ? 'can-afford' : 'cannot-afford'}" 
                data-hand-index="${idx}" 

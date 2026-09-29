@@ -1327,13 +1327,222 @@
   display: flex;
   flex-direction: column;
   z-index: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
+.pack-face-front .visual-card-wrap,
 .pack-face-front .game-card {
   width: 100%;
   height: 100%;
   box-shadow: 4px 4px 0 #000;
 }
+
+/* ===================================================================
+   FULL VISUAL CARD (Full Art with Hover Text Overlay)
+   =================================================================== */
+.visual-card-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 3px solid #2e3e56;
+  box-shadow: 4px 4px 0 #000;
+  overflow: hidden;
+  background: #080d16;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.visual-card-wrap.rarity-common { border-color: var(--rarity-common); }
+.visual-card-wrap.rarity-uncommon { border-color: var(--rarity-uncommon); }
+.visual-card-wrap.rarity-rare { border-color: var(--rarity-rare); }
+.visual-card-wrap.rarity-epic { border-color: var(--rarity-epic); }
+.visual-card-wrap.rarity-legendary { border-color: var(--rarity-legendary); box-shadow: 4px 4px 0 #000, 0 0 16px rgba(245, 158, 11, 0.4); }
+.visual-card-wrap.rarity-exotic { border-color: var(--rarity-exotic); box-shadow: 4px 4px 0 #000, 0 0 20px rgba(0, 229, 255, 0.5); }
+
+/* Full Visual Artwork Layer (Edge-to-Edge) */
+.visual-card-artwork {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #090e18;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.visual-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  display: block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.visual-card-wrap:hover .visual-card-img {
+  transform: scale(1.04);
+}
+
+/* Hover HUD Text Overlay (Hidden by default, reveals on hover) */
+.visual-card-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(6, 10, 18, 0.93);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.85rem;
+  box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Reveal text overlay on hover */
+.visual-card-wrap:hover .visual-card-overlay,
+.visual-card-wrap.show-overlay .visual-card-overlay {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Overlay Top Bar */
+.visual-overlay-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.45rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 0.45rem;
+}
+
+.visual-cost-gem {
+  width: 26px;
+  height: 26px;
+  background: radial-gradient(circle, #38bdf8 0%, #1e40af 100%);
+  border: 2px solid #fff;
+  color: #fff;
+  font-family: var(--font-pixel);
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0 #000;
+  flex-shrink: 0;
+}
+
+.visual-name-title {
+  font-family: var(--font-pixel);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+.visual-class-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Overlay Stats Row */
+.visual-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.35rem 0;
+}
+
+.visual-stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid #000;
+  box-shadow: 1px 1px 0 #000;
+}
+
+.visual-stat-pill.dmg { background: #ef4444; color: #fff; }
+.visual-stat-pill.magic { background: #8b5cf6; color: #fff; }
+.visual-stat-pill.armor { background: #3b82f6; color: #fff; }
+.visual-stat-pill.ward { background: #a855f7; color: #fff; }
+.visual-stat-pill.heal { background: #10b981; color: #fff; }
+
+/* Overlay Description */
+.visual-desc-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--font-pixel);
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: #f1f5f9;
+  text-shadow: 1px 1px 0 #000;
+  margin: 0.35rem 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.visual-desc-body p {
+  margin: 0 0 0.45rem 0;
+}
+
+.visual-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.25rem;
+}
+
+/* Overlay Footer */
+.visual-overlay-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-pixel);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  border-top: 2px solid rgba(255, 255, 255, 0.12);
+  padding-top: 0.45rem;
+}
+
+.visual-rarity {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.visual-rarity.rarity-common { color: var(--rarity-common); }
+.visual-rarity.rarity-uncommon { color: var(--rarity-uncommon); }
+.visual-rarity.rarity-rare { color: var(--rarity-rare); }
+.visual-rarity.rarity-epic { color: var(--rarity-epic); }
+.visual-rarity.rarity-legendary { color: var(--rarity-legendary); }
+.visual-rarity.rarity-exotic { color: var(--rarity-exotic); }
 
 /* NEW! Card Tag */
 .pack-tag-new {

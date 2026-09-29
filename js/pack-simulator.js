@@ -1052,37 +1052,132 @@ class PackSimulator {
     if (!modal || !content) return;
 
     if (window.audioMgr) window.audioMgr.playSFX('buttonClick');
+
+    const dmg = card.damage > 0 ? card.damage : 0;
+    const armor = card.armor > 0 ? card.armor : 0;
+    const ward = card.ward > 0 ? card.ward : 0;
+    const heal = card.healing > 0 ? card.healing : 0;
+
     content.innerHTML = `
-      <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
-        ${this.generateCardHTML(card)}
+      <div style="display: flex; justify-content: center; align-items: center; min-width: 240px;">
+        <div style="width: 230px; height: 345px;">
+          ${this.generateCardHTML(card)}
+        </div>
+      </div>
+      <div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--rarity-${(card.rarity || 'common').toLowerCase()}); font-weight: 700; letter-spacing: 0.1em;">
+            Series ${card.series || 1} • ${card.rarity || 'Common'}
+          </span>
+          <span style="font-family: var(--font-mono); color: var(--text-faint); font-size: 0.85rem;">${card.code || ''}</span>
+        </div>
+        <h2 style="font-size: 1.8rem; color: #fff; margin-bottom: 0.5rem;">${card.name}</h2>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
+          <span class="tag-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">Class: ${card.class}</span>
+          <span class="tag-badge" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc;">Cost: ${card.cost} Mana</span>
+          ${card.damageType && card.damageType !== 'None' ? `<span class="tag-badge" style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe;">Type: ${card.damageType}</span>` : ''}
+          ${card.isAnimated ? `<span class="tag-badge" style="background: rgba(56, 189, 248, 0.3); color: #38bdf8;">🎬 Animated</span>` : ''}
+        </div>
+
+        <div style="background: var(--bg-deep); border: 2px solid var(--border-strong); padding: 1rem; margin-bottom: 1.25rem; box-shadow: 3px 3px 0 #000;">
+          <h4 style="text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.4rem; font-family: var(--font-pixel); font-size: 0.65rem;">Combat Properties</h4>
+          <p style="font-size: 0.95rem; color: #e2e8f0; line-height: 1.5;">${card.description}</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;">
+          <div style="background: var(--bg-surface-elevated); padding: 0.75rem; border: 2px solid var(--border-strong); box-shadow: 2px 2px 0 #000;">
+            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Damage Output</span>
+            <strong style="font-size: 1.1rem; color: #f87171;">${dmg > 0 ? `${dmg} (${card.damageType})` : '—'}</strong>
+          </div>
+          <div style="background: var(--bg-surface-elevated); padding: 0.75rem; border: 2px solid var(--border-strong); box-shadow: 2px 2px 0 #000;">
+            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Defense &amp; Ward</span>
+            <strong style="font-size: 1.1rem; color: #60a5fa;">${armor > 0 ? `🛡️ ${armor}` : (ward > 0 ? `🔮 ${ward}` : (heal > 0 ? `❤️ ${heal}` : '—'))}</strong>
+          </div>
+        </div>
       </div>
     `;
+
     modal.classList.add('active');
     modal.classList.add('open');
   }
 
   generateCardHTML(card) {
     if (!card) return '';
-    if (typeof window !== 'undefined' && window.CompendiumManager && typeof window.CompendiumManager.generateCardHTML === 'function') {
-      return window.CompendiumManager.generateCardHTML(card);
+
+    const classIcons = {
+      'Swordsman': '⚔️',
+      'Wild Mages': '🔮',
+      'Goblins': '👺',
+      'Animal': '🐺',
+      'Monster': '💀',
+      'Elixir': '🧪'
+    };
+
+    const imageSrc = card.image || card.staticImage || '';
+    const rarityClass = (card.rarity || 'common').toLowerCase();
+
+    // Combat Stats row
+    const stats = [];
+    const dmg = card.damage > 0 ? card.damage : 0;
+    const armor = card.armor > 0 ? card.armor : 0;
+    const ward = card.ward > 0 ? card.ward : 0;
+    const heal = card.healing > 0 ? card.healing : 0;
+
+    if (dmg > 0) {
+      const isMag = card.damageType === 'Magic';
+      stats.push(`<span class="visual-stat-pill ${isMag ? 'magic' : 'dmg'}">${isMag ? '✨' : '⚔️'} ${dmg}${card.isSplash ? ' (AoE)' : ''}</span>`);
     }
-    if (typeof CompendiumManager !== 'undefined' && typeof CompendiumManager.generateCardHTML === 'function') {
-      return CompendiumManager.generateCardHTML(card);
+    if (armor > 0) {
+      stats.push(`<span class="visual-stat-pill armor">🛡️ ${armor}</span>`);
     }
-    if (typeof window !== 'undefined' && typeof window.generateCardHTML === 'function') {
-      return window.generateCardHTML(card);
+    if (ward > 0) {
+      stats.push(`<span class="visual-stat-pill ward">🔮 ${ward}</span>`);
     }
+    if (heal > 0) {
+      stats.push(`<span class="visual-stat-pill heal">❤️ ${heal}</span>`);
+    }
+
+    const statsHTML = stats.length > 0 ? `<div class="visual-stats-row">${stats.join('')}</div>` : '';
+
+    // Status Tags
+    const tags = [];
+    if (card.isAnimated) tags.push(`<span class="tag-badge" style="background: rgba(56, 189, 248, 0.25); color: #38bdf8;">🎬 Animated</span>`);
+    if (card.burn > 0) tags.push(`<span class="tag-badge tag-burn">🔥 Burn ${card.burn}</span>`);
+    if (card.bleed > 0) tags.push(`<span class="tag-badge tag-bleed">🩸 Bleed ${card.bleed}</span>`);
+    if (card.poison > 0) tags.push(`<span class="tag-badge tag-poison">☠️ Poison ${card.poison}</span>`);
+    if (card.stunChance > 0) tags.push(`<span class="tag-badge tag-stun">⚡ Stun ${card.stunChance}%</span>`);
+    if (card.isSplash) tags.push(`<span class="tag-badge tag-splash">💥 Splash</span>`);
+    if (card.scrapGain > 0 || card.spendAllScrap) tags.push(`<span class="tag-badge tag-scrap">⚙️ Scrap</span>`);
+
+    const tagsHTML = tags.length > 0 ? `<div class="visual-tags">${tags.join('')}</div>` : '';
+
     return `
-      <div class="game-card rarity-${(card.rarity || 'common').toLowerCase()}">
-        <div class="card-top-bar">
-          <div class="card-cost-gem">${card.cost || 0}</div>
-          <div class="card-name-title">${card.name || 'Card'}</div>
+      <div class="visual-card-wrap rarity-${rarityClass}" data-card-id="${card.id}">
+        <!-- 1. FULL CARD VISUAL LAYER (Edge-to-Edge) -->
+        <div class="visual-card-artwork">
+          <img src="${imageSrc}" alt="${card.name || 'Card'}" class="visual-card-img pixel-art" loading="lazy" />
         </div>
-        <div class="card-image-box">
-          <img src="${card.image || card.staticImage || ''}" alt="${card.name || ''}" loading="lazy" />
+
+        <!-- 2. HOVER TEXT & STATS OVERLAY (shows only when hovered) -->
+        <div class="visual-card-overlay">
+          <div class="visual-overlay-top">
+            <div class="visual-cost-gem">${card.cost || 0}</div>
+            <div class="visual-name-title" title="${card.name || ''}">${card.name || 'Card'}</div>
+            <div class="visual-class-icon" title="${card.class || ''}">${classIcons[card.class] || '🃏'}</div>
+          </div>
+
+          ${statsHTML}
+
+          <div class="visual-desc-body">
+            <p>${card.description || ''}</p>
+            ${tagsHTML}
+          </div>
+
+          <div class="visual-overlay-bottom">
+            <span class="visual-code">${card.code || ''}</span>
+            <span class="visual-rarity rarity-${rarityClass}">${card.rarity || 'Common'}</span>
+          </div>
         </div>
-        <div class="card-desc-box"><p>${card.description || ''}</p></div>
-        <div class="card-footer-bar"><span>${card.code || ''}</span><span>${card.rarity || ''}</span></div>
       </div>
     `;
   }

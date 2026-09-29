@@ -635,6 +635,7 @@
   user-select: none;
 }
 
+.combat-card-playable .card-3d-wrapper { width: 100%; }
 .combat-card-playable .game-card {
   width: 100%;
   font-size: 0.61rem;
